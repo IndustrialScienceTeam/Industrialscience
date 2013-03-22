@@ -18,7 +18,15 @@ public class IndustrialScience {
 	@Init
 	public void load(FMLInitializationEvent event) 
 	{
+	 initmodules();
 	 loadmodules();
+	}
+
+	private void initmodules() {
+		for (ISAbstractModule a : modules) {
+			a.init();
+		}
+		
 	}
 
 	private void loadmodules() {

@@ -9,5 +9,10 @@ public class ResearchModules extends ISAbstractModule {
 		
 
 	}
+	@Override
+	public void init() {
+		researchdesk=new ResearchDesk(754);
+		
+	}
 
 }
