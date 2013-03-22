@@ -1,4 +1,4 @@
-package mod.industrialscience.research;
+package mod.industrialscience.modules.research;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
