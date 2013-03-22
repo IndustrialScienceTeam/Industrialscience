@@ -18,8 +18,14 @@ public class IndustrialScience {
 	@Init
 	public void load(FMLInitializationEvent event) 
 	{
+	 registermodules();
 	 initmodules();
 	 loadmodules();
+	}
+
+	private void registermodules() {
+		modules.add(new mod.industrialscience.modules.ResearchModules());
+		
 	}
 
 	private void initmodules() {
