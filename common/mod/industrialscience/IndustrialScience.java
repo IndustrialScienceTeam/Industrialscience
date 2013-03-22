@@ -10,7 +10,7 @@ import mod.industrialscience.*;
 import mod.industrialscience.modules.*;
 
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
-@Mod(modid = "industrialscience", name = "Industrial Science", version = "1.0")
+@Mod(modid = "mod_industrialscience", name = "Industrial Science", version = "1.0")
 
 public class IndustrialScience {
 	private ArrayList<ISAbstractModule> modules = new ArrayList<ISAbstractModule>();

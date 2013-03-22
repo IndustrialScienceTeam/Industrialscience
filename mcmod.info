@@ -1,0 +1,21 @@
+{
+  "modinfoversion": 2,
+  "modlist": [{
+    "modid": "mod_industrialscience",
+    "name": "Industrial Science",
+    "description": "This mod adds a research system, many cool machines and much WIP!",
+    "version": "1.0",
+    "mcversion": "1.5.1",
+    "url": "",
+    "updateUrl": "",
+    "authors": [ "finesim" ],
+    "credits": "Authored by finesim, based on an idea by finesim, Singularius",
+    "logoFile": "",
+    "screenshots": [  ],
+    "parent": "",
+    "requiredMods": [ "Forge"],
+    "dependencies": [ "],
+    "dependants": [  ],
+    "useDependencyInformation": "true"
+  }]
+}
