@@ -23,7 +23,7 @@ public class ResearchDeskGUI extends GuiContainer {
     protected void drawGuiContainerBackgroundLayer(float f, int i, int j){
            
             GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-            this.mc.renderEngine.func_98187_b("gui/container.png");
+            this.mc.renderEngine.func_98187_b("container");
             int x = (width - xSize) / 2;
            
             int y = (height - ySize) / 2;

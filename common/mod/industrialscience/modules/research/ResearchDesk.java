@@ -12,15 +12,33 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 public class ResearchDesk extends BlockContainer {
+	private Icon side;
+	private Icon bottom;
+	private Icon top;
 	public ResearchDesk(int id) {
 		super(id, Material.wood);
 	}
-	public void func_94332_a(IconRegister iconRegister)
+	@Override 
+	public void func_94332_a(IconRegister par1IconRegister)
 	{
-	         this.field_94336_cN = iconRegister.func_94245_a("industrialscience:notexture");
+	this.side= par1IconRegister.func_94245_a("industrialscience:vannila_researchtable_sides");
+	this.bottom = par1IconRegister.func_94245_a("industrialscience:vannila_researchtable_bottom"); 
+	this.top = par1IconRegister.func_94245_a("wood");
 	}
+
+	public Icon getBlockTextureFromSideAndMetadata(int i, int j){
+		switch (i) {
+		case 0:
+			return bottom;
+		case 1:
+			return top;
+		default:
+			return side;
+			}
+		}
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int i, float a, float b, float c)
 	{
 		TileEntity tilee = world.getBlockTileEntity(x, y, z);
