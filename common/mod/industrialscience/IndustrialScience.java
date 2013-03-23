@@ -7,8 +7,11 @@ import java.util.Hashtable;
 
 import net.minecraftforge.common.Configuration;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod.PreInit;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -17,6 +20,10 @@ import mod.industrialscience.modules.*;
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
 @Mod(modid = "mod_industrialscience", name = "Industrial Science", version = "1.0")
 public class IndustrialScience {
+	@SidedProxy(clientSide = "mod.industrialscience.ClientProxy", serverSide = "mod.industrialscience.CommonProxy")
+	public static ClientProxy proxy;
+	@Instance("Industrial Science")
+	public static IndustrialScience instance;
 	private ArrayList<ISAbstractModule> modules = new ArrayList<ISAbstractModule>();
 	
 	
@@ -25,7 +32,6 @@ public class IndustrialScience {
 		registermodules();
 		giveIDs(event.getSuggestedConfigurationFile());
    }
-	
 	private void giveIDs(File suggestedConfigurationFile) {
 		Configuration configuration = new Configuration(suggestedConfigurationFile);
 		configuration.load();
@@ -53,6 +59,8 @@ public class IndustrialScience {
 	@Init
 	public void load(FMLInitializationEvent event) 
 	{
+	 NetworkRegistry.instance().registerGuiHandler(this, proxy);
+	 instance=this;
 	 initmodules();
 	 loadmodules();
 	}
@@ -61,14 +69,12 @@ public class IndustrialScience {
 		modules.add(new mod.industrialscience.modules.ResearchModule());
 		
 	}
-
 	private void initmodules() {
 		for (ISAbstractModule a : modules) {
 			a.init();
 		}
 		
 	}
-
 	private void loadmodules() {
 		for (ISAbstractModule a : modules) {
 			a.load();
