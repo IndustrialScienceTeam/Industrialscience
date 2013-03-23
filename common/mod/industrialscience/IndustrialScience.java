@@ -44,12 +44,12 @@ public class IndustrialScience {
 				BlockIDs.put(blockname, configuration.getBlock(blockname, neededBlockids.get(blockname)).getInt());
 				System.out.println(configuration.getBlock(blockname, neededBlockids.get(blockname)).getInt());
 			}
-			Hashtable<String, Integer> neededItemIDs = a.getNeededBlockIDs();
+			Hashtable<String, Integer> neededItemIDs = a.getNeededItemIDs();
 			Hashtable<String, Integer> ItemIDs = new Hashtable<String, Integer>();
 			Enumeration<String> itemnames = neededItemIDs.keys();
 			while (itemnames.hasMoreElements()) {
 				String itemname = (String) itemnames.nextElement();
-				ItemIDs.put(itemname, configuration.getBlock(itemname, neededItemIDs.get(itemname)).getInt());
+				ItemIDs.put(itemname, configuration.getItem(itemname, neededItemIDs.get(itemname)).getInt());
 			}
 			a.setIDs(BlockIDs, ItemIDs);
 		}
