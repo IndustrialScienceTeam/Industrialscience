@@ -7,7 +7,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.block.Block;
 import mod.industrialscience.modules.research.*;
 
-public class ResearchModules extends ISAbstractModule {
+public class ResearchModule extends ISAbstractModule {
 	public Block researchdesk;
 	public void load() {
 		GameRegistry.registerBlock(researchdesk);

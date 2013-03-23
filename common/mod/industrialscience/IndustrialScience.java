@@ -16,7 +16,6 @@ import mod.industrialscience.modules.*;
 
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
 @Mod(modid = "mod_industrialscience", name = "Industrial Science", version = "1.0")
-
 public class IndustrialScience {
 	private ArrayList<ISAbstractModule> modules = new ArrayList<ISAbstractModule>();
 	
@@ -59,7 +58,7 @@ public class IndustrialScience {
 	}
 
 	private void registermodules() {
-		modules.add(new mod.industrialscience.modules.ResearchModules());
+		modules.add(new mod.industrialscience.modules.ResearchModule());
 		
 	}
 
