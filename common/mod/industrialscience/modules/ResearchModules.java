@@ -1,5 +1,7 @@
 package mod.industrialscience.modules;
 
+import java.util.Hashtable;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.block.Block;
@@ -14,8 +16,18 @@ public class ResearchModules extends ISAbstractModule {
 	}
 	@Override
 	public void init() {
-		researchdesk=new ResearchDesk(754);
+		researchdesk=new ResearchDesk(BlockIDs.get("researchdesk"));
 		
+	}
+	@Override
+	public Hashtable<String, Integer> getNeededBlockIDs() {		
+		Hashtable<String, Integer> blub = new Hashtable<String, Integer>();
+		blub.put("researchdesk", 756);
+		return blub;
+	}
+	public Hashtable<String, Integer> getNeededItemIDs() {
+		Hashtable<String, Integer> blub = new Hashtable<String, Integer>();
+		return blub;
 	}
 
 }
