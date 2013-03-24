@@ -5,10 +5,14 @@ import java.util.Hashtable;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import mod.industrialscience.modules.research.*;
 
 public class ResearchModule extends ISAbstractModule {
 	public Block researchdesk;
+	public int researchdeskid;
+	public Item researchbook;
+	public int researchbookid;
 	public void load() {
 		GameRegistry.registerBlock(researchdesk);
 		LanguageRegistry.addName(researchdesk, "Research Table");
@@ -17,6 +21,9 @@ public class ResearchModule extends ISAbstractModule {
 	@Override
 	public void init() {
 		researchdesk=new ResearchDesk(BlockIDs.get("researchdesk"));
+		researchdeskid=BlockIDs.get("researchdesk");
+		researchbook = new ResearchBook(ItemIDs.get("researchbook"));
+		researchbookid = ItemIDs.get("researchbook");
 		
 	}
 	@Override
@@ -27,6 +34,7 @@ public class ResearchModule extends ISAbstractModule {
 	}
 	public Hashtable<String, Integer> getNeededItemIDs() {
 		Hashtable<String, Integer> blub = new Hashtable<String, Integer>();
+		blub.put("researchbook", 8123);
 		return blub;
 	}
 
