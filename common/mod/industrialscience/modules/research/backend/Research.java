@@ -6,6 +6,8 @@ public class Research implements Comparable<Research>{
 private String Name;
 private ArrayList<Research> NeededResearches;
 private String Category;
+private Researchstep[] Steps;
+private RecipeLocker Locker;
 
 public Research(String name, ArrayList<Research> neededResearches,
 		String category, Researchstep[] steps, RecipeLocker locker) {
@@ -16,8 +18,7 @@ public Research(String name, ArrayList<Research> neededResearches,
 	Locker = locker;
 }
 
-private Researchstep[] Steps;
-private RecipeLocker Locker;
+
 
 	public int compareTo(Research o) {
 		return Name.compareTo(o.getName());
