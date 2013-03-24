@@ -5,10 +5,12 @@ import java.util.ArrayList;
 public class Researchfactory{
 	private String Category;
 	private RecipeLocker Locker;
-	public Researchfactory(String category, RecipeLocker locker) {
+	private Researchchecker Checker;
+	public Researchfactory(String category, RecipeLocker locker, Researchchecker checker) {
 		super();
 		Category = category;
 		Locker = locker;
+		Checker=checker;
 	}
 	public Research getResearch(String Name, ArrayList<Research> NeededResearches, String Category, Researchstep[] Steps, RecipeLocker Locker){
 		return new Research(Name, NeededResearches, Category, Steps, Locker);

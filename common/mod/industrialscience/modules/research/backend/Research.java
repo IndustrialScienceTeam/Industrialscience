@@ -8,16 +8,17 @@ private ArrayList<Research> NeededResearches;
 private String Category;
 private Researchstep[] Steps;
 private RecipeLocker Locker;
+private Researchchecker Checker;
 
 public Research(String name, ArrayList<Research> neededResearches,
-		String category, Researchstep[] steps, RecipeLocker locker) {
+		String category, Researchstep[] steps, RecipeLocker locker, Researchchecker checker) {
 	Name = name;
 	NeededResearches = neededResearches;
 	Category = category;
 	Steps = steps;
 	Locker = locker;
+	Checker=checker;
 }
-
 
 
 	public int compareTo(Research o) {
