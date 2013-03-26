@@ -3,8 +3,6 @@ package mod.industrialscience.modules.research.backend.model;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import net.minecraft.item.ItemStack;
-
 public class Research implements Comparable<Research>{
 private String Name;
 private ArrayList<Research> NeededResearches;
