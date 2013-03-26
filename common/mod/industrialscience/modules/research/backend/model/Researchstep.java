@@ -7,6 +7,13 @@ public class Researchstep implements Comparable<Researchstep>{
 	private ResearchObject neededobject;
 	private String ResearchStepText;
 
+	public Researchstep(int iD, ResearchObject neededobject,
+			String researchStepText) {
+		super();
+		ID = iD;
+		this.neededobject = neededobject;
+		ResearchStepText = researchStepText;
+	}
 	public boolean isEnabled(){
 		return enabled;
 	}
