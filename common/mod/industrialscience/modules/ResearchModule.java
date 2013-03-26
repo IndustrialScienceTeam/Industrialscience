@@ -6,6 +6,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import mod.industrialscience.ResearchManager;
 import mod.industrialscience.modules.research.*;
 
 public class ResearchModule extends ISAbstractModule {
@@ -39,7 +40,8 @@ public class ResearchModule extends ISAbstractModule {
 	}
 	@Override
 	public void postinit() {
-		
+		ResearchManager.getInstance().disable();
+		ResearchManager.getInstance().loadResearches();
 		
 	}
 
