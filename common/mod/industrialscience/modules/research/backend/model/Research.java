@@ -35,7 +35,9 @@ public boolean research(ResearchObject object){
 	return Steps[id].research(object);
 	
 }	
-
+public boolean check(){
+	return Checker.check();
+}
 public boolean isRearched(){
 		for(Researchstep rs : Steps){
 			if(!rs.isEnabled())
