@@ -21,6 +21,7 @@ public Research(String name, ArrayList<Research> neededResearches, String catego
 	Checker=checker;
 }
 public boolean research(ResearchObject object){
+	if(!isResearched()){
 	int id=-1;
 	for (int i = 0; i < Steps.length; i++) {
 		if(!Steps[i].isEnabled()){
@@ -30,8 +31,13 @@ public boolean research(ResearchObject object){
 			id=i;
 		}
 	}
-	return Steps[id].research(object);
-	
+	boolean toreturn = false;
+	if(id!=-1){
+	toreturn= Steps[id].research(object);}
+	if(isResearched())unlock();
+	return toreturn;
+	}
+	return false;
 }	
 public boolean check(){
 	return Checker.check();
@@ -47,7 +53,7 @@ public boolean isResearched(){
 		return Name.compareTo(o.getName());
 	}
 	
-	public synchronized void unlock(){
+	private synchronized void unlock(){
 		Locker.unlock();
 	}
 	public synchronized void lock(){

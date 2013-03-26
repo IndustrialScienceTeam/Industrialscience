@@ -10,6 +10,10 @@ public class ResearchObject {
 	public ItemStack getNeededStack() {
 		return neededStack;
 	}
-	
-
+	public boolean isOkay(ResearchObject ro){
+	if(ro.getNeededStack().getItem().itemID==getNeededStack().itemID){
+		return true;
+	}
+	return false;
+	}
 }

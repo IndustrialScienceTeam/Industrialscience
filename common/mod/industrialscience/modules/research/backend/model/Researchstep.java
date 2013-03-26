@@ -18,7 +18,7 @@ public class Researchstep implements Comparable<Researchstep>{
 		return enabled;
 	}
 	public boolean research(ResearchObject ro){
-		if(ro.equals(neededobject)){
+		if(ro.isOkay(neededobject)){
 			enabled=true;
 			return true;
 		}
