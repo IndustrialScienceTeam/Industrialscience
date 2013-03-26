@@ -43,7 +43,6 @@ public class IndustrialScience {
 			while (blocknames.hasMoreElements()) {
 				String blockname = (String) blocknames.nextElement();
 				BlockIDs.put(blockname, configuration.getBlock(blockname, neededBlockids.get(blockname)).getInt());
-				System.out.println(configuration.getBlock(blockname, neededBlockids.get(blockname)).getInt());
 			}
 			Hashtable<String, Integer> neededItemIDs = a.getNeededItemIDs();
 			Hashtable<String, Integer> ItemIDs = new Hashtable<String, Integer>();
