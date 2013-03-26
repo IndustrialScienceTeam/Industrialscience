@@ -1,7 +1,8 @@
 package mod.industrialscience;
 
 import java.util.ArrayList;
-import mod.industrialscience.modules.research.backend.Research;
+
+import mod.industrialscience.modules.research.backend.model.Research;
 
 public class ResearchManager {
 private ArrayList<Research> allResearches=null;

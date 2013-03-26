@@ -1,4 +1,4 @@
-package mod.industrialscience.modules.research.backend;
+package mod.industrialscience.modules.research.backend.model;
 
 import java.util.ArrayList;
 
