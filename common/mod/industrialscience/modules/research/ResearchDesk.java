@@ -21,6 +21,10 @@ public class ResearchDesk extends BlockContainer {
 	public ResearchDesk(int id) {
 		super(id, Material.wood);
 	}
+    public boolean isOpaqueCube()
+    {
+        return false;
+    }
 	@Override 
 	public void func_94332_a(IconRegister par1IconRegister)
 	{
