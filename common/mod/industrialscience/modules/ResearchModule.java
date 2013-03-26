@@ -16,6 +16,7 @@ public class ResearchModule extends ISAbstractModule {
 	public int researchbookid;
 	public void load() {
 		GameRegistry.registerBlock(researchdesk);
+		GameRegistry.registerTileEntity(ResearchDeskTile.class, "Research-Desk");
 		LanguageRegistry.addName(researchdesk, "Research Table");
 
 	}
