@@ -16,5 +16,8 @@ public class Researchstep{
 		}
 		return false;
 	}
+	public String getResearchStepText() {
+		return ResearchStepText;
+	}
 
 }
