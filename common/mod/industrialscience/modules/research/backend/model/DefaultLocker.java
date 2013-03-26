@@ -12,12 +12,10 @@ public class DefaultLocker implements RecipeLocker {
 	}
 	@Override
 	public void lock() {
-		System.out.println("UNLOCK!!!!!!!!!!!!!");
 	}
 
 	@Override
 	public void unlock() {
-		System.out.println("LOCK!!!!!!!!!!!!!!!");
 		CraftingManager.getInstance().addRecipe(istack, recipe);
 	}
 
