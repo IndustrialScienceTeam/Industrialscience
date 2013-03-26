@@ -29,4 +29,7 @@ public void registerResearch(Research r){
 public void disable(){
 	enabled=false;
 }
+public ArrayList<Research> getActivatedResearches() {
+	return activatedResearches;
+}
 }
