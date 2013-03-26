@@ -27,7 +27,6 @@ public class ResearchBook extends Item {
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,
 			EntityPlayer par3EntityPlayer) {
 		par3EntityPlayer.openGui(IndustrialScience.instance, 1, par2World, par3EntityPlayer.getPlayerCoordinates().posX, par3EntityPlayer.getPlayerCoordinates().posY, par3EntityPlayer.getPlayerCoordinates().posZ);
-		System.out.println(par3EntityPlayer.getEntityName());
 		return super.onItemRightClick(par1ItemStack, par2World, par3EntityPlayer);
 	}
 	
