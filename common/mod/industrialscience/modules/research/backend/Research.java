@@ -10,8 +10,7 @@ private Researchstep[] Steps;
 private RecipeLocker Locker;
 private Researchchecker Checker;
 
-public Research(String name, ArrayList<Research> neededResearches,
-		String category, Researchstep[] steps, RecipeLocker locker, Researchchecker checker) {
+public Research(String name, ArrayList<Research> neededResearches, String category, Researchstep[] steps, RecipeLocker locker, Researchchecker checker) {
 	Name = name;
 	NeededResearches = neededResearches;
 	Category = category;
@@ -20,7 +19,13 @@ public Research(String name, ArrayList<Research> neededResearches,
 	Checker=checker;
 }
 
-
+	public boolean isRearched(){
+		for(Researchstep rs : Steps){
+			if(!rs.isEnabled())
+				return false;
+		}
+		return true;
+	}
 	public int compareTo(Research o) {
 		return Name.compareTo(o.getName());
 	}
