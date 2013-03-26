@@ -29,6 +29,10 @@ public class ResearchModule extends ISAbstractModule {
 		researchdeskid=BlockIDs.get("researchdesk");
 		researchbook = new ResearchBook(ItemIDs.get("researchbook"));
 		researchbookid = ItemIDs.get("researchbook");
+		addresearches();
+		
+	}
+	private void addresearches() {
 		
 	}
 	@Override
