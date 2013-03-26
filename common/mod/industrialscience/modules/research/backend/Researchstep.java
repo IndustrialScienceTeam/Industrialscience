@@ -7,7 +7,14 @@ public class Researchstep{
 	private String ResearchStepText;
 
 	public boolean isEnabled(){
-		return eneabled;
+		return enabled;
+	}
+	public boolean research(ResearchObject ro){
+		if(ro.equals(neededobject)){
+			enabled=true;
+			return true;
+		}
+		return false;
 	}
 
 }
