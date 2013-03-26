@@ -67,5 +67,9 @@ public boolean isRearched(){
 	public synchronized Researchstep[] getSteps() {
 		return Steps;
 	}
+	public String toString(){
+		return "Researchname: "+Name+", ResearchCategory: "+Category;
+		
+	}
 
 }
