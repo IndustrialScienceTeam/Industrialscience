@@ -44,5 +44,9 @@ public class ResearchModule extends ISAbstractModule {
 		ResearchManager.getInstance().loadResearches();
 		
 	}
+	@Override
+	public String getName() {
+		return "Research-Module-IS";
+	}
 
 }
