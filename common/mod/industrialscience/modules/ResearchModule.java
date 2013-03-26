@@ -1,6 +1,7 @@
 package mod.industrialscience.modules;
 
 import java.util.Hashtable;
+import java.util.logging.Level;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
