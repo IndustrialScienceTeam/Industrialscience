@@ -14,6 +14,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import mod.industrialscience.modules.*;
 
@@ -64,7 +65,16 @@ public class IndustrialScience {
 	 initmodules();
 	 loadmodules();
 	}
-
+	@cpw.mods.fml.common.Mod.PostInit
+	public void PostInit(FMLPostInitializationEvent event){
+		postinitmodules();
+	}
+	private void postinitmodules() {
+		for(ISAbstractModule a: modules){
+			a.postinit();
+		}
+		
+	}
 	private void registermodules() {
 		modules.add(new mod.industrialscience.modules.ResearchModule());
 		

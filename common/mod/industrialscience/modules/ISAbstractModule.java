@@ -14,4 +14,5 @@ public void setIDs(Hashtable<String, Integer> BlockIDs, Hashtable<String, Intege
 public abstract void init();
 public abstract Hashtable<String, Integer> getNeededBlockIDs();
 public abstract Hashtable<String, Integer> getNeededItemIDs();
+public abstract void postinit();
 }

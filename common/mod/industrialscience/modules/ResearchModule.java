@@ -37,5 +37,10 @@ public class ResearchModule extends ISAbstractModule {
 		blub.put("researchbook", 8123);
 		return blub;
 	}
+	@Override
+	public void postinit() {
+		
+		
+	}
 
 }
