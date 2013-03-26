@@ -23,7 +23,16 @@ public Research(String name, ArrayList<Research> neededResearches, String catego
 	Checker=checker;
 }
 public boolean research(ResearchObject object){
-	return false;
+	int id=-1;
+	for (int i = 0; i < Steps.length; i++) {
+		if(!Steps[i].isEnabled()){
+			if(i!=Steps[i].getID()){
+				throw new RuntimeException();
+			}
+			id=i;
+		}
+	}
+	return Steps[id].research(object);
 	
 }	
 
@@ -49,15 +58,12 @@ public boolean isRearched(){
 	public String getName() {
 		return Name;
 	}
-
 	public ArrayList<Research> getNeededResearches() {
 		return NeededResearches;
 	}
-
 	public String getCategory() {
 		return Category;
 	}
-
 	public synchronized Researchstep[] getSteps() {
 		return Steps;
 	}
