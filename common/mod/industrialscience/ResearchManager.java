@@ -8,8 +8,10 @@ public class ResearchManager {
 private static ResearchManager instance=null;
 private ArrayList<Research> allResearches=null;
 private ArrayList<Research> activatedResearches=null;
+private boolean enabled;
 public void loadResearches(){
 	for(Research r : allResearches){
+		if(r.check())
 		activatedResearches.add(r);
 	}
 }
@@ -20,6 +22,11 @@ public static ResearchManager getInstance(){
 	return instance;
 }
 public void registerResearch(Research r){
-	
+	if(enabled){
+		allResearches.add(r);
+	}
+}
+public void disable(){
+	enabled=false;
 }
 }
