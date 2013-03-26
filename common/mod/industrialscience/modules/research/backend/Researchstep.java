@@ -1,7 +1,13 @@
 package mod.industrialscience.modules.research.backend;
 
-public interface Researchstep {
 
-	public boolean isEnabled();
+public class Researchstep{
+	private boolean eneabled= false;
+	private ResearchObject neededitemstack;
+	private String ResearchStepText;
+
+	public boolean isEnabled(){
+		return eneabled;
+	}
 
 }

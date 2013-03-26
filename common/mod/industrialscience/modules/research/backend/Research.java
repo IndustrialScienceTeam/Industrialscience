@@ -1,6 +1,9 @@
 package mod.industrialscience.modules.research.backend;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
+import net.minecraft.item.ItemStack;
 
 public class Research implements Comparable<Research>{
 private String Name;
@@ -15,11 +18,16 @@ public Research(String name, ArrayList<Research> neededResearches, String catego
 	NeededResearches = neededResearches;
 	Category = category;
 	Steps = steps;
+	Arrays.sort(Steps);
 	Locker = locker;
 	Checker=checker;
 }
+public boolean research(ResearchObject object){
+	return false;
+	
+}	
 
-	public boolean isRearched(){
+public boolean isRearched(){
 		for(Researchstep rs : Steps){
 			if(!rs.isEnabled())
 				return false;
