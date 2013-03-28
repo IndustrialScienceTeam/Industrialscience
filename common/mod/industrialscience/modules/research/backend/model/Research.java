@@ -10,6 +10,7 @@ private String Category;
 private Researchstep[] Steps;
 private RecipeLocker Locker;
 private Researchchecker Checker;
+private String ProgrammingDate;
 
 public Research(String ProgrammingDate ,String name, ArrayList<Research> neededResearches, String category, Researchstep[] steps, RecipeLocker locker, Researchchecker checker) {
 	Name = name;
@@ -19,6 +20,7 @@ public Research(String ProgrammingDate ,String name, ArrayList<Research> neededR
 	Arrays.sort(Steps);
 	Locker = locker;
 	Checker=checker;
+	this.ProgrammingDate=ProgrammingDate;
 }
 public boolean research(ResearchObject object){
 	if(!isResearched()){
@@ -50,7 +52,7 @@ public boolean isResearched(){
 		return true;
 	}
 	public int compareTo(Research o) {
-		return Name.compareTo(o.getName());
+		return ProgrammingDate.compareTo(o.getProgrammingDate());
 	}
 	
 	private synchronized void unlock(){
@@ -76,6 +78,9 @@ public boolean isResearched(){
 	public String toString(){
 		return "Researchname: "+Name+", ResearchCategory: "+Category;
 		
+	}
+	public String getProgrammingDate() {
+		return ProgrammingDate;
 	}
 
 }
