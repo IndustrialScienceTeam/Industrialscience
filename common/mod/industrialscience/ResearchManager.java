@@ -11,6 +11,7 @@ private ArrayList<Research> activatedResearches=null;
 private boolean enabled=true;
 public void loadResearches(){
 	activatedResearches= new ArrayList<Research>();
+	if(allResearches!=null)
 	for(Research r : allResearches){
 		if(r.check())
 		activatedResearches.add(r);
