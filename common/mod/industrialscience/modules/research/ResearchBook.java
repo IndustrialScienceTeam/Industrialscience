@@ -38,7 +38,10 @@ public class ResearchBook extends Item {
 		par3EntityPlayer.openGui(IndustrialScience.instance, 1, par2World, par3EntityPlayer.getPlayerCoordinates().posX, par3EntityPlayer.getPlayerCoordinates().posY, par3EntityPlayer.getPlayerCoordinates().posZ);
 		return super.onItemRightClick(par1ItemStack, par2World, par3EntityPlayer);
 	}
+	@SuppressWarnings("unchecked")
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, @SuppressWarnings("rawtypes") List par3List, boolean par4) {
+	    if( par1ItemStack.stackTagCompound == null )
+	        par1ItemStack.setTagCompound( new NBTTagCompound( ) );
 		int[] researchesid= par1ItemStack.stackTagCompound.getIntArray(NBTNAME);
 		if(researchesid!=null){
 			par3List.add("Researches: "+researchesid.length);
