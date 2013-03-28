@@ -1,6 +1,8 @@
 package mod.industrialscience;
 
 import java.util.ArrayList;
+import java.util.Collections;
+
 import mod.industrialscience.modules.research.backend.model.Research;
 
 public class ResearchManager {
@@ -18,6 +20,7 @@ public void loadResearches(){
 		if(r.check())
 		activatedResearches.add(r);
 	}
+	Collections.sort(activatedResearches);
 }
 public static ResearchManager getInstance(){
 	if(instance==null){
