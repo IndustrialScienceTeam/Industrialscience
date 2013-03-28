@@ -40,4 +40,7 @@ public void disable(){
 public ArrayList<Research> getActivatedResearches() {
 	return activatedResearches;
 }
+public ArrayList<Research> getAllResearches() {
+	return allResearches;
+}
 }
