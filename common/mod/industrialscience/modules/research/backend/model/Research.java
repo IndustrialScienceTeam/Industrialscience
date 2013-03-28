@@ -12,7 +12,7 @@ private RecipeLocker Locker;
 private Researchchecker Checker;
 private boolean Ghost=false;
 
-public Research(String name, ArrayList<Research> neededResearches, String category, Researchstep[] steps, RecipeLocker locker, Researchchecker checker) {
+public Research(String ProgrammingDate ,String name, ArrayList<Research> neededResearches, String category, Researchstep[] steps, RecipeLocker locker, Researchchecker checker) {
 	Name = name;
 	NeededResearches = neededResearches;
 	Category = category;
