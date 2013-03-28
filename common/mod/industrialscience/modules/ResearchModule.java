@@ -7,6 +7,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import mod.industrialscience.ResearchManager;
 import mod.industrialscience.modules.research.*;
 
@@ -24,11 +25,14 @@ public class ResearchModule extends ISAbstractModule {
 	}
 	@Override
 	public void init() {
+		initCreativeTab();
 		logger.log(Level.INFO, "INIT");
 		researchdesk=new ResearchDesk(BlockIDs.get("researchdesk"));
 		researchdeskid=BlockIDs.get("researchdesk");
+		researchdesk.setCreativeTab(CreativeTab);
 		researchbook = new ResearchBook(ItemIDs.get("researchbook"));
 		researchbookid = ItemIDs.get("researchbook");
+		researchbook.setCreativeTab(CreativeTab);
 		addresearches();
 		
 	}
@@ -56,6 +60,10 @@ public class ResearchModule extends ISAbstractModule {
 	@Override
 	public String getName() {
 		return "Research-Module-IS";
+	}
+	@Override
+	public ItemStack getIconitemstack() {
+		return new ItemStack(researchbook);
 	}
 
 }
