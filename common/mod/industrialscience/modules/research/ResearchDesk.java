@@ -51,6 +51,10 @@ public class ResearchDesk extends BlockContainer {
     // player.openGui(IndustrialScience.instance, 0, world, x, y, z);
     return true;
 	}
+	public boolean hasTileEntity(int metadata)
+	{
+	    return true;
+	}
 	
     @Override
     public void breakBlock(World world, int x, int y, int z, int i, int j){
