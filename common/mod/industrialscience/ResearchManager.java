@@ -10,6 +10,9 @@ private static ResearchManager instance=null;
 private ArrayList<Research> allResearches=null;
 private ArrayList<Research> activatedResearches=null;
 private boolean enabled=true;
+private ResearchManager(){
+	
+}
 public void loadResearches(){
 	activatedResearches= new ArrayList<Research>();
 	if(allResearches!=null)
