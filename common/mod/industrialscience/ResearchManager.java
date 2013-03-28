@@ -1,7 +1,6 @@
 package mod.industrialscience;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 import mod.industrialscience.modules.research.backend.model.Research;
