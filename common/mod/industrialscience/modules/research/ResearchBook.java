@@ -21,7 +21,7 @@ public class ResearchBook extends Item {
 	}
 	public void func_94581_a(IconRegister iconRegister)
 	{
-	         iconIndex = iconRegister.func_94245_a("book");
+	         iconIndex = iconRegister.func_94245_a("industrialscience:research-book");
 	}
 	@Override
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,
