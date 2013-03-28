@@ -3,7 +3,6 @@ package mod.industrialscience.modules.research;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import mod.industrialscience.IndustrialScience;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -14,7 +13,6 @@ public class ResearchBook extends Item {
 	public ResearchBook(int id) {
 		super(id);
 		setMaxStackSize(64);
-		setCreativeTab(CreativeTabs.tabMisc);
 		setUnlocalizedName("Research Book");
 		LanguageRegistry.addName(this, "Research Book");
 
