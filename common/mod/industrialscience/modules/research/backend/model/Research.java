@@ -10,6 +10,7 @@ private String Category;
 private Researchstep[] Steps;
 private RecipeLocker Locker;
 private Researchchecker Checker;
+private boolean Ghost=false;
 
 public Research(String name, ArrayList<Research> neededResearches, String category, Researchstep[] steps, RecipeLocker locker, Researchchecker checker) {
 	Name = name;
@@ -21,7 +22,7 @@ public Research(String name, ArrayList<Research> neededResearches, String catego
 	Checker=checker;
 }
 public boolean research(ResearchObject object){
-	if(!isResearched()){
+	if(!isResearched() & !Ghost){
 	int id=-1;
 	for (int i = 0; i < Steps.length; i++) {
 		if(!Steps[i].isEnabled()){
@@ -76,6 +77,9 @@ public boolean isResearched(){
 	public String toString(){
 		return "Researchname: "+Name+", ResearchCategory: "+Category;
 		
+	}
+	public void setGhostResearch(boolean bool){
+		Ghost=bool;
 	}
 
 }
