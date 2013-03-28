@@ -17,6 +17,7 @@ public class ResearchBook extends Item {
 		LanguageRegistry.addName(this, "Research Book");
 
 	}
+	@Override
 	public void func_94581_a(IconRegister iconRegister)
 	{
 	         iconIndex = iconRegister.func_94245_a("industrialscience:research-book");
