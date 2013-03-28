@@ -32,6 +32,7 @@ public void registerResearch(Research r){
 	if(enabled){
 		if(allResearches==null)allResearches=new ArrayList<Research>();
 		allResearches.add(r);
+		Collections.sort(allResearches);
 	}
 }
 public void disable(){
