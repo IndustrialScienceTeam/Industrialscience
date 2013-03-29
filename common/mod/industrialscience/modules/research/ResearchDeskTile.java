@@ -8,7 +8,8 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
 public class ResearchDeskTile extends TileEntity implements IInventory {
-	private final static int BOOKSLOT=0; 
+	public final static int PAGESLOT=0;
+	public final static int ITEMSLOT=1;
 	private ItemStack[] Inventory;
 	public ResearchDeskTile(){
 		this.Inventory= new ItemStack[6];
