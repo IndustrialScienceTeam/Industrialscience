@@ -1,18 +1,17 @@
 package mod.industrialscience.modules.research;
 
+import mod.industrialscience.ISContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 
-public class ResearchBookContainer extends Container {
+public class ResearchBookContainer extends ISContainer {
 	public ResearchBookContainer(InventoryPlayer player_inventory, int[] researchids){
-		
+		super(player_inventory);
 	}
 
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer) {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 }
