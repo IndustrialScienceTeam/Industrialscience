@@ -11,6 +11,7 @@ private Researchstep[] Steps;
 private RecipeLocker Locker;
 private Researchchecker Checker;
 private String ProgrammingDate;
+private int id=-1;
 
 public Research(String ProgrammingDate ,String name, ArrayList<Research> neededResearches, String category, Researchstep[] steps, RecipeLocker locker, Researchchecker checker) {
 	Name = name;
@@ -81,6 +82,12 @@ public boolean isResearched(){
 	}
 	public String getProgrammingDate() {
 		return ProgrammingDate;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }
