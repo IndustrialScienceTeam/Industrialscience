@@ -8,6 +8,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 import mod.industrialscience.ResearchManager;
 import mod.industrialscience.modules.research.*;
 
@@ -24,7 +25,7 @@ public class ResearchModule extends ISAbstractModule {
 		GameRegistry.registerTileEntity(ResearchDeskTile.class, "Research-Desk");
 		LanguageRegistry.addName(researchdesk, "Research Table");
 		researchdesk.setCreativeTab(CreativeTab);
-		
+		GameRegistry.addRecipe(new ShapedOreRecipe(researchdesk, new Object[]{"WWW","S S","S S",Character.valueOf('W'), "slabWood",Character.valueOf('S'),"stickWood"}));
 		//Researchbook
 		researchbook.setCreativeTab(CreativeTab);
 
