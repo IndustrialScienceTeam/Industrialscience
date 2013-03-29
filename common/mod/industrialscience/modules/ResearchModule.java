@@ -30,7 +30,7 @@ public class ResearchModule extends ISAbstractModule {
 		//Researchbook
 		researchbook.setCreativeTab(CreativeTab);
 		GameRegistry.addRecipe(new ShapelessOreRecipe(researchbook, new Object[]{Item.book,"dyeLime", "dyeLime"}));
-
+		
 		addresearches();
 	}
 	@Override
