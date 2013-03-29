@@ -14,7 +14,7 @@ public class ResearchDeskGUI extends GuiContainer {
     @Override
     protected void drawGuiContainerForegroundLayer(int i, int j){
    
-            fontRenderer.drawString("Tutorial Gui", 6, 6, 0xffffff);
+            fontRenderer.drawString("Research Desk", 6, 6, 0xffffff);
             fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 6, ySize - 96 , 0xffffff);
     }
    
