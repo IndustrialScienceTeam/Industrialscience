@@ -11,7 +11,7 @@ public class ResearchObject {
 		return neededStack;
 	}
 	public boolean isOkay(ResearchObject ro){
-	if(ro.getNeededStack().getItem().itemID==getNeededStack().itemID){
+	if(ItemStack.areItemStacksEqual(ro.getNeededStack(), getNeededStack())){
 		return true;
 	}
 	return false;
