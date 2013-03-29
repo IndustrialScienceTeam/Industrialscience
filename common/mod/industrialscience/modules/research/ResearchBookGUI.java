@@ -4,9 +4,10 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 
 public class ResearchBookGUI extends GuiContainer {
-
-	public ResearchBookGUI(InventoryPlayer player_inventory) {
-		super(new ResearchBookContainer(player_inventory));
+	int[] researchids;
+	public ResearchBookGUI(InventoryPlayer player_inventory,int[] researchids) {
+		super(new ResearchBookContainer(player_inventory, researchids));
+		this.researchids=researchids;
 	}
 
 	@Override

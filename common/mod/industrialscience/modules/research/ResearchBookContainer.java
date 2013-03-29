@@ -5,7 +5,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 
 public class ResearchBookContainer extends Container {
-	public ResearchBookContainer(InventoryPlayer player_inventory){
+	public ResearchBookContainer(InventoryPlayer player_inventory, int[] researchids){
 		
 	}
 
