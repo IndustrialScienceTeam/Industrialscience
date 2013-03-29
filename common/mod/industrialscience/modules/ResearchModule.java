@@ -18,10 +18,17 @@ public class ResearchModule extends ISAbstractModule {
 	public int researchbookid;
 	public void load() {
 		logger.log(Level.INFO, "LOADING");
+		
+		//Research Desk
 		GameRegistry.registerBlock(researchdesk);
 		GameRegistry.registerTileEntity(ResearchDeskTile.class, "Research-Desk");
 		LanguageRegistry.addName(researchdesk, "Research Table");
+		researchdesk.setCreativeTab(CreativeTab);
+		
+		//Researchbook
+		researchbook.setCreativeTab(CreativeTab);
 
+		addresearches();
 	}
 	@Override
 	public void init() {
@@ -29,11 +36,8 @@ public class ResearchModule extends ISAbstractModule {
 		logger.log(Level.INFO, "INIT");
 		researchdesk=new ResearchDesk(BlockIDs.get("researchdesk"));
 		researchdeskid=BlockIDs.get("researchdesk");
-		researchdesk.setCreativeTab(CreativeTab);
 		researchbook = new ResearchBook(ItemIDs.get("researchbook"));
 		researchbookid = ItemIDs.get("researchbook");
-		researchbook.setCreativeTab(CreativeTab);
-		addresearches();
 		
 	}
 	private void addresearches() {
