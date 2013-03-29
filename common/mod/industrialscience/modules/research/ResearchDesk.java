@@ -1,6 +1,8 @@
 package mod.industrialscience.modules.research;
 
 import java.util.Random;
+
+import mod.industrialscience.IndustrialScience;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -48,7 +50,7 @@ public class ResearchDesk extends BlockContainer {
             return false;
             }
 
-    // player.openGui(IndustrialScience.instance, 0, world, x, y, z);
+    player.openGui(IndustrialScience.instance, 0, world, x, y, z);
     return true;
 	}
 	public boolean hasTileEntity(int metadata)
