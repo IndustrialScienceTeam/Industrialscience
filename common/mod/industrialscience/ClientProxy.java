@@ -1,5 +1,7 @@
 package mod.industrialscience;
 
+import mod.industrialscience.modules.research.ResearchBook;
+import mod.industrialscience.modules.research.ResearchBookGUI;
 import mod.industrialscience.modules.research.ResearchDeskGUI;
 import mod.industrialscience.modules.research.ResearchDeskTile;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,7 +24,7 @@ public class ClientProxy extends CommonProxy {
 	}
 	
 	private Object getResearchBookGUI(EntityPlayer player, World world, int x, int y, int z) {
-		return null;
+		return new ResearchBookGUI(player.inventory, player.inventory.mainInventory[player.inventory.currentItem].stackTagCompound.getIntArray(ResearchBook.NBTNAME));
 	}
 	
 	private Object getResearchDeskGUI(EntityPlayer player, World world, int x, int y, int z) {

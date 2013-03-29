@@ -1,5 +1,7 @@
 package mod.industrialscience;
 
+import mod.industrialscience.modules.research.ResearchBook;
+import mod.industrialscience.modules.research.ResearchBookContainer;
 import mod.industrialscience.modules.research.ResearchDeskContainer;
 import mod.industrialscience.modules.research.ResearchDeskTile;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,7 +28,7 @@ public class CommonProxy implements IGuiHandler {
 
 	private Object getResearchBookContainer(EntityPlayer player, World world,
 			int x, int y, int z) {
-		return null;
+		return new ResearchBookContainer(player.inventory, player.inventory.mainInventory[player.inventory.currentItem].stackTagCompound.getIntArray(ResearchBook.NBTNAME));
 	}
 
 	private Object getResearchDeskContainer(EntityPlayer player, World world,
