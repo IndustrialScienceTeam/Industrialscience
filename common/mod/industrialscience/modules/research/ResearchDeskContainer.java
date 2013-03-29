@@ -10,17 +10,7 @@ public class ResearchDeskContainer extends ISContainer {
 			InventoryPlayer player_inventory) {
 		super(player_inventory);
         this.tile_entity = tile_entity;
-        int o=0;
-        for(int q = 0; q <2; q++){
-        for(int p = 0; p <3; p++){
-       
-       
-        addSlotToContainer(new Slot(tile_entity, o, 9+p*18, 9+q*18));
-       
-        o++;
         }
-        }
-	}
        
 
 	@Override
