@@ -14,7 +14,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 public class ResearchBook extends Item {
-	private static final String NBTNAME= "Researches";
+	public static final String NBTNAME= "Researches";
 	public ResearchBook(int id) {
 		super(id);
 		setMaxStackSize(64);
