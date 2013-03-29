@@ -9,6 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 import mod.industrialscience.ResearchManager;
 import mod.industrialscience.modules.research.*;
 
@@ -28,6 +29,7 @@ public class ResearchModule extends ISAbstractModule {
 		GameRegistry.addRecipe(new ShapedOreRecipe(researchdesk, new Object[]{"WWW","S S","S S",Character.valueOf('W'), "slabWood",Character.valueOf('S'),"stickWood"}));
 		//Researchbook
 		researchbook.setCreativeTab(CreativeTab);
+		GameRegistry.addRecipe(new ShapelessOreRecipe(researchbook, new Object[]{Item.book,"dyeLime", "dyeLime"}));
 
 		addresearches();
 	}
