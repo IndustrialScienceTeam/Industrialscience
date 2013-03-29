@@ -1,10 +1,12 @@
 package mod.industrialscience.modules.research;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import mod.industrialscience.IndustrialScience;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -46,6 +48,24 @@ public class ResearchBook extends Item {
 		if(researchesid!=null){
 			par3List.add("Researches: "+researchesid.length);
 		}
+	}
+	@Override
+	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity){
+		if( stack.stackTagCompound == null )
+	        stack.setTagCompound( new NBTTagCompound( ) );
+		ArrayList<Integer>  ids = new ArrayList<Integer>();
+		int[] researchesid= stack.stackTagCompound.getIntArray(NBTNAME);
+		System.out.println(researchesid.length);
+		for (int i : researchesid){
+			ids.add(new Integer(i));
+		}
+		ids.add(new Integer(27));
+		researchesid = new int[ids.size()];
+		for (int i = 0; i < ids.size(); i++) {
+			researchesid[i]=ids.get(i).intValue();
+		}
+		stack.stackTagCompound.setIntArray(NBTNAME, researchesid);
+		return false;
 	}
 	
 
