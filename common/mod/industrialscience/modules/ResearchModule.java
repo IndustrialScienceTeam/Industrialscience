@@ -45,14 +45,14 @@ public class ResearchModule extends ISAbstractModule {
 	}
 	@Override
 	public Hashtable<String, Integer> getNeededBlockIDs() {		
-		Hashtable<String, Integer> blub = new Hashtable<String, Integer>();
-		blub.put("researchdesk", 756);
-		return blub;
+		Hashtable<String, Integer> neededBlockIDs = new Hashtable<String, Integer>();
+		neededBlockIDs.put("researchdesk", 756);
+		return neededBlockIDs;
 	}
 	public Hashtable<String, Integer> getNeededItemIDs() {
-		Hashtable<String, Integer> blub = new Hashtable<String, Integer>();
-		blub.put("researchbook", 8123);
-		return blub;
+		Hashtable<String, Integer> neededItemIDs = new Hashtable<String, Integer>();
+		neededItemIDs.put("researchbook", 8123);
+		return neededItemIDs;
 	}
 	@Override
 	public void postinit() {
