@@ -3,6 +3,8 @@ package mod.industrialscience.modules.research.backend.model;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import net.minecraft.nbt.NBTTagCompound;
+
 public class Research implements Comparable<Research>{
 private String Name;
 private ArrayList<Research> NeededResearches;
@@ -88,6 +90,21 @@ public boolean isResearched(){
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public void writeToNBT(NBTTagCompound tagCompound){
+	   tagCompound.setCompoundTag(String.valueOf(id), getStepNBTTag());
+	}
+	private NBTTagCompound getStepNBTTag() {
+		NBTTagCompound steps = new NBTTagCompound();
+		for(Researchstep r  : Steps){
+			NBTTagCompound enabled = new NBTTagCompound();
+			enabled.setBoolean("enabled", r.isEnabled());
+			steps.setCompoundTag(String.valueOf(r.getID()),enabled);
+		}
+		return steps;
+	}
+	public void setSteps(Researchstep[] steps) {
+		Steps = steps;
 	}
 
 }
