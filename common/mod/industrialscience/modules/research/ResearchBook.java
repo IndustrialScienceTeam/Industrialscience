@@ -55,7 +55,6 @@ public class ResearchBook extends Item {
 	        stack.setTagCompound( new NBTTagCompound( ) );
 		ArrayList<Integer>  ids = new ArrayList<Integer>();
 		int[] researchesid= stack.stackTagCompound.getIntArray(NBTNAME);
-		System.out.println(researchesid.length);
 		for (int i : researchesid){
 			ids.add(new Integer(i));
 		}
