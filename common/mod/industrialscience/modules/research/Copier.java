@@ -23,7 +23,7 @@ public class Copier extends BlockContainer {
 	{
 	this.side= par1IconRegister.func_94245_a("industrialscience:vannila_researchtable_sides");
 	this.bottom = par1IconRegister.func_94245_a("industrialscience:vannila_researchtable_bottom"); 
-	this.top = par1IconRegister.func_94245_a("wood");
+	this.top = par1IconRegister.func_94245_a("wood_jungle");
 	}
 
 	public Icon getBlockTextureFromSideAndMetadata(int i, int j){
