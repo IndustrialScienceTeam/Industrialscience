@@ -27,9 +27,11 @@ public class ResearchModule extends ISAbstractModule {
 		GameRegistry.registerTileEntity(ResearchDeskTile.class, "Research-Desk");
 		researchdesk.setCreativeTab(CreativeTab);
 		GameRegistry.addRecipe(new ShapedOreRecipe(researchdesk, new Object[]{"WWW","S S","S S",Character.valueOf('W'), "slabWood",Character.valueOf('S'),"stickWood"}));
+		
 		//Researchbook
 		researchbook.setCreativeTab(CreativeTab);
 		GameRegistry.addRecipe(new ShapelessOreRecipe(researchbook, new Object[]{Item.book,"dyeLime", "dyeLime"}));
+		
 		//Researchcopier
 		copier.setCreativeTab(CreativeTab);
 		GameRegistry.registerBlock(copier);
