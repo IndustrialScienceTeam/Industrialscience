@@ -2,6 +2,9 @@ package mod.industrialscience.modules.research.backend.model;
 
 import java.util.ArrayList;
 
+import mod.industrialscience.ResearchManager;
+import net.minecraft.nbt.NBTTagCompound;
+
 public class Researchfactory{
 	private String Category;
 	private RecipeLocker Locker;
@@ -21,5 +24,17 @@ public class Researchfactory{
 	public Research getResearch(String ProgrammingDate, String Name, ArrayList<Research> NeededResearches, Researchstep[] Steps, RecipeLocker Locker){
 		return new Research(ProgrammingDate, Name, NeededResearches, Category, Steps, Locker, Checker);
 	}
-
+	public Research getResearch(NBTTagCompound nbttc, int id){
+		Research research = ResearchManager.getInstance().getAllResearches().get(id);
+		Researchstep[] cleansteps= research.getSteps();
+		Researchstep[] steps = new Researchstep[cleansteps.length];
+		Researchstep modedresearchstep;
+		for (Researchstep researchstep : cleansteps) {
+		modedresearchstep=researchstep;
+		modedresearchstep.setEnabled(nbttc.getBoolean(String.valueOf(researchstep.getID())));
+		steps[researchstep.getID()]=modedresearchstep;
+		}
+		research.setSteps(steps);
+		return research;
+	}
 }
