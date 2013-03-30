@@ -11,7 +11,7 @@ public class Copier extends BlockContainer {
 	private Icon side;
 	private Icon bottom;
 	private Icon top;
-	protected Copier(int id) {
+	public Copier(int id) {
 		super(id, Material.wood);
 	}
     public boolean isOpaqueCube()
