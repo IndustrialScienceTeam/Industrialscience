@@ -38,5 +38,8 @@ public class Researchstep implements Comparable<Researchstep>{
 	public int getID() {
 		return ID;
 	}
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 
 }
