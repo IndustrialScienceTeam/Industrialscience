@@ -38,7 +38,7 @@ public class Copier extends BlockContainer {
 		}
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return null;
+		return new CopierTile();
 	}
 	public boolean hasTileEntity(int metadata)
 	{
