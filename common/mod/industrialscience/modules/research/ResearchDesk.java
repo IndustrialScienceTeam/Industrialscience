@@ -2,6 +2,8 @@ package mod.industrialscience.modules.research;
 
 import java.util.Random;
 
+import cpw.mods.fml.common.registry.LanguageRegistry;
+
 import mod.industrialscience.IndustrialScience;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -20,6 +22,8 @@ public class ResearchDesk extends BlockContainer {
 	private Icon top;
 	public ResearchDesk(int id) {
 		super(id, Material.wood);
+		setUnlocalizedName("Research Desk");
+		LanguageRegistry.addName(this, "Research Desk");
 	}
     public boolean isOpaqueCube()
     {

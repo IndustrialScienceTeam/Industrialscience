@@ -25,7 +25,6 @@ public class ResearchModule extends ISAbstractModule {
 		//Research Desk
 		GameRegistry.registerBlock(researchdesk);
 		GameRegistry.registerTileEntity(ResearchDeskTile.class, "Research-Desk");
-		LanguageRegistry.addName(researchdesk, "Research Table");
 		researchdesk.setCreativeTab(CreativeTab);
 		GameRegistry.addRecipe(new ShapedOreRecipe(researchdesk, new Object[]{"WWW","S S","S S",Character.valueOf('W'), "slabWood",Character.valueOf('S'),"stickWood"}));
 		//Researchbook
@@ -34,7 +33,6 @@ public class ResearchModule extends ISAbstractModule {
 		//Researchcopier
 		copier.setCreativeTab(CreativeTab);
 		GameRegistry.registerBlock(copier);
-		LanguageRegistry.addName(copier, "Research Copier");
 		GameRegistry.registerTileEntity(CopierTile.class, "Research-Copier");
 		
 		addresearches();
