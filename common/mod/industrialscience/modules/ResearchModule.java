@@ -17,6 +17,8 @@ public class ResearchModule extends ISAbstractModule {
 	public int researchdeskid;
 	public Item researchbook;
 	public int researchbookid;
+	public Block copier;
+	public int copierid;
 	public void load() {
 		logger.log(Level.INFO, "LOADING");
 		
@@ -36,6 +38,8 @@ public class ResearchModule extends ISAbstractModule {
 	public void init() {
 		initCreativeTab();
 		logger.log(Level.INFO, "INIT");
+		copier= new Copier(BlockIDs.get("researchcopier"));
+		copierid=BlockIDs.get("researchcopier");
 		researchdesk=new ResearchDesk(BlockIDs.get("researchdesk"));
 		researchdeskid=BlockIDs.get("researchdesk");
 		researchbook = new ResearchBook(ItemIDs.get("researchbook"));
@@ -49,6 +53,7 @@ public class ResearchModule extends ISAbstractModule {
 	public Hashtable<String, Integer> getNeededBlockIDs() {		
 		Hashtable<String, Integer> neededBlockIDs = new Hashtable<String, Integer>();
 		neededBlockIDs.put("researchdesk", 756);
+		neededBlockIDs.put("researchcopier", 757);
 		return neededBlockIDs;
 	}
 	public Hashtable<String, Integer> getNeededItemIDs() {
