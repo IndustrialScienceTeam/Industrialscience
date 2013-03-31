@@ -22,7 +22,7 @@ public class ResearchModule extends ISAbstractModule {
 		logger.log(Level.INFO, "LOADING");
 		
 		//Research Desk
-		GameRegistry.registerBlock(researchdesk);
+		GameRegistry.registerBlock(researchdesk,researchdesk.getUnlocalizedName());
 		GameRegistry.registerTileEntity(ResearchDeskTile.class, "Research-Desk");
 		researchdesk.setCreativeTab(CreativeTab);
 		GameRegistry.addRecipe(new ShapedOreRecipe(researchdesk, new Object[]{"WWW","S S","S S",Character.valueOf('W'), "slabWood",Character.valueOf('S'),"stickWood"}));
@@ -33,7 +33,7 @@ public class ResearchModule extends ISAbstractModule {
 		
 		//Researchcopier
 		copier.setCreativeTab(CreativeTab);
-		GameRegistry.registerBlock(copier);
+		GameRegistry.registerBlock(copier, copier.getUnlocalizedName());
 		GameRegistry.registerTileEntity(CopierTile.class, "Research-Copier");
 		
 		addresearches();
