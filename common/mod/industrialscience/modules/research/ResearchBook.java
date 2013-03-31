@@ -17,7 +17,7 @@ public class ResearchBook extends Item {
 	public static final String NBTNAME= "Researches";
 	public ResearchBook(int id) {
 		super(id);
-		setMaxStackSize(64);
+		setMaxStackSize(1);
 		setUnlocalizedName("Research Book");
 		LanguageRegistry.addName(this, "Research Book");
 
