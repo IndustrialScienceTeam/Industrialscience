@@ -74,7 +74,7 @@ public class ResearchModule extends ISAbstractModule {
 	}
 	@Override
 	public String getName() {
-		return "Research-Module-IS";
+		return "Research Module";
 	}
 	@Override
 	public ItemStack getIconitemstack() {
