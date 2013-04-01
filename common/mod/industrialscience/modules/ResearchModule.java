@@ -14,10 +14,15 @@ import mod.industrialscience.modules.research.*;
 public class ResearchModule extends ISAbstractModule {
 	public Block researchdesk;
 	public int researchdeskid;
+	
 	public Item researchbook;
 	public int researchbookid;
+	
 	public Block copier;
 	public int copierid;
+	
+	public Item researchNote;
+	public int researchNoteid;
 	public void load() {
 		logger.log(Level.INFO, "LOADING");
 		
@@ -36,6 +41,9 @@ public class ResearchModule extends ISAbstractModule {
 		GameRegistry.registerBlock(copier, copier.getUnlocalizedName());
 		GameRegistry.registerTileEntity(CopierTile.class, "Research-Copier");
 		
+		//Reseach Note
+		researchNote.setCreativeTab(CreativeTab);
+		
 		addresearches();
 	}
 	@Override
@@ -48,6 +56,8 @@ public class ResearchModule extends ISAbstractModule {
 		researchdeskid=BlockIDs.get("researchdesk");
 		researchbook = new ResearchBook(ItemIDs.get("researchbook"));
 		researchbookid = ItemIDs.get("researchbook");
+		researchNote= new ResearchNote(ItemIDs.get("researchnote"));
+		researchNoteid=ItemIDs.get("researchnote");
 		
 	}
 	private void addresearches() {
@@ -63,6 +73,7 @@ public class ResearchModule extends ISAbstractModule {
 	public Hashtable<String, Integer> getNeededItemIDs() {
 		Hashtable<String, Integer> neededItemIDs = new Hashtable<String, Integer>();
 		neededItemIDs.put("researchbook", 8123);
+		neededItemIDs.put("researchnote", 8124);
 		return neededItemIDs;
 	}
 	@Override
