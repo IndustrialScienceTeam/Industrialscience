@@ -38,11 +38,10 @@ public class ResearchBook extends Item {
 	@Override
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,
 			EntityPlayer par3EntityPlayer) {
-		Minecraft.getMinecraft().displayGuiScreen(new ResearchBookGUI(par3EntityPlayer, par1ItemStack, getResearchID()));
+		Minecraft.getMinecraft().displayGuiScreen(new ResearchBookGUI(par3EntityPlayer, par1ItemStack));
 		return super.onItemRightClick(par1ItemStack, par2World, par3EntityPlayer);
 	}
-	private int[] getResearchID() {
-		// TODO Auto-generated method stub
+	public int[] getResearchID() {
 		return null;
 	}
 	@SuppressWarnings("unchecked")
