@@ -24,7 +24,8 @@ public class ClientProxy extends CommonProxy {
 	}
 	
 	private Object getResearchBookGUI(EntityPlayer player, World world, int x, int y, int z) {
-		return new ResearchBookGUI(player.inventory, player.inventory.mainInventory[player.inventory.currentItem].stackTagCompound.getIntArray(ResearchBook.NBTNAME));
+		//return new ResearchBookGUI(player.inventory, player.inventory.mainInventory[player.inventory.currentItem].stackTagCompound.getIntArray(ResearchBook.NBTNAME));
+		return null;
 	}
 	
 	private Object getResearchDeskGUI(EntityPlayer player, World world, int x, int y, int z) {

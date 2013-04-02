@@ -5,6 +5,7 @@ import java.util.List;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import mod.industrialscience.IndustrialScience;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -37,8 +38,12 @@ public class ResearchBook extends Item {
 	@Override
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,
 			EntityPlayer par3EntityPlayer) {
-		par3EntityPlayer.openGui(IndustrialScience.instance, 1, par2World, par3EntityPlayer.getPlayerCoordinates().posX, par3EntityPlayer.getPlayerCoordinates().posY, par3EntityPlayer.getPlayerCoordinates().posZ);
+		Minecraft.getMinecraft().displayGuiScreen(new ResearchBookGUI(par3EntityPlayer, par1ItemStack, getResearchID()));
 		return super.onItemRightClick(par1ItemStack, par2World, par3EntityPlayer);
+	}
+	private int[] getResearchID() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	@SuppressWarnings("unchecked")
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, @SuppressWarnings("rawtypes") List par3List, boolean par4) {
