@@ -7,8 +7,8 @@ import mod.industrialscience.modules.research.backend.model.Research;
 
 public class ResearchManager {
 private static ResearchManager instance=null;
-private ArrayList<Research> allResearches=null;
-private ArrayList<Research> activatedResearches=null;
+private Hashtable<String,Research> allResearches=null;
+private Hashtable<String,Research> activatedResearches=null;
 private boolean enabled=true;
 private ResearchManager(){
 	
