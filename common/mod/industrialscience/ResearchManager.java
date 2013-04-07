@@ -34,10 +34,10 @@ public void registerResearch(Research r){
 public void disable(){
 	enabled=false;
 }
-public ArrayList<Research> getActivatedResearches() {
+public Hashtable<String,Research> getActivatedResearches() {
 	return activatedResearches;
 }
-public ArrayList<Research> getAllResearches() {
+public Hashtable<String,Research> getAllResearches() {
 	return allResearches;
 }
 }
