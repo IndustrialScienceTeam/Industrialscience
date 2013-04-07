@@ -1,7 +1,5 @@
 package mod.industrialscience;
 
-import mod.industrialscience.modules.research.ResearchBook;
-import mod.industrialscience.modules.research.ResearchBookGUI;
 import mod.industrialscience.modules.research.ResearchDeskGUI;
 import mod.industrialscience.modules.research.ResearchDeskTile;
 import net.minecraft.entity.player.EntityPlayer;
