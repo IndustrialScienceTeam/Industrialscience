@@ -20,7 +20,6 @@ public void loadResearches(){
 		if(r.check())
 		activatedResearches.add(r);
 	}
-	Collections.sort(activatedResearches);
 }
 public static ResearchManager getInstance(){
 	if(instance==null){
@@ -30,7 +29,6 @@ public static ResearchManager getInstance(){
 }
 public void registerResearch(Research r){
 	if(enabled){
-		Collections.sort(allResearches);
 	}
 }
 public void disable(){
