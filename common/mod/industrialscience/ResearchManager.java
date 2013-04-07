@@ -30,9 +30,6 @@ public static ResearchManager getInstance(){
 }
 public void registerResearch(Research r){
 	if(enabled){
-		int id=allResearches.size();
-		r.setId(id);
-		allResearches.add(id, r);
 		Collections.sort(allResearches);
 	}
 }
