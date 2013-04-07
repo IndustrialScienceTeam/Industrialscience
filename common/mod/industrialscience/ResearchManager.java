@@ -18,7 +18,7 @@ public void loadResearches(){
 	if(allResearches!=null)
 	for(Research r : allResearches){
 		if(r.check())
-		activatedResearches.add(r);
+		activatedResearches.put(r.getName(), r);
 	}
 }
 public static ResearchManager getInstance(){
@@ -29,6 +29,7 @@ public static ResearchManager getInstance(){
 }
 public void registerResearch(Research r){
 	if(enabled){
+		allResearches.put(r.getName(), r);
 	}
 }
 public void disable(){
