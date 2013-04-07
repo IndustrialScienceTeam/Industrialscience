@@ -15,7 +15,9 @@ private ResearchManager(){
 	activatedResearches= new Hashtable<String, Research>();
 }
 public void loadResearches(){
-	for(Research r : allResearches){
+	Enumeration<Research> e= allResearches.elements();
+	while(e.hasMoreElements()){
+		Research r = allResearches.elements().nextElement();
 		if(r.check())
 		activatedResearches.put(r.getName(), r);
 	}
