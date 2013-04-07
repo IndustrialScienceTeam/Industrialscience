@@ -13,7 +13,6 @@ public class ResearchDeskGUI extends GuiContainer {
     @Override
     protected void drawGuiContainerForegroundLayer(int i, int j){
    
-            fontRenderer.drawString("Research Desk", 6, 6, 0xffffff);
     }
    
    
