@@ -62,7 +62,11 @@ public class ResearchModule extends ISAbstractModule {
 		
 	}
 	private void addresearches() {
-		ResearchManager.getInstance().registerResearch(new Researchfactory("Research", new DefaultLocker(new Object[]{"XXX","YXY","XXX",Character.valueOf('X'),Block.planks}, new ItemStack(copier)), new DefaultChecker()).getResearch("7.3.2013", "Copying", null, new Researchstep[]{new Researchstep(0, new ResearchObject(new ItemStack(Item.paper)), "I'm working on a way to duplicate infomation. Paper is very important for it."), new Researchstep(1, new ResearchObject(new ItemStack(Item.dyePowder, 1, 0)), "I also need some ink to write the infomation down, but I can't use my fingers...")}));
+		try {
+			ResearchManager.getInstance().registerResearch(new Researchfactory("Research", new DefaultLocker(new Object[]{"XXX","YXY","XXX",Character.valueOf('X'),Block.planks}, new ItemStack(copier)), new DefaultChecker()).getResearch("7.3.2013", "Copying", null, new Researchstep[]{new Researchstep(0, new ResearchObject(new ItemStack(Item.paper)), "I'm working on a way to duplicate infomation. Paper is very important for it."), new Researchstep(1, new ResearchObject(new ItemStack(Item.dyePowder, 1, 0)), "I also need some ink to write the infomation down, but I can't use my fingers...")}));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	@Override
 	public Hashtable<String, Integer> getNeededBlockIDs() {		
