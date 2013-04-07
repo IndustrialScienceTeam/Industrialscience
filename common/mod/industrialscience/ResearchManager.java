@@ -11,7 +11,7 @@ private Hashtable<String,Research> allResearches=null;
 private Hashtable<String,Research> activatedResearches=null;
 private boolean enabled=true;
 private ResearchManager(){
-	
+	allResearches=new Hashtable<String, Research>();
 }
 public void loadResearches(){
 	activatedResearches= new ArrayList<Research>();
@@ -30,7 +30,6 @@ public static ResearchManager getInstance(){
 }
 public void registerResearch(Research r){
 	if(enabled){
-		if(allResearches==null)allResearches=new ArrayList<Research>();
 		int id=allResearches.size();
 		r.setId(id);
 		allResearches.add(id, r);
