@@ -28,8 +28,10 @@ public static ResearchManager getInstance(){
 	}
 	return instance;
 }
-public void registerResearch(Research r){
+public void registerResearch(Research r) throws Exception{
 	if(enabled){
+		if(allResearches.get(r).getName()!=null)
+			throw new Exception("There is already a research with the name: "+r.getName());
 		allResearches.put(r.getName(), r);
 	}
 }
