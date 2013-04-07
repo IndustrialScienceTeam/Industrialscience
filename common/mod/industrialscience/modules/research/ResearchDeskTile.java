@@ -10,6 +10,7 @@ import net.minecraft.tileentity.TileEntity;
 public class ResearchDeskTile extends TileEntity implements IInventory {
 	public final static int PAGESLOT=0;
 	public final static int ITEMSLOT=1;
+	public final static int BOOKSLOT=2;
 	private ItemStack[] Inventory;
 	public ResearchDeskTile(){
 		this.Inventory= new ItemStack[2];
