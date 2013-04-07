@@ -13,7 +13,7 @@ public class ResearchDeskTile extends TileEntity implements IInventory {
 	public final static int BOOKSLOT=2;
 	private ItemStack[] Inventory;
 	public ResearchDeskTile(){
-		this.Inventory= new ItemStack[2];
+		this.Inventory= new ItemStack[3];
 	}
 	@Override
 	public int getSizeInventory() {
