@@ -12,10 +12,9 @@ private Hashtable<String,Research> activatedResearches=null;
 private boolean enabled=true;
 private ResearchManager(){
 	allResearches=new Hashtable<String, Research>();
+	activatedResearches= new Hashtable<String, Research>();
 }
 public void loadResearches(){
-	activatedResearches= new ArrayList<Research>();
-	if(allResearches!=null)
 	for(Research r : allResearches){
 		if(r.check())
 		activatedResearches.put(r.getName(), r);
