@@ -30,7 +30,7 @@ public static ResearchManager getInstance(){
 }
 public void registerResearch(Research r) throws Exception{
 	if(enabled){
-		if(allResearches.get(r).getName()!=null)
+		if(allResearches.get(r)!=null)
 			throw new Exception("There is already a research with the name: "+r.getName());
 		allResearches.put(r.getName(), r);
 	}
