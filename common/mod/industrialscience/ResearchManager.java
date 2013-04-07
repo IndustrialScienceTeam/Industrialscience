@@ -17,7 +17,7 @@ private ResearchManager(){
 public void loadResearches(){
 	Enumeration<Research> e= allResearches.elements();
 	while(e.hasMoreElements()){
-		Research r = allResearches.elements().nextElement();
+		Research r = e.nextElement();
 		if(r.check())
 		activatedResearches.put(r.getName(), r);
 	}
