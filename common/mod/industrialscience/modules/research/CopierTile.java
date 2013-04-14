@@ -53,7 +53,10 @@ public class CopierTile extends TileEntity implements IInventory {
 	}
 	@Override
 	public void setInventorySlotContents(int i, ItemStack itemstack) {
-		// TODO Auto-generated method stub
+		Inventory[i]=itemstack;
+        if(itemstack != null && itemstack.stackSize > getInventoryStackLimit()){
+            itemstack.stackSize = getInventoryStackLimit();
+    }
 		
 	}
 	@Override
