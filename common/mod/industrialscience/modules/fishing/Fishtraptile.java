@@ -6,15 +6,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
 public class Fishtraptile extends TileEntity implements IInventory {
+	static final int UPDATESLOT=1;
+	static final int FISHSLOT=1;
 	private ItemStack[] Inventory;
 	private String name="Basic Fishtrap";
 	public Fishtraptile() {
 		Inventory = new ItemStack[2];
 	}
-	@Override
-	public void updateEntity(){
-	}
-
 	@Override
 	public int getSizeInventory() {
 		return Inventory.length;
@@ -104,10 +102,6 @@ ItemStack stack = getStackInSlot(i);
 	public boolean func_94041_b(int i, ItemStack itemstack) {
 		// TODO Auto-generated method stub
 		return false;
-	}
-	@Override
-	public boolean canUpdate(){
-		return true;
 	}
 	
 
