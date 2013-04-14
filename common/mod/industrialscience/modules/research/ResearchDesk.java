@@ -82,9 +82,9 @@ public class ResearchDesk extends BlockContainer {
                 ItemStack item = inventory.getStackInSlot(i);
                
                 if(item != null && item.stackSize > 0){
-                float rx = rand.nextFloat() * 0.6F + 0.1F;
-                float ry = rand.nextFloat() * 0.6F + 0.1F;
-                float rz = rand.nextFloat() * 0.6F + 0.1F;
+                float rx = rand.nextFloat() * 0.3F + 0.1F;
+                float ry = rand.nextFloat() * 0.3F + 0.1F;
+                float rz = rand.nextFloat() * 0.3F + 0.1F;
                
                 EntityItem entity_item = new EntityItem(world, x + rx, y + ry, z + rz, new ItemStack(item.itemID, item.stackSize, item.getItemDamage()));
                
@@ -95,7 +95,7 @@ public class ResearchDesk extends BlockContainer {
                 float factor = 0.5F;
                
                 entity_item.motionX = rand.nextGaussian() * factor;
-                entity_item.motionY = rand.nextGaussian() * factor + 0.2F;
+                entity_item.motionY = rand.nextGaussian() * factor;
                 entity_item.motionZ = rand.nextGaussian() * factor;
                 world.spawnEntityInWorld(entity_item);
                 item.stackSize = 0;
