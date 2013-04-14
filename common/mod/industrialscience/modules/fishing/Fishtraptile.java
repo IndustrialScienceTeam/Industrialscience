@@ -143,6 +143,17 @@ ItemStack stack = getStackInSlot(i);
 		
 		tagCompound.setTag("Inventory", itemList);
 	}
+	public void addFish() {
+		ItemStack stack=null;
+		if(Inventory[FISHSLOT]!=null){
+		stack=Inventory[FISHSLOT];
+		stack.stackSize++;
+		}
+		else {
+		stack=new ItemStack(Item.fishRaw, 1);
+		}
+		Inventory[FISHSLOT]=stack;
+	}
 	
 
 }
