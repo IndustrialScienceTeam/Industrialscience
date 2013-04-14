@@ -26,11 +26,14 @@ public class FishtrapBlock extends BlockContainer {
 	}
     public boolean isOpaqueCube()
     {
-        return true;
+        return false;
     }
 	public void func_94332_a(IconRegister par1IconRegister)
 	{
-	texture= par1IconRegister.func_94245_a("trapdoor");
+	this.texture= par1IconRegister.func_94245_a("trapdoor");
 	}
+	public Icon getBlockTextureFromSideAndMetadata(int i, int j){
+		return texture;
+		}
 
 }
