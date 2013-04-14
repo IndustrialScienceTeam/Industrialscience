@@ -1,7 +1,6 @@
 package mod.industrialscience.modules.fishing;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import mod.industrialscience.modules.research.CopierTile;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
