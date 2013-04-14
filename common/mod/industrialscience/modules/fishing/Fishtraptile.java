@@ -2,7 +2,10 @@ package mod.industrialscience.modules.fishing;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
 public class Fishtraptile extends TileEntity implements IInventory {
@@ -102,6 +105,43 @@ ItemStack stack = getStackInSlot(i);
 	public boolean func_94041_b(int i, ItemStack itemstack) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	@Override
+	public void readFromNBT(NBTTagCompound tagCompound){
+		super.readFromNBT(tagCompound);
+		
+		NBTTagList tagList = tagCompound.getTagList("Inventory");
+		
+		for(int i = 0; i < tagList.tagCount(); i++){
+			NBTTagCompound tag = (NBTTagCompound) tagList.tagAt(i);
+			
+			byte slot = tag.getByte("Slot");
+			
+			if(slot >= 0 && slot < Inventory.length){
+				Inventory[slot] = ItemStack.loadItemStackFromNBT(tag);
+			}
+		}
+	}
+	
+	@Override
+	public void writeToNBT(NBTTagCompound tagCompound){
+		super.writeToNBT(tagCompound);
+		
+		NBTTagList itemList = new NBTTagList();
+		
+		for(int i = 0; i < Inventory.length; i++){
+			ItemStack stack = Inventory[i];
+			
+			if(stack != null){
+				NBTTagCompound tag = new NBTTagCompound();
+				
+				tag.setByte("Slot", (byte) i);
+				stack.writeToNBT(tag);
+				itemList.appendTag(tag);
+			}
+		}
+		
+		tagCompound.setTag("Inventory", itemList);
 	}
 	
 
