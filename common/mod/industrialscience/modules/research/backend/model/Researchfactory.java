@@ -24,8 +24,8 @@ public class Researchfactory{
 	public Research getResearch(String ProgrammingDate, String Name, ArrayList<Research> NeededResearches, Researchstep[] Steps, RecipeLocker Locker){
 		return new Research(ProgrammingDate, Name, NeededResearches, Category, Steps, Locker, Checker);
 	}
-	public Research getResearch(NBTTagCompound nbttc, int id){
-		Research research = ResearchManager.getInstance().getAllResearches().get(id);
+	public Research getResearch(NBTTagCompound nbttc, String name){
+		Research research = ResearchManager.getInstance().getAllResearches().get(name);
 		Researchstep[] cleansteps= research.getSteps();
 		Researchstep[] steps = new Researchstep[cleansteps.length];
 		Researchstep modedresearchstep;

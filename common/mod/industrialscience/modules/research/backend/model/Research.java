@@ -85,7 +85,7 @@ public boolean isResearched(){
 		return ProgrammingDate;
 	}
 	public void writeToNBT(NBTTagCompound tagCompound){
-	   tagCompound.setCompoundTag(String.valueOf(id), getStepNBTTag());
+	   tagCompound.setCompoundTag(Name, getStepNBTTag());
 	}
 	private NBTTagCompound getStepNBTTag() {
 		NBTTagCompound steps = new NBTTagCompound();
