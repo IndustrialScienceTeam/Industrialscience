@@ -10,11 +10,6 @@ import net.minecraft.item.ItemStack;
 public class FishingModule extends ISAbstractModule {
 	public Block basicfishtrap;
 	public int basicfishtrapid;
-	
-
-	public FishingModule() {
-		// TODO Auto-generated constructor stub
-	}
 
 	@Override
 	public void load() {
