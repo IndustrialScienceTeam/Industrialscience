@@ -76,6 +76,7 @@ public class IndustrialScience {
 	}
 	private void registermodules() {
 		modules.add(new mod.industrialscience.modules.ResearchModule());
+		modules.add(new mod.industrialscience.modules.FishingModule());
 		
 	}
 	private void initmodules() {
