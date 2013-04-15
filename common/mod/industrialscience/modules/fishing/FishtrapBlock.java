@@ -6,12 +6,18 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
 public class FishtrapBlock extends BlockContainer {
 	private Icon texture;
+	private final Random random = new Random();
+	private int fishamout=5;
 	private static Material material=Material.wood;
 	public FishtrapBlock(int id) {
 		super(id, material);
@@ -39,6 +45,14 @@ public class FishtrapBlock extends BlockContainer {
 		return texture;
 		}
 	public void updateTick(World world, int x, int y, int z, Random random){
+		System.out.println("TICK");
+		int rand=random.nextInt(100);
+			TileEntity tile =world.getBlockTileEntity(x, y, z);
+	        if(!(tile instanceof Fishtraptile)){
+                return;
+	        }
+	        Fishtraptile fishtile = (Fishtraptile) tile;
+			fishtile.addFish(fishamout);
 		
 	}
     public void breakBlock(World world, int x, int y, int z, int i, int j){
@@ -82,6 +96,7 @@ public class FishtrapBlock extends BlockContainer {
                     }
                 }
                 }
+            
             }
         }
 }
