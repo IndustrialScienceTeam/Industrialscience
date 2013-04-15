@@ -45,38 +45,43 @@ public class FishtrapBlock extends BlockContainer {
         dropItems(world, x, y, z);
         super.breakBlock(world, x, y, z, i, j);
         }
-    private void dropItems(World world, int x, int y, int z){
-        Random rand = new Random();
-       
-        TileEntity tile_entity = world.getBlockTileEntity(x, y, z);
-       
-        if(!(tile_entity instanceof IInventory)){
-                return;
+    private void dropItems(World par1World, int x, int y, int z){
+    	TileEntity tileentity = par1World.getBlockTileEntity(x, y, z);
+    	if(tileentity instanceof IInventory){
+    		IInventory INV = (IInventory) tileentity;
+            for (int j1 = 0; j1 < INV.getSizeInventory(); ++j1)
+            {
+                ItemStack itemstack = INV.getStackInSlot(j1);
+
+                if (itemstack != null)
+                {
+                    float f = this.random.nextFloat() * 0.8F + 0.1F;
+                    float f1 = this.random.nextFloat() * 0.8F + 0.1F;
+                    EntityItem entityitem;
+
+                    for (float f2 = this.random.nextFloat() * 0.8F + 0.1F; itemstack.stackSize > 0; par1World.spawnEntityInWorld(entityitem))
+                    {
+                        int k1 = this.random.nextInt(21) + 10;
+
+                        if (k1 > itemstack.stackSize)
+                        {
+                            k1 = itemstack.stackSize;
+                        }
+
+                        itemstack.stackSize -= k1;
+                        entityitem = new EntityItem(par1World, (double)((float)x + f), (double)((float)y + f1), (double)((float)z + f2), new ItemStack(itemstack.itemID, k1, itemstack.getItemDamage()));
+                        float f3 = 0.05F;
+                        entityitem.motionX = (double)((float)this.random.nextGaussian() * f3);
+                        entityitem.motionY = (double)((float)this.random.nextGaussian() * f3 + 0.5F);
+                        entityitem.motionZ = (double)((float)this.random.nextGaussian() * f3);
+
+                        if (itemstack.hasTagCompound())
+                        {
+                            entityitem.getEntityItem().setTagCompound((NBTTagCompound)itemstack.getTagCompound().copy());
+                        }
+                    }
+                }
+                }
+            }
         }
-
-        IInventory inventory = (IInventory) tile_entity;
-
-        for(int i = 0; i < inventory.getSizeInventory(); i++){
-                ItemStack item = inventory.getStackInSlot(i);
-               
-                if(item != null && item.stackSize > 0){
-                float rz = rand.nextFloat() * 0.3F + 0.1F;
-               
-                EntityItem entity_item = new EntityItem(world, x, y , z + rz, new ItemStack(item.itemID, item.stackSize, item.getItemDamage()));
-               
-                if(item.hasTagCompound()){
-                        entity_item.writeToNBT(((NBTTagCompound) item.getTagCompound().copy()));
-                }
-
-                float factor = 0.5F;
-               
-                entity_item.motionX = rand.nextGaussian() * factor;
-                entity_item.motionY = rand.nextGaussian() * factor + 0.2F;
-                entity_item.motionZ = rand.nextGaussian() * factor;
-                world.spawnEntityInWorld(entity_item);
-                item.stackSize = 0;
-                }
-                }
-        }
-
 }
