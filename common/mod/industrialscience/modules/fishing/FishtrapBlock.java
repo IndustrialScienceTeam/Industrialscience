@@ -15,10 +15,10 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
 public class FishtrapBlock extends BlockContainer {
-	private Icon texture;
-	private final Random random = new Random();
-	private int fishamout=5;
-	private static Material material=Material.wood;
+	protected Icon texture;
+	protected final Random random = new Random();
+	protected int fishamout=5;
+	protected static Material material=Material.wood;
 	public FishtrapBlock(int id) {
 		super(id, material);
 		setUnlocalizedName("Basic Fishtrap");
@@ -59,7 +59,7 @@ public class FishtrapBlock extends BlockContainer {
         dropItems(world, x, y, z);
         super.breakBlock(world, x, y, z, i, j);
         }
-    private void dropItems(World par1World, int x, int y, int z){
+    protected void dropItems(World par1World, int x, int y, int z){
     	TileEntity tileentity = par1World.getBlockTileEntity(x, y, z);
     	if(tileentity instanceof IInventory){
     		IInventory INV = (IInventory) tileentity;
