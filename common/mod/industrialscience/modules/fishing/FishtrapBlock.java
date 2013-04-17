@@ -45,7 +45,6 @@ public class FishtrapBlock extends BlockContainer {
 		return texture;
 		}
 	public void updateTick(World world, int x, int y, int z, Random random){
-		System.out.println("TICK");
 		int rand=random.nextInt(100);
 			TileEntity tile =world.getBlockTileEntity(x, y, z);
 	        if(!(tile instanceof Fishtraptile)){
