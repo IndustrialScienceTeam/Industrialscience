@@ -21,8 +21,8 @@ public class FishtrapBlock extends BlockContainer {
 	protected static Material material=Material.wood;
 	public FishtrapBlock(int id) {
 		super(id, material);
-		setUnlocalizedName("Basic Fishtrap");
-		LanguageRegistry.addName(this, "Basic Fishtrap");
+		setUnlocalizedName("Basic fishtrap");
+		LanguageRegistry.addName(this, "Basic fishtrap");
 		setTickRandomly(true);
 	}
 	@Override
