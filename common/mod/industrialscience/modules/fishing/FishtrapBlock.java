@@ -17,7 +17,10 @@ import net.minecraft.world.World;
 public class FishtrapBlock extends BlockContainer {
 	protected Icon texture;
 	protected final Random random = new Random();
-	protected int fishamout=5;
+	protected int fishamout=1;
+	protected int neededwater=4;
+	protected int waterforextrafish=8;
+	protected int range=5;
 	protected static Material material=Material.wood;
 	public FishtrapBlock(int id) {
 		super(id, material);
