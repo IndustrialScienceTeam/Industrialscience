@@ -53,7 +53,7 @@ public class FishtrapBlock extends BlockContainer {
                 return;
 	        }
 	        Fishtraptile fishtile = (Fishtraptile) tile;
-			fishtile.addFish(fishamout, neededwater, range,waterforextrafish);
+			fishtile.addFish(fishamout);
 		
 	}
     public void breakBlock(World world, int x, int y, int z, int i, int j){
