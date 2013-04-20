@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import mod.industrialscience.IndustrialScience;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
