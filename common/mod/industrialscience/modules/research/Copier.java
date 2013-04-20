@@ -22,11 +22,11 @@ public class Copier extends BlockContainer {
         return false;
     }
 	@Override 
-	public void registerIcons(IconRegister par1IconRegister)
+	public void func_94332_a(IconRegister par1IconRegister)
 	{
-	this.side= par1IconRegister.registerIcon("industrialscience:vannila_researchtable_sides");
-	this.bottom = par1IconRegister.registerIcon("industrialscience:vannila_researchtable_bottom"); 
-	this.top = par1IconRegister.registerIcon("wood_jungle");
+	this.side= par1IconRegister.func_94245_a("industrialscience:vannila_researchtable_sides");
+	this.bottom = par1IconRegister.func_94245_a("industrialscience:vannila_researchtable_bottom"); 
+	this.top = par1IconRegister.func_94245_a("wood_jungle");
 	}
 
 	public Icon getBlockTextureFromSideAndMetadata(int i, int j){

@@ -12,9 +12,9 @@ public class ResearchNote extends Item {
 		setUnlocalizedName("Research Note");
 		LanguageRegistry.addName(this, "Research Note");
 	}
-	public void updateIcons(IconRegister iconRegister)
+	public void func_94581_a(IconRegister iconRegister)
 	{
-		this.iconIndex = iconRegister.registerIcon("paper");
+		this.iconIndex = iconRegister.func_94245_a("paper");
 	}
 
 }

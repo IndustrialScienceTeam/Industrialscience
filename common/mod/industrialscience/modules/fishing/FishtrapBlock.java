@@ -40,9 +40,9 @@ public class FishtrapBlock extends BlockContainer {
     {
         return false;
     }
-	public void registerIcons(IconRegister par1IconRegister)
+	public void func_94332_a(IconRegister par1IconRegister)
 	{
-	this.texture= par1IconRegister.registerIcon("trapdoor");
+	this.texture= par1IconRegister.func_94245_a("trapdoor");
 	}
 	public Icon getBlockTextureFromSideAndMetadata(int i, int j){
 		return texture;
