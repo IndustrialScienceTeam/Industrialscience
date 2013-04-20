@@ -71,12 +71,6 @@ public class ResearchDeskTile extends TileEntity implements IInventory {
 	public String getInvName() {
 		return "Research Desk";
 	}
-
-	@Override
-	public boolean func_94042_c() {
-		return false;
-	}
-
 	@Override
 	public int getInventoryStackLimit() {
 		return 64;
@@ -95,13 +89,6 @@ public class ResearchDeskTile extends TileEntity implements IInventory {
 	@Override
 	public void closeChest() {
 		
-	}
-
-	@Override
-	public boolean func_94041_b(int i, ItemStack itemstack) {
-		// TODO Auto-generated method stub
-		//WHAT IS THAT?
-		return false;
 	}
 	@Override
 	public void readFromNBT(NBTTagCompound tagCompound){
@@ -139,6 +126,16 @@ public class ResearchDeskTile extends TileEntity implements IInventory {
 		}
 		
 		tagCompound.setTag("Inventory", itemList);
+	}
+	@Override
+	public boolean isInvNameLocalized() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public boolean isStackValidForSlot(int i, ItemStack itemstack) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

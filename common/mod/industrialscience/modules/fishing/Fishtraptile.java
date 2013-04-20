@@ -77,13 +77,6 @@ ItemStack stack = getStackInSlot(i);
 	public String getInvName() {
 		return name;
 	}
-
-	@Override
-	public boolean func_94042_c() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 	@Override
 	public int getInventoryStackLimit() {
 		return 64;
@@ -106,11 +99,7 @@ ItemStack stack = getStackInSlot(i);
 
 	}
 
-	@Override
-	public boolean func_94041_b(int i, ItemStack itemstack) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+
 	@Override
 	public void readFromNBT(NBTTagCompound tagCompound){
 		super.readFromNBT(tagCompound);
@@ -433,6 +422,16 @@ ItemStack stack = getStackInSlot(i);
 		}
 		return waterblocks.size();
 		
+	}
+	@Override
+	public boolean isInvNameLocalized() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public boolean isStackValidForSlot(int i, ItemStack itemstack) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 
