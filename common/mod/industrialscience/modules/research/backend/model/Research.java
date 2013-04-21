@@ -51,7 +51,7 @@ public boolean isResearched(){
 		return true;
 	}
 	public int compareTo(Research o) {
-		return ProgrammingDate.compareTo(o.getProgrammingDate());
+		return Name.compareTo(o.getName());
 	}
 	
 	private synchronized void unlock(){
