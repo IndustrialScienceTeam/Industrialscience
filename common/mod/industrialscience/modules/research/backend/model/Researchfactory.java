@@ -10,7 +10,6 @@ public class Researchfactory{
 	private RecipeLocker Locker;
 	private Researchchecker Checker;
 	public Researchfactory(String category, RecipeLocker locker, Researchchecker checker) {
-		super();
 		Category = category;
 		Locker = locker;
 		Checker=checker;
