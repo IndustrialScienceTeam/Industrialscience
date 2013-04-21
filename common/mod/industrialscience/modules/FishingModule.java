@@ -6,6 +6,7 @@ import java.util.logging.Level;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 import mod.industrialscience.modules.fishing.FishtrapBlock;
+import mod.industrialscience.modules.fishing.LobsterItem;
 import mod.industrialscience.modules.fishing.Lobster_trapBlock;
 import mod.industrialscience.modules.fishing.Fishtraptile;
 import net.minecraft.block.Block;
@@ -18,6 +19,10 @@ public class FishingModule extends ISAbstractModule {
 
 	public Block lobster_trap;
 	public int lobster_trapid;
+	
+	public Item lobsteritem;
+	public int lobsteritemid;
+	
 	@Override
 	public void load() {
 		logger.log(Level.INFO, "LOADING");
@@ -34,6 +39,9 @@ public class FishingModule extends ISAbstractModule {
 		lobster_trap.setCreativeTab(CreativeTab);
 		GameRegistry.addRecipe(new ItemStack(basicfishtrap),new Object[]{"X X X"," X X ","X X X", Character.valueOf('X'), Item.paper});
 
+		//Lobster item
+		GameRegistry.registerItem(lobsteritem , lobsteritem.getUnlocalizedName());
+		lobsteritem.setCreativeTab(CreativeTab);
 	}
 
 	@Override
@@ -48,6 +56,12 @@ public class FishingModule extends ISAbstractModule {
 		//Lobster trap
 		lobster_trapid=BlockIDs.get("lobster_trap");
 		lobster_trap=new Lobster_trapBlock(lobster_trapid);
+		
+		//Lobster item
+		
+		//test//lobsteritemid=ItemIDs.get(lobsteritem);
+		//test//lobsteritem = new Item(lobsteritemid);
+		lobsteritem = new Item(760);
 	}
 
 	@Override
@@ -62,8 +76,11 @@ public class FishingModule extends ISAbstractModule {
 
 	@Override
 	public Hashtable<String, Integer> getNeededItemIDs() {
-		Hashtable<String, Integer> neededItemIDs = new Hashtable<String, Integer>();
-		return neededItemIDs;
+		Hashtable<String, Integer> NeededItemIDs = new Hashtable<String, Integer>();
+		
+		NeededItemIDs.put("lobsteritem" , 760); //Lobster item
+		
+		return NeededItemIDs;
 	}
 
 	@Override
