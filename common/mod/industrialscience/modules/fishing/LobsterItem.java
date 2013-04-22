@@ -3,9 +3,7 @@ package mod.industrialscience.modules.fishing;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraft.util.Icon;
 
 public class LobsterItem extends Item {
 

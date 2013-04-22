@@ -10,7 +10,6 @@ import mod.industrialscience.modules.fishing.LobsterItem;
 import mod.industrialscience.modules.fishing.Lobster_trapBlock;
 import mod.industrialscience.modules.fishing.Fishtraptile;
 import mod.industrialscience.modules.fishing.Lobster_traptile;
-import mod.industrialscience.modules.research.ResearchBook;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
