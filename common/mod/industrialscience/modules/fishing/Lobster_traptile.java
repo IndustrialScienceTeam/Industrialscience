@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.Set;
+
+import mod.industrialscience.modules.FishingModule;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
@@ -152,7 +154,7 @@ ItemStack stack = getStackInSlot(i);
 		stack.stackSize=stack.stackSize+fishes;
 		}
 		else {
-		stack=new ItemStack(Item.appleRed, fishes);
+		stack=new ItemStack(FishingModule.lobsteritem, fishes);
 		}
 		Inventory[FISHSLOT]=stack;
 		}

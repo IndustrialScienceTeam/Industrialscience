@@ -22,7 +22,7 @@ public class FishingModule extends ISAbstractModule {
 	public Block lobster_trap;
 	public int lobster_trapid;
 	
-	public Item lobsteritem;
+	public static Item lobsteritem;
 	public int lobsteritemid;
 	
 	@Override
