@@ -9,6 +9,7 @@ import mod.industrialscience.modules.fishing.FishtrapBlock;
 import mod.industrialscience.modules.fishing.LobsterItem;
 import mod.industrialscience.modules.fishing.Lobster_trapBlock;
 import mod.industrialscience.modules.fishing.Fishtraptile;
+import mod.industrialscience.modules.research.ResearchBook;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -40,8 +41,9 @@ public class FishingModule extends ISAbstractModule {
 		GameRegistry.addRecipe(new ItemStack(basicfishtrap),new Object[]{"X X X"," X X ","X X X", Character.valueOf('X'), Item.paper});
 
 		//Lobster item
-		GameRegistry.registerItem(lobsteritem , lobsteritem.getUnlocalizedName());
 		lobsteritem.setCreativeTab(CreativeTab);
+		GameRegistry.registerItem(lobsteritem , lobsteritem.getUnlocalizedName());
+		
 	}
 
 	@Override
@@ -58,10 +60,13 @@ public class FishingModule extends ISAbstractModule {
 		lobster_trap=new Lobster_trapBlock(lobster_trapid);
 		
 		//Lobster item
+		lobsteritemid = ItemIDs.get("lobsteritem");
+		lobsteritem = new LobsterItem(ItemIDs.get("lobsteritem"));
+		
 		
 		//test//lobsteritemid=ItemIDs.get(lobsteritem);
 		//test//lobsteritem = new Item(lobsteritemid);
-		lobsteritem = new Item(760);
+		//test//lobsteritem = new Item(760);
 	}
 
 	@Override

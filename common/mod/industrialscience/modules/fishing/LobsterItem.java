@@ -1,6 +1,7 @@
 package mod.industrialscience.modules.fishing;
 
 
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -8,18 +9,18 @@ import net.minecraft.util.Icon;
 
 public class LobsterItem extends Item {
 
-	protected Icon texture;    
+	
 	public LobsterItem(int id) {
                 super(id);
                
-                // Constructor Configuration
-                maxStackSize = 64;
-                
-                setUnlocalizedName("genericItem");
+                setMaxStackSize(64);
+                setUnlocalizedName("Lobster Item");
+                LanguageRegistry.addName(this, "Lobster Item");
         }
        
-	public void registerIcons(IconRegister par1IconRegister)
+	public void updateIcons(IconRegister iconRegister)
 	{
-	this.texture= par1IconRegister.registerIcon("industrialscience:lobstertrap");
+	         //iconIndex = iconRegister.registerIcon("industrialscience:lobsteritem");
+		this.iconIndex = iconRegister.registerIcon("paper");
 	}
 }
