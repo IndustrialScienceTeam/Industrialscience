@@ -6,6 +6,7 @@ import mod.industrialscience.ResearchManager;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class Researchfactory{
+	private boolean defaultvalues=false;
 	private String Category;
 	private RecipeLocker Locker;
 	private Researchchecker Checker;
@@ -13,15 +14,22 @@ public class Researchfactory{
 		Category = category;
 		Locker = locker;
 		Checker=checker;
+		defaultvalues=true;
+	}
+	public Researchfactory() {
 	}
 	public Research getResearch(String ProgrammingDate, String Name, ArrayList<Research> NeededResearches, String Category, Researchstep[] Steps, RecipeLocker Locker, Researchchecker Checker){
 		return new Research(ProgrammingDate, Name, NeededResearches, Category, Steps, Locker, Checker);
 	}
 	public Research getResearch(String ProgrammingDate, String Name, ArrayList<Research> NeededResearches, Researchstep[] Steps){
+		if(defaultvalues)
 		return new Research(ProgrammingDate ,Name, NeededResearches, Category, Steps, Locker, Checker);
+		return null;
 	}
 	public Research getResearch(String ProgrammingDate, String Name, ArrayList<Research> NeededResearches, Researchstep[] Steps, RecipeLocker Locker){
+		if(defaultvalues)
 		return new Research(ProgrammingDate, Name, NeededResearches, Category, Steps, Locker, Checker);
+		return null;
 	}
 	public Research getResearch(NBTTagCompound nbttc, String name){
 		Research research = ResearchManager.getInstance().getAllResearches().get(name);
