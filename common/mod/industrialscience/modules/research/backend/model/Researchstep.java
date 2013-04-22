@@ -3,7 +3,6 @@ package mod.industrialscience.modules.research.backend.model;
 
 public class Researchstep implements Comparable<Researchstep>{
 	private int ID=0;
-	private boolean enabled= false;
 	private ResearchObject neededobject;
 	private String ResearchStepText;
 
@@ -14,12 +13,8 @@ public class Researchstep implements Comparable<Researchstep>{
 		this.neededobject = neededobject;
 		ResearchStepText = researchStepText;
 	}
-	public boolean isEnabled(){
-		return enabled;
-	}
 	public boolean research(ResearchObject ro){
 		if(ro.isOkay(neededobject)){
-			enabled=true;
 			return true;
 		}
 		return false;
@@ -37,9 +32,6 @@ public class Researchstep implements Comparable<Researchstep>{
 	}
 	public int getID() {
 		return ID;
-	}
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
 	}
 
 }
