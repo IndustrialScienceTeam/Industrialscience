@@ -17,10 +17,10 @@ import net.minecraft.world.World;
 public class Lobster_trapBlock extends BlockContainer {
 	protected Icon texture;
 	protected final Random random = new Random();
-	protected int fishamout=1;
-	protected int neededwater=4;
-	protected int waterforextrafish=8;
-	protected int range=5;
+	protected int fishamout=10;
+	protected int neededwater=1;
+	protected int waterforextrafish=1;
+	protected int range=1;
 	protected static Material material=Material.wood;
 	public Lobster_trapBlock(int id) {
 		super(id, material);
@@ -49,11 +49,11 @@ public class Lobster_trapBlock extends BlockContainer {
 		}
 	public void updateTick(World world, int x, int y, int z, Random random){
 			TileEntity tile =world.getBlockTileEntity(x, y, z);
-	        if(!(tile instanceof Fishtraptile)){
+	        if(!(tile instanceof Lobster_traptile)){
                 return;
 	        }
-	        Fishtraptile fishtile = (Fishtraptile) tile;
-			fishtile.addFish(fishamout, neededwater, range,waterforextrafish);
+	        Lobster_traptile lobstertile = (Lobster_traptile) tile;
+	        lobstertile.addFish(fishamout, neededwater, range,waterforextrafish);
 		
 	}
     public void breakBlock(World world, int x, int y, int z, int i, int j){

@@ -151,7 +151,7 @@ ItemStack stack = getStackInSlot(i);
 		stack.stackSize=stack.stackSize+fishes;
 		}
 		else {
-		stack=new ItemStack(Item.fishRaw, fishes);
+		stack=new ItemStack(Item.appleRed, fishes);
 		}
 		Inventory[FISHSLOT]=stack;
 		}
