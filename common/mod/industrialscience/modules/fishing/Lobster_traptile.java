@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import mod.industrialscience.modules.fishing.LobsterItem;
 
 public class Lobster_traptile extends TileEntity implements IInventory {
 	static final int UPDATESLOT=1;

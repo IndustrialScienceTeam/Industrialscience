@@ -20,7 +20,7 @@ public class LobsterItem extends Item {
        
 	public void updateIcons(IconRegister iconRegister)
 	{
-	         //iconIndex = iconRegister.registerIcon("industrialscience:lobsteritem");
-		this.iconIndex = iconRegister.registerIcon("paper");
+	     
+		this.iconIndex = iconRegister.registerIcon("industrialscience:lobsteritem");
 	}
 }
