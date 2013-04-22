@@ -16,14 +16,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class FishingModule extends ISAbstractModule {
-	public Block basicfishtrap;
-	public int basicfishtrapid;
+	public static Block basicfishtrap;
+	public static int basicfishtrapid;
 
-	public Block lobster_trap;
-	public int lobster_trapid;
+	public static Block lobster_trap;
+	public static int lobster_trapid;
 	
 	public static Item lobsteritem;
-	public int lobsteritemid;
+	public static int lobsteritemid;
 	
 	@Override
 	public void load() {

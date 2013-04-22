@@ -13,17 +13,17 @@ import mod.industrialscience.modules.research.*;
 import mod.industrialscience.modules.research.backend.model.*;
 
 public class ResearchModule extends ISAbstractModule {
-	public Block researchdesk;
-	public int researchdeskid;
+	public static Block researchdesk;
+	public static int researchdeskid;
 	
-	public Item researchbook;
-	public int researchbookid;
+	public static Item researchbook;
+	public static int researchbookid;
 	
-	public Block copier;
-	public int copierid;
+	public static Block copier;
+	public static int copierid;
 	
-	public Item researchNote;
-	public int researchNoteid;
+	public static Item researchNote;
+	public static int researchNoteid;
 	public void load() {
 		logger.log(Level.INFO, "LOADING");
 		
