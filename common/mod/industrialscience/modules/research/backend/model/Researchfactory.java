@@ -18,17 +18,17 @@ public class Researchfactory{
 	}
 	public Researchfactory() {
 	}
-	public Research getResearch(String ProgrammingDate, String Name, ArrayList<Research> NeededResearches, String Category, Researchstep[] Steps, RecipeLocker Locker, Researchchecker Checker){
-		return new Research(ProgrammingDate, Name, NeededResearches, Category, Steps, Locker, Checker);
+	public Research getResearch( String Name, ArrayList<Research> NeededResearches, String Category, Researchstep[] Steps, RecipeLocker Locker, Researchchecker Checker){
+		return new Research( Name, NeededResearches, Category, Steps, Locker, Checker);
 	}
-	public Research getResearch(String ProgrammingDate, String Name, ArrayList<Research> NeededResearches, Researchstep[] Steps){
+	public Research getResearch(String Name, ArrayList<Research> NeededResearches, Researchstep[] Steps){
 		if(defaultvalues)
-		return new Research(ProgrammingDate ,Name, NeededResearches, Category, Steps, Locker, Checker);
+		return new Research(Name, NeededResearches, Category, Steps, Locker, Checker);
 		return null;
 	}
-	public Research getResearch(String ProgrammingDate, String Name, ArrayList<Research> NeededResearches, Researchstep[] Steps, RecipeLocker Locker){
+	public Research getResearch( String Name, ArrayList<Research> NeededResearches, Researchstep[] Steps, RecipeLocker Locker){
 		if(defaultvalues)
-		return new Research(ProgrammingDate, Name, NeededResearches, Category, Steps, Locker, Checker);
+		return new Research(Name, NeededResearches, Category, Steps, Locker, Checker);
 		return null;
 	}
 	public Research getResearch(NBTTagCompound nbttc, String name){
