@@ -1,10 +1,8 @@
 package mod.industrialscience.modules.research.backend.model;
 
 import java.util.ArrayList;
-
+import java.util.Hashtable;
 import mod.industrialscience.ResearchManager;
-import net.minecraft.nbt.NBTTagCompound;
-
 public class Researchfactory{
 	private boolean defaultvalues=false;
 	private String Category;
@@ -31,17 +29,9 @@ public class Researchfactory{
 		return new Research(Name, NeededResearches, Category, Steps, Locker, Checker);
 		return null;
 	}
-	public Research getResearch(NBTTagCompound nbttc, String name){
+	public Research getResearch(String name, Hashtable<Integer, Boolean> steps){
 		Research research = ResearchManager.getInstance().getAllResearches().get(name);
-		Researchstep[] cleansteps= research.getSteps();
-		Researchstep[] steps = new Researchstep[cleansteps.length];
-		Researchstep modedresearchstep;
-		for (Researchstep researchstep : cleansteps) {
-		modedresearchstep=researchstep;
-		modedresearchstep.setEnabled(nbttc.getBoolean(String.valueOf(researchstep.getID())));
-		steps[researchstep.getID()]=modedresearchstep;
-		}
-		research.setSteps(steps);
+		research.enableSteps(steps);
 		return research;
 	}
 }
