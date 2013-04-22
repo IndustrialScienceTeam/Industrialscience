@@ -78,18 +78,6 @@ public boolean isResearched(){
 		return "Researchname: "+Name+", ResearchCategory: "+Category;
 		
 	}
-	public void writeToNBT(NBTTagCompound tagCompound){
-	   tagCompound.setCompoundTag(Name, getStepNBTTag());
-	}
-	private NBTTagCompound getStepNBTTag() {
-		NBTTagCompound steps = new NBTTagCompound();
-		for(Researchstep r  : Steps){
-			NBTTagCompound enabled = new NBTTagCompound();
-			enabled.setBoolean("enabled", r.isEnabled());
-			steps.setCompoundTag(String.valueOf(r.getID()),enabled);
-		}
-		return steps;
-	}
 	public void setSteps(Researchstep[] steps) {
 		Steps = steps;
 	}
