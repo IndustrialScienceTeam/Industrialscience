@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 public class Lobster_trapBlock extends BlockContainer {
 	protected Icon texture;
 	protected final Random random = new Random();
-	protected int fishamout=10;
+	protected int fishamout=5;
 	protected int neededwater=1;
 	protected int waterforextrafish=1;
 	protected int range=1;
