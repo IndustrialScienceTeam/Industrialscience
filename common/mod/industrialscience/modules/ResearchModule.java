@@ -84,8 +84,6 @@ public class ResearchModule extends ISAbstractModule {
 	@Override
 	public void postinit() {
 		logger.log(Level.INFO, "POST-INIT");
-		ResearchManager.getInstance().disable();
-		ResearchManager.getInstance().loadResearches();
 		
 	}
 	@Override
