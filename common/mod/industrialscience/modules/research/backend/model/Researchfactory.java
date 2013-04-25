@@ -16,17 +16,17 @@ public class Researchfactory{
 	}
 	public Researchfactory() {
 	}
-	public Research getResearch( String Name, ArrayList<Research> NeededResearches, String Category, Researchstep[] Steps, RecipeLocker Locker, Researchchecker Checker){
-		return new Research( Name, NeededResearches, Category, Steps, Locker, Checker);
+	public Research getResearch( String Name, ArrayList<Research> NeededResearches, String Category, Object Data, Researchstep[] Steps, RecipeLocker Locker, Researchchecker Checker){
+		return new Research( Name, NeededResearches, Category, Data, Steps, Locker, Checker);
 	}
-	public Research getResearch(String Name, ArrayList<Research> NeededResearches, Researchstep[] Steps){
+	public Research getResearch(String Name, ArrayList<Research> NeededResearches, Object Data, Researchstep[] Steps){
 		if(defaultvalues)
-		return new Research(Name, NeededResearches, Category, Steps, Locker, Checker);
+		return new Research(Name, NeededResearches, Category, Data, Steps, Locker, Checker);
 		return null;
 	}
-	public Research getResearch( String Name, ArrayList<Research> NeededResearches, Researchstep[] Steps, RecipeLocker Locker){
+	public Research getResearch( String Name, ArrayList<Research> NeededResearches, Object Data, Researchstep[] Steps, RecipeLocker Locker){
 		if(defaultvalues)
-		return new Research(Name, NeededResearches, Category, Steps, Locker, Checker);
+		return new Research(Name, NeededResearches, Category, Data, Steps, Locker, Checker);
 		return null;
 	}
 	public Research getResearch(String name, Hashtable<Integer, Boolean> steps){
