@@ -13,7 +13,8 @@ private Researchstep[] Steps;
 private Hashtable<Integer, Boolean> EnabledSteps;
 private RecipeLocker Locker;
 private Researchchecker Checker;
-public Research(String name, ArrayList<Research> neededResearches, String category, Researchstep[] steps, RecipeLocker locker, Researchchecker checker) {
+private Object Data;
+public Research(String name, ArrayList<Research> neededResearches, String category, Object data, Researchstep[] steps, RecipeLocker locker, Researchchecker checker) {
 	Name = name;
 	NeededResearches = neededResearches;
 	Category = category;
@@ -21,6 +22,7 @@ public Research(String name, ArrayList<Research> neededResearches, String catego
 	Arrays.sort(Steps);
 	Locker = locker;
 	Checker=checker;
+	Data=data;
 }
 public boolean research(ResearchObject object){
 	if(!isResearched()){
@@ -94,6 +96,9 @@ public boolean isResearched(){
 			throw new RuntimeException();
 		EnabledSteps=steps;
 		
+	}
+	public Object getData() {
+		return Data;
 	}
 
 }
