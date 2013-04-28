@@ -1,13 +1,18 @@
 package mod.industrialscience;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
-
 public abstract class ISContainer extends Container {
-protected ISContainer(InventoryPlayer ip){
+protected IInventory tile_entity;
+protected ISContainer(InventoryPlayer ip, IInventory tile_entity){
+	this.tile_entity=tile_entity;
 	bindPlayerInventory(ip);
 }
-
+public boolean canInteractWith(EntityPlayer entityplayer) {
+	return tile_entity.isUseableByPlayer(entityplayer);
+}
 private void bindPlayerInventory(InventoryPlayer ip) {
 	for(int i = 0; i < 3; i++){
         for(int j = 0; j < 9; j++){
