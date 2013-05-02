@@ -1,6 +1,7 @@
 package mod.industrialscience.modules.research;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import mod.industrialscience.modules.ResearchModule;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -16,6 +17,7 @@ public class Copier extends BlockContainer {
 		super(id, Material.wood);
 		setUnlocalizedName("Research Copier");
 		LanguageRegistry.addName(this, "Research Copier");
+		setCreativeTab(ResearchModule.getCreativeTab());
 	}
     public boolean isOpaqueCube()
     {

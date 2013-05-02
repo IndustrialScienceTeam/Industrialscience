@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 
 
 public abstract class ISAbstractModule {
-protected CreativeTabs CreativeTab = null;
+static protected CreativeTabs CreativeTab = null;
 public ISAbstractModule(){
 	logger=Logger.getLogger(getName());
 	logger.setParent(cpw.mods.fml.common.FMLLog.getLogger());
@@ -37,5 +37,8 @@ public void initCreativeTab(){
 		 }};
 		 LanguageRegistry.instance().addStringLocalization("itemGroup."+getName(), "en_US", getName());
 	
+}
+public static CreativeTabs getCreativeTab() {
+	return CreativeTab;
 }
 }

@@ -3,6 +3,7 @@ package mod.industrialscience.modules.fishing;
 import java.util.Random;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import mod.industrialscience.modules.FishingModule;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -27,6 +28,7 @@ public class FishtrapBlock extends BlockContainer {
 		setUnlocalizedName("Basic fishtrap");
 		LanguageRegistry.addName(this, "Basic fishtrap");
 		setTickRandomly(true);
+		setCreativeTab(FishingModule.getCreativeTab());
 	}
 	@Override
 	public TileEntity createNewTileEntity(World world) {

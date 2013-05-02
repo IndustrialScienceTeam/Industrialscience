@@ -31,17 +31,14 @@ public class FishingModule extends ISAbstractModule {
 		//Basicfishtrap
 		GameRegistry.registerBlock(basicfishtrap,basicfishtrap.getUnlocalizedName());
 		GameRegistry.registerTileEntity(Fishtraptile.class,"Basic-Fishtrap");
-		basicfishtrap.setCreativeTab(CreativeTab);
 		GameRegistry.addRecipe(new ItemStack(basicfishtrap),new Object[]{"X X X"," X X ","X X X", Character.valueOf('X'), Item.stick});
 		
 		//Lobster trap
 		GameRegistry.registerBlock(lobster_trap,lobster_trap.getUnlocalizedName());
 		GameRegistry.registerTileEntity(Lobster_traptile.class,"Lobster-Trap");
-		lobster_trap.setCreativeTab(CreativeTab);
 		GameRegistry.addRecipe(new ItemStack(basicfishtrap),new Object[]{"X X X"," X X ","X X X", Character.valueOf('X'), Item.paper});
 
 		//Lobster item
-		lobsteritem.setCreativeTab(CreativeTab);
 		GameRegistry.registerItem(lobsteritem , lobsteritem.getUnlocalizedName());
 		
 	}

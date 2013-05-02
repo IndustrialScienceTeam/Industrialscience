@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import mod.industrialscience.modules.ResearchModule;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
@@ -20,6 +21,7 @@ public class ResearchBook extends Item {
 		setMaxStackSize(1);
 		setUnlocalizedName("Research Book");
 		LanguageRegistry.addName(this, "Research Book");
+		setCreativeTab(ResearchModule.getCreativeTab());
 
 	}
 	@Override
