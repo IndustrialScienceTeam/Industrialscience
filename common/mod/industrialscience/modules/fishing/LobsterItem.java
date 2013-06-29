@@ -17,10 +17,10 @@ public class LobsterItem extends Item {
                 LanguageRegistry.addName(this, "Lobster Item");
                 setCreativeTab(FishingModule.getCreativeTab());
         }
-       
-	public void updateIcons(IconRegister iconRegister)
+    @Override
+	public void registerIcons(IconRegister iconRegister)
 	{
 	     
-		this.iconIndex = iconRegister.registerIcon("industrialscience:lobsteritem");
+		this.itemIcon = iconRegister.registerIcon("industrialscience:lobsteritem");
 	}
 }

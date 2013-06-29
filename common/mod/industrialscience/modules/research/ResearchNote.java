@@ -13,10 +13,10 @@ public class ResearchNote extends Item {
 		setUnlocalizedName("Research Note");
 		LanguageRegistry.addName(this, "Research Note");
 		setCreativeTab(ResearchModule.getCreativeTab());
-	}
-	public void updateIcons(IconRegister iconRegister)
+	}  @Override
+    public void registerIcons(IconRegister iconRegister)
 	{
-		this.iconIndex = iconRegister.registerIcon("paper");
+		this.itemIcon = iconRegister.registerIcon("paper");
 	}
 
 }

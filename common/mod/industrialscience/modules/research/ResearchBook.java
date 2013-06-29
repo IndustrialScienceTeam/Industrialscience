@@ -25,9 +25,9 @@ public class ResearchBook extends Item {
 
 	}
 	@Override
-	public void updateIcons(IconRegister iconRegister)
+	public void registerIcons(IconRegister iconRegister)
 	{
-	         iconIndex = iconRegister.registerIcon("industrialscience:research-book");
+	         itemIcon= iconRegister.registerIcon("industrialscience:research-book");
 	}
 	public void onCreated(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
     if( par1ItemStack.stackTagCompound == null )
