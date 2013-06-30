@@ -6,8 +6,9 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 
 public class Research implements Comparable<Research> {
+    public final static String RESEARCH_CATEGORY="Researching";
     private String Name;
-    private ArrayList<Research> NeededResearches;
+    private ArrayList<String> NeededResearches;
     private String Category;
     private Researchstep[] Steps;
     private Hashtable<Integer, Boolean> EnabledSteps;
@@ -15,7 +16,7 @@ public class Research implements Comparable<Research> {
     private Researchchecker Checker;
     private Object Data;
 
-    public Research(String name, ArrayList<Research> neededResearches,
+    public Research(String name, ArrayList<String> neededResearches,
             String category, Object data, Researchstep[] steps,
             RecipeLocker locker, Researchchecker checker) {
         Name = name;
@@ -84,7 +85,7 @@ public class Research implements Comparable<Research> {
         return Name;
     }
 
-    public ArrayList<Research> getNeededResearches() {
+    public ArrayList<String> getNeededResearches() {
         return NeededResearches;
     }
 

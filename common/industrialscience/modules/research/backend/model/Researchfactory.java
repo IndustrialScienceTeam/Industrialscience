@@ -24,14 +24,14 @@ public class Researchfactory {
     }
 
     public Research getResearch(String Name,
-            ArrayList<Research> NeededResearches, String Category, Object Data,
+            ArrayList<String> NeededResearches, String Category, Object Data,
             Researchstep[] Steps, RecipeLocker Locker, Researchchecker Checker) {
         return new Research(Name, NeededResearches, Category, Data, Steps,
                 Locker, Checker);
     }
 
     public Research getResearch(String Name,
-            ArrayList<Research> NeededResearches, Object Data,
+            ArrayList<String> NeededResearches, Object Data,
             Researchstep[] Steps) {
         if (defaultvalues)
             return new Research(Name, NeededResearches, Category, Data, Steps,
@@ -40,7 +40,7 @@ public class Researchfactory {
     }
 
     public Research getResearch(String Name,
-            ArrayList<Research> NeededResearches, Object Data,
+            ArrayList<String> NeededResearches, Object Data,
             Researchstep[] Steps, RecipeLocker Locker) {
         if (defaultvalues)
             return new Research(Name, NeededResearches, Category, Data, Steps,
