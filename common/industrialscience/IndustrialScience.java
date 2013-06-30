@@ -73,7 +73,7 @@ public class IndustrialScience {
 
     @Init
     public void load(FMLInitializationEvent event) {
-        NetworkRegistry.instance().registerGuiHandler(this, proxy);
+        NetworkRegistry.instance().registerGuiHandler(instance, proxy);
         instance = this;
         initmodules();
         loadmodules();
