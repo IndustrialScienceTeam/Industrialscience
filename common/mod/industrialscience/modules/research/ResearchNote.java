@@ -1,22 +1,23 @@
 package mod.industrialscience.modules.research;
 
-import cpw.mods.fml.common.registry.LanguageRegistry;
-import mod.industrialscience.modules.ResearchModule;
+import mod.industrialscience.modules.ISAbstractModule;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.Item;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class ResearchNote extends Item {
 
-	public ResearchNote(int id) {
-		super(id);
-		setMaxStackSize(1);
-		setUnlocalizedName("Research Note");
-		LanguageRegistry.addName(this, "Research Note");
-		setCreativeTab(ResearchModule.getCreativeTab());
-	}  @Override
-    public void registerIcons(IconRegister iconRegister)
-	{
-		this.itemIcon = iconRegister.registerIcon("paper");
-	}
+    public ResearchNote(int id) {
+        super(id);
+        setMaxStackSize(1);
+        setUnlocalizedName("Research Note");
+        LanguageRegistry.addName(this, "Research Note");
+        setCreativeTab(ISAbstractModule.getCreativeTab());
+    }
+
+    @Override
+    public void registerIcons(IconRegister iconRegister) {
+        itemIcon = iconRegister.registerIcon("paper");
+    }
 
 }
