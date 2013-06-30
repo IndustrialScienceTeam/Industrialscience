@@ -29,7 +29,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
         name = "Industrial Science", 
         version = "1.0")
 public class IndustrialScience {
-    @SidedProxy(clientSide = "mod.industrialscience.ClientProxy", serverSide = "mod.industrialscience.CommonProxy")
+    @SidedProxy(clientSide = "industrialscience.ClientProxy", serverSide = "industrialscience.CommonProxy")
     public static ClientProxy proxy;
     @Instance("Industrial Science")
     public static IndustrialScience instance;
