@@ -19,8 +19,15 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 
-@NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = { "isresearchtable" }, packetHandler = Packethandler.class)
-@Mod(modid = "mod_industrialscience", name = "Industrial Science", version = "1.0")
+@NetworkMod(
+        clientSideRequired = true, 
+        serverSideRequired = false, 
+        channels = { "isresearchtable" }, 
+        packetHandler = Packethandler.class)
+@Mod(
+        modid = "mod_industrialscience", 
+        name = "Industrial Science", 
+        version = "1.0")
 public class IndustrialScience {
     @SidedProxy(clientSide = "mod.industrialscience.ClientProxy", serverSide = "mod.industrialscience.CommonProxy")
     public static ClientProxy proxy;
