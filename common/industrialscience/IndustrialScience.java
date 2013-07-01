@@ -16,6 +16,7 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 
@@ -33,6 +34,7 @@ public class IndustrialScience {
     public static ClientProxy proxy;
     @Instance("Industrial Science")
     public static IndustrialScience instance;
+    public static IGuiHandler guihandler;
     private ArrayList<ISAbstractModule> modules = new ArrayList<ISAbstractModule>();
 
     @PreInit
@@ -73,8 +75,9 @@ public class IndustrialScience {
 
     @Init
     public void load(FMLInitializationEvent event) {
-        NetworkRegistry.instance().registerGuiHandler(instance, proxy);
         instance = this;
+        guihandler=new ISGUIHandler();
+        NetworkRegistry.instance().registerGuiHandler(instance, guihandler);
         initmodules();
         loadmodules();
     }
