@@ -41,9 +41,9 @@ public class ResearchModule extends ISAbstractModule {
         }
         
         // Research Desk
-//        GameRegistry.addRecipe(new ShapedOreRecipe(researchdesk, new Object[] {
-//                "WWW", "S S", "S S", Character.valueOf('W'), "slabWood",
-//                Character.valueOf('S'), "stickWood" }));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(researchBlock, 1, 1), new Object[] {
+                "WWW", "S S", "S S", Character.valueOf('W'), "slabWood",
+                Character.valueOf('S'), "stickWood" }));
 
         // Researchbook
         GameRegistry.addRecipe(new ShapelessOreRecipe(researchbook,
