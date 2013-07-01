@@ -19,7 +19,7 @@ public abstract class ISAbstractModule {
     protected Logger logger;
     protected Hashtable<String, Integer> BlockIDs;
     protected Hashtable<String, Integer> ItemIDs;
-    private String prefix="";
+    static private String prefix="";
 
     public abstract void load();
 
@@ -56,10 +56,10 @@ public abstract class ISAbstractModule {
     public static CreativeTabs getCreativeTab() {
         return CreativeTab;
     }
-    public String getPrefix(){
+    public static String getPrefix(){
         return prefix;
     }
-    protected void setPrefix(String prefix){
-        this.prefix="INDUSTRIALSCIENCE."+prefix+".";
+    protected static void setPrefix(String prefixarg){
+        prefix="INDUSTRIALSCIENCE."+prefixarg+".";
     }
 }
