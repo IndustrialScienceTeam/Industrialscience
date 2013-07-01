@@ -47,8 +47,29 @@ public class GUIHandler implements IGuiHandler {
         @Override
         public Object getClientGuiElement(int ID, EntityPlayer player, World world,
                 int x, int y, int z) {
+            switch (ID) {
+                case RESEARCHDESK_ID:
+                    return getResearchDeskGUI(player, world, x, y, z);
+                case RESEARCHBOOK_ID:
+                    return getResearchBookGUI(player, world, x, y, z);
+                default:
+                    break;
+            }
             return null;
 
+        }
+
+        private Object getResearchBookGUI(EntityPlayer player, World world,
+                int x, int y, int z) {
+            return new ResearchBookGUI(player, player.inventory.mainInventory[player.inventory.currentItem]);
+        }
+
+        private Object getResearchDeskGUI(EntityPlayer player, World world,
+                int x, int y, int z) {
+            TileEntity tile_entity = world.getBlockTileEntity(x, y, z);
+            if (tile_entity instanceof ResearchDeskTile)
+                return new ResearchDeskGUI(player.inventory, (ResearchDeskTile)tile_entity);
+            return null;
         }
     }
 
