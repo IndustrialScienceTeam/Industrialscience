@@ -19,6 +19,7 @@ public abstract class ISAbstractModule {
     protected Logger logger;
     protected Hashtable<String, Integer> BlockIDs;
     protected Hashtable<String, Integer> ItemIDs;
+    private String prefix="";
 
     public abstract void load();
 
@@ -54,5 +55,11 @@ public abstract class ISAbstractModule {
 
     public static CreativeTabs getCreativeTab() {
         return CreativeTab;
+    }
+    public String getPrefix(){
+        return prefix;
+    }
+    protected void setPrefix(String prefix){
+        this.prefix="INDUSTRIALSCIENCE."+prefix+".";
     }
 }
