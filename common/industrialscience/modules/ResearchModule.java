@@ -18,9 +18,6 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 public class ResearchModule extends ISAbstractModule {
     public static Block researchBlock;
     public static int researchBlockID;
-    
-    public static Block researchdesk;
-    public static int researchdeskid;
 
     public static Item researchbook;
     public static int researchbookid;
