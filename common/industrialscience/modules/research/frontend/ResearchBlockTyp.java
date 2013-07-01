@@ -1,9 +1,9 @@
 package industrialscience.modules.research.frontend;
 
 import industrialscience.modules.ResearchModule;
-import industrialscience.modules.research.backend.model.Research;
-import industrialscience.modules.research.backend.model.ResearchObject;
-import industrialscience.modules.research.backend.model.Researchstep;
+import industrialscience.modules.research.backend.Research;
+import industrialscience.modules.research.backend.ResearchObject;
+import industrialscience.modules.research.backend.Researchstep;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

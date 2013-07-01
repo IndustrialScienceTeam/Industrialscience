@@ -1,6 +1,6 @@
 package industrialscience;
 
-import industrialscience.modules.research.backend.model.Research;
+import industrialscience.modules.research.backend.Research;
 
 import java.util.Hashtable;
 

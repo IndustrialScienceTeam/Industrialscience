@@ -1,4 +1,4 @@
-package industrialscience.modules.research.backend.model;
+package industrialscience.modules.research.backend;
 
 public class Researchstep implements Comparable<Researchstep> {
     private int ID = 0;
