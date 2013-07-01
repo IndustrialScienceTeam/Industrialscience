@@ -1,4 +1,4 @@
-package industrialscience.modules.research.frontend;
+package industrialscience.modules.research.frontend.GUI.containers;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

@@ -1,6 +1,7 @@
-package industrialscience.modules.research.frontend;
+package industrialscience.modules.research.frontend.GUI.containers;
 
 import industrialscience.ISContainer;
+import industrialscience.modules.research.frontend.TileEntities.ResearchDeskTile;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 

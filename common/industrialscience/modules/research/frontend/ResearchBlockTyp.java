@@ -4,6 +4,8 @@ import industrialscience.modules.ResearchModule;
 import industrialscience.modules.research.backend.Research;
 import industrialscience.modules.research.backend.ResearchObject;
 import industrialscience.modules.research.backend.Researchstep;
+import industrialscience.modules.research.frontend.TileEntities.CopierTile;
+import industrialscience.modules.research.frontend.TileEntities.ResearchDeskTile;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

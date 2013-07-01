@@ -1,6 +1,7 @@
 package industrialscience.modules.research.frontend;
 
 import industrialscience.modules.ISAbstractModule;
+import industrialscience.modules.research.frontend.GUI.ResearchBookGUI;
 
 import java.util.ArrayList;
 import java.util.List;
