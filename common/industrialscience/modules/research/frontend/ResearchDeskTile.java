@@ -1,17 +1,20 @@
-package industrialscience.modules.research;
+package industrialscience.modules.research.frontend;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
-public class CopierTile extends TileEntity implements IInventory {
-    public final static int PAGEINPUT = 0;
-    public final static int PAGEOUTPUT = 1;
+public class ResearchDeskTile extends TileEntity implements IInventory {
+    public final static int PAGESLOT = 0;
+    public final static int ITEMSLOT = 1;
+    public final static int BOOKSLOT = 2;
     private ItemStack[] Inventory;
 
-    public CopierTile() {
-        Inventory = new ItemStack[2];
+    public ResearchDeskTile() {
+        Inventory = new ItemStack[3];
     }
 
     @Override
@@ -65,18 +68,18 @@ public class CopierTile extends TileEntity implements IInventory {
 
     @Override
     public String getInvName() {
-        return "Research Copier";
+        return "Research Desk";
     }
 
     @Override
     public int getInventoryStackLimit() {
-        return 1;
+        return 64;
     }
 
     @Override
-    public boolean isUseableByPlayer(EntityPlayer entityplayer) {
+    public boolean isUseableByPlayer(EntityPlayer player) {
         return worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) == this
-                && entityplayer.getDistanceSq(xCoord + 0.5, yCoord + 0.5,
+                && player.getDistanceSq(xCoord + 0.5, yCoord + 0.5,
                         zCoord + 0.5) < 64;
     }
 
@@ -91,7 +94,46 @@ public class CopierTile extends TileEntity implements IInventory {
     }
 
     @Override
+    public void readFromNBT(NBTTagCompound tagCompound) {
+        super.readFromNBT(tagCompound);
+
+        NBTTagList tagList = tagCompound.getTagList("Inventory");
+
+        for (int i = 0; i < tagList.tagCount(); i++) {
+            NBTTagCompound tag = (NBTTagCompound) tagList.tagAt(i);
+
+            byte slot = tag.getByte("Slot");
+
+            if (slot >= 0 && slot < Inventory.length) {
+                Inventory[slot] = ItemStack.loadItemStackFromNBT(tag);
+            }
+        }
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound tagCompound) {
+        super.writeToNBT(tagCompound);
+
+        NBTTagList itemList = new NBTTagList();
+
+        for (int i = 0; i < Inventory.length; i++) {
+            ItemStack stack = Inventory[i];
+
+            if (stack != null) {
+                NBTTagCompound tag = new NBTTagCompound();
+
+                tag.setByte("Slot", (byte) i);
+                stack.writeToNBT(tag);
+                itemList.appendTag(tag);
+            }
+        }
+
+        tagCompound.setTag("Inventory", itemList);
+    }
+
+    @Override
     public boolean isInvNameLocalized() {
+        // TODO Auto-generated method stub
         return false;
     }
 

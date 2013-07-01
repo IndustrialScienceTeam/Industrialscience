@@ -1,9 +1,9 @@
 package industrialscience;
 
-import industrialscience.modules.research.ResearchBook;
-import industrialscience.modules.research.ResearchBookContainer;
-import industrialscience.modules.research.ResearchDeskContainer;
-import industrialscience.modules.research.ResearchDeskTile;
+import industrialscience.modules.research.frontend.ResearchBook;
+import industrialscience.modules.research.frontend.ResearchBookContainer;
+import industrialscience.modules.research.frontend.ResearchDeskContainer;
+import industrialscience.modules.research.frontend.ResearchDeskTile;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;

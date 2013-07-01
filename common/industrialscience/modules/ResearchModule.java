@@ -1,9 +1,9 @@
 package industrialscience.modules;
-import industrialscience.modules.research.ItemResearchBlock;
-import industrialscience.modules.research.ResearchBlock;
-import industrialscience.modules.research.ResearchBlockTyp;
-import industrialscience.modules.research.ResearchBook;
-import industrialscience.modules.research.ResearchNote;
+import industrialscience.modules.research.frontend.ItemResearchBlock;
+import industrialscience.modules.research.frontend.ResearchBlock;
+import industrialscience.modules.research.frontend.ResearchBlockTyp;
+import industrialscience.modules.research.frontend.ResearchBook;
+import industrialscience.modules.research.frontend.ResearchNote;
 
 import java.util.Hashtable;
 import java.util.logging.Level;

@@ -1,4 +1,4 @@
-package industrialscience.modules.research;
+package industrialscience.modules.research.frontend;
 
 import industrialscience.modules.ISAbstractModule;
 import net.minecraft.client.renderer.texture.IconRegister;

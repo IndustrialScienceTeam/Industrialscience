@@ -1,4 +1,4 @@
-package industrialscience.modules.research;
+package industrialscience.modules.research.frontend;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
