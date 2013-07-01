@@ -1,10 +1,8 @@
 package industrialscience.modules;
-import industrialscience.modules.research.CopierTile;
+import industrialscience.modules.research.ItemResearchBlock;
 import industrialscience.modules.research.ResearchBlock;
 import industrialscience.modules.research.ResearchBlockTyp;
 import industrialscience.modules.research.ResearchBook;
-import industrialscience.modules.research.ResearchDesk;
-import industrialscience.modules.research.ResearchDeskTile;
 import industrialscience.modules.research.ResearchNote;
 
 import java.util.Hashtable;
@@ -12,9 +10,7 @@ import java.util.logging.Level;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlockWithMetadata;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -36,21 +32,18 @@ public class ResearchModule extends ISAbstractModule {
     public void load() {
         logger.log(Level.INFO, "LOADING");
         
-        GameRegistry.registerBlock(researchBlock,researchBlock.getUnlocalizedName());
-        
+        GameRegistry.registerBlock(researchBlock,ItemResearchBlock.class,getPrefix()+researchBlock.getUnlocalizedName2());
+        int i=0;
         for (ResearchBlockTyp typ : ResearchBlockTyp.values()) {
-            GameRegistry.registerTileEntityWithAlternatives(typ.getTileentity(), "INDUSTRIALSCIENCE.RESEARCH."+typ.name(), typ.name());
-            LanguageRegistry.addName(new ItemStack(researchBlock, 1, typ.ordinal()), typ.getReadableName());
+            GameRegistry.registerTileEntityWithAlternatives(typ.getTileentity(), getPrefix()+typ.name(), typ.name());
+            LanguageRegistry.addName(new ItemStack(researchBlock, 1, i), typ.getReadableName());
+            i++;
         }
         
         // Research Desk
-        GameRegistry.registerBlock(researchdesk,
-                researchdesk.getUnlocalizedName());
-        GameRegistry
-                .registerTileEntity(ResearchDeskTile.class, "Research-Desk");
-        GameRegistry.addRecipe(new ShapedOreRecipe(researchdesk, new Object[] {
-                "WWW", "S S", "S S", Character.valueOf('W'), "slabWood",
-                Character.valueOf('S'), "stickWood" }));
+//        GameRegistry.addRecipe(new ShapedOreRecipe(researchdesk, new Object[] {
+//                "WWW", "S S", "S S", Character.valueOf('W'), "slabWood",
+//                Character.valueOf('S'), "stickWood" }));
 
         // Researchbook
         GameRegistry.addRecipe(new ShapelessOreRecipe(researchbook,
@@ -63,13 +56,11 @@ public class ResearchModule extends ISAbstractModule {
 
     @Override
     public void init() {
+        logger.log(Level.INFO, "INIT");
         initCreativeTab();
         setPrefix("RESEARCH-MODULE");
-        logger.log(Level.INFO, "INIT");
         researchBlock = new ResearchBlock(BlockIDs.get("researchblock"));
         researchBlockID=BlockIDs.get("researchblock");
-        researchdesk = new ResearchDesk(BlockIDs.get("researchdesk"));
-        researchdeskid = BlockIDs.get("researchdesk");
         researchbook = new ResearchBook(ItemIDs.get("researchbook"));
         researchbookid = ItemIDs.get("researchbook");
         researchNote = new ResearchNote(ItemIDs.get("researchnote"));
@@ -83,7 +74,6 @@ public class ResearchModule extends ISAbstractModule {
     @Override
     public Hashtable<String, Integer> getNeededBlockIDs() {
         Hashtable<String, Integer> neededBlockIDs = new Hashtable<String, Integer>();
-        neededBlockIDs.put("researchdesk", 756);
         neededBlockIDs.put("researchblock", 757);
         return neededBlockIDs;
     }
