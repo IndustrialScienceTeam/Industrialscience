@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class FishingModule extends ISAbstractModule {
@@ -104,6 +105,11 @@ public class FishingModule extends ISAbstractModule {
     @Override
     public ItemStack getIconitemstack() {
         return new ItemStack(Item.fishingRod);
+    }
+
+    @Override
+    public IGuiHandler getGUIHandler() {
+        return null;
     }
 
 }

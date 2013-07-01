@@ -13,6 +13,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
@@ -96,6 +97,12 @@ public class ResearchModule extends ISAbstractModule {
     @Override
     public ItemStack getIconitemstack() {
         return new ItemStack(researchbook);
+    }
+
+    @Override
+    public IGuiHandler getGUIHandler() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

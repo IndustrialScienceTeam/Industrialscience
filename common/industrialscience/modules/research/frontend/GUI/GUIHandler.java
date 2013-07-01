@@ -1,4 +1,4 @@
-package industrialscience;
+package industrialscience.modules.research.frontend.GUI;
 
 import industrialscience.modules.research.frontend.ResearchBook;
 import industrialscience.modules.research.frontend.ResearchBookContainer;
@@ -9,7 +9,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
 
-public class ISGUIHandler implements IGuiHandler {
+public class GUIHandler implements IGuiHandler {
         protected final static int RESEARCHDESK_ID = 0;
         protected final static int RESEARCHBOOK_ID = 1;
 

@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
+import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public abstract class ISAbstractModule {
@@ -62,4 +63,5 @@ public abstract class ISAbstractModule {
     protected static void setPrefix(String prefixarg){
         prefix="INDUSTRIALSCIENCE."+prefixarg+".";
     }
+    public abstract IGuiHandler getGUIHandler();
 }
