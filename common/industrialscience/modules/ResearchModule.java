@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -30,11 +31,9 @@ public class ResearchModule extends ISAbstractModule {
         logger.log(Level.INFO, "LOADING");
         
         GameRegistry.registerBlock(researchBlock,ItemResearchBlock.class,getPrefix()+researchBlock.getUnlocalizedName2());
-        int i=0;
         for (ResearchBlockTyp typ : ResearchBlockTyp.values()) {
             GameRegistry.registerTileEntityWithAlternatives(typ.getTileentity(), getPrefix()+typ.name(), typ.name());
-            LanguageRegistry.addName(new ItemStack(researchBlock, 1, i), typ.getReadableName());
-            i++;
+            LanguageRegistry.addName(new ItemStack(researchBlock, 1, typ.ordinal()), typ.getReadableName());
         }
         
         // Research Desk
