@@ -11,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
+import industrialscience.TextureGenerator;
 
 public enum ResearchBlockTyp {
     COPIER(
