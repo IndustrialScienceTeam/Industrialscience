@@ -15,7 +15,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
 public class Fishtraptile extends TileEntity implements IInventory {
-    static final int UPDATESLOT = 1;
+    static final int UPDATESLOT = 0;
     static final int FISHSLOT = 1;
     private ItemStack[] Inventory;
     private String name = "Basic Fishtrap";
