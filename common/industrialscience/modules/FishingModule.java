@@ -4,8 +4,6 @@ import industrialscience.modules.fishing.FishingBlock;
 import industrialscience.modules.fishing.FishingBlockTyp;
 import industrialscience.modules.fishing.ItemFishingBlock;
 import industrialscience.modules.fishing.LobsterItem;
-import industrialscience.modules.fishing.Lobster_trapBlock;
-import industrialscience.modules.fishing.Lobster_traptile;
 
 import java.util.Hashtable;
 import java.util.logging.Level;
@@ -20,9 +18,6 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 public class FishingModule extends ISAbstractModule {
     public static Block fishingblock;
     public static int fishingblockid;
-
-    public static Block lobster_trap;
-    public static int lobster_trapid;
 
     public static Item lobsteritem;
     public static int lobsteritemid;
@@ -43,11 +38,6 @@ public class FishingModule extends ISAbstractModule {
 //                .addRecipe(new ItemStack(basicfishtrap), new Object[] {
 //                        "X X X", " X X ", "X X X", Character.valueOf('X'),
 //                        Item.stick });
-
-        // Lobster trap
-        GameRegistry.registerBlock(lobster_trap,
-                lobster_trap.getUnlocalizedName());
-        GameRegistry.registerTileEntity(Lobster_traptile.class, "Lobster-Trap");
 //        GameRegistry
 //                .addRecipe(new ItemStack(basicfishtrap), new Object[] {
 //                        "X X X", " X X ", "X X X", Character.valueOf('X'),
@@ -65,24 +55,17 @@ public class FishingModule extends ISAbstractModule {
         logger.log(Level.INFO, "INIT");
         fishingblockid = BlockIDs.get("fishingblock");
         fishingblock = new FishingBlock(fishingblockid);
-
-        // Lobster trap
-        lobster_trapid = BlockIDs.get("lobster_trap");
-        lobster_trap = new Lobster_trapBlock(lobster_trapid);
-
         // Lobster item
         lobsteritemid = ItemIDs.get("lobsteritem");
         lobsteritem = new LobsterItem(ItemIDs.get("lobsteritem"));
+        
 
     }
 
     @Override
     public Hashtable<String, Integer> getNeededBlockIDs() {
         Hashtable<String, Integer> NeededBlockIDs = new Hashtable<String, Integer>();
-
-        NeededBlockIDs.put("fishingblock", 758); // Basicfishtrap
-        NeededBlockIDs.put("lobster_trap", 759); // Lobster trap
-
+        NeededBlockIDs.put("fishingblock", 758);
         return NeededBlockIDs;
     }
 

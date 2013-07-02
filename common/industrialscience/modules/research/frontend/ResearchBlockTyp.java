@@ -1,5 +1,6 @@
 package industrialscience.modules.research.frontend;
 
+import industrialscience.TextureGenerator;
 import industrialscience.modules.ResearchModule;
 import industrialscience.modules.research.backend.Research;
 import industrialscience.modules.research.backend.ResearchObject;
@@ -11,7 +12,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
-import industrialscience.TextureGenerator;
 
 public enum ResearchBlockTyp {
     COPIER(

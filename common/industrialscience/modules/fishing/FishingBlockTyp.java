@@ -1,11 +1,22 @@
 package industrialscience.modules.fishing;
 
+import industrialscience.TextureGenerator;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
-import industrialscience.TextureGenerator;
 
 public enum FishingBlockTyp {
+    SIMPLELOBSTERTRAP("Lobster Trap","simplelobstertrap.png", Lobster_traptile.class, new TextureGenerator(){
+        Icon texture=null;
+        @Override
+        public void registerIcons(IconRegister par1IconRegister) {
+            texture = par1IconRegister
+                    .registerIcon("industrialscience:lobstertrap");
+        }
+        @Override
+        public Icon getIcon(int i) {
+            return texture;
+        }}),
     SIMPLEFISHTRAP("Simple Fishtrap","simplefishtrap.png",Fishtraptile.class, new TextureGenerator(){
         Icon texture=null;
         @Override
