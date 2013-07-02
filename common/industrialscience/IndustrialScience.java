@@ -31,7 +31,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
         channels = { "isresearchtable" }, 
         packetHandler = Packethandler.class)
 @Mod(
-        modid = "mod_industrialscience", 
+        modid = "industrialscience", 
         name = "Industrial Science", 
         version = "1.0")
 public class IndustrialScience {
