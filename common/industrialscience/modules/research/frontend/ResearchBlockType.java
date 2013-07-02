@@ -13,7 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 
-public enum ResearchBlockTyp {
+public enum ResearchBlockType {
     COPIER(
             "Research Copier",
             "copier.png",
@@ -119,7 +119,7 @@ public enum ResearchBlockTyp {
     public Class<? extends TileEntity> tileentity;
     private Research research;
 
-    private ResearchBlockTyp(String name, String modelfile,
+    private ResearchBlockType(String name, String modelfile,
             Class<? extends TileEntity> tileentity,
             TextureGenerator texturegen, Research research) {
         friendlyname = name;
@@ -146,8 +146,8 @@ public enum ResearchBlockTyp {
     }
 
     public static void registerIcons(IconRegister par1IconRegister) {
-        for (ResearchBlockTyp researchBlockTyp : ResearchBlockTyp.values()) {
-            researchBlockTyp.texturegen.registerIcons(par1IconRegister);
+        for (ResearchBlockType researchBlockType : ResearchBlockType.values()) {
+            researchBlockType.texturegen.registerIcons(par1IconRegister);
         }
 
     }

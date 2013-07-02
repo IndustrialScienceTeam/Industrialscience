@@ -29,7 +29,7 @@ public class ResearchBlock extends BlockContainer {
     }
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
-       ResearchBlockTyp.registerIcons(par1IconRegister);
+       ResearchBlockType.registerIcons(par1IconRegister);
     }
     @Override
     public TileEntity createNewTileEntity(World world) {
@@ -38,7 +38,7 @@ public class ResearchBlock extends BlockContainer {
     @Override
     public TileEntity createTileEntity(World world, int metadata)
     {
-        return ResearchBlockTyp.getEntity(metadata);
+        return ResearchBlockType.getEntity(metadata);
     }
     @Override
     public boolean hasTileEntity(int metadata) {
@@ -46,13 +46,13 @@ public class ResearchBlock extends BlockContainer {
     }
     @Override
     public Icon getIcon(int i, int j) {
-        return ResearchBlockTyp.getIcon(i,j);
+        return ResearchBlockType.getIcon(i,j);
         }
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
     {
-        for (int i = 0; i < ResearchBlockTyp.values().length; i++) {
+        for (int i = 0; i < ResearchBlockType.values().length; i++) {
             par3List.add(new ItemStack(par1, 1, i));
         }
         

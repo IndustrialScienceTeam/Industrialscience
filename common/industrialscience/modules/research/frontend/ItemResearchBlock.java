@@ -12,7 +12,7 @@ public class ItemResearchBlock extends ItemBlock {
     @Override
     public String getUnlocalizedName(ItemStack itemstack)
     {
-          return getUnlocalizedName() + ResearchBlockTyp.values()[itemstack.getItemDamage()].name()+".name";
+          return getUnlocalizedName() + ResearchBlockType.values()[itemstack.getItemDamage()].name()+".name";
     }
    
     public int getMetadata(int par1)

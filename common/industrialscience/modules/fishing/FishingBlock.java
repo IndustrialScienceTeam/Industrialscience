@@ -31,7 +31,7 @@ public class FishingBlock extends BlockContainer {
     }
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
-        FishingBlockTyp.registerIcons(par1IconRegister);
+        FishingBlockType.registerIcons(par1IconRegister);
     }
     @Override
     public TileEntity createNewTileEntity(World world) {
@@ -40,7 +40,7 @@ public class FishingBlock extends BlockContainer {
     @Override
     public TileEntity createTileEntity(World world, int metadata)
     {
-        return FishingBlockTyp.getEntity(metadata);
+        return FishingBlockType.getEntity(metadata);
     }
     @Override
     public boolean hasTileEntity(int metadata) {
@@ -48,13 +48,13 @@ public class FishingBlock extends BlockContainer {
     }
     @Override
     public Icon getIcon(int i, int j) {
-        return FishingBlockTyp.getIcon(i,j);
+        return FishingBlockType.getIcon(i,j);
         }
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
     {
-        for (int i = 0; i < FishingBlockTyp.values().length; i++) {
+        for (int i = 0; i < FishingBlockType.values().length; i++) {
             par3List.add(new ItemStack(par1, 1, i));
         }
         
