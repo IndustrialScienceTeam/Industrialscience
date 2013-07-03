@@ -3,7 +3,6 @@ import industrialscience.modules.research.frontend.ItemResearchBlock;
 import industrialscience.modules.research.frontend.ResearchBlock;
 import industrialscience.modules.research.frontend.ResearchBlockType;
 import industrialscience.modules.research.frontend.ResearchBook;
-import industrialscience.modules.research.frontend.ResearchItem;
 import industrialscience.modules.research.frontend.ResearchNote;
 
 import java.util.Hashtable;
@@ -22,12 +21,16 @@ public class ResearchModule extends ISAbstractModule {
     public static Block researchBlock;
     public static int researchBlockID;
 
-    public static ResearchItem researchitem;
-    public static int researchitemid;
+    public static Item researchbook;
+    public static int researchbookid;
+
+    public static Item researchNote;
+    public static int researchNoteid;
+
     @Override
     public void load() {
         logger.log(Level.INFO, "LOADING");
-        researchitem.register();
+        
         GameRegistry.registerBlock(researchBlock,ItemResearchBlock.class,getPrefix()+researchBlock.getUnlocalizedName2());
         for (ResearchBlockType typ : ResearchBlockType.values()) {
             GameRegistry.registerTileEntityWithAlternatives(typ.getTileentity(), getPrefix()+typ.name(), typ.name());
@@ -40,8 +43,8 @@ public class ResearchModule extends ISAbstractModule {
                 Character.valueOf('S'), "stickWood" }));
 
         // Researchbook
-       // GameRegistry.addRecipe(new ShapelessOreRecipe(researchbook,
-        //        new Object[] { Item.book, "dyeLime", "dyeLime" }));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(researchbook,
+                new Object[] { Item.book, "dyeLime", "dyeLime" }));
 
         // Reseach Note
 
@@ -55,8 +58,10 @@ public class ResearchModule extends ISAbstractModule {
         setPrefix("RESEARCH-MODULE");
         researchBlock = new ResearchBlock(BlockIDs.get("researchblock"));
         researchBlockID=BlockIDs.get("researchblock");
-        researchitem = new ResearchItem(ItemIDs.get("researchitem"));
-        researchitemid = ItemIDs.get("researchitem");
+        researchbook = new ResearchBook(ItemIDs.get("researchbook"));
+        researchbookid = ItemIDs.get("researchbook");
+        researchNote = new ResearchNote(ItemIDs.get("researchnote"));
+        researchNoteid = ItemIDs.get("researchnote");
 
     }
 
@@ -73,7 +78,8 @@ public class ResearchModule extends ISAbstractModule {
     @Override
     public Hashtable<String, Integer> getNeededItemIDs() {
         Hashtable<String, Integer> neededItemIDs = new Hashtable<String, Integer>();
-        neededItemIDs.put("researchitem", 8123);
+        neededItemIDs.put("researchbook", 8123);
+        neededItemIDs.put("researchnote", 8124);
         return neededItemIDs;
     }
 
@@ -90,7 +96,7 @@ public class ResearchModule extends ISAbstractModule {
 
     @Override
     public ItemStack getIconitemstack() {
-        return new ItemStack(researchitem,1,ResearchItem.RESEARCHBOOKID);
+        return new ItemStack(researchbook);
     }
 
     @Override
