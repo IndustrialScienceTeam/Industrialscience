@@ -26,6 +26,7 @@ public class ResearchItem extends Item {
         subitems[1]=new ResearchNote();
         this.setHasSubtypes(true);
         setCreativeTab(ISAbstractModule.getCreativeTab());
+        this.maxStackSize=1;
     }
     @Override
     public Icon getIconFromDamage(int par1){
