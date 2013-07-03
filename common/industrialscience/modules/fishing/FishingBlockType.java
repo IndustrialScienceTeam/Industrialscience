@@ -5,7 +5,7 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 
-public enum FishingBlockTyp {
+public enum FishingBlockType {
     SIMPLELOBSTERTRAP("Lobster Trap","simplelobstertrap.png", Lobster_traptile.class, new TextureGenerator(){
         Icon texture=null;
         @Override
@@ -49,7 +49,7 @@ public enum FishingBlockTyp {
 
     public Class<? extends TileEntity> tileentity;
 
-    private FishingBlockTyp(String name, String modelfile,
+    private FishingBlockType(String name, String modelfile,
             Class<? extends TileEntity> tileentity,
             TextureGenerator texturegen) {
         friendlyname = name;
@@ -75,7 +75,7 @@ public enum FishingBlockTyp {
     }
 
     public static void registerIcons(IconRegister par1IconRegister) {
-        for (FishingBlockTyp BlockTyp : FishingBlockTyp.values()) {
+        for (FishingBlockType BlockTyp : FishingBlockType.values()) {
             BlockTyp.texturegen.registerIcons(par1IconRegister);
         }
 

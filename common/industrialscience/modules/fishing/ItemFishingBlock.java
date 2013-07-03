@@ -11,7 +11,7 @@ public class ItemFishingBlock extends ItemBlock {
     @Override
     public String getUnlocalizedName(ItemStack itemstack)
     {
-          return getUnlocalizedName() + FishingBlockTyp.values()[itemstack.getItemDamage()].name()+".name";
+          return getUnlocalizedName() + FishingBlockType.values()[itemstack.getItemDamage()].name()+".name";
     }
    
     public int getMetadata(int par1)

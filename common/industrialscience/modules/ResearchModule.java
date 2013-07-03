@@ -1,7 +1,7 @@
 package industrialscience.modules;
 import industrialscience.modules.research.frontend.ItemResearchBlock;
 import industrialscience.modules.research.frontend.ResearchBlock;
-import industrialscience.modules.research.frontend.ResearchBlockTyp;
+import industrialscience.modules.research.frontend.ResearchBlockType;
 import industrialscience.modules.research.frontend.ResearchBook;
 import industrialscience.modules.research.frontend.ResearchNote;
 
@@ -32,7 +32,7 @@ public class ResearchModule extends ISAbstractModule {
         logger.log(Level.INFO, "LOADING");
         
         GameRegistry.registerBlock(researchBlock,ItemResearchBlock.class,getPrefix()+researchBlock.getUnlocalizedName2());
-        for (ResearchBlockTyp typ : ResearchBlockTyp.values()) {
+        for (ResearchBlockType typ : ResearchBlockType.values()) {
             GameRegistry.registerTileEntityWithAlternatives(typ.getTileentity(), getPrefix()+typ.name(), typ.name());
             LanguageRegistry.addName(new ItemStack(researchBlock, 1, typ.ordinal()), typ.getReadableName());
         }

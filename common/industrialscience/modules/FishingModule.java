@@ -1,7 +1,7 @@
 package industrialscience.modules;
 
 import industrialscience.modules.fishing.FishingBlock;
-import industrialscience.modules.fishing.FishingBlockTyp;
+import industrialscience.modules.fishing.FishingBlockType;
 import industrialscience.modules.fishing.ItemFishingBlock;
 import industrialscience.modules.fishing.LobsterItem;
 
@@ -30,7 +30,7 @@ public class FishingModule extends ISAbstractModule {
 
         // Basicfishtrap
         GameRegistry.registerBlock(fishingblock,ItemFishingBlock.class,getPrefix()+fishingblock.getUnlocalizedName2());
-        for (FishingBlockTyp typ : FishingBlockTyp.values()) {
+        for (FishingBlockType typ : FishingBlockType.values()) {
             GameRegistry.registerTileEntityWithAlternatives(typ.getTileentity(), getPrefix()+typ.name(), typ.name());
             LanguageRegistry.addName(new ItemStack(fishingblock, 1, typ.ordinal()), typ.getReadableName());
         }
