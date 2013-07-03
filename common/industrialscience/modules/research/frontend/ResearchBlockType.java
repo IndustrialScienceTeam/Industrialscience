@@ -61,7 +61,7 @@ public enum ResearchBlockType {
                             new Researchstep(
                                     1,
                                     new ResearchObject(new ItemStack(
-                                            ResearchModule.researchNote)),
+                                            ResearchModule.researchitemid,1,0)),
                                     "Yout think the best way to copy researches would be just read your written results and write them down again. So simple.") },
                     null, null)),
     RESEARCHDESK( "Research Desk",

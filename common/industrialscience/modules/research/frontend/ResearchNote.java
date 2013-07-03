@@ -1,18 +1,12 @@
 package industrialscience.modules.research.frontend;
 
-import industrialscience.modules.ISAbstractModule;
+import industrialscience.IISItem;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.item.Item;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
-public class ResearchNote extends Item {
+public class ResearchNote extends IISItem {
 
-    public ResearchNote(int id) {
-        super(id);
-        setMaxStackSize(1);
-        setUnlocalizedName("Research Note");
-        LanguageRegistry.addName(this, "Research Note");
-        setCreativeTab(ISAbstractModule.getCreativeTab());
+    public ResearchNote() {
+        super("researchnote","Research Note",1);
     }
 
     @Override
