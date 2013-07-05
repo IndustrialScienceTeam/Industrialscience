@@ -1,6 +1,6 @@
 package industrialscience.modules.fishing;
 
-import industrialscience.modules.ISAbstractModule;
+import industrialscience.modules.FishingModule;
 
 import java.util.List;
 import java.util.Random;
@@ -21,7 +21,7 @@ public class FishingBlock extends BlockContainer {
 
     public FishingBlock(int id) {
         super(id,Material.wood);
-        setCreativeTab(ISAbstractModule.getCreativeTab());
+        setCreativeTab(FishingModule.getCreativeTab());
         setUnlocalizedName("FishingBlock");
         setTickRandomly(true);
     }
