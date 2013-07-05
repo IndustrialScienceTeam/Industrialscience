@@ -1,5 +1,6 @@
 package industrialscience.modules.research.frontend;
 
+import industrialscience.ISModel;
 import industrialscience.TextureGenerator;
 import industrialscience.modules.ResearchModule;
 import industrialscience.modules.research.backend.Research;
@@ -7,6 +8,8 @@ import industrialscience.modules.research.backend.ResearchObject;
 import industrialscience.modules.research.backend.Researchstep;
 import industrialscience.modules.research.frontend.TileEntities.CopierTile;
 import industrialscience.modules.research.frontend.TileEntities.ResearchDeskTile;
+import industrialscience.modules.research.frontend.models.ResearchCopierModel;
+import industrialscience.modules.research.frontend.models.ResearchDeskModel;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -16,7 +19,7 @@ import net.minecraft.util.Icon;
 public enum ResearchBlockType {
     COPIER(
             "Research Copier",
-            "copier.png",
+            "copier.png",ResearchCopierModel.class,
             CopierTile.class,
             new TextureGenerator() {
                 private Icon bottom;
@@ -65,7 +68,7 @@ public enum ResearchBlockType {
                                     "Yout think the best way to copy researches would be just read your written results and write them down again. So simple.") },
                     null, null)),
     RESEARCHDESK( "Research Desk",
-            "researchdesk.png",
+            "researchdesk.png",ResearchDeskModel.class,
             ResearchDeskTile.class,
             new TextureGenerator() {
                 private Icon bottom;
@@ -96,6 +99,7 @@ public enum ResearchBlockType {
                 }
 
             },null);
+    private Class<? extends ISModel> model;
     private String friendlyname;
     private String modelfile;
     public TextureGenerator texturegen;
@@ -119,7 +123,7 @@ public enum ResearchBlockType {
     public Class<? extends TileEntity> tileentity;
     private Research research;
 
-    private ResearchBlockType(String name, String modelfile,
+    private ResearchBlockType(String name, String modelfile,Class<? extends ISModel> model,
             Class<? extends TileEntity> tileentity,
             TextureGenerator texturegen, Research research) {
         friendlyname = name;
@@ -127,6 +131,7 @@ public enum ResearchBlockType {
         this.tileentity = tileentity;
         this.research = research;
         this.texturegen = texturegen;
+        this.model=model;
     }
 
     public static TileEntity getEntity(int metadata) {
@@ -150,5 +155,9 @@ public enum ResearchBlockType {
             researchBlockType.texturegen.registerIcons(par1IconRegister);
         }
 
+    }
+
+    public Class<? extends ISModel> getModel() {
+        return model;
     }
 }
