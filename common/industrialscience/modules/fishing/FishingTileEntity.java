@@ -16,16 +16,15 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public abstract class FishingTileEntity extends TileEntity implements IInventory {
+public abstract class FishingTileEntity extends TileEntity implements
+        IInventory {
     protected ItemStack[] Inventory;
     protected String Name;
-    
-    
 
     protected FishingTileEntity(ItemStack[] inventory, String name) {
         super();
         Inventory = inventory;
-        Name=name;
+        Name = name;
     }
 
     @Override
@@ -143,8 +142,6 @@ public abstract class FishingTileEntity extends TileEntity implements IInventory
 
         tagCompound.setTag("Inventory", itemList);
     }
-
-
 
     protected class Cordinate {
         int x;
@@ -471,6 +468,7 @@ public abstract class FishingTileEntity extends TileEntity implements IInventory
         // TODO Auto-generated method stub
         return false;
     }
+
     protected void addFish(int fishamout, int neededwater, int range,
             int waterforextrafish, int fishslot) {
         int waterblocks = countWater(range);
@@ -491,5 +489,6 @@ public abstract class FishingTileEntity extends TileEntity implements IInventory
         }
     }
 
-    public abstract void doUpdateTick(World world, int x, int y, int z, Random random);
+    public abstract void doUpdateTick(World world, int x, int y, int z,
+            Random random);
 }

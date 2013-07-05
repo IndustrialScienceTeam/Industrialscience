@@ -10,67 +10,67 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
 
 public class GUIHandler implements IGuiHandler {
-        protected final static int RESEARCHDESK_ID = 0;
-        protected final static int RESEARCHBOOK_ID = 1;
+    protected final static int RESEARCHDESK_ID = 0;
+    protected final static int RESEARCHBOOK_ID = 1;
 
-        @Override
-        public Object getServerGuiElement(int ID, EntityPlayer player, World world,
-                int x, int y, int z) {
-            switch (ID) {
-                case RESEARCHDESK_ID:
-                    return getResearchDeskContainer(player, world, x, y, z);
-                case RESEARCHBOOK_ID:
-                    return getResearchBookContainer(player, world, x, y, z);
-                default:
-                    break;
-            }
-            return null;
+    @Override
+    public Object getServerGuiElement(int ID, EntityPlayer player, World world,
+            int x, int y, int z) {
+        switch (ID) {
+            case RESEARCHDESK_ID:
+                return getResearchDeskContainer(player, world, x, y, z);
+            case RESEARCHBOOK_ID:
+                return getResearchBookContainer(player, world, x, y, z);
+            default:
+                break;
         }
-
-        private Object getResearchBookContainer(EntityPlayer player, World world,
-                int x, int y, int z) {
-            return new ResearchBookContainer(
-                    player.inventory,
-                    player.inventory.mainInventory[player.inventory.currentItem].stackTagCompound
-                            .getIntArray(ResearchBook.NBTNAME));
-        }
-
-        private Object getResearchDeskContainer(EntityPlayer player, World world,
-                int x, int y, int z) {
-            TileEntity tile_entity = world.getBlockTileEntity(x, y, z);
-            if (tile_entity instanceof ResearchDeskTile)
-                return new ResearchDeskContainer((ResearchDeskTile) tile_entity,
-                        player.inventory);
-            return null;
-        }
-
-        @Override
-        public Object getClientGuiElement(int ID, EntityPlayer player, World world,
-                int x, int y, int z) {
-            switch (ID) {
-                case RESEARCHDESK_ID:
-                    return getResearchDeskGUI(player, world, x, y, z);
-                case RESEARCHBOOK_ID:
-                    return getResearchBookGUI(player, world, x, y, z);
-                default:
-                    break;
-            }
-            return null;
-
-        }
-
-        private Object getResearchBookGUI(EntityPlayer player, World world,
-                int x, int y, int z) {
-            return new ResearchBookGUI(player, player.inventory.mainInventory[player.inventory.currentItem]);
-        }
-
-        private Object getResearchDeskGUI(EntityPlayer player, World world,
-                int x, int y, int z) {
-            TileEntity tile_entity = world.getBlockTileEntity(x, y, z);
-            if (tile_entity instanceof ResearchDeskTile)
-                return new ResearchDeskGUI(player.inventory, (ResearchDeskTile)tile_entity);
-            return null;
-        }
+        return null;
     }
 
+    private Object getResearchBookContainer(EntityPlayer player, World world,
+            int x, int y, int z) {
+        return new ResearchBookContainer(
+                player.inventory,
+                player.inventory.mainInventory[player.inventory.currentItem].stackTagCompound
+                        .getIntArray(ResearchBook.NBTNAME));
+    }
 
+    private Object getResearchDeskContainer(EntityPlayer player, World world,
+            int x, int y, int z) {
+        TileEntity tile_entity = world.getBlockTileEntity(x, y, z);
+        if (tile_entity instanceof ResearchDeskTile)
+            return new ResearchDeskContainer((ResearchDeskTile) tile_entity,
+                    player.inventory);
+        return null;
+    }
+
+    @Override
+    public Object getClientGuiElement(int ID, EntityPlayer player, World world,
+            int x, int y, int z) {
+        switch (ID) {
+            case RESEARCHDESK_ID:
+                return getResearchDeskGUI(player, world, x, y, z);
+            case RESEARCHBOOK_ID:
+                return getResearchBookGUI(player, world, x, y, z);
+            default:
+                break;
+        }
+        return null;
+
+    }
+
+    private Object getResearchBookGUI(EntityPlayer player, World world, int x,
+            int y, int z) {
+        return new ResearchBookGUI(player,
+                player.inventory.mainInventory[player.inventory.currentItem]);
+    }
+
+    private Object getResearchDeskGUI(EntityPlayer player, World world, int x,
+            int y, int z) {
+        TileEntity tile_entity = world.getBlockTileEntity(x, y, z);
+        if (tile_entity instanceof ResearchDeskTile)
+            return new ResearchDeskGUI(player.inventory,
+                    (ResearchDeskTile) tile_entity);
+        return null;
+    }
+}

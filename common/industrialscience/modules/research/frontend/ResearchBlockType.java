@@ -19,7 +19,8 @@ import net.minecraft.util.Icon;
 public enum ResearchBlockType {
     COPIER(
             "Research Copier",
-            "copier.png",ResearchCopierModel.class,
+            "copier.png",
+            ResearchCopierModel.class,
             CopierTile.class,
             new TextureGenerator() {
                 private Icon bottom;
@@ -58,19 +59,17 @@ public enum ResearchBlockType {
                     new Researchstep[] {
                             new Researchstep(
                                     0,
-                                    new ResearchObject(new ItemStack(
-                                            Item.paper)),
+                                    new ResearchObject(
+                                            new ItemStack(Item.paper)),
                                     "You have looked at your Researchbook and thought, how cool it would be to share and save your knowledge. You want to think more about this idea"),
                             new Researchstep(
                                     1,
                                     new ResearchObject(new ItemStack(
                                             ResearchModule.researchNote)),
                                     "Yout think the best way to copy researches would be just read your written results and write them down again. So simple.") },
-                    null, null)),
-    RESEARCHDESK( "Research Desk",
-            "researchdesk.png",ResearchDeskModel.class,
-            ResearchDeskTile.class,
-            new TextureGenerator() {
+                    null, null)), RESEARCHDESK("Research Desk",
+            "researchdesk.png", ResearchDeskModel.class,
+            ResearchDeskTile.class, new TextureGenerator() {
                 private Icon bottom;
                 private Icon top;
                 private Icon side;
@@ -98,7 +97,7 @@ public enum ResearchBlockType {
 
                 }
 
-            },null);
+            }, null);
     private Class<? extends ISModel> model;
     private String friendlyname;
     private String modelfile;
@@ -123,7 +122,8 @@ public enum ResearchBlockType {
     public Class<? extends TileEntity> tileentity;
     private Research research;
 
-    private ResearchBlockType(String name, String modelfile,Class<? extends ISModel> model,
+    private ResearchBlockType(String name, String modelfile,
+            Class<? extends ISModel> model,
             Class<? extends TileEntity> tileentity,
             TextureGenerator texturegen, Research research) {
         friendlyname = name;
@@ -131,7 +131,7 @@ public enum ResearchBlockType {
         this.tileentity = tileentity;
         this.research = research;
         this.texturegen = texturegen;
-        this.model=model;
+        this.model = model;
     }
 
     public static TileEntity getEntity(int metadata) {

@@ -34,6 +34,7 @@ public class TrapCraftingTable extends BlockContainer {
                 .registerIcon("industrialscience:vannila_researchtable_bottom");
         top = par1IconRegister.registerIcon("wood");
     }
+
     @Override
     public Icon getIcon(int i, int j) {
         switch (i) {

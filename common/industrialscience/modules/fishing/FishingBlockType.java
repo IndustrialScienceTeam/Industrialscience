@@ -6,34 +6,40 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 
 public enum FishingBlockType {
-    SIMPLELOBSTERTRAP("Lobster Trap","simplelobstertrap.png", Lobster_traptile.class, new TextureGenerator(){
-        Icon texture=null;
-        @Override
-        public void registerIcons(IconRegister par1IconRegister) {
-            texture = par1IconRegister
-                    .registerIcon("industrialscience:lobstertrap");
-        }
-        @Override
-        public Icon getIcon(int i) {
-            return texture;
-        }}),
-    SIMPLEFISHTRAP("Simple Fishtrap","simplefishtrap.png",Fishtraptile.class, new TextureGenerator(){
-        Icon texture=null;
-        @Override
-        public Icon getIcon(int i) {
-            return texture;
-        }
+    SIMPLELOBSTERTRAP("Lobster Trap", "simplelobstertrap.png",
+            Lobster_traptile.class, new TextureGenerator() {
+                Icon texture = null;
 
-        @Override
-        public void registerIcons(IconRegister par1IconRegister) {
-           texture=par1IconRegister.registerIcon("trapdoor");
-            
-        }
-        
-    });
+                @Override
+                public void registerIcons(IconRegister par1IconRegister) {
+                    texture = par1IconRegister
+                            .registerIcon("industrialscience:lobstertrap");
+                }
+
+                @Override
+                public Icon getIcon(int i) {
+                    return texture;
+                }
+            }), SIMPLEFISHTRAP("Simple Fishtrap", "simplefishtrap.png",
+            Fishtraptile.class, new TextureGenerator() {
+                Icon texture = null;
+
+                @Override
+                public Icon getIcon(int i) {
+                    return texture;
+                }
+
+                @Override
+                public void registerIcons(IconRegister par1IconRegister) {
+                    texture = par1IconRegister.registerIcon("trapdoor");
+
+                }
+
+            });
     private String friendlyname;
     private String modelfile;
     public TextureGenerator texturegen;
+
     public String getReadableName() {
         return friendlyname;
     }
@@ -46,12 +52,10 @@ public enum FishingBlockType {
         return tileentity;
     }
 
-
     public Class<? extends TileEntity> tileentity;
 
     private FishingBlockType(String name, String modelfile,
-            Class<? extends TileEntity> tileentity,
-            TextureGenerator texturegen) {
+            Class<? extends TileEntity> tileentity, TextureGenerator texturegen) {
         friendlyname = name;
         this.modelfile = modelfile;
         this.tileentity = tileentity;

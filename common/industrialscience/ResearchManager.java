@@ -4,7 +4,6 @@ import industrialscience.modules.research.backend.Research;
 
 import java.util.Hashtable;
 
-
 public class ResearchManager {
     private static ResearchManager instance = null;
     private Hashtable<String, Research> allResearches = null;

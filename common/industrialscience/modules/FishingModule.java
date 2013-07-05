@@ -21,27 +21,29 @@ public class FishingModule extends ISAbstractModule {
 
     public static Item lobsteritem;
     public static int lobsteritemid;
-    
-    
-    
+
     @Override
     public void load() {
         logger.log(Level.INFO, "LOADING");
 
         // Basicfishtrap
-        GameRegistry.registerBlock(fishingblock,ItemFishingBlock.class,getPrefix()+fishingblock.getUnlocalizedName2());
+        GameRegistry.registerBlock(fishingblock, ItemFishingBlock.class,
+                getPrefix() + fishingblock.getUnlocalizedName2());
         for (FishingBlockType typ : FishingBlockType.values()) {
-            GameRegistry.registerTileEntityWithAlternatives(typ.getTileentity(), getPrefix()+typ.name(), typ.name());
-            LanguageRegistry.addName(new ItemStack(fishingblock, 1, typ.ordinal()), typ.getReadableName());
+            GameRegistry.registerTileEntityWithAlternatives(
+                    typ.getTileentity(), getPrefix() + typ.name(), typ.name());
+            LanguageRegistry.addName(
+                    new ItemStack(fishingblock, 1, typ.ordinal()),
+                    typ.getReadableName());
         }
-//        GameRegistry
-//                .addRecipe(new ItemStack(basicfishtrap), new Object[] {
-//                        "X X X", " X X ", "X X X", Character.valueOf('X'),
-//                        Item.stick });
-//        GameRegistry
-//                .addRecipe(new ItemStack(basicfishtrap), new Object[] {
-//                        "X X X", " X X ", "X X X", Character.valueOf('X'),
-//                        Item.paper });
+        // GameRegistry
+        // .addRecipe(new ItemStack(basicfishtrap), new Object[] {
+        // "X X X", " X X ", "X X X", Character.valueOf('X'),
+        // Item.stick });
+        // GameRegistry
+        // .addRecipe(new ItemStack(basicfishtrap), new Object[] {
+        // "X X X", " X X ", "X X X", Character.valueOf('X'),
+        // Item.paper });
 
         // Lobster item
         GameRegistry
@@ -58,7 +60,6 @@ public class FishingModule extends ISAbstractModule {
         // Lobster item
         lobsteritemid = ItemIDs.get("lobsteritem");
         lobsteritem = new LobsterItem(ItemIDs.get("lobsteritem"));
-        
 
     }
 

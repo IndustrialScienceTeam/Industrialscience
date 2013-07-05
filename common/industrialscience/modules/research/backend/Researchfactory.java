@@ -4,7 +4,6 @@ import industrialscience.ResearchManager;
 
 import java.util.Hashtable;
 
-
 public class Researchfactory {
     private boolean defaultvalues = false;
     private String Category;
@@ -22,25 +21,23 @@ public class Researchfactory {
     public Researchfactory() {
     }
 
-    public Research getResearch(String Name,
-            String[] NeededResearches, String Category, Object Data,
-            Researchstep[] Steps, RecipeLocker Locker, Researchchecker Checker) {
+    public Research getResearch(String Name, String[] NeededResearches,
+            String Category, Object Data, Researchstep[] Steps,
+            RecipeLocker Locker, Researchchecker Checker) {
         return new Research(Name, NeededResearches, Category, Data, Steps,
                 Locker, Checker);
     }
 
-    public Research getResearch(String Name,
-            String[] NeededResearches, Object Data,
-            Researchstep[] Steps) {
+    public Research getResearch(String Name, String[] NeededResearches,
+            Object Data, Researchstep[] Steps) {
         if (defaultvalues)
             return new Research(Name, NeededResearches, Category, Data, Steps,
                     Locker, Checker);
         return null;
     }
 
-    public Research getResearch(String Name,
-            String[] NeededResearches, Object Data,
-            Researchstep[] Steps, RecipeLocker Locker) {
+    public Research getResearch(String Name, String[] NeededResearches,
+            Object Data, Researchstep[] Steps, RecipeLocker Locker) {
         if (defaultvalues)
             return new Research(Name, NeededResearches, Category, Data, Steps,
                     Locker, Checker);

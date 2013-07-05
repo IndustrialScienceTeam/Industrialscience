@@ -1,6 +1,6 @@
 package industrialscience.modules.fishing;
 
-import industrialscience.modules.FishingModule;
+import industrialscience.modules.ISAbstractModule;
 
 import java.util.List;
 import java.util.Random;
@@ -20,45 +20,52 @@ import net.minecraft.world.World;
 public class FishingBlock extends BlockContainer {
 
     public FishingBlock(int id) {
-        super(id,Material.wood);
-        setCreativeTab(FishingModule.getCreativeTab());
+        super(id, Material.wood);
+        setCreativeTab(ISAbstractModule.getCreativeTab());
         setUnlocalizedName("FishingBlock");
         setTickRandomly(true);
     }
+
     @Override
-    public boolean isOpaqueCube(){
+    public boolean isOpaqueCube() {
         return false;
     }
+
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
         FishingBlockType.registerIcons(par1IconRegister);
     }
+
     @Override
     public TileEntity createNewTileEntity(World world) {
-     return null;
+        return null;
     }
+
     @Override
-    public TileEntity createTileEntity(World world, int metadata)
-    {
+    public TileEntity createTileEntity(World world, int metadata) {
         return FishingBlockType.getEntity(metadata);
     }
+
     @Override
     public boolean hasTileEntity(int metadata) {
         return true;
     }
+
     @Override
     public Icon getIcon(int i, int j) {
-        return FishingBlockType.getIcon(i,j);
-        }
+        return FishingBlockType.getIcon(i, j);
+    }
+
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
-    public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
-    {
+    public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs,
+            List par3List) {
         for (int i = 0; i < FishingBlockType.values().length; i++) {
             par3List.add(new ItemStack(par1, 1, i));
         }
-        
+
     }
+
     private void dropItems(World world, int x, int y, int z) {
         Random rand = new Random();
 
@@ -95,21 +102,23 @@ public class FishingBlock extends BlockContainer {
                 item.stackSize = 0;
             }
         }
-    
+
     }
+
     @Override
     public void breakBlock(World world, int x, int y, int z, int i, int j) {
         dropItems(world, x, y, z);
         super.breakBlock(world, x, y, z, i, j);
     }
+
     @Override
     public void updateTick(World world, int x, int y, int z, Random random) {
         TileEntity tile = world.getBlockTileEntity(x, y, z);
         if (!(tile instanceof FishingTileEntity))
             return;
         FishingTileEntity fishtile = (FishingTileEntity) tile;
-        fishtile.doUpdateTick(world,x,y,z, random);
+        fishtile.doUpdateTick(world, x, y, z, random);
 
     }
 
-    }
+}

@@ -1,5 +1,6 @@
 package industrialscience.modules.research.frontend;
-import industrialscience.modules.ResearchModule;
+
+import industrialscience.modules.ISAbstractModule;
 
 import java.util.List;
 import java.util.Random;
@@ -19,44 +20,51 @@ import net.minecraft.world.World;
 // Thx to iron chest(cpw) for the idea of this system. You rock.
 public class ResearchBlock extends BlockContainer {
     public ResearchBlock(int id) {
-        super(id,Material.wood);
-        setCreativeTab(ResearchModule.getCreativeTab());
+        super(id, Material.wood);
+        setCreativeTab(ISAbstractModule.getCreativeTab());
         setUnlocalizedName("ResearchBlock");
     }
+
     @Override
-    public boolean isOpaqueCube(){
+    public boolean isOpaqueCube() {
         return false;
     }
+
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
-       ResearchBlockType.registerIcons(par1IconRegister);
+        ResearchBlockType.registerIcons(par1IconRegister);
     }
+
     @Override
     public TileEntity createNewTileEntity(World world) {
-     return null;
+        return null;
     }
+
     @Override
-    public TileEntity createTileEntity(World world, int metadata)
-    {
+    public TileEntity createTileEntity(World world, int metadata) {
         return ResearchBlockType.getEntity(metadata);
     }
+
     @Override
     public boolean hasTileEntity(int metadata) {
         return true;
     }
+
     @Override
     public Icon getIcon(int i, int j) {
-        return ResearchBlockType.getIcon(i,j);
-        }
+        return ResearchBlockType.getIcon(i, j);
+    }
+
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
-    public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
-    {
+    public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs,
+            List par3List) {
         for (int i = 0; i < ResearchBlockType.values().length; i++) {
             par3List.add(new ItemStack(par1, 1, i));
         }
-        
+
     }
+
     private void dropItems(World world, int x, int y, int z) {
         Random rand = new Random();
 
@@ -93,12 +101,13 @@ public class ResearchBlock extends BlockContainer {
                 item.stackSize = 0;
             }
         }
-    
+
     }
+
     @Override
     public void breakBlock(World world, int x, int y, int z, int i, int j) {
         dropItems(world, x, y, z);
         super.breakBlock(world, x, y, z, i, j);
     }
 
-    }
+}

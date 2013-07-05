@@ -17,10 +17,9 @@ public class Lobster_traptile extends FishingTileEntity implements IInventory {
     protected int range = 1;
 
     public Lobster_traptile() {
-        super(new ItemStack[2],"Lobster Trap");
+        super(new ItemStack[2], "Lobster Trap");
     }
 
-    
     public void addFish(int fishamout, int neededwater, int range,
             int waterforextrafish) {
         int waterblocks = countWater(range);
@@ -41,13 +40,10 @@ public class Lobster_traptile extends FishingTileEntity implements IInventory {
         }
     }
 
-
     @Override
     public void doUpdateTick(World world, int x, int y, int z, Random random) {
         addFish(fishamout, neededwater, range, waterforextrafish);
-        
-    }
 
-    
+    }
 
 }

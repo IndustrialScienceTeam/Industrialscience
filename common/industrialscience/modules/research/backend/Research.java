@@ -1,10 +1,11 @@
 package industrialscience.modules.research.backend;
+
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
 public class Research implements Comparable<Research> {
-    public final static String RESEARCH_CATEGORY="Researching";
+    public final static String RESEARCH_CATEGORY = "Researching";
     private String Name;
     private String[] NeededResearches;
     private String Category;
@@ -14,9 +15,9 @@ public class Research implements Comparable<Research> {
     private Researchchecker Checker;
     private Object Data;
 
-    public Research(String name, String[] neededResearches,
-            String category, Object data, Researchstep[] steps,
-            RecipeLocker locker, Researchchecker checker) {
+    public Research(String name, String[] neededResearches, String category,
+            Object data, Researchstep[] steps, RecipeLocker locker,
+            Researchchecker checker) {
         Name = name;
         NeededResearches = neededResearches;
         Category = category;

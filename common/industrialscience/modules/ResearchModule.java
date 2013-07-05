@@ -1,4 +1,5 @@
 package industrialscience.modules;
+
 import industrialscience.modules.research.frontend.ItemResearchBlock;
 import industrialscience.modules.research.frontend.ResearchBlock;
 import industrialscience.modules.research.frontend.ResearchBlockType;
@@ -30,17 +31,22 @@ public class ResearchModule extends ISAbstractModule {
     @Override
     public void load() {
         logger.log(Level.INFO, "LOADING");
-        
-        GameRegistry.registerBlock(researchBlock,ItemResearchBlock.class,getPrefix()+researchBlock.getUnlocalizedName2());
+
+        GameRegistry.registerBlock(researchBlock, ItemResearchBlock.class,
+                getPrefix() + researchBlock.getUnlocalizedName2());
         for (ResearchBlockType typ : ResearchBlockType.values()) {
-            GameRegistry.registerTileEntityWithAlternatives(typ.getTileentity(), getPrefix()+typ.name(), typ.name());
-            LanguageRegistry.addName(new ItemStack(researchBlock, 1, typ.ordinal()), typ.getReadableName());
+            GameRegistry.registerTileEntityWithAlternatives(
+                    typ.getTileentity(), getPrefix() + typ.name(), typ.name());
+            LanguageRegistry.addName(
+                    new ItemStack(researchBlock, 1, typ.ordinal()),
+                    typ.getReadableName());
         }
-        
+
         // Research Desk
-        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(researchBlock, 1, 1), new Object[] {
-                "WWW", "S S", "S S", Character.valueOf('W'), "slabWood",
-                Character.valueOf('S'), "stickWood" }));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(researchBlock,
+                1, 1), new Object[] { "WWW", "S S", "S S",
+                Character.valueOf('W'), "slabWood", Character.valueOf('S'),
+                "stickWood" }));
 
         // Researchbook
         GameRegistry.addRecipe(new ShapelessOreRecipe(researchbook,
@@ -57,7 +63,7 @@ public class ResearchModule extends ISAbstractModule {
         initCreativeTab();
         setPrefix("RESEARCH-MODULE");
         researchBlock = new ResearchBlock(BlockIDs.get("researchblock"));
-        researchBlockID=BlockIDs.get("researchblock");
+        researchBlockID = BlockIDs.get("researchblock");
         researchbook = new ResearchBook(ItemIDs.get("researchbook"));
         researchbookid = ItemIDs.get("researchbook");
         researchNote = new ResearchNote(ItemIDs.get("researchnote"));
