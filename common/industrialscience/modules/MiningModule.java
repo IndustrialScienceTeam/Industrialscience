@@ -21,7 +21,7 @@ public class MiningModule extends ISAbstractModule {
     public void init() {
         logger.log(Level.INFO, "INIT");
         initCreativeTab();
-        setPrefix("MINING_INDUSTRIALSCIENCE");
+        setPrefix("MINING");
 
     }
 

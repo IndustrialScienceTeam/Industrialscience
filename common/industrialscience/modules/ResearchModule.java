@@ -61,7 +61,7 @@ public class ResearchModule extends ISAbstractModule {
     public void init() {
         logger.log(Level.INFO, "INIT");
         initCreativeTab();
-        setPrefix("IS.RESEARCH-MODULE");
+        setPrefix("RESEARCH-MODULE");
         researchBlockID = BlockIDs.get("researchblock");
         researchBlock = new ResearchBlock(researchBlockID);
         researchbookID = ItemIDs.get("researchbook");
