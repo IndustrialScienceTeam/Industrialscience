@@ -23,10 +23,10 @@ public class ResearchModule extends ISAbstractModule {
     public static int researchBlockID;
 
     public static Item researchbook;
-    public static int researchbookid;
+    public static int researchbookID;
 
     public static Item researchNote;
-    public static int researchNoteid;
+    public static int researchNoteID;
 
     @Override
     public void load() {
@@ -61,13 +61,13 @@ public class ResearchModule extends ISAbstractModule {
     public void init() {
         logger.log(Level.INFO, "INIT");
         initCreativeTab();
-        setPrefix("RESEARCH-MODULE");
-        researchBlock = new ResearchBlock(BlockIDs.get("researchblock"));
+        setPrefix("IS.RESEARCH-MODULE");
         researchBlockID = BlockIDs.get("researchblock");
-        researchbook = new ResearchBook(ItemIDs.get("researchbook"));
-        researchbookid = ItemIDs.get("researchbook");
-        researchNote = new ResearchNote(ItemIDs.get("researchnote"));
-        researchNoteid = ItemIDs.get("researchnote");
+        researchBlock = new ResearchBlock(researchBlockID);
+        researchbookID = ItemIDs.get("researchbook");
+        researchbook = new ResearchBook(researchbookID);
+        researchNoteID = ItemIDs.get("researchnote");
+        researchNote = new ResearchNote(researchNoteID);
 
     }
 
@@ -97,7 +97,7 @@ public class ResearchModule extends ISAbstractModule {
 
     @Override
     public String getName() {
-        return "Research Module";
+        return "IndustrialScience research module";
     }
 
     @Override

@@ -17,10 +17,10 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class FishingModule extends ISAbstractModule {
     public static Block fishingblock;
-    public static int fishingblockid;
+    public static int fishingblockID;
 
     public static Item lobsteritem;
-    public static int lobsteritemid;
+    public static int lobsteritemID;
 
     @Override
     public void load() {
@@ -55,11 +55,11 @@ public class FishingModule extends ISAbstractModule {
     public void init() {
         initCreativeTab();
         logger.log(Level.INFO, "INIT");
-        fishingblockid = BlockIDs.get("fishingblock");
-        fishingblock = new FishingBlock(fishingblockid);
+        fishingblockID = BlockIDs.get("fishingblock");
+        fishingblock = new FishingBlock(fishingblockID);
         // Lobster item
-        lobsteritemid = ItemIDs.get("lobsteritem");
-        lobsteritem = new LobsterItem(ItemIDs.get("lobsteritem"));
+        lobsteritemID = ItemIDs.get("lobsteritem");
+        lobsteritem = new LobsterItem(lobsteritemID);
 
     }
 
@@ -87,7 +87,7 @@ public class FishingModule extends ISAbstractModule {
 
     @Override
     public String getName() {
-        return "IS Fishing Module";
+        return "IndustrialScience fishing module";
     }
 
     @Override

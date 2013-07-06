@@ -43,7 +43,7 @@ public class MiningModule extends ISAbstractModule {
 
     @Override
     public String getName() {
-        return "Mining Module";
+        return "IndustrialScience mining module";
     }
 
     @Override
