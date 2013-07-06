@@ -2,7 +2,6 @@ package industrialscience.modules;
 
 import industrialscience.modules.fishing.FishingBlock;
 import industrialscience.modules.fishing.FishingBlockType;
-import industrialscience.modules.fishing.ItemFishingBlock;
 import industrialscience.modules.fishing.LobsterItem;
 
 import java.util.Hashtable;
@@ -15,7 +14,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class FishingModule extends ISAbstractModule {
     public FishingModule(int blockid) {
@@ -31,15 +29,7 @@ public class FishingModule extends ISAbstractModule {
     @Override
     public void load() {
         logger.log(Level.INFO, "LOADING");
-        GameRegistry.registerBlock(fishingblock, ItemFishingBlock.class,
-                getPrefix() + fishingblock.getUnlocalizedName2());
-        for (FishingBlockType typ : FishingBlockType.values()) {
-            GameRegistry.registerTileEntityWithAlternatives(
-                    typ.getTileentity(), getPrefix() + typ.name(), typ.name());
-            LanguageRegistry.addName(
-                    new ItemStack(fishingblock, 1, typ.ordinal()),
-                    typ.getReadableName());
-        }
+        FishingBlockType.register(fishingblock,getPrefix());
         fishingblock.setCreativeTab(CreativeTab);
         lobsteritem.setCreativeTab(CreativeTab);
         // GameRegistry

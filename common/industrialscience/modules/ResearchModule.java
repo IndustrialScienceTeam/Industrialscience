@@ -1,6 +1,5 @@
 package industrialscience.modules;
 
-import industrialscience.modules.research.frontend.ItemResearchBlock;
 import industrialscience.modules.research.frontend.ResearchBlock;
 import industrialscience.modules.research.frontend.ResearchBlockType;
 import industrialscience.modules.research.frontend.ResearchBook;
@@ -16,7 +15,6 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class ResearchModule extends ISAbstractModule {
     public ResearchModule(int blockID) {
@@ -35,26 +33,16 @@ public class ResearchModule extends ISAbstractModule {
     @Override
     public void load() {
         logger.log(Level.INFO, "LOADING");
-
-        GameRegistry.registerBlock(researchBlock, ItemResearchBlock.class,
-                getPrefix() + researchBlock.getUnlocalizedName2());
-        for (ResearchBlockType typ : ResearchBlockType.values()) {
-            GameRegistry.registerTileEntityWithAlternatives(
-                    typ.getTileentity(), getPrefix() + typ.name(), typ.name());
-            LanguageRegistry.addName(
-                    new ItemStack(researchBlock, 1, typ.ordinal()),
-                    typ.getReadableName());
-        }
+        ResearchBlockType.register(researchBlock,getPrefix());
+        
         researchBlock.setCreativeTab(CreativeTab);
         researchbook.setCreativeTab(CreativeTab);
         researchNote.setCreativeTab(CreativeTab);
-        // Research Desk
+        
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(researchBlock,
                 1, 1), new Object[] { "WWW", "S S", "S S",
                 Character.valueOf('W'), "slabWood", Character.valueOf('S'),
                 "stickWood" }));
-
-        // Researchbook
         GameRegistry.addRecipe(new ShapelessOreRecipe(researchbook,
                 new Object[] { Item.book, "dyeLime", "dyeLime" }));
     }

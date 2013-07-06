@@ -10,11 +10,14 @@ import industrialscience.modules.research.frontend.TileEntities.CopierTile;
 import industrialscience.modules.research.frontend.TileEntities.ResearchDeskTile;
 import industrialscience.modules.research.frontend.models.ResearchCopierModel;
 import industrialscience.modules.research.frontend.models.ResearchDeskModel;
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public enum ResearchBlockType {
     COPIER(
@@ -159,5 +162,18 @@ public enum ResearchBlockType {
 
     public Class<? extends ISModel> getModel() {
         return model;
+    }
+
+    public static void register(Block researchBlock, String Prefix) {
+        GameRegistry.registerBlock(researchBlock, ItemResearchBlock.class,
+                Prefix + researchBlock.getUnlocalizedName2());
+        for (ResearchBlockType typ : ResearchBlockType.values()) {
+            GameRegistry.registerTileEntityWithAlternatives(
+                    typ.getTileentity(), Prefix + typ.name(), typ.name());
+            LanguageRegistry.addName(
+                    new ItemStack(researchBlock, 1, typ.ordinal()),
+                    typ.getReadableName());
+        }
+        
     }
 }

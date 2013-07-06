@@ -1,9 +1,13 @@
 package industrialscience.modules.fishing;
 
 import industrialscience.TextureGenerator;
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public enum FishingBlockType {
     SIMPLELOBSTERTRAP("Lobster Trap", "simplelobstertrap.png",
@@ -83,5 +87,18 @@ public enum FishingBlockType {
             BlockTyp.texturegen.registerIcons(par1IconRegister);
         }
 
+    }
+
+    public static void register(Block fishingblock, String prefix) {
+        GameRegistry.registerBlock(fishingblock, ItemFishingBlock.class,
+                prefix + fishingblock.getUnlocalizedName2());
+        for (FishingBlockType typ : FishingBlockType.values()) {
+            GameRegistry.registerTileEntityWithAlternatives(
+                    typ.getTileentity(), prefix + typ.name(), typ.name());
+            LanguageRegistry.addName(
+                    new ItemStack(fishingblock, 1, typ.ordinal()),
+                    typ.getReadableName());
+        }
+        
     }
 }
