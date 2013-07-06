@@ -24,18 +24,17 @@ public abstract class ISAbstractModule {
         super();
         ItemIDs = itemIDs;
         BlockID = blockID;
-        this.prefix = "industrialscience."+prefix;
+        this.prefix = "industrialscience." + prefix;
         this.name = name;
         this.guihandler = guihandler;
-        logger=Logger.getLogger(this.prefix);
+        logger = Logger.getLogger(this.prefix);
         logger.setParent(FMLLog.getLogger());
     }
 
     public abstract void load();
 
-    public void setIDs(int suggestedBlockID,
-            Hashtable<String, Integer> ItemIDs) {
-        this.BlockID = suggestedBlockID;
+    public void setIDs(int suggestedBlockID, Hashtable<String, Integer> ItemIDs) {
+        BlockID = suggestedBlockID;
         this.ItemIDs = ItemIDs;
     }
 
@@ -44,7 +43,7 @@ public abstract class ISAbstractModule {
     public abstract void postinit();
 
     public void initCreativeTab(ItemStack iconitemstack) {
-        IconItemStack=iconitemstack;
+        IconItemStack = iconitemstack;
         CreativeTab = new CreativeTabs(prefix) {
             @Override
             public ItemStack getIconItemStack() {
@@ -55,7 +54,6 @@ public abstract class ISAbstractModule {
                 "itemGroup." + prefix, "en_US", name);
 
     }
-    
 
     public Hashtable<String, Integer> getItemIDs() {
         return ItemIDs;
@@ -93,4 +91,3 @@ public abstract class ISAbstractModule {
         return guihandler;
     }
 }
-

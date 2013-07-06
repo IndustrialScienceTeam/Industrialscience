@@ -20,7 +20,8 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class ResearchModule extends ISAbstractModule {
     public ResearchModule(int blockID) {
-        super(NeededItemIDs(), blockID, "research", "IndustrialScience Research", GUIHandler());
+        super(NeededItemIDs(), blockID, "research",
+                "IndustrialScience Research", GUIHandler());
     }
 
     public static Block researchBlock;
@@ -66,22 +67,25 @@ public class ResearchModule extends ISAbstractModule {
         researchNoteID = getItemIDs().get("researchnote");
         researchNote = new ResearchNote(researchNoteID);
         researchBlock = new ResearchBlock(getBlockID());
-        initCreativeTab(new ItemStack(researchBlock, 1, ResearchBlockType.RESEARCHDESK.ordinal()));
+        initCreativeTab(new ItemStack(researchBlock, 1,
+                ResearchBlockType.RESEARCHDESK.ordinal()));
     }
+
     @Override
     public void postinit() {
         logger.log(Level.INFO, "POST-INIT");
 
     }
+
     public static IGuiHandler GUIHandler() {
         return new industrialscience.modules.research.frontend.GUI.GUIHandler();
     }
+
     public static Hashtable<String, Integer> NeededItemIDs() {
         Hashtable<String, Integer> neededItemIDs = new Hashtable<String, Integer>();
         neededItemIDs.put("researchbook", 8123);
         neededItemIDs.put("researchnote", 8124);
         return neededItemIDs;
     }
-
 
 }

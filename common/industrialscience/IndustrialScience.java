@@ -71,10 +71,10 @@ public class IndustrialScience {
                 suggestedConfigurationFile);
         configuration.load();
         for (ISAbstractModule a : modules) {
-            int suggestedBlockID=a.getBlockID();
-            suggestedBlockID=configuration.getBlock(a.getPrefix()+".blockID",
-                                suggestedBlockID).getInt();
-                
+            int suggestedBlockID = a.getBlockID();
+            suggestedBlockID = configuration.getBlock(
+                    a.getPrefix() + ".blockID", suggestedBlockID).getInt();
+
             Hashtable<String, Integer> neededItemIDs = a.getItemIDs();
             Hashtable<String, Integer> ItemIDs = new Hashtable<String, Integer>();
             Enumeration<String> itemnames = neededItemIDs.keys();

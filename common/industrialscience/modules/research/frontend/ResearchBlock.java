@@ -1,6 +1,5 @@
 package industrialscience.modules.research.frontend;
 
-
 import java.util.List;
 import java.util.Random;
 
