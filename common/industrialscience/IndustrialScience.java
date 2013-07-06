@@ -71,17 +71,11 @@ public class IndustrialScience {
                 suggestedConfigurationFile);
         configuration.load();
         for (ISAbstractModule a : modules) {
-            Hashtable<String, Integer> neededBlockids = a.getNeededBlockIDs();
-            Hashtable<String, Integer> BlockIDs = new Hashtable<String, Integer>();
-            Enumeration<String> blocknames = neededBlockids.keys();
-            while (blocknames.hasMoreElements()) {
-                String blockname = blocknames.nextElement();
-                BlockIDs.put(
-                        blockname,
-                        configuration.getBlock(blockname,
-                                neededBlockids.get(blockname)).getInt());
-            }
-            Hashtable<String, Integer> neededItemIDs = a.getNeededItemIDs();
+            int suggestedBlockID=a.getBlockID();
+            suggestedBlockID=configuration.getBlock(a.getPrefix()+".blockID",
+                                suggestedBlockID).getInt();
+                
+            Hashtable<String, Integer> neededItemIDs = a.getItemIDs();
             Hashtable<String, Integer> ItemIDs = new Hashtable<String, Integer>();
             Enumeration<String> itemnames = neededItemIDs.keys();
             while (itemnames.hasMoreElements()) {
@@ -91,7 +85,8 @@ public class IndustrialScience {
                         configuration.getItem(itemname,
                                 neededItemIDs.get(itemname)).getInt());
             }
-            a.setIDs(BlockIDs, ItemIDs);
+            a.setItemIDs(ItemIDs);
+            a.setBlockID(suggestedBlockID);
         }
         configuration.save();
     }
@@ -135,9 +130,9 @@ public class IndustrialScience {
      * Adds every module to the ArrayList.
      */
     private void registermodules() {
-        modules.add(new industrialscience.modules.ResearchModule());
-        modules.add(new industrialscience.modules.FishingModule());
-        modules.add(new industrialscience.modules.MiningModule());
+        modules.add(new industrialscience.modules.ResearchModule(756));
+        modules.add(new industrialscience.modules.FishingModule(757));
+        modules.add(new industrialscience.modules.MiningModule(758));
 
     }
 
@@ -158,9 +153,9 @@ public class IndustrialScience {
     private void loadmodules() {
         for (ISAbstractModule a : modules) {
             a.load();
-            if (a.getGUIHandler() != null) {
+            if (a.getGuihandler() != null) {
                 NetworkRegistry.instance().registerGuiHandler(instance,
-                        a.getGUIHandler());
+                        a.getGuihandler());
             }
         }
 

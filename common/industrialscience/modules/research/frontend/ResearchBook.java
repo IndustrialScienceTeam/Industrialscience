@@ -1,6 +1,5 @@
 package industrialscience.modules.research.frontend;
 
-import industrialscience.modules.ISAbstractModule;
 import industrialscience.modules.research.frontend.GUI.ResearchBookGUI;
 
 import java.util.ArrayList;
@@ -24,7 +23,6 @@ public class ResearchBook extends Item {
         setMaxStackSize(1);
         setUnlocalizedName("Research Book");
         LanguageRegistry.addName(this, "Research Book");
-        setCreativeTab(ISAbstractModule.getCreativeTab());
 
     }
 

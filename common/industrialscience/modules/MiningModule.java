@@ -11,6 +11,10 @@ import cpw.mods.fml.common.network.IGuiHandler;
 
 public class MiningModule extends ISAbstractModule {
 
+    public MiningModule(int blockID) {
+        super(NeededItemIDs(), blockID, "mining", "IndustrialScience Mining",GUIHandler());
+    }
+
     @Override
     public void load() {
         logger.log(Level.INFO, "LOADING");
@@ -19,19 +23,12 @@ public class MiningModule extends ISAbstractModule {
 
     @Override
     public void init() {
+        initCreativeTab(new ItemStack(Item.pickaxeDiamond));
         logger.log(Level.INFO, "INIT");
-        initCreativeTab();
-        setPrefix("MINING");
 
-    }
+    }   
 
-    @Override
-    public Hashtable<String, Integer> getNeededBlockIDs() {
-        return new Hashtable<String, Integer>();
-    }
-
-    @Override
-    public Hashtable<String, Integer> getNeededItemIDs() {
+    public static Hashtable<String, Integer> NeededItemIDs() {
         return new Hashtable<String, Integer>();
     }
 
@@ -41,18 +38,7 @@ public class MiningModule extends ISAbstractModule {
 
     }
 
-    @Override
-    public String getName() {
-        return "IndustrialScience mining module";
-    }
-
-    @Override
-    public ItemStack getIconitemstack() {
-        return new ItemStack(Item.pickaxeDiamond);
-    }
-
-    @Override
-    public IGuiHandler getGUIHandler() {
+    public static IGuiHandler GUIHandler() {
         return new IGuiHandler() {
             
             @Override

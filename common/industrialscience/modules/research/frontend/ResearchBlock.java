@@ -1,6 +1,5 @@
 package industrialscience.modules.research.frontend;
 
-import industrialscience.modules.ISAbstractModule;
 
 import java.util.List;
 import java.util.Random;
@@ -21,7 +20,6 @@ import net.minecraft.world.World;
 public class ResearchBlock extends BlockContainer {
     public ResearchBlock(int id) {
         super(id, Material.wood);
-        setCreativeTab(ISAbstractModule.getCreativeTab());
         setUnlocalizedName("ResearchBlock");
     }
 

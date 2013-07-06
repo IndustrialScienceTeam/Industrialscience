@@ -19,8 +19,11 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class ResearchModule extends ISAbstractModule {
+    public ResearchModule(int blockID) {
+        super(NeededItemIDs(), blockID, "research", "IndustrialScience Research", GUIHandler());
+    }
+
     public static Block researchBlock;
-    public static int researchBlockID;
 
     public static Item researchbook;
     public static int researchbookID;
@@ -41,7 +44,9 @@ public class ResearchModule extends ISAbstractModule {
                     new ItemStack(researchBlock, 1, typ.ordinal()),
                     typ.getReadableName());
         }
-
+        researchBlock.setCreativeTab(CreativeTab);
+        researchbook.setCreativeTab(CreativeTab);
+        researchNote.setCreativeTab(CreativeTab);
         // Research Desk
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(researchBlock,
                 1, 1), new Object[] { "WWW", "S S", "S S",
@@ -51,64 +56,32 @@ public class ResearchModule extends ISAbstractModule {
         // Researchbook
         GameRegistry.addRecipe(new ShapelessOreRecipe(researchbook,
                 new Object[] { Item.book, "dyeLime", "dyeLime" }));
-
-        // Reseach Note
-
-        addresearches();
     }
 
     @Override
     public void init() {
         logger.log(Level.INFO, "INIT");
-        initCreativeTab();
-        setPrefix("RESEARCH-MODULE");
-        researchBlockID = BlockIDs.get("researchblock");
-        researchBlock = new ResearchBlock(researchBlockID);
-        researchbookID = ItemIDs.get("researchbook");
+        researchbookID = getItemIDs().get("researchbook");
         researchbook = new ResearchBook(researchbookID);
-        researchNoteID = ItemIDs.get("researchnote");
+        researchNoteID = getItemIDs().get("researchnote");
         researchNote = new ResearchNote(researchNoteID);
-
+        researchBlock = new ResearchBlock(getBlockID());
+        initCreativeTab(new ItemStack(researchBlock, 1, ResearchBlockType.RESEARCHDESK.ordinal()));
     }
-
-    private void addresearches() {
-    }
-
     @Override
-    public Hashtable<String, Integer> getNeededBlockIDs() {
-        Hashtable<String, Integer> neededBlockIDs = new Hashtable<String, Integer>();
-        neededBlockIDs.put("researchblock", 757);
-        return neededBlockIDs;
-    }
+    public void postinit() {
+        logger.log(Level.INFO, "POST-INIT");
 
-    @Override
-    public Hashtable<String, Integer> getNeededItemIDs() {
+    }
+    public static IGuiHandler GUIHandler() {
+        return new industrialscience.modules.research.frontend.GUI.GUIHandler();
+    }
+    public static Hashtable<String, Integer> NeededItemIDs() {
         Hashtable<String, Integer> neededItemIDs = new Hashtable<String, Integer>();
         neededItemIDs.put("researchbook", 8123);
         neededItemIDs.put("researchnote", 8124);
         return neededItemIDs;
     }
 
-    @Override
-    public void postinit() {
-        logger.log(Level.INFO, "POST-INIT");
-
-    }
-
-    @Override
-    public String getName() {
-        return "IndustrialScience research module";
-    }
-
-    @Override
-    public ItemStack getIconitemstack() {
-        return new ItemStack(researchbook);
-    }
-
-    @Override
-    public IGuiHandler getGUIHandler() {
-        // TODO Auto-generated method stub
-        return null;
-    }
 
 }

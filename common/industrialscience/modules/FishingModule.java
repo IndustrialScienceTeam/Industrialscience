@@ -9,15 +9,20 @@ import java.util.Hashtable;
 import java.util.logging.Level;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class FishingModule extends ISAbstractModule {
+    public FishingModule(int blockid) {
+        super(NeededItemIDs(), blockid, "fishingmodule", "IndustrialScience Fishing",GUIHandler() );
+    }
+
     public static Block fishingblock;
-    public static int fishingblockID;
 
     public static Item lobsteritem;
     public static int lobsteritemID;
@@ -25,8 +30,6 @@ public class FishingModule extends ISAbstractModule {
     @Override
     public void load() {
         logger.log(Level.INFO, "LOADING");
-
-        // Basicfishtrap
         GameRegistry.registerBlock(fishingblock, ItemFishingBlock.class,
                 getPrefix() + fishingblock.getUnlocalizedName2());
         for (FishingBlockType typ : FishingBlockType.values()) {
@@ -36,6 +39,8 @@ public class FishingModule extends ISAbstractModule {
                     new ItemStack(fishingblock, 1, typ.ordinal()),
                     typ.getReadableName());
         }
+        fishingblock.setCreativeTab(CreativeTab);
+        lobsteritem.setCreativeTab(CreativeTab);
         // GameRegistry
         // .addRecipe(new ItemStack(basicfishtrap), new Object[] {
         // "X X X", " X X ", "X X X", Character.valueOf('X'),
@@ -53,30 +58,12 @@ public class FishingModule extends ISAbstractModule {
 
     @Override
     public void init() {
-        initCreativeTab();
         logger.log(Level.INFO, "INIT");
-        fishingblockID = BlockIDs.get("fishingblock");
-        fishingblock = new FishingBlock(fishingblockID);
-        // Lobster item
-        lobsteritemID = ItemIDs.get("lobsteritem");
+        initCreativeTab(new ItemStack(Item.fishingRod));
+        fishingblock = new FishingBlock(getBlockID());
+        lobsteritemID = getItemIDs().get("lobsteritem");
         lobsteritem = new LobsterItem(lobsteritemID);
 
-    }
-
-    @Override
-    public Hashtable<String, Integer> getNeededBlockIDs() {
-        Hashtable<String, Integer> NeededBlockIDs = new Hashtable<String, Integer>();
-        NeededBlockIDs.put("fishingblock", 758);
-        return NeededBlockIDs;
-    }
-
-    @Override
-    public Hashtable<String, Integer> getNeededItemIDs() {
-        Hashtable<String, Integer> NeededItemIDs = new Hashtable<String, Integer>();
-
-        NeededItemIDs.put("lobsteritem", 760); // Lobster item
-
-        return NeededItemIDs;
     }
 
     @Override
@@ -85,19 +72,28 @@ public class FishingModule extends ISAbstractModule {
 
     }
 
-    @Override
-    public String getName() {
-        return "IndustrialScience fishing module";
+    private static IGuiHandler GUIHandler() {
+        return new IGuiHandler() {
+            
+            @Override
+            public Object getServerGuiElement(int ID, EntityPlayer player, World world,
+                    int x, int y, int z) {
+                // TODO Auto-generated method stub
+                return null;
+            }
+            
+            @Override
+            public Object getClientGuiElement(int ID, EntityPlayer player, World world,
+                    int x, int y, int z) {
+                // TODO Auto-generated method stub
+                return null;
+            }
+        };
     }
 
-    @Override
-    public ItemStack getIconitemstack() {
-        return new ItemStack(Item.fishingRod);
+    private static Hashtable<String, Integer> NeededItemIDs() {
+        Hashtable<String, Integer> NeededItemIDs = new Hashtable<String, Integer>();
+        NeededItemIDs.put("lobsteritem", 760);
+        return NeededItemIDs;
     }
-
-    @Override
-    public IGuiHandler getGUIHandler() {
-        return null;
-    }
-
 }
