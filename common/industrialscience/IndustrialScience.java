@@ -137,6 +137,7 @@ public class IndustrialScience {
     private void registermodules() {
         modules.add(new industrialscience.modules.ResearchModule());
         modules.add(new industrialscience.modules.FishingModule());
+        modules.add(new industrialscience.modules.MiningModule());
 
     }
 
