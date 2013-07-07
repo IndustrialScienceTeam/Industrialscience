@@ -8,6 +8,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -26,6 +27,13 @@ public class FishingBlock extends BlockContainer {
     @Override
     public boolean isOpaqueCube() {
         return false;
+    }
+    @Override
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9)
+    {
+        if(player.isSneaking())
+            return false;
+        return FishingBlockType.values()[world.getBlockMetadata(x, y, z)].activate(world, x,y,z,player,par6,par7,par8,par9);
     }
 
     @Override
@@ -104,6 +112,7 @@ public class FishingBlock extends BlockContainer {
 
     @Override
     public void breakBlock(World world, int x, int y, int z, int i, int j) {
+        FishingBlockType.values()[world.getBlockMetadata(x, y, z)].breakBlock(world, x, y, z, i, j);
         dropItems(world, x, y, z);
         super.breakBlock(world, x, y, z, i, j);
     }
