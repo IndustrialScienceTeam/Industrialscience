@@ -166,7 +166,7 @@ public enum ResearchBlockType {
 
     public static void register(Block researchBlock, String Prefix) {
         GameRegistry.registerBlock(researchBlock, ItemResearchBlock.class,
-                Prefix + researchBlock.getUnlocalizedName2());
+                Prefix + researchBlock.getUnlocalizedName());
         for (ResearchBlockType typ : ResearchBlockType.values()) {
             GameRegistry.registerTileEntityWithAlternatives(
                     typ.getTileentity(), Prefix + typ.name(), typ.name());

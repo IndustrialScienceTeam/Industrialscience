@@ -95,10 +95,12 @@ public class CopierTile extends TileEntity implements IInventory {
         return false;
     }
 
-    @Override
-    public boolean isStackValidForSlot(int i, ItemStack itemstack) {
-        // TODO Auto-generated method stub
-        return false;
-    }
+	@Override
+	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
 
 }

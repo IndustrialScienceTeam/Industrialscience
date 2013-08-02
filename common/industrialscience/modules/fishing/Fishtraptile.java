@@ -87,5 +87,10 @@ public class Fishtraptile extends FishingTileEntity implements IInventory {
     public void setCoreZ(int coreZ) {
         this.coreZ = coreZ;
     }
+	@Override
+	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

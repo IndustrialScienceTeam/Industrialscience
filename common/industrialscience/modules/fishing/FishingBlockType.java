@@ -138,7 +138,7 @@ public enum FishingBlockType {
 
     public static void register(Block fishingblock, String prefix) {
         GameRegistry.registerBlock(fishingblock, ItemFishingBlock.class,
-                prefix + fishingblock.getUnlocalizedName2());
+                prefix + fishingblock.getUnlocalizedName());
         for (FishingBlockType typ : FishingBlockType.values()) {
             GameRegistry.registerTileEntityWithAlternatives(
                     typ.getTileentity(), prefix + typ.name(), typ.name());

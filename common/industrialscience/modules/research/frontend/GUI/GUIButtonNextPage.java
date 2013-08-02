@@ -30,7 +30,6 @@ class GuiButtonNextPage extends GuiButton {
             boolean flag = par2 >= xPosition && par3 >= yPosition
                     && par2 < xPosition + width && par3 < yPosition + height;
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-            par1Minecraft.renderEngine.bindTexture("/gui/book.png");
             int k = 0;
             int l = 192;
 

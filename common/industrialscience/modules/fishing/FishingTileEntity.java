@@ -463,11 +463,6 @@ public abstract class FishingTileEntity extends TileEntity implements
         return false;
     }
 
-    @Override
-    public boolean isStackValidForSlot(int i, ItemStack itemstack) {
-        // TODO Auto-generated method stub
-        return false;
-    }
 
     protected void addFish(int fishamout, int neededwater, int range,
             int waterforextrafish, int fishslot) {

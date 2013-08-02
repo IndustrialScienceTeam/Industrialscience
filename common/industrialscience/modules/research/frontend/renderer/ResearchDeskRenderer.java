@@ -16,7 +16,7 @@ public class ResearchDeskRenderer extends TileEntitySpecialRenderer {
             metavalue = tileentity.getWorldObj().getBlockMetadata(
                     tileentity.xCoord, tileentity.yCoord, tileentity.zCoord);
         }
-        bindTextureByName(ResearchBlockType.values()[metavalue].getModelfile());
+      //  bindTextureByName(ResearchBlockType.values()[metavalue].getModelfile());
         GL11.glPushMatrix();
         GL11.glTranslatef((float) d0 + 0.5F, (float) d1 + 1.5F,
                 (float) d2 + 0.5F);
