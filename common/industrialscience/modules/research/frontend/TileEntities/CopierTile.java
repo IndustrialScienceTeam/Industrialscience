@@ -1,5 +1,6 @@
 package industrialscience.modules.research.frontend.TileEntities;
 
+import industrialscience.modules.ResearchModule;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -97,7 +98,8 @@ public class CopierTile extends TileEntity implements IInventory {
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		// TODO Auto-generated method stub
+		if((i==PAGEINPUT&&itemstack.itemID==ResearchModule.researchNoteID)||itemstack.itemID==ResearchModule.researchbookID)
+			return true;
 		return false;
 	}
 
