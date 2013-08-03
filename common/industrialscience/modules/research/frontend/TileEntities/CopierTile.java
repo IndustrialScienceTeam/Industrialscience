@@ -141,8 +141,6 @@ public class CopierTile extends TileEntity implements IInventory {
 			return true;
 		if(itemstack.itemID==ResearchModule.researchbookID)
 			return true;
-		System.out.println(itemstack.itemID);
-		System.out.println(ResearchModule.researchbookID);
 		return false;
 	}
 
