@@ -27,7 +27,10 @@ public class CopierGUI extends GuiContainer {
 		GL11.glColor4f(1, 1, 1, 1);
 		Minecraft.getMinecraft().func_110434_K().func_110577_a(texture);
 		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
-		
+	}
+	@Override
+	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
+		fontRenderer.drawString("Research Copier", 8, 6, 0x404040);
 	}
 
 }
