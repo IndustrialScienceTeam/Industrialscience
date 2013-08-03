@@ -9,6 +9,7 @@ import java.util.Hashtable;
 
 import net.minecraftforge.common.Configuration;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod.PreInit;
@@ -52,7 +53,7 @@ public class IndustrialScience {
      * @param event
      *            The FMLPreInitializationEvent given by forge.
      */
-    @PreInit
+    @EventHandler
     public void preLoad(FMLPreInitializationEvent event) {
         registermodules();
         giveIDs(event.getSuggestedConfigurationFile());
@@ -98,7 +99,7 @@ public class IndustrialScience {
      * @param event
      *            The FMLInitializationEvent given by forge.
      */
-    @Init
+    @EventHandler
     public void load(FMLInitializationEvent event) {
         instance = this;
         NetworkRegistry.instance().registerGuiHandler(instance, new ISGUIHandler(modules));
@@ -112,7 +113,7 @@ public class IndustrialScience {
      * @param event
      *            The FMLInitializationEvent given by forge.
      */
-    @cpw.mods.fml.common.Mod.PostInit
+    @EventHandler
     public void PostInit(FMLPostInitializationEvent event) {
         postinitmodules();
     }
