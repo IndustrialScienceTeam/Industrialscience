@@ -70,7 +70,8 @@ public enum ResearchBlockType {
                                     new ResearchObject(new ItemStack(
                                             ResearchModule.researchNote)),
                                     "Yout think the best way to copy researches would be just read your written results and write them down again. So simple.") },
-                    null, null)), RESEARCHDESK("Research Desk",
+                    null, null)),
+ RESEARCHDESK("Research Desk",
             "researchdesk.png", ResearchDeskModel.class,
             ResearchDeskTile.class, new TextureGenerator() {
                 private Icon bottom;

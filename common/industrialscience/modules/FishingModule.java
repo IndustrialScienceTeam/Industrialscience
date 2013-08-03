@@ -18,7 +18,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class FishingModule extends ISAbstractModule {
     public FishingModule(int blockid) {
         super(NeededItemIDs(), blockid, "fishingmodule",
-                "IndustrialScience Fishing", GUIHandler());
+                "IndustrialScience Fishing");
     }
 
     public static Block fishingblock;
@@ -63,28 +63,23 @@ public class FishingModule extends ISAbstractModule {
 
     }
 
-    private static IGuiHandler GUIHandler() {
-        return new IGuiHandler() {
-
-            @Override
-            public Object getServerGuiElement(int ID, EntityPlayer player,
-                    World world, int x, int y, int z) {
-                // TODO Auto-generated method stub
-                return null;
-            }
-
-            @Override
-            public Object getClientGuiElement(int ID, EntityPlayer player,
-                    World world, int x, int y, int z) {
-                // TODO Auto-generated method stub
-                return null;
-            }
-        };
-    }
-
     private static Hashtable<String, Integer> NeededItemIDs() {
         Hashtable<String, Integer> NeededItemIDs = new Hashtable<String, Integer>();
         NeededItemIDs.put("lobsteritem", 760);
         return NeededItemIDs;
     }
+
+	@Override
+	public Object getServerGUIElement(int blockMetadata, EntityPlayer player,
+			World world, int x, int y, int z) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object getClientGUIElement(int blockMetadata, EntityPlayer player,
+			World world, int x, int y, int z) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

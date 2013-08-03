@@ -12,8 +12,7 @@ import cpw.mods.fml.common.network.IGuiHandler;
 public class MiningModule extends ISAbstractModule {
 
     public MiningModule(int blockID) {
-        super(NeededItemIDs(), blockID, "mining", "IndustrialScience Mining",
-                GUIHandler());
+        super(NeededItemIDs(), blockID, "mining", "IndustrialScience Mining");
     }
 
     @Override
@@ -39,24 +38,19 @@ public class MiningModule extends ISAbstractModule {
 
     }
 
-    public static IGuiHandler GUIHandler() {
-        return new IGuiHandler() {
+	@Override
+	public Object getServerGUIElement(int blockMetadata, EntityPlayer player,
+			World world, int x, int y, int z) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-            @Override
-            public Object getServerGuiElement(int ID, EntityPlayer player,
-                    World world, int x, int y, int z) {
-                // TODO Auto-generated method stub
+	@Override
+	public Object getClientGUIElement(int blockMetadata, EntityPlayer player,
+			World world, int x, int y, int z) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-                return null;
-            }
-
-            @Override
-            public Object getClientGuiElement(int ID, EntityPlayer player,
-                    World world, int x, int y, int z) {
-                // TODO Auto-generated method stub
-                return null;
-            }
-        };
-    }
 
 }

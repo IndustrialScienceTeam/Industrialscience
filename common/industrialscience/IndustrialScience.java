@@ -101,6 +101,7 @@ public class IndustrialScience {
     @Init
     public void load(FMLInitializationEvent event) {
         instance = this;
+        NetworkRegistry.instance().registerGuiHandler(instance, new ISGUIHandler(modules));
         initmodules();
         loadmodules();
     }
@@ -147,18 +148,12 @@ public class IndustrialScience {
     }
 
     /**
-     * Calls the load method from every module and registers the GUIHandler from
-     * every module at the NetworkRegistry.
+     * Calls the load method from every module.
      */
     private void loadmodules() {
         for (ISAbstractModule a : modules) {
             a.load();
-            if (a.getGuihandler() != null) {
-                NetworkRegistry.instance().registerGuiHandler(instance,
-                        a.getGuihandler());
             }
         }
 
     }
-
-}

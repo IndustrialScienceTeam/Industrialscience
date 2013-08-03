@@ -4,13 +4,18 @@ import industrialscience.modules.research.frontend.ResearchBlock;
 import industrialscience.modules.research.frontend.ResearchBlockType;
 import industrialscience.modules.research.frontend.ResearchBook;
 import industrialscience.modules.research.frontend.ResearchNote;
+import industrialscience.modules.research.frontend.GUI.CopierGUI;
+import industrialscience.modules.research.frontend.GUI.containers.CopierContainer;
+import industrialscience.modules.research.frontend.TileEntities.CopierTile;
 
 import java.util.Hashtable;
 import java.util.logging.Level;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import cpw.mods.fml.common.network.IGuiHandler;
@@ -19,7 +24,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class ResearchModule extends ISAbstractModule {
     public ResearchModule(int blockID) {
         super(NeededItemIDs(), blockID, "research",
-                "IndustrialScience Research", GUIHandler());
+                "IndustrialScience Research");
     }
 
     public static Block researchBlock;
@@ -65,10 +70,6 @@ public class ResearchModule extends ISAbstractModule {
 
     }
 
-    public static IGuiHandler GUIHandler() {
-        return new industrialscience.modules.research.frontend.GUI.GUIHandler();
-    }
-
     public static Hashtable<String, Integer> NeededItemIDs() {
         Hashtable<String, Integer> neededItemIDs = new Hashtable<String, Integer>();
         neededItemIDs.put("researchbook", 8123);
@@ -76,4 +77,15 @@ public class ResearchModule extends ISAbstractModule {
         return neededItemIDs;
     }
 
+	@Override
+	public Object getServerGUIElement(int blockMetadata, EntityPlayer player,
+			World world, int x, int y, int z) {
+		return new CopierContainer((CopierTile)world.getBlockTileEntity(x, y, z), player.inventory);
+	}
+
+	@Override
+	public Object getClientGUIElement(int blockMetadata, EntityPlayer player,
+			World world, int x, int y, int z) {;
+		return new CopierGUI((CopierTile)world.getBlockTileEntity(x, y, z), player.inventory);
+	}
 }

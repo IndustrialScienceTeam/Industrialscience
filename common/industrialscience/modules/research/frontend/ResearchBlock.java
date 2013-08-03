@@ -1,13 +1,17 @@
 package industrialscience.modules.research.frontend;
 
+import industrialscience.IndustrialScience;
+
 import java.util.List;
 import java.util.Random;
 
+import cpw.mods.fml.common.network.FMLNetworkHandler;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -105,6 +109,14 @@ public class ResearchBlock extends BlockContainer {
     public void breakBlock(World world, int x, int y, int z, int i, int j) {
         dropItems(world, x, y, z);
         super.breakBlock(world, x, y, z, i, j);
+    }
+    @Override
+    public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
+    {
+        if(!par1World.isRemote){
+        	FMLNetworkHandler.openGui(par5EntityPlayer, IndustrialScience.instance, 0, par1World, par2, par3, par4);
+        }
+        return true;
     }
 
 }

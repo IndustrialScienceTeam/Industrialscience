@@ -4,7 +4,9 @@ import java.util.Hashtable;
 import java.util.logging.Logger;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -17,16 +19,14 @@ public abstract class ISAbstractModule {
     private String prefix;
     private String name;
     private ItemStack IconItemStack;
-    protected IGuiHandler guihandler;
 
     protected ISAbstractModule(Hashtable<String, Integer> itemIDs, int blockID,
-            String prefix, String name, IGuiHandler guihandler) {
+            String prefix, String name) {
         super();
         ItemIDs = itemIDs;
         BlockID = blockID;
         this.prefix = "industrialscience." + prefix;
         this.name = name;
-        this.guihandler = guihandler;
         logger = Logger.getLogger(this.prefix);
         logger.setParent(FMLLog.getLogger());
     }
@@ -87,7 +87,6 @@ public abstract class ISAbstractModule {
         return name;
     }
 
-    public IGuiHandler getGuihandler() {
-        return guihandler;
-    }
+	public abstract Object getServerGUIElement(int blockMetadata, EntityPlayer player, World world, int x, int y, int z);
+	public abstract Object getClientGUIElement(int blockMetadata, EntityPlayer player, World world, int x, int y, int z);
 }
