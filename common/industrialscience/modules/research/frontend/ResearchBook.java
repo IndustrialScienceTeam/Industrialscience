@@ -45,8 +45,9 @@ public class ResearchBook extends Item {
     @Override
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,
             EntityPlayer par3EntityPlayer) {
-        Minecraft.getMinecraft().displayGuiScreen(
-                new ResearchBookGUI(par3EntityPlayer, par1ItemStack));
+    	//if(!par2World.isRemote){
+      //  Minecraft.getMinecraft().displayGuiScreen(
+       //         new ResearchBookGUI(par3EntityPlayer, par1ItemStack));}
         return super.onItemRightClick(par1ItemStack, par2World,
                 par3EntityPlayer);
     }
