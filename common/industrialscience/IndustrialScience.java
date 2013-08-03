@@ -34,7 +34,7 @@ public class IndustrialScience {
      * This field holds the proxy for registering the renders.
      */
     @SidedProxy(clientSide = "industrialscience.ClientProxy", serverSide = "industrialscience.CommonProxy")
-    public static ClientProxy proxy;
+    public static CommonProxy proxy;
 
     /**
      * The instance of this mod for forge.
