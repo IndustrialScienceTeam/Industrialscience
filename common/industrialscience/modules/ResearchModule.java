@@ -80,12 +80,20 @@ public class ResearchModule extends ISAbstractModule {
 	@Override
 	public Object getServerGUIElement(int blockMetadata, EntityPlayer player,
 			World world, int x, int y, int z) {
-		return new CopierContainer((CopierTile)world.getBlockTileEntity(x, y, z), player.inventory);
+		if(ResearchBlockType.RESEARCHDESK.ordinal()==blockMetadata)
+			return null;
+		if(ResearchBlockType.COPIER.ordinal()==blockMetadata)
+			return new CopierContainer((CopierTile)world.getBlockTileEntity(x, y, z), player.inventory);
+		return null;
 	}
 
 	@Override
 	public Object getClientGUIElement(int blockMetadata, EntityPlayer player,
 			World world, int x, int y, int z) {;
-		return new CopierGUI((CopierTile)world.getBlockTileEntity(x, y, z), player.inventory);
+			if(ResearchBlockType.RESEARCHDESK.ordinal()==blockMetadata)
+				return null;
+			if(ResearchBlockType.COPIER.ordinal()==blockMetadata)
+				return new CopierGUI((CopierTile)world.getBlockTileEntity(x, y, z), player.inventory);
+			return null;
 	}
 }
