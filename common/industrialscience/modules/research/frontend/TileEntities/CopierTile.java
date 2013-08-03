@@ -4,6 +4,8 @@ import industrialscience.modules.ResearchModule;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
 public class CopierTile extends TileEntity implements IInventory {
@@ -95,11 +97,52 @@ public class CopierTile extends TileEntity implements IInventory {
     public boolean isInvNameLocalized() {
         return false;
     }
+    @Override
+    public void readFromNBT(NBTTagCompound tagCompound) {
+        super.readFromNBT(tagCompound);
+
+        NBTTagList tagList = tagCompound.getTagList("Inventory");
+
+        for (int i = 0; i < tagList.tagCount(); i++) {
+            NBTTagCompound tag = (NBTTagCompound) tagList.tagAt(i);
+
+            byte slot = tag.getByte("Slot");
+
+            if (slot >= 0 && slot < Inventory.length) {
+                Inventory[slot] = ItemStack.loadItemStackFromNBT(tag);
+            }
+        }
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound tagCompound) {
+        super.writeToNBT(tagCompound);
+
+        NBTTagList itemList = new NBTTagList();
+
+        for (int i = 0; i < Inventory.length; i++) {
+            ItemStack stack = Inventory[i];
+
+            if (stack != null) {
+                NBTTagCompound tag = new NBTTagCompound();
+
+                tag.setByte("Slot", (byte) i);
+                stack.writeToNBT(tag);
+                itemList.appendTag(tag);
+            }
+        }
+
+        tagCompound.setTag("Inventory", itemList);
+    }
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		if((i==PAGEINPUT&&itemstack.itemID==ResearchModule.researchNoteID)||itemstack.itemID==ResearchModule.researchbookID)
+		if((i==PAGEINPUT)&&itemstack.itemID==ResearchModule.researchNoteID)
 			return true;
+		if(itemstack.itemID==ResearchModule.researchbookID)
+			return true;
+		System.out.println(itemstack.itemID);
+		System.out.println(ResearchModule.researchbookID);
 		return false;
 	}
 
