@@ -49,7 +49,7 @@ public enum ResearchBlockType {
                             .registerIcon("industrialscience:vannila_researchtable_sides");
                     bottom = par1IconRegister
                             .registerIcon("industrialscience:vannila_researchtable_bottom");
-                    top = par1IconRegister.registerIcon("wood_jungle");
+                    top = par1IconRegister.registerIcon("planks_jungle");
 
                 }
 
@@ -96,7 +96,7 @@ public enum ResearchBlockType {
                             .registerIcon("industrialscience:vannila_researchtable_sides");
                     bottom = par1IconRegister
                             .registerIcon("industrialscience:vannila_researchtable_bottom");
-                    top = par1IconRegister.registerIcon("wood");
+                    top = par1IconRegister.registerIcon("planks_oak");
 
                 }
 
