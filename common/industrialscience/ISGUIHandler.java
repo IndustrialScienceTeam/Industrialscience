@@ -3,6 +3,7 @@ package industrialscience;
 import industrialscience.modules.ISAbstractModule;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,9 +11,9 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
 
 public class ISGUIHandler implements IGuiHandler {
-	ArrayList<ISAbstractModule> modules;
-	public ISGUIHandler(ArrayList<ISAbstractModule> modules) {
-		this.modules=modules;
+	Collection<ISAbstractModule> modules;
+	public ISGUIHandler(Collection<ISAbstractModule> collection) {
+		this.modules=collection;
 	}
 
 	@Override

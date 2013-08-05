@@ -10,9 +10,7 @@ import java.util.Hashtable;
 import net.minecraftforge.common.Configuration;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.Mod.PreInit;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -42,9 +40,9 @@ public class IndustrialScience {
     @Instance(Modinfo.ModID)
     public static IndustrialScience instance;
     /**
-     * This ArrayList holds the modules of this mod, which should be loaded.
+     * This hashtable holds the modules of this mod, which should be loaded.
      */
-    private ArrayList<ISAbstractModule> modules = new ArrayList<ISAbstractModule>();
+    public final Hashtable<String,ISAbstractModule> modules = new Hashtable<String, ISAbstractModule>();
 
     /**
      * The mod PreInit method. Calls the registermodules and giveIDs(with the
@@ -71,7 +69,7 @@ public class IndustrialScience {
         Configuration configuration = new Configuration(
                 suggestedConfigurationFile);
         configuration.load();
-        for (ISAbstractModule a : modules) {
+        for (ISAbstractModule a : modules.values()) {
             int suggestedBlockID = a.getBlockID();
             suggestedBlockID = configuration.getBlock(
                     a.getPrefix() + ".blockID", suggestedBlockID).getInt();
@@ -102,7 +100,7 @@ public class IndustrialScience {
     @EventHandler
     public void load(FMLInitializationEvent event) {
         instance = this;
-        NetworkRegistry.instance().registerGuiHandler(instance, new ISGUIHandler(modules));
+        NetworkRegistry.instance().registerGuiHandler(instance, new ISGUIHandler(modules.values()));
         initmodules();
         loadmodules();
     }
@@ -122,19 +120,22 @@ public class IndustrialScience {
      * Calls the postinit method from every module
      */
     private void postinitmodules() {
-        for (ISAbstractModule a : modules) {
+        for (ISAbstractModule a : modules.values()) {
             a.postinit();
         }
 
     }
 
     /**
-     * Adds every module to the ArrayList.
+     * Adds every module to the list.
      */
     private void registermodules() {
-        modules.add(new industrialscience.modules.ResearchModule(756));
-        modules.add(new industrialscience.modules.FishingModule(757));
-        modules.add(new industrialscience.modules.MiningModule(758));
+        ISAbstractModule research=new industrialscience.modules.ResearchModule(756);
+        ISAbstractModule fishing=new industrialscience.modules.FishingModule(757);
+        ISAbstractModule mining=new industrialscience.modules.MiningModule(758);
+        modules.put(research.getName(), research);
+        modules.put(fishing.getName(), fishing);
+        modules.put(mining.getName(), mining);
 
     }
 
@@ -142,7 +143,7 @@ public class IndustrialScience {
      * Calls the init method from every module.
      */
     private void initmodules() {
-        for (ISAbstractModule a : modules) {
+        for (ISAbstractModule a : modules.values()) {
             a.init();
         }
 
@@ -152,7 +153,7 @@ public class IndustrialScience {
      * Calls the load method from every module.
      */
     private void loadmodules() {
-        for (ISAbstractModule a : modules) {
+        for (ISAbstractModule a : modules.values()) {
             a.load();
             }
         }
