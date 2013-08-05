@@ -5,7 +5,9 @@ import industrialscience.modules.research.frontend.ResearchBlockType;
 import industrialscience.modules.research.frontend.ResearchBook;
 import industrialscience.modules.research.frontend.ResearchNote;
 import industrialscience.modules.research.frontend.GUI.CopierGUI;
+import industrialscience.modules.research.frontend.GUI.ResearchBookGUI;
 import industrialscience.modules.research.frontend.GUI.containers.CopierContainer;
+import industrialscience.modules.research.frontend.GUI.containers.ResearchBookContainer;
 import industrialscience.modules.research.frontend.TileEntities.CopierTile;
 
 import java.util.Hashtable;
@@ -90,7 +92,7 @@ public class ResearchModule extends ISAbstractModule {
 		else {
 			switch (id) {
 			case 1:
-				return null;
+				return new ResearchBookContainer(player.inventory, new int[4]);
 
 			default:
 				return null;
@@ -111,7 +113,7 @@ public class ResearchModule extends ISAbstractModule {
 				else {
 					switch (id) {
 					case 1:
-						return null;
+						return new ResearchBookGUI(player, player.getCurrentEquippedItem());
 
 					default:
 						return null;

@@ -43,7 +43,7 @@ public class IndustrialScience {
     /**
      * This array holds the modules of this mod, which should be loaded.
      */
-    public final ISAbstractModule[] modules = new ISAbstractModule[3];
+    public final static ISAbstractModule[] modules = new ISAbstractModule[3];
 
     /**
      * The mod PreInit method. Calls the registermodules and giveIDs(with the
