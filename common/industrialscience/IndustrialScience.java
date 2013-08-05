@@ -4,6 +4,7 @@ import industrialscience.modules.ISAbstractModule;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
@@ -40,9 +41,9 @@ public class IndustrialScience {
     @Instance(Modinfo.ModID)
     public static IndustrialScience instance;
     /**
-     * This hashtable holds the modules of this mod, which should be loaded.
+     * This array holds the modules of this mod, which should be loaded.
      */
-    public final Hashtable<String,ISAbstractModule> modules = new Hashtable<String, ISAbstractModule>();
+    public final ISAbstractModule[] modules = new ISAbstractModule[3];
 
     /**
      * The mod PreInit method. Calls the registermodules and giveIDs(with the
@@ -69,7 +70,7 @@ public class IndustrialScience {
         Configuration configuration = new Configuration(
                 suggestedConfigurationFile);
         configuration.load();
-        for (ISAbstractModule a : modules.values()) {
+        for (ISAbstractModule a : modules) {
             int suggestedBlockID = a.getBlockID();
             suggestedBlockID = configuration.getBlock(
                     a.getPrefix() + ".blockID", suggestedBlockID).getInt();
@@ -100,7 +101,7 @@ public class IndustrialScience {
     @EventHandler
     public void load(FMLInitializationEvent event) {
         instance = this;
-        NetworkRegistry.instance().registerGuiHandler(instance, new ISGUIHandler(modules.values()));
+        NetworkRegistry.instance().registerGuiHandler(instance, new ISGUIHandler(Arrays.asList(modules)));
         initmodules();
         loadmodules();
     }
@@ -120,7 +121,7 @@ public class IndustrialScience {
      * Calls the postinit method from every module
      */
     private void postinitmodules() {
-        for (ISAbstractModule a : modules.values()) {
+        for (ISAbstractModule a : modules) {
             a.postinit();
         }
 
@@ -130,12 +131,9 @@ public class IndustrialScience {
      * Adds every module to the list.
      */
     private void registermodules() {
-        ISAbstractModule research=new industrialscience.modules.ResearchModule(756);
-        ISAbstractModule fishing=new industrialscience.modules.FishingModule(757);
-        ISAbstractModule mining=new industrialscience.modules.MiningModule(758);
-        modules.put(research.getName(), research);
-        modules.put(fishing.getName(), fishing);
-        modules.put(mining.getName(), mining);
+       modules[0]=new industrialscience.modules.ResearchModule(756,0);
+       modules[1]=new industrialscience.modules.FishingModule(757,1);
+       modules[2]=new industrialscience.modules.MiningModule(758,2);
 
     }
 
@@ -143,7 +141,7 @@ public class IndustrialScience {
      * Calls the init method from every module.
      */
     private void initmodules() {
-        for (ISAbstractModule a : modules.values()) {
+        for (ISAbstractModule a : modules) {
             a.init();
         }
 
@@ -153,7 +151,7 @@ public class IndustrialScience {
      * Calls the load method from every module.
      */
     private void loadmodules() {
-        for (ISAbstractModule a : modules.values()) {
+        for (ISAbstractModule a : modules) {
             a.load();
             }
         }

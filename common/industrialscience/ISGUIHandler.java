@@ -19,11 +19,16 @@ public class ISGUIHandler implements IGuiHandler {
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world,
 			int x, int y, int z) {
+		if(ID==0)
 		for (Iterator iterator = modules.iterator(); iterator.hasNext();) {
 			ISAbstractModule module = (ISAbstractModule) iterator.next();
 			if(world.getBlockId(x, y, z)==module.getBlockID()){
-				return module.getServerGUIElement(world.getBlockMetadata(x, y, z),player,world,x,y,z);
+				return module.getServerGUIElement(0,player,world,x,y,z);
 			}
+		}
+		else {
+			return IndustrialScience.instance.modules[ID&7].getServerGUIElement(ID>>3, player, world, x, y, z);
+			
 		}
 		return null;
 	}
@@ -31,11 +36,15 @@ public class ISGUIHandler implements IGuiHandler {
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world,
 			int x, int y, int z) {
+		if(ID==0)
 		for (Iterator iterator = modules.iterator(); iterator.hasNext();) {
 			ISAbstractModule module = (ISAbstractModule) iterator.next();
 			if(world.getBlockId(x, y, z)==module.getBlockID()){
-				return module.getClientGUIElement(world.getBlockMetadata(x, y, z),player,world,x,y,z);
+				return module.getClientGUIElement(0,player,world,x,y,z);
 			}
+		}
+		else {
+			return IndustrialScience.instance.modules[ID&7].getClientGUIElement(ID>>3, player, world, x, y, z);
 		}
 		return null;
 	}

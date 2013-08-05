@@ -22,9 +22,9 @@ import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ResearchModule extends ISAbstractModule {
-    public ResearchModule(int blockID) {
+    public ResearchModule(int blockID, int bitprefix) {
         super(NeededItemIDs(), blockID, "research",
-                "IndustrialScience Research");
+                "IndustrialScience Research",bitprefix);
     }
 
     public static Block researchBlock;
@@ -78,22 +78,44 @@ public class ResearchModule extends ISAbstractModule {
     }
 
 	@Override
-	public Object getServerGUIElement(int blockMetadata, EntityPlayer player,
+	public Object getServerGUIElement(int id, EntityPlayer player,
 			World world, int x, int y, int z) {
-		if(ResearchBlockType.RESEARCHDESK.ordinal()==blockMetadata)
+		if(id==0){
+		if(ResearchBlockType.RESEARCHDESK.ordinal()==world.getBlockMetadata(x, y, z))
 			return null;
-		if(ResearchBlockType.COPIER.ordinal()==blockMetadata)
+		if(ResearchBlockType.COPIER.ordinal()==world.getBlockMetadata(x, y, z))
 			return new CopierContainer((CopierTile)world.getBlockTileEntity(x, y, z), player.inventory);
 		return null;
+		}
+		else {
+			switch (id) {
+			case 1:
+				return null;
+
+			default:
+				return null;
+			}
+		}
 	}
 
 	@Override
-	public Object getClientGUIElement(int blockMetadata, EntityPlayer player,
+	public Object getClientGUIElement(int id, EntityPlayer player,
 			World world, int x, int y, int z) {;
-			if(ResearchBlockType.RESEARCHDESK.ordinal()==blockMetadata)
+			if(id==0){
+				if(ResearchBlockType.RESEARCHDESK.ordinal()==world.getBlockMetadata(x, y, z))
+					return null;
+				if(ResearchBlockType.COPIER.ordinal()==world.getBlockMetadata(x, y, z))
+					return new CopierGUI((CopierTile)world.getBlockTileEntity(x, y, z), player.inventory);
 				return null;
-			if(ResearchBlockType.COPIER.ordinal()==blockMetadata)
-				return new CopierGUI((CopierTile)world.getBlockTileEntity(x, y, z), player.inventory);
-			return null;
+				}
+				else {
+					switch (id) {
+					case 1:
+						return null;
+
+					default:
+						return null;
+					}
+				}		
 	}
 }
