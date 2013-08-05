@@ -65,58 +65,19 @@ public class ResearchBlock extends BlockContainer {
         }
 
     }
-
-    private void dropItems(World world, int x, int y, int z) {
-        Random rand = new Random();
-
-        TileEntity tile_entity = world.getBlockTileEntity(x, y, z);
-
-        if (!(tile_entity instanceof IInventory))
-            return;
-
-        IInventory inventory = (IInventory) tile_entity;
-
-        for (int i = 0; i < inventory.getSizeInventory(); i++) {
-            ItemStack item = inventory.getStackInSlot(i);
-
-            if (item != null && item.stackSize > 0) {
-                float rx = rand.nextFloat() * 0.3F + 0.1F;
-                float ry = rand.nextFloat() * 0.3F + 0.1F;
-                float rz = rand.nextFloat() * 0.3F + 0.1F;
-
-                EntityItem entity_item = new EntityItem(world, x + rx, y + ry,
-                        z + rz, new ItemStack(item.itemID, item.stackSize,
-                                item.getItemDamage()));
-
-                if (item.hasTagCompound()) {
-                    entity_item.writeToNBT((NBTTagCompound) item
-                            .getTagCompound().copy());
-                }
-
-                float factor = 0.5F;
-
-                entity_item.motionX = rand.nextGaussian() * factor;
-                entity_item.motionY = rand.nextGaussian() * factor;
-                entity_item.motionZ = rand.nextGaussian() * factor;
-                world.spawnEntityInWorld(entity_item);
-                item.stackSize = 0;
-            }
-        }
-
-    }
-
     @Override
     public void breakBlock(World world, int x, int y, int z, int i, int j) {
-        dropItems(world, x, y, z);
-        super.breakBlock(world, x, y, z, i, j);
+    	if(!world.isRemote){
+     	   ResearchBlockType.values()[world.getBlockMetadata(x, y, z)].breakBlock(world, x, y, z, i, j);
+        }
     }
     @Override
     public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
     {
-        if(!par1World.isRemote){
-        	FMLNetworkHandler.openGui(par5EntityPlayer, IndustrialScience.instance, 0, par1World, par2, par3, par4);
-        }
-        return true;
+       if(!par1World.isRemote){
+    	   return ResearchBlockType.values()[par1World.getBlockMetadata(par2, par3, par4)].onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer, par6, par7, par8, par9);
+       }
+       return true;
     }
 
 }
