@@ -26,7 +26,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
  * @author finesim97
  * 
  */
-@NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = { Modinfo.ModID+"0",Modinfo.ModID+"1",Modinfo.ModID+"2" }, packetHandler = Packethandler.class)
+@NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = { Modinfo.channelbase+"0",Modinfo.channelbase+"1",Modinfo.channelbase+"2" }, packetHandler = Packethandler.class)
 @Mod(modid = Modinfo.ModID, name = Modinfo.ReadableModName, version = "1.0")
 public class IndustrialScience {
     /**
