@@ -1,6 +1,9 @@
 package industrialscience.modules.research.frontend;
 
+import industrialscience.BlockUtils;
+import industrialscience.ISBlockInterface;
 import industrialscience.ISModel;
+import industrialscience.IndustrialScience;
 import industrialscience.TextureGenerator;
 import industrialscience.modules.ResearchModule;
 import industrialscience.modules.research.backend.Research;
@@ -12,10 +15,13 @@ import industrialscience.modules.research.frontend.models.ResearchCopierModel;
 import industrialscience.modules.research.frontend.models.ResearchDeskModel;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
+import net.minecraft.world.World;
+import cpw.mods.fml.common.network.FMLNetworkHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
@@ -64,13 +70,30 @@ public enum ResearchBlockType {
                                     0,
                                     new ResearchObject(
                                             new ItemStack(Item.paper)),
-                                    "You have looked at your Researchbook and thought, how cool it would be to share and save your knowledge. You want to think more about this idea"),
+                                    "You have looked at your Researchbook and thought, how cool it would be to share and save your knowledge. You want to think more about this idea."),
                             new Researchstep(
                                     1,
                                     new ResearchObject(new ItemStack(
                                             ResearchModule.researchNote)),
-                                    "Yout think the best way to copy researches would be just read your written results and write them down again. So simple.") },
-                    null, null)),
+                                    "You think the best way to copy researches is just to read your written results and write them down again. So simple.") },
+                    null, null), new ISBlockInterface(){
+
+						@Override
+						public boolean onBlockActivated(World world, int x,
+								int y, int z, EntityPlayer player, int par6,
+								float par7, float par8, float par9) {
+								FMLNetworkHandler.instance().openGui(player, IndustrialScience.instance, 0, world, x, y, z);
+							return true;
+						}
+
+						@Override
+						public void breakBlock(World world, int x, int y,
+								int z, int par5, int par6) {
+							BlockUtils.dropItems(world, x, y, z);
+							
+						}
+            	
+            }),
  RESEARCHDESK("Research Desk",
             "researchdesk.png", ResearchDeskModel.class,
             ResearchDeskTile.class, new TextureGenerator() {
@@ -101,7 +124,22 @@ public enum ResearchBlockType {
 
                 }
 
-            }, null);
+            }, null, new ISBlockInterface(){
+
+				@Override
+				public boolean onBlockActivated(World world, int x, int y,
+						int z, EntityPlayer player, int par6, float par7,
+						float par8, float par9) {
+					// TODO Auto-generated method stub
+					return false;
+				}
+
+				@Override
+				public void breakBlock(World world, int x, int y, int z,
+						int par5, int par6) {
+					// TODO Auto-generated method stub
+					
+				}});
     private Class<? extends ISModel> model;
     private String friendlyname;
     private String modelfile;
@@ -125,17 +163,19 @@ public enum ResearchBlockType {
 
     public Class<? extends TileEntity> tileentity;
     private Research research;
+	private ISBlockInterface blockinterface;
 
     private ResearchBlockType(String name, String modelfile,
             Class<? extends ISModel> model,
             Class<? extends TileEntity> tileentity,
-            TextureGenerator texturegen, Research research) {
+            TextureGenerator texturegen, Research research,ISBlockInterface blockinterface) {
         friendlyname = name;
         this.modelfile = modelfile;
         this.tileentity = tileentity;
         this.research = research;
         this.texturegen = texturegen;
         this.model = model;
+        this.blockinterface=blockinterface;
     }
 
     public static TileEntity getEntity(int metadata) {
@@ -176,5 +216,12 @@ public enum ResearchBlockType {
                     typ.getReadableName());
         }
         
+    }
+    public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
+    {
+    	return blockinterface.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer, par6, par7, par8, par9);
+    }
+    public void breakBlock(World world, int x, int y, int z, int i, int j) {
+    	blockinterface.breakBlock(world, x, y,z, i, j);
     }
 }

@@ -4,14 +4,14 @@ import industrialscience.modules.ISAbstractModule;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
 import net.minecraftforge.common.Configuration;
 import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.Init;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.Mod.PreInit;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -27,23 +27,23 @@ import cpw.mods.fml.common.network.NetworkRegistry;
  * 
  */
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = { "isresearchtable" }, packetHandler = Packethandler.class)
-@Mod(modid = "industrialscience", name = "Industrial Science", version = "1.0")
+@Mod(modid = Modinfo.ModID, name = "Industrial Science", version = "1.0")
 public class IndustrialScience {
     /**
      * This field holds the proxy for registering the renders.
      */
     @SidedProxy(clientSide = "industrialscience.ClientProxy", serverSide = "industrialscience.CommonProxy")
-    public static ClientProxy proxy;
+    public static CommonProxy proxy;
 
     /**
      * The instance of this mod for forge.
      */
-    @Instance("Industrial Science")
+    @Instance(Modinfo.ModID)
     public static IndustrialScience instance;
     /**
-     * This ArrayList holds the modules of this mod, which should be loaded.
+     * This array holds the modules of this mod, which should be loaded.
      */
-    private ArrayList<ISAbstractModule> modules = new ArrayList<ISAbstractModule>();
+    public final static ISAbstractModule[] modules = new ISAbstractModule[3];
 
     /**
      * The mod PreInit method. Calls the registermodules and giveIDs(with the
@@ -52,7 +52,7 @@ public class IndustrialScience {
      * @param event
      *            The FMLPreInitializationEvent given by forge.
      */
-    @PreInit
+    @EventHandler
     public void preLoad(FMLPreInitializationEvent event) {
         registermodules();
         giveIDs(event.getSuggestedConfigurationFile());
@@ -98,10 +98,10 @@ public class IndustrialScience {
      * @param event
      *            The FMLInitializationEvent given by forge.
      */
-    @Init
+    @EventHandler
     public void load(FMLInitializationEvent event) {
         instance = this;
-        NetworkRegistry.instance().registerGuiHandler(instance, new ISGUIHandler(modules));
+        NetworkRegistry.instance().registerGuiHandler(instance, new ISGUIHandler(Arrays.asList(modules)));
         initmodules();
         loadmodules();
     }
@@ -112,7 +112,7 @@ public class IndustrialScience {
      * @param event
      *            The FMLInitializationEvent given by forge.
      */
-    @cpw.mods.fml.common.Mod.PostInit
+    @EventHandler
     public void PostInit(FMLPostInitializationEvent event) {
         postinitmodules();
     }
@@ -128,12 +128,12 @@ public class IndustrialScience {
     }
 
     /**
-     * Adds every module to the ArrayList.
+     * Adds every module to the list.
      */
     private void registermodules() {
-        modules.add(new industrialscience.modules.ResearchModule(756));
-        modules.add(new industrialscience.modules.FishingModule(757));
-        modules.add(new industrialscience.modules.MiningModule(758));
+       modules[0]=new industrialscience.modules.ResearchModule(756,0);
+       modules[1]=new industrialscience.modules.FishingModule(757,1);
+       modules[2]=new industrialscience.modules.MiningModule(758,2);
 
     }
 

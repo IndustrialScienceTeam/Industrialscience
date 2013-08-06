@@ -19,9 +19,10 @@ public abstract class ISAbstractModule {
     private String prefix;
     private String name;
     private ItemStack IconItemStack;
+	private int bitprefix;
 
-    protected ISAbstractModule(Hashtable<String, Integer> itemIDs, int blockID,
-            String prefix, String name) {
+	protected ISAbstractModule(Hashtable<String, Integer> itemIDs, int blockID,
+            String prefix, String name, int bitprefix) {
         super();
         ItemIDs = itemIDs;
         BlockID = blockID;
@@ -29,6 +30,7 @@ public abstract class ISAbstractModule {
         this.name = name;
         logger = Logger.getLogger(this.prefix);
         logger.setParent(FMLLog.getLogger());
+        this.bitprefix = bitprefix;
     }
 
     public abstract void load();
@@ -86,7 +88,12 @@ public abstract class ISAbstractModule {
     public String getName() {
         return name;
     }
-
+    public int getBitprefix() {
+		return bitprefix;
+	}
+    public int formGUIID(int GUIID){
+    	return (GUIID << 3)|bitprefix;
+    }
 	public abstract Object getServerGUIElement(int blockMetadata, EntityPlayer player, World world, int x, int y, int z);
 	public abstract Object getClientGUIElement(int blockMetadata, EntityPlayer player, World world, int x, int y, int z);
 }

@@ -1,5 +1,7 @@
 package industrialscience.modules.research.frontend;
 
+import industrialscience.IndustrialScience;
+import industrialscience.modules.ResearchModule;
 import industrialscience.modules.research.frontend.GUI.ResearchBookGUI;
 
 import java.util.ArrayList;
@@ -13,6 +15,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.network.FMLNetworkHandler;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class ResearchBook extends Item {
@@ -45,9 +48,8 @@ public class ResearchBook extends Item {
     @Override
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,
             EntityPlayer par3EntityPlayer) {
-        Minecraft.getMinecraft().displayGuiScreen(
-                new ResearchBookGUI(par3EntityPlayer, par1ItemStack));
-        return super.onItemRightClick(par1ItemStack, par2World,
+    		FMLNetworkHandler.instance().openGui(par3EntityPlayer, IndustrialScience.instance, IndustrialScience.modules[0].formGUIID(1), par2World, par3EntityPlayer.chunkCoordX, par3EntityPlayer.chunkCoordY,par3EntityPlayer.chunkCoordZ); 
+    		return super.onItemRightClick(par1ItemStack, par2World,
                 par3EntityPlayer);
     }
 

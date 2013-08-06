@@ -11,8 +11,8 @@ import cpw.mods.fml.common.network.IGuiHandler;
 
 public class MiningModule extends ISAbstractModule {
 
-    public MiningModule(int blockID) {
-        super(NeededItemIDs(), blockID, "mining", "IndustrialScience Mining");
+    public MiningModule(int blockID, int i) {
+        super(NeededItemIDs(), blockID, "mining", "IndustrialScience Mining",i);
     }
 
     @Override

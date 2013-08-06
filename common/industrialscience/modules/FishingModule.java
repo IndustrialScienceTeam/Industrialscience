@@ -16,9 +16,9 @@ import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class FishingModule extends ISAbstractModule {
-    public FishingModule(int blockid) {
+    public FishingModule(int blockid, int i) {
         super(NeededItemIDs(), blockid, "fishingmodule",
-                "IndustrialScience Fishing");
+                "IndustrialScience Fishing",i);
     }
 
     public static Block fishingblock;
