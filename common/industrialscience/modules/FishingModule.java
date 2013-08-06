@@ -1,7 +1,9 @@
 package industrialscience.modules;
 
+import industrialscience.Packethandler;
 import industrialscience.modules.fishing.FishingBlock;
 import industrialscience.modules.fishing.FishingBlockType;
+import industrialscience.modules.fishing.FishingPackethandler;
 import industrialscience.modules.fishing.LobsterItem;
 
 import java.util.Hashtable;
@@ -18,7 +20,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class FishingModule extends ISAbstractModule {
     public FishingModule(int blockid, int i) {
         super(NeededItemIDs(), blockid, "fishingmodule",
-                "IndustrialScience Fishing",i);
+                "IndustrialScience Fishing",i, new FishingPackethandler());
     }
 
     public static Block fishingblock;

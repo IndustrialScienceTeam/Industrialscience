@@ -6,9 +6,13 @@ import java.util.logging.Logger;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.INetworkManager;
+import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.network.IGuiHandler;
+import cpw.mods.fml.common.network.IPacketHandler;
+import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public abstract class ISAbstractModule {
@@ -20,9 +24,10 @@ public abstract class ISAbstractModule {
     private String name;
     private ItemStack IconItemStack;
 	private int bitprefix;
+	private IPacketHandler packethandler;
 
 	protected ISAbstractModule(Hashtable<String, Integer> itemIDs, int blockID,
-            String prefix, String name, int bitprefix) {
+            String prefix, String name, int bitprefix, IPacketHandler packethandler) {
         super();
         ItemIDs = itemIDs;
         BlockID = blockID;
@@ -31,6 +36,7 @@ public abstract class ISAbstractModule {
         logger = Logger.getLogger(this.prefix);
         logger.setParent(FMLLog.getLogger());
         this.bitprefix = bitprefix;
+        this.packethandler=packethandler;
     }
 
     public abstract void load();
@@ -96,4 +102,10 @@ public abstract class ISAbstractModule {
     }
 	public abstract Object getServerGUIElement(int blockMetadata, EntityPlayer player, World world, int x, int y, int z);
 	public abstract Object getClientGUIElement(int blockMetadata, EntityPlayer player, World world, int x, int y, int z);
+
+	public void onPacketData(INetworkManager manager,
+			Packet250CustomPayload packet, Player player) {
+		packethandler.onPacketData(manager, packet, player);
+		
+	}
 }

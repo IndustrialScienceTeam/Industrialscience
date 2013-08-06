@@ -1,5 +1,7 @@
 package industrialscience.modules;
 
+import industrialscience.modules.mining.MiningPackethandler;
+
 import java.util.Hashtable;
 import java.util.logging.Level;
 
@@ -12,7 +14,7 @@ import cpw.mods.fml.common.network.IGuiHandler;
 public class MiningModule extends ISAbstractModule {
 
     public MiningModule(int blockID, int i) {
-        super(NeededItemIDs(), blockID, "mining", "IndustrialScience Mining",i);
+        super(NeededItemIDs(), blockID, "mining", "IndustrialScience Mining",i, new MiningPackethandler());
     }
 
     @Override

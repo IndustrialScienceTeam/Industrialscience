@@ -1,5 +1,6 @@
 package industrialscience.modules;
 
+import industrialscience.modules.research.ResearchPacketHandler;
 import industrialscience.modules.research.frontend.ResearchBlock;
 import industrialscience.modules.research.frontend.ResearchBlockType;
 import industrialscience.modules.research.frontend.ResearchBook;
@@ -26,7 +27,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class ResearchModule extends ISAbstractModule {
     public ResearchModule(int blockID, int bitprefix) {
         super(NeededItemIDs(), blockID, "research",
-                "IndustrialScience Research",bitprefix);
+                "IndustrialScience Research",bitprefix,new ResearchPacketHandler());
     }
 
     public static Block researchBlock;
