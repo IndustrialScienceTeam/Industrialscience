@@ -1,6 +1,7 @@
 package industrialscience.modules.research.frontend.GUI.containers;
 
 import industrialscience.ISContainer;
+import industrialscience.UpgradeSlot;
 import industrialscience.modules.ResearchModule;
 import industrialscience.modules.research.frontend.TileEntities.CopierTile;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,6 +15,7 @@ public class CopierContainer extends ISContainer {
         super(ip, ct);
         addSlotToContainer(new ResearchCopierSlot(ct, ct.PAGEINPUT, 53, 34, false));
         addSlotToContainer(new ResearchCopierSlot(ct, ct.PAGEOUTPUT, 107, 34, true));
+        addSlotToContainer(new UpgradeSlot(ct,ct.UPGRADESLOT,177,4));
     }
     @Override
     public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {

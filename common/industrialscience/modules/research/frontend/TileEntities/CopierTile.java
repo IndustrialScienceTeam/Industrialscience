@@ -11,10 +11,11 @@ import net.minecraft.tileentity.TileEntity;
 public class CopierTile extends TileEntity implements IInventory {
     public final static int PAGEINPUT = 0;
     public final static int PAGEOUTPUT = 1;
+    public final static int UPGRADESLOT=2;
     private ItemStack[] Inventory;
 
     public CopierTile() {
-        Inventory = new ItemStack[2];
+        Inventory = new ItemStack[3];
     }
 
     @Override

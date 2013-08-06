@@ -20,8 +20,8 @@ public class CopierGUI extends GuiContainer {
 
 	public CopierGUI(CopierTile ct,InventoryPlayer ip) {
 		super(new CopierContainer(ct, ip));
-		xSize=182;
-		ySize=171;
+		xSize=196;
+		ySize=172;
 	}
 
 	@Override
