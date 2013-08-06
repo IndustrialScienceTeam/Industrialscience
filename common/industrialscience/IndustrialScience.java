@@ -26,8 +26,8 @@ import cpw.mods.fml.common.network.NetworkRegistry;
  * @author finesim97
  * 
  */
-@NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = { "isresearchtable" }, packetHandler = Packethandler.class)
-@Mod(modid = Modinfo.ModID, name = "Industrial Science", version = "1.0")
+@NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = { Modinfo.ModID+"0",Modinfo.ModID+"1",Modinfo.ModID+"2" }, packetHandler = Packethandler.class)
+@Mod(modid = Modinfo.ModID, name = Modinfo.ReadableModName, version = "1.0")
 public class IndustrialScience {
     /**
      * This field holds the proxy for registering the renders.
