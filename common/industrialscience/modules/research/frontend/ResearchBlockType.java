@@ -2,7 +2,6 @@ package industrialscience.modules.research.frontend;
 
 import industrialscience.BlockUtils;
 import industrialscience.ISBlockInterface;
-import industrialscience.ISModel;
 import industrialscience.IndustrialScience;
 import industrialscience.TextureGenerator;
 import industrialscience.modules.ResearchModule;
@@ -11,10 +10,13 @@ import industrialscience.modules.research.backend.ResearchObject;
 import industrialscience.modules.research.backend.Researchstep;
 import industrialscience.modules.research.frontend.TileEntities.CopierTile;
 import industrialscience.modules.research.frontend.TileEntities.ResearchDeskTile;
-import industrialscience.modules.research.frontend.models.ResearchCopierModel;
 import industrialscience.modules.research.frontend.models.ResearchDeskModel;
+import industrialscience.modules.research.frontend.renderer.ResearchCopierRenderer;
+import industrialscience.modules.research.frontend.renderer.ResearchDeskRenderer;
 import net.minecraft.block.Block;
+import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -29,7 +31,7 @@ public enum ResearchBlockType {
     COPIER(
             "Research Copier",
             "copier.png",
-            ResearchCopierModel.class,
+            ResearchCopierRenderer.class,
             CopierTile.class,
             new TextureGenerator() {
                 private Icon bottom;
@@ -95,7 +97,7 @@ public enum ResearchBlockType {
             	
             }),
  RESEARCHDESK("Research Desk",
-            "researchdesk.png", ResearchDeskModel.class,
+            "researchdesk.png", ResearchDeskRenderer.class,
             ResearchDeskTile.class, new TextureGenerator() {
                 private Icon bottom;
                 private Icon top;
@@ -140,7 +142,7 @@ public enum ResearchBlockType {
 					// TODO Auto-generated method stub
 					
 				}});
-    private Class<? extends ISModel> model;
+    private Class<? extends TileEntitySpecialRenderer> model;
     private String friendlyname;
     private String modelfile;
     public TextureGenerator texturegen;
@@ -166,7 +168,7 @@ public enum ResearchBlockType {
 	private ISBlockInterface blockinterface;
 
     private ResearchBlockType(String name, String modelfile,
-            Class<? extends ISModel> model,
+            Class<? extends TileEntitySpecialRenderer> model,
             Class<? extends TileEntity> tileentity,
             TextureGenerator texturegen, Research research,ISBlockInterface blockinterface) {
         friendlyname = name;
@@ -201,7 +203,7 @@ public enum ResearchBlockType {
 
     }
 
-    public Class<? extends ISModel> getModel() {
+    public Class<? extends TileEntitySpecialRenderer> getRenderer() {
         return model;
     }
 

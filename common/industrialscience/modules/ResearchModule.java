@@ -10,8 +10,11 @@ import industrialscience.modules.research.frontend.GUI.ResearchBookGUI;
 import industrialscience.modules.research.frontend.GUI.containers.CopierContainer;
 import industrialscience.modules.research.frontend.GUI.containers.ResearchBookContainer;
 import industrialscience.modules.research.frontend.TileEntities.CopierTile;
+import industrialscience.modules.research.frontend.TileEntities.ResearchDeskTile;
+import industrialscience.modules.research.frontend.renderer.ResearchCopierRenderer;
 
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.logging.Level;
 
 import net.minecraft.block.Block;
@@ -21,6 +24,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -120,5 +124,21 @@ public class ResearchModule extends ISAbstractModule {
 						return null;
 					}
 				}		
+	}
+
+	@Override
+	public void registerRenderers() {
+		try {
+			
+			for (ResearchBlockType element : ResearchBlockType.values()) {
+				ClientRegistry.bindTileEntitySpecialRenderer(element.tileentity, element.getRenderer().newInstance());
+			}
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

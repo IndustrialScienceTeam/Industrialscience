@@ -104,6 +104,7 @@ public class IndustrialScience {
         NetworkRegistry.instance().registerGuiHandler(instance, new ISGUIHandler(Arrays.asList(modules)));
         initmodules();
         loadmodules();
+        proxy.registerRenderers();
     }
 
     /**

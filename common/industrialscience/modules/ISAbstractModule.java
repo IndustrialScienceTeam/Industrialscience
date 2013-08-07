@@ -14,6 +14,8 @@ import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public abstract class ISAbstractModule {
     protected CreativeTabs CreativeTab = null;
@@ -108,4 +110,6 @@ public abstract class ISAbstractModule {
 		packethandler.onPacketData(manager, packet, player);
 		
 	}
+	@SideOnly(Side.CLIENT)
+	public abstract void registerRenderers();
 }

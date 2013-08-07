@@ -54,5 +54,11 @@ public class MiningModule extends ISAbstractModule {
 		return null;
 	}
 
+	@Override
+	public void registerRenderers() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

@@ -84,4 +84,10 @@ public class FishingModule extends ISAbstractModule {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void registerRenderers() {
+		// TODO Auto-generated method stub
+		
+	}
 }

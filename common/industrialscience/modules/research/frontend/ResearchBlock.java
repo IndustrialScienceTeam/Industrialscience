@@ -79,5 +79,13 @@ public class ResearchBlock extends BlockContainer {
        }
        return true;
     }
+    public int getRenderType(){
+    	  return -1;
+    	        }
+    public boolean renderAsNormalBlock()
+    {
+            return false;
+    }
+    
 
 }
