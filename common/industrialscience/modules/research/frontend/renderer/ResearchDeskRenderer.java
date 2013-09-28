@@ -16,7 +16,7 @@ public class ResearchDeskRenderer extends TileEntitySpecialRenderer {
     @Override
     public void renderTileEntityAt(TileEntity tileentity, double d0, double d1,
             double d2, float f) {
-    	func_110628_a(texture);
+    	bindTexture(texture);
         GL11.glPushMatrix();
         GL11.glTranslatef((float) d0 + 0.5F, (float) d1 + 1.5F,
                 (float) d2 + 0.5F);

@@ -86,10 +86,10 @@ public class ResearchDeskModel extends ModelBase
       setRotation(brace2_2, 0.7853982F, 0F, 0F);
   }
   
-  public void render(TileEntity en, float f, float f1, float f2, float f3, float f4, float f5)
+  public void render(TileEntity entity, float f, float f1, float f2, float f3, float f4, float f5)
   {
     super.render(null, f, f1, f2, f3, f4, f5);
-    setRotationAngles(f, f1, f2, f3, f4, f5, null);
+    setRotationAngles(f, f1, f2, f3, f4, f5, entity);
     Leg1.render(f5);
     Leg2.render(f5);
     Leg3.render(f5);
@@ -108,9 +108,8 @@ public class ResearchDeskModel extends ModelBase
     model.rotateAngleZ = z;
   }
   
-  public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
+  public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, TileEntity entity)
   {
-    super.setRotationAngles(f, f1, f2, f3, f4, f5,entity);
   }
 
 }
