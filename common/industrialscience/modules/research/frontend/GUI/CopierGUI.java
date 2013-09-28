@@ -1,18 +1,16 @@
 package industrialscience.modules.research.frontend.GUI;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import industrialscience.ISGUIContainer;
 import industrialscience.modules.research.frontend.GUI.containers.CopierContainer;
 import industrialscience.modules.research.frontend.TileEntities.CopierTile;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+
+import org.lwjgl.opengl.GL11;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class CopierGUI extends GuiContainer {
 

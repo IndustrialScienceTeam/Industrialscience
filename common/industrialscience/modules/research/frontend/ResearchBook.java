@@ -1,13 +1,10 @@
 package industrialscience.modules.research.frontend;
 
 import industrialscience.IndustrialScience;
-import industrialscience.modules.ResearchModule;
-import industrialscience.modules.research.frontend.GUI.ResearchBookGUI;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -48,7 +45,7 @@ public class ResearchBook extends Item {
     @Override
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,
             EntityPlayer par3EntityPlayer) {
-    		FMLNetworkHandler.instance().openGui(par3EntityPlayer, IndustrialScience.instance, IndustrialScience.modules[0].formGUIID(1), par2World, par3EntityPlayer.chunkCoordX, par3EntityPlayer.chunkCoordY,par3EntityPlayer.chunkCoordZ); 
+            FMLNetworkHandler.openGui(par3EntityPlayer, IndustrialScience.instance, IndustrialScience.modules[0].formGUIID(1), par2World, par3EntityPlayer.chunkCoordX, par3EntityPlayer.chunkCoordY,par3EntityPlayer.chunkCoordZ); 
     		return super.onItemRightClick(par1ItemStack, par2World,
                 par3EntityPlayer);
     }

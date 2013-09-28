@@ -1,6 +1,5 @@
 package industrialscience.modules;
 
-import industrialscience.Packethandler;
 import industrialscience.modules.fishing.FishingBlock;
 import industrialscience.modules.fishing.FishingBlockType;
 import industrialscience.modules.fishing.FishingPackethandler;
@@ -14,7 +13,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class FishingModule extends ISAbstractModule {

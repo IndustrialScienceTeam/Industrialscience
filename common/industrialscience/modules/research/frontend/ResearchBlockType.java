@@ -10,11 +10,9 @@ import industrialscience.modules.research.backend.ResearchObject;
 import industrialscience.modules.research.backend.Researchstep;
 import industrialscience.modules.research.frontend.TileEntities.CopierTile;
 import industrialscience.modules.research.frontend.TileEntities.ResearchDeskTile;
-import industrialscience.modules.research.frontend.models.ResearchDeskModel;
 import industrialscience.modules.research.frontend.renderer.ResearchCopierRenderer;
 import industrialscience.modules.research.frontend.renderer.ResearchDeskRenderer;
 import net.minecraft.block.Block;
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.player.EntityPlayer;
@@ -84,7 +82,8 @@ public enum ResearchBlockType {
 						public boolean onBlockActivated(World world, int x,
 								int y, int z, EntityPlayer player, int par6,
 								float par7, float par8, float par9) {
-								FMLNetworkHandler.instance().openGui(player, IndustrialScience.instance, 0, world, x, y, z);
+								FMLNetworkHandler.instance();
+                                FMLNetworkHandler.openGui(player, IndustrialScience.instance, 0, world, x, y, z);
 							return true;
 						}
 

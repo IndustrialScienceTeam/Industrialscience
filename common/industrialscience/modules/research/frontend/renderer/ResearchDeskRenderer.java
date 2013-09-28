@@ -1,9 +1,7 @@
 package industrialscience.modules.research.frontend.renderer;
 
 import industrialscience.Modinfo;
-import industrialscience.modules.research.frontend.ResearchBlockType;
 import industrialscience.modules.research.frontend.models.ResearchDeskModel;
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
