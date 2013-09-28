@@ -1,6 +1,7 @@
 package industrialscience.modules;
 
 import industrialscience.modules.mining.MiningPackethandler;
+import industrialscience.modules.mining.frontend.items.MiningSlagItem;
 
 import java.util.Hashtable;
 import java.util.logging.Level;
@@ -11,7 +12,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class MiningModule extends ISAbstractModule {
-
+    public static Item miningslag;
+    public static int miningslagID;
     public MiningModule(int blockID, int i) {
         super(NeededItemIDs(), blockID, "mining", "IndustrialScience Mining",i, new MiningPackethandler());
     }
@@ -19,18 +21,23 @@ public class MiningModule extends ISAbstractModule {
     @Override
     public void load() {
         logger.log(Level.INFO, "LOADING");
+        miningslag.setCreativeTab(CreativeTab);
 
     }
 
     @Override
     public void init() {
-        initCreativeTab(new ItemStack(Item.pickaxeDiamond));
         logger.log(Level.INFO, "INIT");
+        initCreativeTab(new ItemStack(Item.pickaxeDiamond));
+        miningslagID=NeededItemIDs().get("mining_slag");
+        miningslag = new MiningSlagItem(miningslagID);
 
     }
 
     public static Hashtable<String, Integer> NeededItemIDs() {
-        return new Hashtable<String, Integer>();
+       Hashtable<String, Integer> ids= new Hashtable<String, Integer>();
+       ids.put("mining_slag", 8003);
+       return ids;
     }
 
     @Override
