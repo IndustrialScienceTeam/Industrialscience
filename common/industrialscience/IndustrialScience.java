@@ -3,7 +3,6 @@ package industrialscience;
 import industrialscience.modules.ISAbstractModule;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.Hashtable;

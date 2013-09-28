@@ -2,7 +2,6 @@ package industrialscience;
 
 import industrialscience.modules.ISAbstractModule;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
