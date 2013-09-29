@@ -11,26 +11,29 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
 @SideOnly(Side.CLIENT)
 public class CopierGUI extends GuiContainer {
 
-	private static final ResourceLocation texture = new ResourceLocation("industrialscience","textures/gui/GUIResearchCopier.png");
+    private static final ResourceLocation texture = new ResourceLocation(
+            "industrialscience", "textures/gui/GUIResearchCopier.png");
 
-	public CopierGUI(CopierTile ct,InventoryPlayer ip) {
-		super(new CopierContainer(ct, ip));
-		xSize=196;
-		ySize=172;
-	}
+    public CopierGUI(CopierTile ct, InventoryPlayer ip) {
+        super(new CopierContainer(ct, ip));
+        xSize = 196;
+        ySize = 172;
+    }
 
-	@Override
-	protected void drawGuiContainerBackgroundLayer(float f, int i, int j) {
-		GL11.glColor4f(1, 1, 1, 1);
-		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
-		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
-	}
-	@Override
-	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-		fontRenderer.drawString("Research Copier", 8, 6, 0x404040);
-	}
+    @Override
+    protected void drawGuiContainerBackgroundLayer(float f, int i, int j) {
+        GL11.glColor4f(1, 1, 1, 1);
+        Minecraft.getMinecraft().renderEngine.bindTexture(texture);
+        drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
+    }
+
+    @Override
+    protected void drawGuiContainerForegroundLayer(int par1, int par2) {
+        fontRenderer.drawString("Research Copier", 8, 6, 0x404040);
+    }
 
 }

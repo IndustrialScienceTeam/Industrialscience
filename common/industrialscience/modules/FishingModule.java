@@ -18,7 +18,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class FishingModule extends ISAbstractModule {
     public FishingModule(int blockid, int i) {
         super(NeededItemIDs(), blockid, "fishingmodule",
-                "IndustrialScience Fishing",i, new FishingPackethandler());
+                "IndustrialScience Fishing", i, new FishingPackethandler());
     }
 
     public static Block fishingblock;
@@ -29,7 +29,7 @@ public class FishingModule extends ISAbstractModule {
     @Override
     public void load() {
         logger.log(Level.INFO, "LOADING");
-        FishingBlockType.register(fishingblock,getPrefix());
+        FishingBlockType.register(fishingblock, getPrefix());
         fishingblock.setCreativeTab(CreativeTab);
         lobsteritem.setCreativeTab(CreativeTab);
         // GameRegistry
@@ -69,23 +69,23 @@ public class FishingModule extends ISAbstractModule {
         return NeededItemIDs;
     }
 
-	@Override
-	public Object getServerGUIElement(int blockMetadata, EntityPlayer player,
-			World world, int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public Object getServerGUIElement(int blockMetadata, EntityPlayer player,
+            World world, int x, int y, int z) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	@Override
-	public Object getClientGUIElement(int blockMetadata, EntityPlayer player,
-			World world, int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public Object getClientGUIElement(int blockMetadata, EntityPlayer player,
+            World world, int x, int y, int z) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	@Override
-	public void registerRenderers() {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void registerRenderers() {
+        // TODO Auto-generated method stub
+
+    }
 }

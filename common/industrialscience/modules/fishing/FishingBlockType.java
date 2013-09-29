@@ -27,7 +27,7 @@ public enum FishingBlockType {
                 public Icon getIcon(int i) {
                     return texture;
                 }
-            }, new ISBlockInterface(){
+            }, new ISBlockInterface() {
 
                 @Override
                 public boolean onBlockActivated(World world, int x, int y,
@@ -41,9 +41,9 @@ public enum FishingBlockType {
                 public void breakBlock(World world, int x, int y, int z,
                         int par5, int par6) {
                     // TODO Auto-generated method stub
-                    
+
                 }
-                
+
             }), SIMPLEFISHTRAP("Simple Fishtrap", "simplefishtrap.png",
             Fishtraptile.class, new TextureGenerator() {
                 Icon texture = null;
@@ -59,17 +59,17 @@ public enum FishingBlockType {
 
                 }
 
-            },
-            new ISBlockInterface(){
+            }, new ISBlockInterface() {
 
                 @Override
                 public boolean onBlockActivated(World world, int x, int y,
                         int z, EntityPlayer player, int par6, float par7,
                         float par8, float par9) {
-                    Fishtraptile traptile = (Fishtraptile)world.getBlockTileEntity(x, y, z);
-                    if(traptile!=null){
-                        if(!traptile.isStructureValid()){
-                            if(traptile.isStructureProperlyFormed()){
+                    Fishtraptile traptile = (Fishtraptile) world
+                            .getBlockTileEntity(x, y, z);
+                    if (traptile != null) {
+                        if (!traptile.isStructureValid()) {
+                            if (traptile.isStructureProperlyFormed()) {
                                 traptile.activate();
                             }
                         }
@@ -80,10 +80,9 @@ public enum FishingBlockType {
                 @Override
                 public void breakBlock(World world, int x, int y, int z,
                         int par5, int par6) {
-                    
-                    
+
                 }
-                
+
             });
     private String friendlyname;
     private String modelfile;
@@ -105,12 +104,13 @@ public enum FishingBlockType {
     public Class<? extends TileEntity> tileentity;
 
     private FishingBlockType(String name, String modelfile,
-            Class<? extends TileEntity> tileentity, TextureGenerator texturegen, ISBlockInterface iSBlockInterface) {
+            Class<? extends TileEntity> tileentity,
+            TextureGenerator texturegen, ISBlockInterface iSBlockInterface) {
         friendlyname = name;
         this.modelfile = modelfile;
         this.tileentity = tileentity;
         this.texturegen = texturegen;
-        this.blockactivator=iSBlockInterface;
+        this.blockactivator = iSBlockInterface;
     }
 
     public static TileEntity getEntity(int metadata) {
@@ -137,8 +137,8 @@ public enum FishingBlockType {
     }
 
     public static void register(Block fishingblock, String prefix) {
-        GameRegistry.registerBlock(fishingblock, ItemFishingBlock.class,
-                prefix + fishingblock.getUnlocalizedName());
+        GameRegistry.registerBlock(fishingblock, ItemFishingBlock.class, prefix
+                + fishingblock.getUnlocalizedName());
         for (FishingBlockType typ : FishingBlockType.values()) {
             GameRegistry.registerTileEntityWithAlternatives(
                     typ.getTileentity(), prefix + typ.name(), typ.name());
@@ -146,15 +146,17 @@ public enum FishingBlockType {
                     new ItemStack(fishingblock, 1, typ.ordinal()),
                     typ.getReadableName());
         }
-        
+
     }
 
-    public boolean activate(World world, int x, int y, int z, EntityPlayer player,
-            int par6, float par7, float par8, float par9) {
-        return blockactivator.onBlockActivated(world, x, y, z, player, par6, par7, par8, par9);
-        
+    public boolean activate(World world, int x, int y, int z,
+            EntityPlayer player, int par6, float par7, float par8, float par9) {
+        return blockactivator.onBlockActivated(world, x, y, z, player, par6,
+                par7, par8, par9);
+
     }
-    public void breakBlock(World world, int x, int y, int z, int par5, int par6){
+
+    public void breakBlock(World world, int x, int y, int z, int par5, int par6) {
         blockactivator.breakBlock(world, x, y, z, par5, par6);
     }
 }

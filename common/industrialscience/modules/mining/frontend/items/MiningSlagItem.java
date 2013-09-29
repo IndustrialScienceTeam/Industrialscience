@@ -9,9 +9,11 @@ public class MiningSlagItem extends Item {
 
     public MiningSlagItem(int par1) {
         super(par1);
-        setUnlocalizedName(IndustrialScience.modules[2].getPrefix()+"Mining_Slag");
+        setUnlocalizedName(IndustrialScience.modules[2].getPrefix()
+                + "Mining_Slag");
         LanguageRegistry.addName(this, "Mining Slag");
     }
+
     @Override
     public void registerIcons(IconRegister iconRegister) {
         itemIcon = iconRegister.registerIcon("apple");

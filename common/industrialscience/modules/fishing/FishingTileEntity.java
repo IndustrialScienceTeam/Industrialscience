@@ -463,7 +463,6 @@ public abstract class FishingTileEntity extends TileEntity implements
         return false;
     }
 
-
     protected void addFish(int fishamout, int neededwater, int range,
             int waterforextrafish, int fishslot) {
         int waterblocks = countWater(range);

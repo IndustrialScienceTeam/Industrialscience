@@ -25,7 +25,9 @@ import cpw.mods.fml.common.network.NetworkRegistry;
  * @author finesim97
  * 
  */
-@NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = { Modinfo.channelbase+"0",Modinfo.channelbase+"1",Modinfo.channelbase+"2" }, packetHandler = Packethandler.class)
+@NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = {
+        Modinfo.channelbase + "0", Modinfo.channelbase + "1",
+        Modinfo.channelbase + "2" }, packetHandler = Packethandler.class)
 @Mod(modid = Modinfo.ModID, name = Modinfo.ReadableModName, version = "1.0")
 public class IndustrialScience {
     /**
@@ -100,7 +102,8 @@ public class IndustrialScience {
     @EventHandler
     public void load(FMLInitializationEvent event) {
         instance = this;
-        NetworkRegistry.instance().registerGuiHandler(instance, new ISGUIHandler(Arrays.asList(modules)));
+        NetworkRegistry.instance().registerGuiHandler(instance,
+                new ISGUIHandler(Arrays.asList(modules)));
         initmodules();
         loadmodules();
         proxy.registerRenderers();
@@ -131,9 +134,9 @@ public class IndustrialScience {
      * Adds every module to the list.
      */
     private void registermodules() {
-       modules[0]=new industrialscience.modules.ResearchModule(756,0);
-       modules[1]=new industrialscience.modules.FishingModule(757,1);
-       modules[2]=new industrialscience.modules.MiningModule(758,2);
+        modules[0] = new industrialscience.modules.ResearchModule(756, 0);
+        modules[1] = new industrialscience.modules.FishingModule(757, 1);
+        modules[2] = new industrialscience.modules.MiningModule(758, 2);
 
     }
 
@@ -153,7 +156,7 @@ public class IndustrialScience {
     private void loadmodules() {
         for (ISAbstractModule a : modules) {
             a.load();
-            }
         }
-
     }
+
+}

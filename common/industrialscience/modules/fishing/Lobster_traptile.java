@@ -46,10 +46,10 @@ public class Lobster_traptile extends FishingTileEntity implements IInventory {
 
     }
 
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    public boolean isItemValidForSlot(int i, ItemStack itemstack) {
+        // TODO Auto-generated method stub
+        return false;
+    }
 
 }

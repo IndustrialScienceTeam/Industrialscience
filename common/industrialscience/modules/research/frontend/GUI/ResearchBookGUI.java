@@ -184,7 +184,7 @@ public class ResearchBookGUI extends GuiScreen {
     @Override
     public void drawScreen(int par1, int par2, float par3) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-    //    mc.renderEngine.bindTexture("/gui/book.png");
+        // mc.renderEngine.bindTexture("/gui/book.png");
         int k = (width - bookImageWidth) / 2;
         byte b0 = 2;
         this.drawTexturedModalRect(k, b0, 0, 0, bookImageWidth, bookImageHeight);

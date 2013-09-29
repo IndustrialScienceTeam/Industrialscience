@@ -76,28 +76,28 @@ public enum ResearchBlockType {
                                     new ResearchObject(new ItemStack(
                                             ResearchModule.researchNote)),
                                     "You think the best way to copy researches is just to read your written results and write them down again. So simple.") },
-                    null, null), new ISBlockInterface(){
+                    null, null), new ISBlockInterface() {
 
-						@Override
-						public boolean onBlockActivated(World world, int x,
-								int y, int z, EntityPlayer player, int par6,
-								float par7, float par8, float par9) {
-								FMLNetworkHandler.instance();
-                                FMLNetworkHandler.openGui(player, IndustrialScience.instance, 0, world, x, y, z);
-							return true;
-						}
+                @Override
+                public boolean onBlockActivated(World world, int x, int y,
+                        int z, EntityPlayer player, int par6, float par7,
+                        float par8, float par9) {
+                    FMLNetworkHandler.instance();
+                    FMLNetworkHandler.openGui(player,
+                            IndustrialScience.instance, 0, world, x, y, z);
+                    return true;
+                }
 
-						@Override
-						public void breakBlock(World world, int x, int y,
-								int z, int par5, int par6) {
-							BlockUtils.dropItems(world, x, y, z);
-							
-						}
-            	
-            }),
- RESEARCHDESK("Research Desk",
-            "researchdesk.png", ResearchDeskRenderer.class,
-            ResearchDeskTile.class, new TextureGenerator() {
+                @Override
+                public void breakBlock(World world, int x, int y, int z,
+                        int par5, int par6) {
+                    BlockUtils.dropItems(world, x, y, z);
+
+                }
+
+            }), RESEARCHDESK("Research Desk", "researchdesk.png",
+            ResearchDeskRenderer.class, ResearchDeskTile.class,
+            new TextureGenerator() {
                 private Icon bottom;
                 private Icon top;
                 private Icon side;
@@ -125,22 +125,23 @@ public enum ResearchBlockType {
 
                 }
 
-            }, null, new ISBlockInterface(){
+            }, null, new ISBlockInterface() {
 
-				@Override
-				public boolean onBlockActivated(World world, int x, int y,
-						int z, EntityPlayer player, int par6, float par7,
-						float par8, float par9) {
-					// TODO Auto-generated method stub
-					return false;
-				}
+                @Override
+                public boolean onBlockActivated(World world, int x, int y,
+                        int z, EntityPlayer player, int par6, float par7,
+                        float par8, float par9) {
+                    // TODO Auto-generated method stub
+                    return false;
+                }
 
-				@Override
-				public void breakBlock(World world, int x, int y, int z,
-						int par5, int par6) {
-					// TODO Auto-generated method stub
-					
-				}});
+                @Override
+                public void breakBlock(World world, int x, int y, int z,
+                        int par5, int par6) {
+                    // TODO Auto-generated method stub
+
+                }
+            });
     private Class<? extends TileEntitySpecialRenderer> model;
     private String friendlyname;
     private String modelfile;
@@ -164,19 +165,20 @@ public enum ResearchBlockType {
 
     public Class<? extends TileEntity> tileentity;
     private Research research;
-	private ISBlockInterface blockinterface;
+    private ISBlockInterface blockinterface;
 
     private ResearchBlockType(String name, String modelfile,
             Class<? extends TileEntitySpecialRenderer> model,
             Class<? extends TileEntity> tileentity,
-            TextureGenerator texturegen, Research research,ISBlockInterface blockinterface) {
+            TextureGenerator texturegen, Research research,
+            ISBlockInterface blockinterface) {
         friendlyname = name;
         this.modelfile = modelfile;
         this.tileentity = tileentity;
         this.research = research;
         this.texturegen = texturegen;
         this.model = model;
-        this.blockinterface=blockinterface;
+        this.blockinterface = blockinterface;
     }
 
     public static TileEntity getEntity(int metadata) {
@@ -216,13 +218,17 @@ public enum ResearchBlockType {
                     new ItemStack(researchBlock, 1, typ.ordinal()),
                     typ.getReadableName());
         }
-        
+
     }
-    public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
-    {
-    	return blockinterface.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer, par6, par7, par8, par9);
+
+    public boolean onBlockActivated(World par1World, int par2, int par3,
+            int par4, EntityPlayer par5EntityPlayer, int par6, float par7,
+            float par8, float par9) {
+        return blockinterface.onBlockActivated(par1World, par2, par3, par4,
+                par5EntityPlayer, par6, par7, par8, par9);
     }
+
     public void breakBlock(World world, int x, int y, int z, int i, int j) {
-    	blockinterface.breakBlock(world, x, y,z, i, j);
+        blockinterface.breakBlock(world, x, y, z, i, j);
     }
 }

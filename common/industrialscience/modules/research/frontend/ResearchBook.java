@@ -45,8 +45,11 @@ public class ResearchBook extends Item {
     @Override
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,
             EntityPlayer par3EntityPlayer) {
-            FMLNetworkHandler.openGui(par3EntityPlayer, IndustrialScience.instance, IndustrialScience.modules[0].formGUIID(1), par2World, par3EntityPlayer.chunkCoordX, par3EntityPlayer.chunkCoordY,par3EntityPlayer.chunkCoordZ); 
-    		return super.onItemRightClick(par1ItemStack, par2World,
+        FMLNetworkHandler.openGui(par3EntityPlayer, IndustrialScience.instance,
+                IndustrialScience.modules[0].formGUIID(1), par2World,
+                par3EntityPlayer.chunkCoordX, par3EntityPlayer.chunkCoordY,
+                par3EntityPlayer.chunkCoordZ);
+        return super.onItemRightClick(par1ItemStack, par2World,
                 par3EntityPlayer);
     }
 

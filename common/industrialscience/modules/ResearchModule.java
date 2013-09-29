@@ -27,7 +27,8 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class ResearchModule extends ISAbstractModule {
     public ResearchModule(int blockID, int bitprefix) {
         super(NeededItemIDs(), blockID, "research",
-                "IndustrialScience Research",bitprefix,new ResearchPacketHandler());
+                "IndustrialScience Research", bitprefix,
+                new ResearchPacketHandler());
     }
 
     public static Block researchBlock;
@@ -41,12 +42,12 @@ public class ResearchModule extends ISAbstractModule {
     @Override
     public void load() {
         logger.log(Level.INFO, "LOADING");
-        ResearchBlockType.register(researchBlock,getPrefix());
-        
+        ResearchBlockType.register(researchBlock, getPrefix());
+
         researchBlock.setCreativeTab(CreativeTab);
         researchbook.setCreativeTab(CreativeTab);
         researchNote.setCreativeTab(CreativeTab);
-        
+
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(researchBlock,
                 1, 1), new Object[] { "WWW", "S S", "S S",
                 Character.valueOf('W'), "slabWood", Character.valueOf('S'),
@@ -59,9 +60,9 @@ public class ResearchModule extends ISAbstractModule {
     public void init() {
         logger.log(Level.INFO, "INIT");
         researchbookID = getItemIDs().get("researchbook");
-        researchbook = new ResearchBook(researchbookID-256);
+        researchbook = new ResearchBook(researchbookID - 256);
         researchNoteID = getItemIDs().get("researchnote");
-        researchNote = new ResearchNote(researchNoteID-256);
+        researchNote = new ResearchNote(researchNoteID - 256);
         researchBlock = new ResearchBlock(getBlockID());
         initCreativeTab(new ItemStack(researchBlock, 1,
                 ResearchBlockType.RESEARCHDESK.ordinal()));
@@ -80,61 +81,71 @@ public class ResearchModule extends ISAbstractModule {
         return neededItemIDs;
     }
 
-	@Override
-	public Object getServerGUIElement(int id, EntityPlayer player,
-			World world, int x, int y, int z) {
-		if(id==0){
-		if(ResearchBlockType.RESEARCHDESK.ordinal()==world.getBlockMetadata(x, y, z))
-			return null;
-		if(ResearchBlockType.COPIER.ordinal()==world.getBlockMetadata(x, y, z))
-			return new CopierContainer((CopierTile)world.getBlockTileEntity(x, y, z), player.inventory);
-		return null;
-		}
-		else {
-			switch (id) {
-			case 1:
-				return new ResearchBookContainer(player.inventory, new int[4]);
+    @Override
+    public Object getServerGUIElement(int id, EntityPlayer player, World world,
+            int x, int y, int z) {
+        if (id == 0) {
+            if (ResearchBlockType.RESEARCHDESK.ordinal() == world
+                    .getBlockMetadata(x, y, z))
+                return null;
+            if (ResearchBlockType.COPIER.ordinal() == world.getBlockMetadata(x,
+                    y, z))
+                return new CopierContainer(
+                        (CopierTile) world.getBlockTileEntity(x, y, z),
+                        player.inventory);
+            return null;
+        } else {
+            switch (id) {
+                case 1:
+                    return new ResearchBookContainer(player.inventory,
+                            new int[4]);
 
-			default:
-				return null;
-			}
-		}
-	}
+                default:
+                    return null;
+            }
+        }
+    }
 
-	@Override
-	public Object getClientGUIElement(int id, EntityPlayer player,
-			World world, int x, int y, int z) {;
-			if(id==0){
-				if(ResearchBlockType.RESEARCHDESK.ordinal()==world.getBlockMetadata(x, y, z))
-					return null;
-				if(ResearchBlockType.COPIER.ordinal()==world.getBlockMetadata(x, y, z))
-					return new CopierGUI((CopierTile)world.getBlockTileEntity(x, y, z), player.inventory);
-				return null;
-				}
-				else {
-					switch (id) {
-					case 1:
-						return new ResearchBookGUI(player, player.getCurrentEquippedItem());
+    @Override
+    public Object getClientGUIElement(int id, EntityPlayer player, World world,
+            int x, int y, int z) {
+        ;
+        if (id == 0) {
+            if (ResearchBlockType.RESEARCHDESK.ordinal() == world
+                    .getBlockMetadata(x, y, z))
+                return null;
+            if (ResearchBlockType.COPIER.ordinal() == world.getBlockMetadata(x,
+                    y, z))
+                return new CopierGUI((CopierTile) world.getBlockTileEntity(x,
+                        y, z), player.inventory);
+            return null;
+        } else {
+            switch (id) {
+                case 1:
+                    return new ResearchBookGUI(player,
+                            player.getCurrentEquippedItem());
 
-					default:
-						return null;
-					}
-				}		
-	}
+                default:
+                    return null;
+            }
+        }
+    }
 
-	@Override
-	public void registerRenderers() {
-		try {
-			
-			for (ResearchBlockType element : ResearchBlockType.values()) {
-				ClientRegistry.bindTileEntitySpecialRenderer(element.tileentity, element.getRenderer().newInstance());
-			}
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+    @Override
+    public void registerRenderers() {
+        try {
+
+            for (ResearchBlockType element : ResearchBlockType.values()) {
+                ClientRegistry
+                        .bindTileEntitySpecialRenderer(element.tileentity,
+                                element.getRenderer().newInstance());
+            }
+        } catch (InstantiationException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 }

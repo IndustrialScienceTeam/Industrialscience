@@ -11,7 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 public class CopierTile extends TileEntity implements IInventory {
     public final static int PAGEINPUT = 0;
     public final static int PAGEOUTPUT = 1;
-    public final static int UPGRADESLOT=2;
+    public final static int UPGRADESLOT = 2;
     private ItemStack[] Inventory;
 
     public CopierTile() {
@@ -98,6 +98,7 @@ public class CopierTile extends TileEntity implements IInventory {
     public boolean isInvNameLocalized() {
         return false;
     }
+
     @Override
     public void readFromNBT(NBTTagCompound tagCompound) {
         super.readFromNBT(tagCompound);
@@ -136,15 +137,14 @@ public class CopierTile extends TileEntity implements IInventory {
         tagCompound.setTag("Inventory", itemList);
     }
 
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		if((i==PAGEINPUT)&&itemstack.itemID==ResearchModule.researchNoteID)
-			return true;
-		if(itemstack.itemID==ResearchModule.researchbookID)
-			return true;
-		return false;
-	}
-
-
+    @Override
+    public boolean isItemValidForSlot(int i, ItemStack itemstack) {
+        if ((i == PAGEINPUT)
+                && itemstack.itemID == ResearchModule.researchNoteID)
+            return true;
+        if (itemstack.itemID == ResearchModule.researchbookID)
+            return true;
+        return false;
+    }
 
 }

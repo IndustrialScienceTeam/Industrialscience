@@ -24,11 +24,12 @@ public abstract class ISAbstractModule {
     private String prefix;
     private String name;
     private ItemStack IconItemStack;
-	private int bitprefix;
-	private IPacketHandler packethandler;
+    private int bitprefix;
+    private IPacketHandler packethandler;
 
-	protected ISAbstractModule(Hashtable<String, Integer> itemIDs, int blockID,
-            String prefix, String name, int bitprefix, IPacketHandler packethandler) {
+    protected ISAbstractModule(Hashtable<String, Integer> itemIDs, int blockID,
+            String prefix, String name, int bitprefix,
+            IPacketHandler packethandler) {
         super();
         ItemIDs = itemIDs;
         BlockID = blockID;
@@ -37,7 +38,7 @@ public abstract class ISAbstractModule {
         logger = Logger.getLogger(this.prefix);
         logger.setParent(FMLLog.getLogger());
         this.bitprefix = bitprefix;
-        this.packethandler=packethandler;
+        this.packethandler = packethandler;
     }
 
     public abstract void load();
@@ -95,20 +96,27 @@ public abstract class ISAbstractModule {
     public String getName() {
         return name;
     }
-    public int getBitprefix() {
-		return bitprefix;
-	}
-    public int formGUIID(int GUIID){
-    	return (GUIID << 3)|bitprefix;
-    }
-	public abstract Object getServerGUIElement(int blockMetadata, EntityPlayer player, World world, int x, int y, int z);
-	public abstract Object getClientGUIElement(int blockMetadata, EntityPlayer player, World world, int x, int y, int z);
 
-	public void onPacketData(INetworkManager manager,
-			Packet250CustomPayload packet, Player player) {
-		packethandler.onPacketData(manager, packet, player);
-		
-	}
-	@SideOnly(Side.CLIENT)
-	public abstract void registerRenderers();
+    public int getBitprefix() {
+        return bitprefix;
+    }
+
+    public int formGUIID(int GUIID) {
+        return (GUIID << 3) | bitprefix;
+    }
+
+    public abstract Object getServerGUIElement(int blockMetadata,
+            EntityPlayer player, World world, int x, int y, int z);
+
+    public abstract Object getClientGUIElement(int blockMetadata,
+            EntityPlayer player, World world, int x, int y, int z);
+
+    public void onPacketData(INetworkManager manager,
+            Packet250CustomPayload packet, Player player) {
+        packethandler.onPacketData(manager, packet, player);
+
+    }
+
+    @SideOnly(Side.CLIENT)
+    public abstract void registerRenderers();
 }

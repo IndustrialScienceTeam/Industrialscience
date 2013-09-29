@@ -58,27 +58,33 @@ public class ResearchBlock extends BlockContainer {
         }
 
     }
+
     @Override
     public void breakBlock(World world, int x, int y, int z, int i, int j) {
-    	if(!world.isRemote){
-     	   ResearchBlockType.values()[world.getBlockMetadata(x, y, z)].breakBlock(world, x, y, z, i, j);
+        if (!world.isRemote) {
+            ResearchBlockType.values()[world.getBlockMetadata(x, y, z)]
+                    .breakBlock(world, x, y, z, i, j);
         }
     }
+
     @Override
-    public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
-    {
-       if(!par1World.isRemote){
-    	   return ResearchBlockType.values()[par1World.getBlockMetadata(par2, par3, par4)].onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer, par6, par7, par8, par9);
-       }
-       return true;
+    public boolean onBlockActivated(World par1World, int par2, int par3,
+            int par4, EntityPlayer par5EntityPlayer, int par6, float par7,
+            float par8, float par9) {
+        if (!par1World.isRemote) {
+            return ResearchBlockType.values()[par1World.getBlockMetadata(par2,
+                    par3, par4)].onBlockActivated(par1World, par2, par3, par4,
+                    par5EntityPlayer, par6, par7, par8, par9);
+        }
+        return true;
     }
-    public int getRenderType(){
-    	  return -1;
-    	        }
-    public boolean renderAsNormalBlock()
-    {
-            return false;
+
+    public int getRenderType() {
+        return -1;
     }
-    
+
+    public boolean renderAsNormalBlock() {
+        return false;
+    }
 
 }
