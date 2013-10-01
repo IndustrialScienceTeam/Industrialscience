@@ -13,7 +13,8 @@ import tconstruct.library.ActiveToolMod;
 import tconstruct.library.TConstructRegistry;
 import tconstruct.library.crafting.ToolBuilder;
 
-
+import mods.battlegear2.api.weapons.IBattlegearWeapon;
+import mods.battlegear2.api.weapons.OffhandAttackEvent;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -27,6 +28,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -56,7 +58,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  * @see ToolMod
  */
 
-public abstract class ToolCore extends Item implements ICustomElectricItem, IBoxable
+public abstract class ToolCore extends Item implements ICustomElectricItem, IBoxable, IBattlegearWeapon
 {
     protected Random random = new Random();
     protected int damageVsEntity;
@@ -137,6 +139,12 @@ public abstract class ToolCore extends Item implements ICustomElectricItem, IBox
     public int getRenderPasses (int metadata)
     {
         return 9;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public boolean hasEffect (ItemStack par1ItemStack)
+    {
+        return false;
     }
 
     //Override me please!
@@ -610,7 +618,7 @@ public abstract class ToolCore extends Item implements ICustomElectricItem, IBox
     public boolean onLeftClickEntity (ItemStack stack, EntityPlayer player, Entity entity)
     {
         AbilityHelper.onLeftClickEntity(stack, player, entity, this, 0);
-        return true;
+        return false;
     }
 
     @Override
@@ -820,7 +828,7 @@ public abstract class ToolCore extends Item implements ICustomElectricItem, IBox
     public int discharge (ItemStack stack, int amount, int tier, boolean ignoreTransferLimit, boolean simulate)
     {
         NBTTagCompound tags = stack.getTagCompound();
-        if (!tags.hasKey("charge"))
+        if (tags == null || !tags.hasKey("charge"))
             return 0;
 
         if (amount > 0)
@@ -890,9 +898,9 @@ public abstract class ToolCore extends Item implements ICustomElectricItem, IBox
     {
         return true;
     }
-    
+
     @SideOnly(Side.CLIENT)
-    public boolean hasEffect(ItemStack par1ItemStack, int pass)
+    public boolean hasEffect (ItemStack par1ItemStack, int pass)
     {
         return false;
     }
@@ -932,4 +940,47 @@ public abstract class ToolCore extends Item implements ICustomElectricItem, IBox
         return tags.getCompoundTag("InfiTool").getInteger("Damage");
     }
 
+
+	@Override
+	public boolean willAllowOffhandWeapon() {
+		return true;
+	}
+
+	@Override
+	public boolean willAllowShield() {
+		return true;
+	}
+
+	@Override
+	public boolean isOffhandHandDualWeapon() {
+		return true;
+	}
+
+	@Override
+	public boolean sheatheOnBack() {
+		return false;
+	}
+
+	@Override
+	public boolean offhandAttackEntity(OffhandAttackEvent event,
+			ItemStack mainhandItem, ItemStack offhandItem) {
+		return true;
+	}
+
+	@Override
+	public boolean offhandClickAir(PlayerInteractEvent event,
+			ItemStack mainhandItem, ItemStack offhandItem) {
+		return true;
+	}
+
+	@Override
+	public boolean offhandClickBlock(PlayerInteractEvent event,
+			ItemStack mainhandItem, ItemStack offhandItem) {
+		return true;
+	}
+
+	@Override
+	public void performPassiveEffects(Side effectiveSide,
+			ItemStack mainhandItem, ItemStack offhandItem) {		
+	}
 }

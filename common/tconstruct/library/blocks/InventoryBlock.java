@@ -5,7 +5,6 @@ import java.util.Random;
 import tconstruct.library.util.IActiveLogic;
 import tconstruct.library.util.IFacingLogic;
 
-
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -15,7 +14,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.Icon;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -112,14 +113,13 @@ public abstract class InventoryBlock extends BlockContainer
 
     /* Placement */
 
+    int side = -1;
+
+    //This class does not have an actual block placed in the world
+    @Override
     public int onBlockPlaced (World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int meta)
     {
-        TileEntity logic = world.getBlockTileEntity(x, y, z);
-        if (logic instanceof IFacingLogic)
-        {
-            IFacingLogic direction = (IFacingLogic) logic;
-            direction.setDirection(side);
-        }
+        this.side = side;
         return meta;
     }
 
@@ -130,6 +130,11 @@ public abstract class InventoryBlock extends BlockContainer
         if (logic instanceof IFacingLogic)
         {
             IFacingLogic direction = (IFacingLogic) logic;
+            if (side != -1)
+            {
+                direction.setDirection(side);
+                side = -1;
+            }
             if (entityliving == null)
             {
                 direction.setDirection(0F, 0F, null);
@@ -138,6 +143,11 @@ public abstract class InventoryBlock extends BlockContainer
             {
                 direction.setDirection(entityliving.rotationYaw * 4F, entityliving.rotationPitch, entityliving);
             }
+        }
+
+        if (stack.hasDisplayName())
+        {
+            ((InventoryLogic) world.getBlockTileEntity(x, y, z)).setInvName(stack.getDisplayName());
         }
     }
 

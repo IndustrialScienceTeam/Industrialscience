@@ -7,11 +7,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import tconstruct.library.ActiveToolMod;
-import tconstruct.library.TConstructRegistry;
-import tconstruct.library.util.PiercingEntityDamage;
-
-
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentThorns;
@@ -20,6 +15,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityGhast;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -39,10 +35,14 @@ import net.minecraftforge.common.FakePlayer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.Event.Result;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
+import tconstruct.library.ActiveToolMod;
+import tconstruct.library.TConstructRegistry;
+import tconstruct.library.util.PiercingEntityDamage;
 
 public class AbilityHelper
 {
     public static Random random = new Random();
+    public static boolean necroticUHS;
 
     /* Normal interactions */
     public static boolean onBlockChanged (ItemStack stack, World world, int bID, int x, int y, int z, EntityLivingBase player, Random random)
@@ -73,7 +73,7 @@ public class AbilityHelper
     {
         if (entity.canAttackWithItem() && stack.hasTagCompound())
         {
-            if (!entity.func_85031_j(player)) // can't attack this entity
+            if (!entity.hitByEntity(player)) // can't attack this entity
             {
                 NBTTagCompound tags = stack.getTagCompound();
                 NBTTagCompound toolTags = stack.getTagCompound().getCompoundTag("InfiTool");
@@ -206,9 +206,12 @@ public class AbilityHelper
                         }
                         //damageTool(stack, 1, player, false);
                         tool.onEntityDamaged(player.worldObj, player, entity);
-                        int drain = toolTags.getInteger("Necrotic") * 2;
-                        if (drain > 0)
-                            player.heal(random.nextInt(drain + 1));
+                        if (!necroticUHS || (entity instanceof IMob && entity instanceof EntityLivingBase && ((EntityLivingBase) entity).getHealth() <= 0))
+                        {
+                            int drain = toolTags.getInteger("Necrotic") * 2;
+                            if (drain > 0)
+                                player.heal(random.nextInt(drain + 1));
+                        }
 
                         if (knockback > 0)
                         {
@@ -236,8 +239,8 @@ public class AbilityHelper
                                 ((EntityPlayer) player).triggerAchievement(AchievementList.overkill);
                             }
                         }
-                        
-                        player.func_130011_c(entity);
+
+                        player.setLastAttacker(entity);
 
                         if (entity instanceof EntityLivingBase)
                         {
@@ -305,7 +308,7 @@ public class AbilityHelper
                 }
             }
 
-            if (!(living instanceof EntityPlayer) || player.func_96122_a((EntityPlayer) living))
+            if (!(living instanceof EntityPlayer) || player.canAttackPlayer((EntityPlayer) living))
             {
                 List var6 = player.worldObj.getEntitiesWithinAABB(EntityWolf.class,
                         AxisAlignedBB.getAABBPool().getAABB(player.posX, player.posY, player.posZ, player.posX + 1.0D, player.posY + 1.0D, player.posZ + 1.0D).expand(16.0D, 4.0D, 16.0D));
@@ -362,6 +365,7 @@ public class AbilityHelper
             {
                 tags.getCompoundTag("InfiTool").setInteger("Damage", 0);
                 stack.setItemDamage(0);
+                tags.getCompoundTag("InfiTool").setBoolean("Broken", false);
             }
 
             else if (damageTrue > maxDamage)
@@ -396,19 +400,19 @@ public class AbilityHelper
 
         float mineSpeed = toolTag.getInteger("MiningSpeed");
         int heads = 1;
-        if (tags.hasKey("MiningSpeed2"))
+        if (toolTag.hasKey("MiningSpeed2"))
         {
             mineSpeed += toolTag.getInteger("MiningSpeed2");
             heads++;
         }
 
-        if (tags.hasKey("MiningSpeedHandle"))
+        if (toolTag.hasKey("MiningSpeedHandle"))
         {
             mineSpeed += toolTag.getInteger("MiningSpeedHandle");
             heads++;
         }
 
-        if (tags.hasKey("MiningSpeedExtra"))
+        if (toolTag.hasKey("MiningSpeedExtra"))
         {
             mineSpeed += toolTag.getInteger("MiningSpeedExtra");
             heads++;
@@ -417,9 +421,7 @@ public class AbilityHelper
         float stonebound = toolTag.getFloat("Shoddy");
         float bonusLog = (float) Math.log(durability / 72f + 1) * 2 * stonebound;
         trueSpeed += bonusLog;
-
-        /*mineSpeed += shoddy * durability / 100f;
-        mineSpeed /= 15;*/
+        trueSpeed *= 6;
 
         if (charge < trueSpeed)
         {
@@ -427,10 +429,8 @@ public class AbilityHelper
                 tags.setInteger("charge", 0);
             return false;
         }
-        /*if (entity instanceof EntityPlayer && ElectricItem.use(stack, mineSpeed, (EntityPlayer) entity))
-        	return true;*/
 
-        charge -= mineSpeed;
+        charge -= trueSpeed;
         ToolCore tool = (ToolCore) stack.getItem();
         stack.setItemDamage(1 + (tool.getMaxCharge(stack) - charge) * (stack.getMaxDamage() - 1) / tool.getMaxCharge(stack));
         tags.setInteger("charge", charge);
