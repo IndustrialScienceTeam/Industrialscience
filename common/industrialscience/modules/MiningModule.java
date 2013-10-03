@@ -7,6 +7,8 @@ import industrialscience.modules.mining.frontend.items.MiningSlagItem;
 import java.util.Hashtable;
 import java.util.logging.Level;
 
+import com.google.common.collect.Iterators;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
@@ -16,8 +18,7 @@ import net.minecraft.world.World;
 public class MiningModule extends ISAbstractModule {
     public static Item miningslag;
     public static int miningslagID;
-    public static Item ironminerpickaxe;
-    public static int ironminerpickaxeID;
+    public static Hashtable<String, Item> minerpickaxes= new Hashtable<String, Item>();
 
     public MiningModule(int blockID, int i) {
         super(NeededItemIDs(), blockID, "mining", "IndustrialScience Mining",
@@ -28,28 +29,30 @@ public class MiningModule extends ISAbstractModule {
     public void load() {
         logger.log(Level.INFO, "LOADING");
         miningslag.setCreativeTab(CreativeTab);
-        ironminerpickaxe.setCreativeTab(CreativeTab)
-                .setTextureName("ironpickaxe").setTextureName("iron_pickaxe");
-        ;
+        for (EnumToolMaterial mat : EnumToolMaterial.values()) {
+            minerpickaxes.get(mat.name()).setCreativeTab(CreativeTab).setTextureName(mat.toString().toLowerCase()+"_pickaxe");
+        }
 
     }
-
     @Override
     public void init() {
         logger.log(Level.INFO, "INIT");
         initCreativeTab(new ItemStack(Item.pickaxeDiamond));
         miningslagID = NeededItemIDs().get("mining_slag");
         miningslag = new MiningSlagItem(miningslagID);
-        ironminerpickaxeID = NeededItemIDs().get("iron_minerpickaxe");
-        ironminerpickaxe = new ItemMinerPickaxe(ironminerpickaxeID,
-                EnumToolMaterial.IRON);
+        for (EnumToolMaterial mat : EnumToolMaterial.values()) {
+            minerpickaxes.put(mat.name(), new ItemMinerPickaxe(NeededItemIDs().get("minerpickaxe_"+mat.name()), mat));
+        }
 
     }
 
     public static Hashtable<String, Integer> NeededItemIDs() {
         Hashtable<String, Integer> ids = new Hashtable<String, Integer>();
         ids.put("mining_slag", 8003);
-        ids.put("iron_minerpickaxe", 8004);
+        for (int i = 0; i < EnumToolMaterial.values().length; i++) {
+            EnumToolMaterial mat = EnumToolMaterial.values()[i];
+            ids.put("minerpickaxe_"+mat.name(),8004+i);
+        }
         return ids;
     }
 
