@@ -22,6 +22,7 @@ public class MiningModule extends ISAbstractModule {
     public static Item MinerPickaxeStone;
     public static Item MinerPickaxeIron;
     public static Item MinerPickaxeDiamond;
+    public static Item MinerPickaxeICBronze;
 
     public MiningModule(int blockID, int i) {
         super(NeededItemIDs(), blockID, "mining", "IndustrialScience Mining",
@@ -41,6 +42,10 @@ public class MiningModule extends ISAbstractModule {
         LanguageRegistry.addName(MinerPickaxeIron, "Iron Miner Pickaxe");
         MinerPickaxeDiamond.setCreativeTab(CreativeTab).setTextureName("diamond_pickaxe");
         LanguageRegistry.addName(MinerPickaxeDiamond, "Diamond Miner Pickaxe");
+        if(isIC2installed()){
+            MinerPickaxeICBronze.setCreativeTab(CreativeTab);
+            LanguageRegistry.addName(MinerPickaxeICBronze, "Bronze Miner Pickaxe");
+        }
         
 
     }
@@ -54,6 +59,9 @@ public class MiningModule extends ISAbstractModule {
         MinerPickaxeStone=new ItemMinerPickaxe(getItemIDs().get("MinerPickaxeStone"), EnumToolMaterial.STONE);
         MinerPickaxeIron=new ItemMinerPickaxe(getItemIDs().get("MinerPickaxeIron"), EnumToolMaterial.IRON);
         MinerPickaxeDiamond=new ItemMinerPickaxe(getItemIDs().get("MinerPickaxeDiamond"), EnumToolMaterial.EMERALD);
+        if(isIC2installed()){
+            MinerPickaxeICBronze=new ItemMinerPickaxe(getItemIDs().get("MinerPickaxeICBronze"), EnumToolMaterial.valueOf("IC2_BRONZE"));
+        }
     }
 
     public static Hashtable<String, Integer> NeededItemIDs () {
