@@ -48,15 +48,15 @@ public class MiningModule extends ISAbstractModule {
     public void init() {
         logger.log(Level.INFO, "INIT");
         initCreativeTab(new ItemStack(Item.pickaxeDiamond));
-        miningslagID = NeededItemIDs().get("mining_slag");
+        miningslagID =getItemIDs().get("mining_slag");
         miningslag = new MiningSlagItem(miningslagID);
-        MinerPickaxeWood=new ItemMinerPickaxe(NeededItemIDs().get("MinerPickaxeWood"), EnumToolMaterial.WOOD);
-        MinerPickaxeStone=new ItemMinerPickaxe(NeededItemIDs().get("MinerPickaxeStone"), EnumToolMaterial.STONE);
-        MinerPickaxeIron=new ItemMinerPickaxe(NeededItemIDs().get("MinerPickaxeIron"), EnumToolMaterial.IRON);
-        MinerPickaxeDiamond=new ItemMinerPickaxe(NeededItemIDs().get("MinerPickaxeDiamond"), EnumToolMaterial.EMERALD);
+        MinerPickaxeWood=new ItemMinerPickaxe(getItemIDs().get("MinerPickaxeWood"), EnumToolMaterial.WOOD);
+        MinerPickaxeStone=new ItemMinerPickaxe(getItemIDs().get("MinerPickaxeStone"), EnumToolMaterial.STONE);
+        MinerPickaxeIron=new ItemMinerPickaxe(getItemIDs().get("MinerPickaxeIron"), EnumToolMaterial.IRON);
+        MinerPickaxeDiamond=new ItemMinerPickaxe(getItemIDs().get("MinerPickaxeDiamond"), EnumToolMaterial.EMERALD);
     }
 
-    public static Hashtable<String, Integer> NeededItemIDs() {
+    public static Hashtable<String, Integer> NeededItemIDs () {
         Hashtable<String, Integer> ids = new Hashtable<String, Integer>();
         ids.put("mining_slag", 8003);
         ids.put("MinerPickaxeWood",8004);

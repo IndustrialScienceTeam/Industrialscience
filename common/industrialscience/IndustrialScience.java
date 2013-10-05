@@ -84,7 +84,7 @@ public class IndustrialScience {
                 ItemIDs.put(
                         itemname,
                         configuration.getItem(itemname,
-                                neededItemIDs.get(itemname)).getInt());
+                                neededItemIDs.get(itemname)).getInt()-256);
             }
             a.setItemIDs(ItemIDs);
             a.setBlockID(suggestedBlockID);
