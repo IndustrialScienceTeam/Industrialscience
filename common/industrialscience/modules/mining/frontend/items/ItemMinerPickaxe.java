@@ -1,8 +1,5 @@
 package industrialscience.modules.mining.frontend.items;
 
-import org.apache.commons.lang3.text.WordUtils;
-
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import industrialscience.IndustrialScience;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
@@ -17,11 +14,6 @@ public class ItemMinerPickaxe extends ItemPickaxe {
         super(par1, par2EnumToolMaterial);
         this.setUnlocalizedName(IndustrialScience.modules[2].getPrefix()
                 + ".MinerPickaxe." + this.toolMaterial.toString());
-        LanguageRegistry.addName(
-                this,
-                WordUtils
-                        .capitalize(this.toolMaterial.toString().toLowerCase())
-                        + " Miner Pickaxe");
     }
 
     @Override
