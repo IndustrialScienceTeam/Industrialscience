@@ -42,11 +42,7 @@ public class ItemMinerPickaxe extends ItemPickaxe implements IStorageCell {
 
     @Override
     public int getBytes(ItemStack cellItem) {
-        if(cellItem.getItem() instanceof ItemMinerPickaxe){
-        EnumToolMaterial material=((ItemMinerPickaxe) cellItem.getItem()).getToolMaterial();
-        return basebytes*(material.getHarvestLevel()+1);
-        }
-        return 0;
+        return getStorageBytes(cellItem);
     }
     
 
@@ -56,21 +52,14 @@ public class ItemMinerPickaxe extends ItemPickaxe implements IStorageCell {
         Boolean hasName = !Util.getCellRegistry().getHandlerForCell(par1ItemStack).getName().isEmpty();
         String partName = Util.getCellRegistry().getHandlerForCell(par1ItemStack).getName();
         if(hasName){
-            return StatCollector.translateToLocal(this.getUnlocalizedName()) + " - " + partName;
-        }
-        else {
-            return StatCollector.translateToLocal(this.getUnlocalizedName());
+            return super.getItemDisplayName(par1ItemStack) + " - " + partName;
         }
         }
             return super.getItemDisplayName(par1ItemStack);
     }
     @Override
     public int BytePerType(ItemStack iscellItem) {
-        if(iscellItem.getItem() instanceof ItemMinerPickaxe){
-            EnumToolMaterial material=((ItemMinerPickaxe) iscellItem.getItem()).getToolMaterial();
-            return (basebytes*(material.getHarvestLevel()+1))/128;
-            }
-            return 0;
+            return getStorageBytes(iscellItem)/128;
     }
 
     @Override
@@ -87,5 +76,23 @@ public class ItemMinerPickaxe extends ItemPickaxe implements IStorageCell {
     @Override
     public boolean storableInStorageCell() {
         return true;
+    }
+    protected int getStorageBytes(ItemStack item){
+        if(item.getItem() instanceof ItemMinerPickaxe){
+            EnumToolMaterial material=((ItemMinerPickaxe) item.getItem()).getToolMaterial();
+            switch (material.getHarvestLevel()) {
+                case 0:
+                    return 1024;
+                case 1:
+                    return 4096;
+                case 2:
+                    return 16384;
+                case 3:
+                    return 65536;
+                default:
+                    break;
+            }
+        }
+        return 0;
     }
 }
