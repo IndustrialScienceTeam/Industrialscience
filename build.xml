@@ -93,7 +93,7 @@
 				<length string="${git.revision}" trim="yes" length="0" when="greater"/>
 			</and>
 		</condition>
-		<echo>Building buildcraft version ${project.complete.version} (${project.version})</echo>
+		<echo>Building industrialscience version ${project.complete.version} (${project.version})</echo>
 	</target>
 
 	<!-- Download necessary files -->
@@ -197,7 +197,11 @@
 		</copy>
 
 		<!-- Reset src dir to post-forge-install state -->
-		<delete dir="${mcpsrc.dir}/minecraft/buildcraft"/>
+		<delete dir="${mcpsrc.dir}/minecraft/industrialscience"/>
+		<delete dir="${mcpsrc.dir}/minecraft/mods"/>
+		<delete dir="${mcpsrc.dir}/minecraft/appeng"/>
+		<delete dir="${mcpsrc.dir}/minecraft/tconstruct"/>
+		<delete dir="${mcpsrc.dir}/minecraft/ic2"/>
 
 	</target>
 
@@ -208,7 +212,7 @@
 		<delete includeemptydirs="true">
 			<fileset dir="${jar.dir}" includes="**/*"/>
 		</delete>
-		<condition property="jar.file.name" value="${jar.dir}/${buildcraft.name}-${mc.version}-${project.version.full}.jar" else="${jar.dir}/${buildcraft.name}-universal-${mc.version}-${project.version.full}.jar">
+		<condition property="jar.file.name" value="${jar.dir}/${industrialscience.name}-${mc.version}-${project.version.full}.jar" else="${jar.dir}/${industrialscience.name}-universal-${mc.version}-${project.version.full}.jar">
 			<isset property="forge-long-name"/>
 		</condition>
 		
