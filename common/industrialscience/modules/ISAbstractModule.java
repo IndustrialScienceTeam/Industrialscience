@@ -26,7 +26,7 @@ public abstract class ISAbstractModule {
     private ItemStack IconItemStack;
     private int bitprefix;
     private IPacketHandler packethandler;
-    private boolean ic2installed=true;
+    private static boolean ic2installed=true;
 
     protected ISAbstractModule(Hashtable<String, Integer> itemIDs, int blockID,
             String prefix, String name, int bitprefix,
@@ -117,7 +117,7 @@ public abstract class ISAbstractModule {
         packethandler.onPacketData(manager, packet, player);
 
     }
-    public boolean isIC2installed(){
+    public static boolean isIC2installed(){
         if(ic2installed)
             ic2installed=!(ic2.api.item.Items.getItem("copperOre")==null);
         return ic2installed;
