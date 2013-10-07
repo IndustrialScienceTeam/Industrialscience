@@ -34,6 +34,7 @@ public class ItemMinerPickaxe extends ItemPickaxe implements IStorageCell {
     @Override
     public boolean onBlockStartBreak(ItemStack itemstack, int x, int y, int z, EntityPlayer player)
     {
+        if(ISAbstractModule.isAEinstalled()){
         World world = player.worldObj;
         int blockID = player.worldObj.getBlockId(x, y, z);
         int meta = world.getBlockMetadata(x, y, z);
@@ -58,7 +59,8 @@ public class ItemMinerPickaxe extends ItemPickaxe implements IStorageCell {
                 
             return true;
             }
-            return false;
+            }
+        return false;
     }
 
     @Override
