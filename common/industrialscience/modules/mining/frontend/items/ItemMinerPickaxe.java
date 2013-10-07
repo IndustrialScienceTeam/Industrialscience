@@ -1,20 +1,27 @@
 package industrialscience.modules.mining.frontend.items;
-
 import appeng.api.IAEItemStack;
 import appeng.api.Util;
 import appeng.api.me.items.IStorageCell;
 import industrialscience.IndustrialScience;
 import industrialscience.modules.ISAbstractModule;
 import net.minecraft.block.Block;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.packet.Packet53BlockChange;
+import net.minecraft.src.ModLoader;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
 public class ItemMinerPickaxe extends ItemPickaxe implements IStorageCell {
-    private final static int basebytes=0;
     public ItemMinerPickaxe(int par1, EnumToolMaterial par2EnumToolMaterial) {
         super(par1, par2EnumToolMaterial);
         this.setUnlocalizedName(IndustrialScience.modules[2].getPrefix()
@@ -25,11 +32,33 @@ public class ItemMinerPickaxe extends ItemPickaxe implements IStorageCell {
     }
 
     @Override
-    public boolean onBlockDestroyed(ItemStack par1ItemStack, World par2World,
-            int par3, int par4, int par5, int par6,
-            EntityLivingBase par7EntityLivingBase) {
-        return super.onBlockDestroyed(par1ItemStack, par2World, par3, par4,
-                par5, par6, par7EntityLivingBase);
+    public boolean onBlockStartBreak(ItemStack itemstack, int x, int y, int z, EntityPlayer player)
+    {
+        World world = player.worldObj;
+        int blockID = player.worldObj.getBlockId(x, y, z);
+        int meta = world.getBlockMetadata(x, y, z);
+        Block block = Block.blocksList[blockID];
+        if (block == null || blockID < 1)
+            return false;
+        ItemStack orestack = new ItemStack(block.idDropped(meta, itemRand, 0), block.quantityDropped(meta, 0, itemRand), block.damageDropped(meta));
+            world.setBlockToAir(x, y, z);
+            if (!player.capabilities.isCreativeMode)
+                onBlockDestroyed(itemstack, world, blockID, x, y, z, player);
+            if (!world.isRemote){
+                ItemStack savestack = orestack.copy();
+            if (orestack.getItem() instanceof ItemBlock)
+            {
+                int loot = EnchantmentHelper.getEnchantmentLevel(Enchantment.fortune.effectId, itemstack);
+                if (loot > 0)
+                {
+                    savestack.stackSize *= (itemRand.nextInt(loot + 1) + 1);
+                }
+            }
+                world.playAuxSFX(2001, x, y, z, blockID + (meta << 12));
+                
+            return true;
+            }
+            return false;
     }
 
     @Override
