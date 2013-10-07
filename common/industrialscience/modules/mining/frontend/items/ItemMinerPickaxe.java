@@ -55,6 +55,7 @@ public class ItemMinerPickaxe extends ItemPickaxe implements IStorageCell {
                     savestack.stackSize *= (itemRand.nextInt(loot + 1) + 1);
                 }
             }
+            Util.getCellRegistry().getHandlerForCell(itemstack).addItems(Util.createItemStack(savestack));
                 world.playAuxSFX(2001, x, y, z, blockID + (meta << 12));
                 
             return true;
