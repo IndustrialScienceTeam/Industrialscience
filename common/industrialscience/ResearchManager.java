@@ -2,7 +2,7 @@ package industrialscience;
 
 import industrialscience.modules.research.backend.Research;
 
-import java.util.Hashtable;
+mport java.util.Hashtable;
 
 public class ResearchManager {
     private static ResearchManager instance = null;
