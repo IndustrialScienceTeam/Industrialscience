@@ -75,7 +75,7 @@
 	</target>
 
 	<target name="clean-src">
-		<delete verbose="true">
+		<delete verbose="true" failonerror="false">
 			<fileset dir="${mcpsrc.dir}/minecraft">
 				<present present="both" targetdir="${src.dir}/common" /> 
 			</fileset>
