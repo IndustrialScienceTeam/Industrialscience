@@ -8,8 +8,8 @@
     "mcversion": "1.5.1",
     "url": "",
     "updateUrl": "",
-    "authors": [ "finesim" ],
-    "credits": "Authored by finesim, based on an idea by finesim, Singularius",
+    "authors": [ "finesim", "MAESchortens", "Singularius" ]
+    "credits": "",
     "logoFile": "",
     "screenshots": [  ],
     "parent": "",
