@@ -1,13 +1,10 @@
 package appeng.api;
 
 import appeng.api.me.items.IMemoryCard;
-import appeng.api.me.tiles.IColoredMETile;
 import appeng.api.me.util.IAssemblerPattern;
 import appeng.api.me.util.IMEInventory;
 import appeng.api.me.util.IMEInventoryUtil;
-import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.world.World;
 
 public interface IAppEngApi {

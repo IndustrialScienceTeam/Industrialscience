@@ -19,7 +19,6 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -141,7 +140,8 @@ public abstract class ToolCore extends Item implements ICustomElectricItem, IBox
         return 9;
     }
 
-    @SideOnly(Side.CLIENT)
+    @Override
+	@SideOnly(Side.CLIENT)
     public boolean hasEffect (ItemStack par1ItemStack)
     {
         return false;
@@ -519,7 +519,8 @@ public abstract class ToolCore extends Item implements ICustomElectricItem, IBox
 
     /* Creative mode tools */
 
-    public void getSubItems (int id, CreativeTabs tab, List list)
+    @Override
+	public void getSubItems (int id, CreativeTabs tab, List list)
     {
         Iterator iter = TConstructRegistry.toolMaterials.entrySet().iterator();
         while (iter.hasNext())
@@ -597,7 +598,7 @@ public abstract class ToolCore extends Item implements ICustomElectricItem, IBox
     public boolean onBlockDestroyed (ItemStack itemstack, World world, int blockID, int x, int y, int z, EntityLivingBase player)
     {
         Block block = Block.blocksList[blockID];
-        if (block != null && (double) block.getBlockHardness(world, x, y, z) != 0.0D)
+        if (block != null && block.getBlockHardness(world, x, y, z) != 0.0D)
         {
             return AbilityHelper.onBlockChanged(itemstack, world, blockID, x, y, z, player, random);
         }
@@ -659,7 +660,8 @@ public abstract class ToolCore extends Item implements ICustomElectricItem, IBox
     }
 
     //Right-click
-    public boolean onItemUse (ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float clickX, float clickY, float clickZ)
+    @Override
+	public boolean onItemUse (ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float clickX, float clickY, float clickZ)
     {
         /*if (world.isRemote)
             return true;*/
@@ -873,7 +875,8 @@ public abstract class ToolCore extends Item implements ICustomElectricItem, IBox
     }
 
     //Vanilla overrides
-    public boolean isItemTool (ItemStack par1ItemStack)
+    @Override
+	public boolean isItemTool (ItemStack par1ItemStack)
     {
         return false;
     }
@@ -884,22 +887,26 @@ public abstract class ToolCore extends Item implements ICustomElectricItem, IBox
         return false;
     }
 
-    public boolean isRepairable ()
+    @Override
+	public boolean isRepairable ()
     {
         return false;
     }
 
-    public int getItemEnchantability ()
+    @Override
+	public int getItemEnchantability ()
     {
         return 0;
     }
 
-    public boolean isFull3D ()
+    @Override
+	public boolean isFull3D ()
     {
         return true;
     }
 
-    @SideOnly(Side.CLIENT)
+    @Override
+	@SideOnly(Side.CLIENT)
     public boolean hasEffect (ItemStack par1ItemStack, int pass)
     {
         return false;

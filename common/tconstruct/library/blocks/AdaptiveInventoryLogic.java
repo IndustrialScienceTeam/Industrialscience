@@ -1,19 +1,11 @@
 package tconstruct.library.blocks;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import tconstruct.library.util.CoordTuple;
 import tconstruct.library.util.IFacingLogic;
-import tconstruct.library.util.IMasterLogic;
-import tconstruct.library.util.IServantLogic;
 
 public abstract class AdaptiveInventoryLogic extends InventoryLogic implements IFacingLogic
 {
@@ -83,8 +75,8 @@ public abstract class AdaptiveInventoryLogic extends InventoryLogic implements I
                             }
 
                             stack.stackSize -= itemSize;
-                            EntityItem entityitem = new EntityItem(worldObj, (double) ((float) xCoord + jumpX + offsetX), (double) ((float) yCoord + jumpY),
-                                    (double) ((float) zCoord + jumpZ + offsetZ), new ItemStack(stack.itemID, itemSize, stack.getItemDamage()));
+                            EntityItem entityitem = new EntityItem(worldObj, xCoord + jumpX + offsetX, yCoord + jumpY,
+                                    zCoord + jumpZ + offsetZ, new ItemStack(stack.itemID, itemSize, stack.getItemDamage()));
 
                             if (stack.hasTagCompound())
                             {
@@ -92,9 +84,9 @@ public abstract class AdaptiveInventoryLogic extends InventoryLogic implements I
                             }
 
                             float offset = 0.05F;
-                            entityitem.motionX = (double) ((float) random.nextGaussian() * offset);
-                            entityitem.motionY = (double) ((float) random.nextGaussian() * offset + 0.2F);
-                            entityitem.motionZ = (double) ((float) random.nextGaussian() * offset);
+                            entityitem.motionX = (float) random.nextGaussian() * offset;
+                            entityitem.motionY = (float) random.nextGaussian() * offset + 0.2F;
+                            entityitem.motionZ = (float) random.nextGaussian() * offset;
                             worldObj.spawnEntityInWorld(entityitem);
                         }
                     }

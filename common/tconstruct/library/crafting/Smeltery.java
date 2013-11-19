@@ -114,7 +114,7 @@ public class Smeltery
         if (item == null)
             return null;
 
-        FluidStack stack = (FluidStack) instance.smeltingList.get(Arrays.asList(item.itemID, item.getItemDamage()));
+        FluidStack stack = instance.smeltingList.get(Arrays.asList(item.itemID, item.getItemDamage()));
         if (stack == null)
             return null;
         return stack.copy();
@@ -127,7 +127,7 @@ public class Smeltery
      */
     public static FluidStack getSmelteryResult (int blockID, int metadata)
     {
-        FluidStack stack = (FluidStack) instance.smeltingList.get(Arrays.asList(blockID, metadata));
+        FluidStack stack = instance.smeltingList.get(Arrays.asList(blockID, metadata));
         if (stack == null)
             return null;
         return stack.copy();

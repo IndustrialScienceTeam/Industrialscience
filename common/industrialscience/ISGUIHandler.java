@@ -22,7 +22,7 @@ public class ISGUIHandler implements IGuiHandler {
         if (ID == 0)
             for (Iterator<ISAbstractModule> iterator = modules.iterator(); iterator
                     .hasNext();) {
-                ISAbstractModule module = (ISAbstractModule) iterator.next();
+                ISAbstractModule module = iterator.next();
                 if (world.getBlockId(x, y, z) == module.getBlockID()) {
                     return module
                             .getServerGUIElement(0, player, world, x, y, z);
@@ -42,7 +42,7 @@ public class ISGUIHandler implements IGuiHandler {
         if (ID == 0)
             for (Iterator<ISAbstractModule> iterator = modules.iterator(); iterator
                     .hasNext();) {
-                ISAbstractModule module = (ISAbstractModule) iterator.next();
+                ISAbstractModule module = iterator.next();
                 if (world.getBlockId(x, y, z) == module.getBlockID()) {
                     return module
                             .getClientGUIElement(0, player, world, x, y, z);

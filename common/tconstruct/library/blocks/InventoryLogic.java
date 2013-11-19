@@ -97,7 +97,7 @@ public abstract class InventoryLogic extends TileEntity implements IInventory
             return false;
 
         else
-            return entityplayer.getDistance((double) xCoord + 0.5D, (double) yCoord + 0.5D, (double) zCoord + 0.5D) <= 64D;
+            return entityplayer.getDistance(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D) <= 64D;
 
     }
 
@@ -144,16 +144,19 @@ public abstract class InventoryLogic extends TileEntity implements IInventory
     }
 
     /* Default implementations of hardly used methods */
-    public ItemStack getStackInSlotOnClosing (int slot)
+    @Override
+	public ItemStack getStackInSlotOnClosing (int slot)
     {
         return null;
     }
 
-    public void openChest ()
+    @Override
+	public void openChest ()
     {
     }
 
-    public void closeChest ()
+    @Override
+	public void closeChest ()
     {
     }
 
@@ -164,12 +167,14 @@ public abstract class InventoryLogic extends TileEntity implements IInventory
         this.invName = name;
     }
 
-    public String getInvName ()
+    @Override
+	public String getInvName ()
     {
         return this.isInvNameLocalized() ? this.invName : getDefaultName();
     }
 
-    public boolean isInvNameLocalized ()
+    @Override
+	public boolean isInvNameLocalized ()
     {
         return this.invName != null && this.invName.length() > 0;
     }

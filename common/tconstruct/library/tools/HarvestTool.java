@@ -114,7 +114,8 @@ public abstract class HarvestTool extends ToolCore
         return 0.1f;
     }
 
-    public boolean canHarvestBlock (Block block)
+    @Override
+	public boolean canHarvestBlock (Block block)
     {
         if (block.blockMaterial.isToolNotRequired())
         {

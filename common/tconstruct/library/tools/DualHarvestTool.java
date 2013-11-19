@@ -101,7 +101,8 @@ public abstract class DualHarvestTool extends HarvestTool
         return super.getStrVsBlock(stack, block, meta);
     }
 
-    public boolean canHarvestBlock (Block block)
+    @Override
+	public boolean canHarvestBlock (Block block)
     {
         if (block.blockMaterial.isToolNotRequired())
         {
