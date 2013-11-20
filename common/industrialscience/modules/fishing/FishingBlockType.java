@@ -67,13 +67,13 @@ public enum FishingBlockType {
                         float par8, float par9) {
                     Fishtraptile traptile = (Fishtraptile) world
                             .getBlockTileEntity(x, y, z);
-                    if (traptile != null) {
-                        if (!traptile.isStructureValid()) {
-                            if (traptile.isStructureProperlyFormed()) {
+                    if (traptile == null) {
+                    	return false;
+                    		}
+                        if (!traptile.isStructureValid()&&traptile.isStructureProperlyFormed()) {
                                 traptile.activate();
-                            }
+                                return true;
                         }
-                    }
                     return false;
                 }
 

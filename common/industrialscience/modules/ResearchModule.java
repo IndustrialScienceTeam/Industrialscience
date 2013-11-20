@@ -109,7 +109,6 @@ public class ResearchModule extends ISAbstractModule {
     @Override
     public Object getClientGUIElement(int id, EntityPlayer player, World world,
             int x, int y, int z) {
-        ;
         if (id == 0) {
             if (ResearchBlockType.RESEARCHDESK.ordinal() == world
                     .getBlockMetadata(x, y, z))
