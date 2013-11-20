@@ -35,7 +35,7 @@
 	<property name="sonar.projectVersion" value="1.0" />
 	<property name="sonar.language" value="java" />
 	<property name="sonar.sources" value="${src.dir}/common" />
-	<property name="sonar.exclude" value="ic2/**/*.java,mods/**/*.java,tconstruct/**/*.java,appeng/**/*.java" />
+	<property name="sonar.exclusions" value="ic2/**/*.java,mods/**/*.java,tconstruct/**/*.java,appeng/**/*.java" />
 	<property name="sonar.binaries" value="${classes.dir}" />
 	
 
