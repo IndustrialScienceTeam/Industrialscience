@@ -1,6 +1,7 @@
 package industrialscience.modules.fishing;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.ListIterator;
@@ -23,7 +24,12 @@ public abstract class FishingTileEntity extends TileEntity implements
 
     protected FishingTileEntity(ItemStack[] inventory, String name) {
         super();
-        Inventory = inventory;
+        if(inventory==null){
+        	this.Inventory=new ItemStack[0];
+        }
+        else{
+        	this.Inventory=Arrays.copyOf(inventory, inventory.length);
+        }
         Name = name;
     }
 
