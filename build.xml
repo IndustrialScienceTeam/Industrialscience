@@ -196,9 +196,6 @@
 
 	<target name="test-run" depends="compile,run"/>
 	<target name="sonar">
-    <taskdef uri="antlib:org.sonar.ant" resource="org/sonar/ant/antlib.xml">
-        <classpath path="sonarlib/*.jar" />
-    </taskdef>
  
     <!-- Execute Sonar -->
     <sonar:sonar />
