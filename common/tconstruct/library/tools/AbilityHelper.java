@@ -215,8 +215,8 @@ public class AbilityHelper
 
                         if (knockback > 0)
                         {
-                            entity.addVelocity((double) (-MathHelper.sin(player.rotationYaw * (float) Math.PI / 180.0F) * (float) knockback * 0.5F), 0.1D,
-                                    (double) (MathHelper.cos(player.rotationYaw * (float) Math.PI / 180.0F) * (float) knockback * 0.5F));
+                            entity.addVelocity(-MathHelper.sin(player.rotationYaw * (float) Math.PI / 180.0F) * knockback * 0.5F, 0.1D,
+                                    MathHelper.cos(player.rotationYaw * (float) Math.PI / 180.0F) * knockback * 0.5F);
                             player.motionX *= 0.6D;
                             player.motionZ *= 0.6D;
                             player.setSprinting(false);
@@ -591,7 +591,7 @@ public class AbilityHelper
             else
             {
                 Block block = Block.tilledField;
-                world.playSoundEffect((double) ((float) x + 0.5F), (double) ((float) y + 0.5F), (double) ((float) z + 0.5F), block.stepSound.getStepSound(),
+                world.playSoundEffect(x + 0.5F, y + 0.5F, z + 0.5F, block.stepSound.getStepSound(),
                         (block.stepSound.getVolume() + 1.0F) / 2.0F, block.stepSound.getPitch() * 0.8F);
 
                 if (world.isRemote)
@@ -700,9 +700,9 @@ public class AbilityHelper
         float f = 1.0F;
         float f1 = player.prevRotationPitch + (player.rotationPitch - player.prevRotationPitch) * f;
         float f2 = player.prevRotationYaw + (player.rotationYaw - player.prevRotationYaw) * f;
-        double d0 = player.prevPosX + (player.posX - player.prevPosX) * (double) f;
-        double d1 = player.prevPosY + (player.posY - player.prevPosY) * (double) f + 1.62D - (double) player.yOffset;
-        double d2 = player.prevPosZ + (player.posZ - player.prevPosZ) * (double) f;
+        double d0 = player.prevPosX + (player.posX - player.prevPosX) * f;
+        double d1 = player.prevPosY + (player.posY - player.prevPosY) * f + 1.62D - player.yOffset;
+        double d2 = player.prevPosZ + (player.posZ - player.prevPosZ) * f;
         Vec3 vec3 = world.getWorldVec3Pool().getVecFromPool(d0, d1, d2);
         float f3 = MathHelper.cos(-f2 * 0.017453292F - (float) Math.PI);
         float f4 = MathHelper.sin(-f2 * 0.017453292F - (float) Math.PI);
@@ -715,7 +715,7 @@ public class AbilityHelper
         {
             d3 = ((EntityPlayerMP) player).theItemInWorldManager.getBlockReachDistance();
         }
-        Vec3 vec31 = vec3.addVector((double) f7 * d3, (double) f6 * d3, (double) f8 * d3);
+        Vec3 vec31 = vec3.addVector(f7 * d3, f6 * d3, f8 * d3);
         return world.rayTraceBlocks_do_do(vec3, vec31, par3, !par3);
     }
 }

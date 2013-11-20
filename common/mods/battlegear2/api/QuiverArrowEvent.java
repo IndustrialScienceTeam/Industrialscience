@@ -1,9 +1,7 @@
 package mods.battlegear2.api;
 
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 
 public class QuiverArrowEvent extends PlayerEventChild{
 

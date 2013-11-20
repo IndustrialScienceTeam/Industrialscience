@@ -3,7 +3,6 @@ package tconstruct.library.util;
 import java.util.Random;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 
 //Quantitive Trait Locus
 public class Trait

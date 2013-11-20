@@ -2,7 +2,6 @@ package mods.battlegear2.api;
 
 import net.minecraft.entity.Entity;
 import net.minecraftforge.event.entity.player.EntityInteractEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 
 public class OffhandAttackEvent extends PlayerEventChild {
 

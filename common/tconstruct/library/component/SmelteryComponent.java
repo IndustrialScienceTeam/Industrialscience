@@ -105,7 +105,7 @@ public class SmelteryComponent extends LogicComponent
     
     public FluidStack getResultFor (ItemStack stack)
     {
-        return Smeltery.instance.getSmelteryResult(stack);
+        return Smeltery.getSmelteryResult(stack);
     }
     
     public int getInternalTemperature ()

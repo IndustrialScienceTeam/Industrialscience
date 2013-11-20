@@ -199,7 +199,7 @@ public class TConstructRegistry
         if (parts.length < 1 || parts.length > 4 || parts.length == 3)
             System.out.println("[TCon API] Wrong amount of items to craft into a tool");
 
-        tb.addToolRecipe(output, parts);
+        ToolBuilder.addToolRecipe(output, parts);
     }
 
     //Materials

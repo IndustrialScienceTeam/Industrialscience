@@ -7,7 +7,6 @@ import appeng.api.me.tiles.IPushable;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 /**

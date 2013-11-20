@@ -1,7 +1,5 @@
 package appeng.api;
 
-import java.lang.reflect.InvocationTargetException;
-
 import cpw.mods.fml.relauncher.ReflectionHelper;
 import net.minecraft.item.ItemStack;
 import appeng.api.me.util.IAssemblerPattern;

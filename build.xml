@@ -26,6 +26,19 @@
 	<property name="industrialscience.name" value="industrialscience" />
 
 	<property name="forge.name" value="minecraftforge-src-${mc.version}-${forge.version}.zip"/>
+	
+	<property name="sonar.jdbc.url" value="jdbc:mysql://localhost:3306/sonar?useUnicode=true&amp;characterEncoding=utf8" />
+	<property name="sonar.jdbc.username" value="sonar" />
+	<property name="sonar.jdbc.password" value="sonar" />
+
+	<property name="sonar.projectKey" value="de.zsgn.industrialscience:ant" />
+	<property name="sonar.projectName" value="The IndustrialScience mod." />
+	<property name="sonar.projectVersion" value="1.0" />
+	<property name="sonar.language" value="java" />
+	<property name="sonar.sources" value="${mcpsrc.dir}/minecraft" />
+	<property name="sonar.binaries" value="${mcp.dir}/bin/minecraft/**/*.class />
+
+
 
 	<available property="forge-exists" file="${download.dir}/${forge.name}"/>
 
@@ -182,6 +195,14 @@
 	</target>
 
 	<target name="test-run" depends="compile,run"/>
+	<target name="sonar">
+    <taskdef uri="antlib:org.sonar.ant" resource="org/sonar/ant/antlib.xml">
+        <classpath path="sonarlib/*.jar" />
+    </taskdef>
+ 
+    <!-- Execute Sonar -->
+    <sonar:sonar />
+</target>
 
 	<!-- Default target to run -->
 	<target name="main" depends="package"/>

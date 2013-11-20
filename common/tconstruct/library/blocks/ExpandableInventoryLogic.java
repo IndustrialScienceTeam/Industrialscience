@@ -21,6 +21,7 @@ public abstract class ExpandableInventoryLogic extends InventoryLogic implements
 		return slot < inventory.size() ? inventory.get(slot) : null;
 	}
 
+	@Override
 	public boolean isStackInSlot(int slot) {
 		return slot < inventory.size() && inventory.get(slot) != null;
 	}
@@ -39,6 +40,7 @@ public abstract class ExpandableInventoryLogic extends InventoryLogic implements
 		return 64;
 	}
 
+	@Override
 	public boolean canDropInventorySlot(int slot) {
 		return true;
 	}
@@ -85,10 +87,11 @@ public abstract class ExpandableInventoryLogic extends InventoryLogic implements
 			return false;
 
 		else
-			return entityplayer.getDistance((double) xCoord + 0.5D, (double) yCoord + 0.5D, (double) zCoord + 0.5D) <= 64D;
+			return entityplayer.getDistance(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D) <= 64D;
 
 	}
 
+	@Override
 	public abstract Container getGuiContainer(InventoryPlayer inventoryplayer, World world, int x, int y, int z);
 
 	/* NBT */
@@ -127,26 +130,33 @@ public abstract class ExpandableInventoryLogic extends InventoryLogic implements
 	}
 
 	/* Default implementations of hardly used methods */
+	@Override
 	public ItemStack getStackInSlotOnClosing(int slot) {
 		return null;
 	}
 
+	@Override
 	public void openChest() {
 	}
 
+	@Override
 	public void closeChest() {
 	}
 
+	@Override
 	protected abstract String getDefaultName();
 
+	@Override
 	public void setInvName(String name) {
 		this.invName = name;
 	}
 
+	@Override
 	public String getInvName() {
 		return this.isInvNameLocalized() ? this.invName : getDefaultName();
 	}
 
+	@Override
 	public boolean isInvNameLocalized() {
 		return this.invName != null && this.invName.length() > 0;
 	}

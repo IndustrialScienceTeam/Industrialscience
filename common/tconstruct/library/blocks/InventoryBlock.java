@@ -14,9 +14,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.Icon;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -30,12 +28,14 @@ public abstract class InventoryBlock extends BlockContainer
     }
 
     /* Logic backend */
-    public TileEntity createNewTileEntity (World var1)
+    @Override
+	public TileEntity createNewTileEntity (World var1)
     {
         return null;
     }
 
-    public abstract TileEntity createTileEntity (World world, int metadata);
+    @Override
+	public abstract TileEntity createTileEntity (World world, int metadata);
 
     public abstract Integer getGui (World world, int x, int y, int z, EntityPlayer entityplayer);
 
@@ -90,7 +90,7 @@ public abstract class InventoryBlock extends BlockContainer
                         }
 
                         stack.stackSize -= itemSize;
-                        EntityItem entityitem = new EntityItem(par1World, (double) ((float) x + jumpX), (double) ((float) y + jumpY), (double) ((float) z + jumpZ), new ItemStack(stack.itemID,
+                        EntityItem entityitem = new EntityItem(par1World, x + jumpX, y + jumpY, z + jumpZ, new ItemStack(stack.itemID,
                                 itemSize, stack.getItemDamage()));
 
                         if (stack.hasTagCompound())
@@ -99,9 +99,9 @@ public abstract class InventoryBlock extends BlockContainer
                         }
 
                         float offset = 0.05F;
-                        entityitem.motionX = (double) ((float) rand.nextGaussian() * offset);
-                        entityitem.motionY = (double) ((float) rand.nextGaussian() * offset + 0.2F);
-                        entityitem.motionZ = (double) ((float) rand.nextGaussian() * offset);
+                        entityitem.motionX = (float) rand.nextGaussian() * offset;
+                        entityitem.motionY = (float) rand.nextGaussian() * offset + 0.2F;
+                        entityitem.motionZ = (float) rand.nextGaussian() * offset;
                         par1World.spawnEntityInWorld(entityitem);
                     }
                 }
@@ -161,7 +161,8 @@ public abstract class InventoryBlock extends BlockContainer
         return false;
     }
 
-    public int damageDropped (int meta)
+    @Override
+	public int damageDropped (int meta)
     {
         return meta;
     }

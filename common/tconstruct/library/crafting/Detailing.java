@@ -99,7 +99,7 @@ public class Detailing
     {
         for (int i = 0; i < detailing.size(); i++)
         {
-            DetailInput detail = (DetailInput) detailing.get(i);
+            DetailInput detail = detailing.get(i);
             if (inputID == detail.inputID && inputMeta == detail.inputMeta)
             {
                 return detail;
