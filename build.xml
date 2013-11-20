@@ -160,14 +160,6 @@
 		<copy todir="${classes.dir}">
 			<fileset dir="${mcp.dir}/reobf/minecraft"/>
 		</copy>
-
-		<!-- Reset src dir to post-forge-install state -->
-		<delete dir="${mcpsrc.dir}/minecraft/industrialscience"/>
-		<delete dir="${mcpsrc.dir}/minecraft/mods"/>
-		<delete dir="${mcpsrc.dir}/minecraft/appeng"/>
-		<delete dir="${mcpsrc.dir}/minecraft/tconstruct"/>
-		<delete dir="${mcpsrc.dir}/minecraft/ic2"/>
-
 	</target>
 
 	<!-- Package the compiled files -->
@@ -192,6 +184,14 @@
 	<target name="test-run" depends="compile,run"/>
 
 	<!-- Default target to run -->
-	<target name="main" depends="package"/>
+	<target name="main" depends="package">
+	<!-- Reset src dir to post-forge-install state -->
+	<delete dir="${mcpsrc.dir}/minecraft/industrialscience"/>
+		<delete dir="${mcpsrc.dir}/minecraft/mods"/>
+		<delete dir="${mcpsrc.dir}/minecraft/appeng"/>
+		<delete dir="${mcpsrc.dir}/minecraft/tconstruct"/>
+		<delete dir="${mcpsrc.dir}/minecraft/ic2"/>
+	</target>
+	
 
 </project>
