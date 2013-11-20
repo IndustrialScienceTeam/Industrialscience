@@ -149,10 +149,8 @@ public class ResearchBookGUI extends GuiScreen {
                     ++currPage;
                 }
 
-            } else if (par1GuiButton.id == 2) {
-                if (currPage > 0) {
+            } else if (par1GuiButton.id == 2 && currPage > 0) {
                     --currPage;
-                }
             }
             this.updateButtons();
         }
