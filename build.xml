@@ -36,8 +36,8 @@
 	<property name="sonar.projectName" value="The IndustrialScience mod" />
 	<property name="sonar.projectVersion" value="1.0" />
 	<property name="sonar.language" value="java" />
-	<property name="sonar.sources" value="${mcpsrc.dir}/minecraft" />
-	<property name="sonar.binaries" value="${jar.dir}/${industrialscience.name}-unobfuscated-${mc.version}-${env.BUILD_NUMBER}.jar" />
+	<property name="sonar.sources" value="${src.dir}" />
+	<property name="sonar.binaries" value="${classes.dir}" />
 
 
 
@@ -128,14 +128,19 @@
 				<resourcecontains resource="${mcp.dir}/logs/client_compile.log" substring="error:"/>
 			</condition>
 		</fail>
-
-	</target>
-	<target name="package_unobf" depends="compile">
 		<copy todir="${classes.dir}">
 			<fileset dir="${resources.dir}">
 				<exclude name="build.xml"/>
 			</fileset>
 		</copy>
+		<try property="error.sonar">
+		<sonar:sonar />
+		</try>
+		<catch>
+		<echo>${error.sonar}</echo>
+		</catch>
+	</target>
+	<target name="package_unobf" depends="compile">
 		<mkdir dir="${jar.dir}"/>
 		<delete includeemptydirs="true">
 			<fileset dir="${jar.dir}" includes="**/*"/>
@@ -190,11 +195,6 @@
 	</target>
 
 	<target name="test-run" depends="compile,run"/>
-	<target name="sonar">
- 
-    <!-- Execute Sonar -->
-    <sonar:sonar />
-</target>
 
 	<!-- Default target to run -->
 	<target name="main" depends="package"/>
