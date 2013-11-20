@@ -133,12 +133,7 @@
 				<exclude name="build.xml"/>
 			</fileset>
 		</copy>
-		<try property="error.sonar">
 		<sonar:sonar />
-		</try>
-		<catch>
-		<echo>${error.sonar}</echo>
-		</catch>
 	</target>
 	<target name="package_unobf" depends="compile">
 		<mkdir dir="${jar.dir}"/>
