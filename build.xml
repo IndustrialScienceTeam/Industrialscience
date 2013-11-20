@@ -27,10 +27,9 @@
 
 	<property name="forge.name" value="minecraftforge-src-${mc.version}-${forge.version}.zip"/>
 	
-	<!-- <property name="sonar.jdbc.url" value="jdbc:mysql://localhost:3306/sonar?useUnicode=true&amp;characterEncoding=utf8" />
+	<property name="sonar.jdbc.url" value="jdbc:mysql://localhost:3306/sonar?useUnicode=true&amp;characterEncoding=utf8" />
 	<property name="sonar.jdbc.username" value="sonar" />
 	<property name="sonar.jdbc.password" value="sonar" />
-	-->
 
 	<property name="sonar.projectKey" value="de.zsgn.industrialscience:ant" />
 	<property name="sonar.projectName" value="The IndustrialScience mod" />
@@ -38,6 +37,7 @@
 	<property name="sonar.language" value="java" />
 	<property name="sonar.sources" value="${src.dir}/common" />
 	<property name="sonar.binaries" value="${classes.dir}" />
+	
 
 
 
