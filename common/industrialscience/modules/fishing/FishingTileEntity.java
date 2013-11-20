@@ -1,6 +1,7 @@
 package industrialscience.modules.fishing;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.ListIterator;
@@ -23,7 +24,12 @@ public abstract class FishingTileEntity extends TileEntity implements
 
     protected FishingTileEntity(ItemStack[] inventory, String name) {
         super();
-        Inventory = inventory;
+        if(inventory==null){
+        	this.Inventory=new ItemStack[0];
+        }
+        else{
+        	this.Inventory=Arrays.copyOf(inventory, inventory.length);
+        }
         Name = name;
     }
 
@@ -156,11 +162,13 @@ public abstract class FishingTileEntity extends TileEntity implements
 
         @Override
         public boolean equals(Object e) {
-            if (!(e instanceof Cordinate))
-                return false;
+            if (!(e instanceof Cordinate)) {
+				return false;
+			}
             Cordinate c = (Cordinate) e;
-            if (x != c.getX() || y != c.getY() || z != c.getZ())
-                return false;
+            if (x != c.getX() || y != c.getY() || z != c.getZ()) {
+				return false;
+			}
             return true;
         }
 
@@ -183,8 +191,9 @@ public abstract class FishingTileEntity extends TileEntity implements
 
         @Override
         public boolean add(Cordinate e) {
-            if (!isAlredayInList(e))
-                return list.add(e);
+            if (!isAlredayInList(e)) {
+				return list.add(e);
+			}
             return false;
         }
 
@@ -192,8 +201,9 @@ public abstract class FishingTileEntity extends TileEntity implements
             for (Iterator<Cordinate> iterator = list.iterator(); iterator
                     .hasNext();) {
                 Cordinate cordinate = iterator.next();
-                if (cordinate.equals(e))
-                    return true;
+                if (cordinate.equals(e)) {
+					return true;
+				}
             }
             return false;
         }
