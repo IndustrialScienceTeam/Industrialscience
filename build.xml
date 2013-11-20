@@ -1,5 +1,5 @@
 <!-- Ant Build file. Original file by the awesome bc team.-->
-<project name="IndustrialScience" default="main">
+<project name="IndustrialScience" default="main" xmlns:sonar="antlib:org.sonar.ant>
 	<property environment="env"/>
 	<!-- Properties -->
 
