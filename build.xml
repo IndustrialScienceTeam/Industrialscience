@@ -32,11 +32,11 @@
 	<property name="sonar.jdbc.password" value="sonar" />
 
 	<property name="sonar.projectKey" value="de.zsgn.industrialscience:ant" />
-	<property name="sonar.projectName" value="The IndustrialScience mod." />
+	<property name="sonar.projectName" value="The IndustrialScience mod" />
 	<property name="sonar.projectVersion" value="1.0" />
 	<property name="sonar.language" value="java" />
 	<property name="sonar.sources" value="${mcpsrc.dir}/minecraft" />
-	<property name="sonar.binaries" value="${mcp.dir}/bin/minecraft/**/*.class" />
+	<property name="sonar.binaries" value="${mcp.dir}/bin/minecraft" />
 
 
 
