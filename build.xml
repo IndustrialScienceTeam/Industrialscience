@@ -36,7 +36,7 @@
 	<property name="sonar.projectVersion" value="1.0" />
 	<property name="sonar.language" value="java" />
 	<property name="sonar.sources" value="${mcpsrc.dir}/minecraft" />
-	<property name="sonar.binaries" value="${mcp.dir}/bin/minecraft" />
+	<property name="sonar.binaries" value="${classes.dir}" />
 
 
 
