@@ -1,5 +1,7 @@
 package industrialscience.modules.fishing;
 
+import industrialscience.ISIInventory;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -17,136 +19,17 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public abstract class FishingTileEntity extends TileEntity implements
-        IInventory {
-    protected ItemStack[] Inventory;
-    protected String Name;
+public abstract class FishingTileEntity extends ISIInventory{
 
-    protected FishingTileEntity(ItemStack[] inventory, String name) {
-        super();
-        if(inventory==null){
-        	this.Inventory=new ItemStack[0];
-        }
-        else{
-        	this.Inventory=Arrays.copyOf(inventory, inventory.length);
-        }
-        Name = name;
-    }
+    protected FishingTileEntity(int size, int stacklimit, String InvName) {
+		super(size, stacklimit, InvName);
+	}
 
-    @Override
-    public int getSizeInventory() {
-        return Inventory.length;
-    }
-
-    @Override
-    public ItemStack getStackInSlot(int i) {
-        return Inventory[i];
-    }
-
-    @Override
-    public ItemStack decrStackSize(int i, int j) {
-        ItemStack stack = getStackInSlot(i);
-
-        if (stack != null) {
-
-            if (stack.stackSize <= j) {
-                setInventorySlotContents(i, null);
-            } else {
-                stack = stack.splitStack(j);
-                if (stack.stackSize == 0) {
-                    setInventorySlotContents(i, null);
-                }
-            }
-        }
-
-        return stack;
-    }
-
-    @Override
-    public ItemStack getStackInSlotOnClosing(int i) {
-        ItemStack stack = getStackInSlot(i);
-
-        if (stack != null) {
-            setInventorySlotContents(i, null);
-        }
-
-        return stack;
-    }
-
-    @Override
-    public void setInventorySlotContents(int i, ItemStack itemstack) {
-        Inventory[i] = itemstack;
-        if (itemstack != null && itemstack.stackSize > getInventoryStackLimit()) {
-            itemstack.stackSize = getInventoryStackLimit();
-        }
-
-    }
-
-    @Override
-    public String getInvName() {
-        return Name;
-    }
-
-    @Override
-    public int getInventoryStackLimit() {
-        return 64;
-    }
-
-    @Override
+	@Override
     public boolean isUseableByPlayer(EntityPlayer entityplayer) {
         return worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) == this
                 && entityplayer.getDistanceSq(xCoord + 0.5, yCoord + 0.5,
                         zCoord + 0.5) < 64;
-    }
-
-    @Override
-    public void openChest() {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void closeChest() {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void readFromNBT(NBTTagCompound tagCompound) {
-        super.readFromNBT(tagCompound);
-
-        NBTTagList tagList = tagCompound.getTagList("Inventory");
-
-        for (int i = 0; i < tagList.tagCount(); i++) {
-            NBTTagCompound tag = (NBTTagCompound) tagList.tagAt(i);
-
-            byte slot = tag.getByte("Slot");
-
-            if (slot >= 0 && slot < Inventory.length) {
-                Inventory[slot] = ItemStack.loadItemStackFromNBT(tag);
-            }
-        }
-    }
-
-    @Override
-    public void writeToNBT(NBTTagCompound tagCompound) {
-        super.writeToNBT(tagCompound);
-
-        NBTTagList itemList = new NBTTagList();
-
-        for (int i = 0; i < Inventory.length; i++) {
-            ItemStack stack = Inventory[i];
-
-            if (stack != null) {
-                NBTTagCompound tag = new NBTTagCompound();
-
-                tag.setByte("Slot", (byte) i);
-                stack.writeToNBT(tag);
-                itemList.appendTag(tag);
-            }
-        }
-
-        tagCompound.setTag("Inventory", itemList);
     }
 
     protected class Cordinate {
@@ -465,12 +348,6 @@ public abstract class FishingTileEntity extends TileEntity implements
         }
         return waterblocks.size();
 
-    }
-
-    @Override
-    public boolean isInvNameLocalized() {
-        // TODO Auto-generated method stub
-        return false;
     }
 
     protected void addFish(int fishamout, int neededwater, int range,

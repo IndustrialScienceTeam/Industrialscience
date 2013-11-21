@@ -17,7 +17,7 @@ public class Fishtraptile extends FishingTileEntity implements IInventory {
     private Cordinate[] StructureBlocks = null;
 
     public Fishtraptile() {
-        super(new ItemStack[2], "Basic Fishtrap");
+        super(2, 64, "Basic Fishtrap");
     }
 
     public void destroyStructure() {
