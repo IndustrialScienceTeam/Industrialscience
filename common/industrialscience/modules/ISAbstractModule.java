@@ -3,6 +3,8 @@ package industrialscience.modules;
 import java.util.Hashtable;
 import java.util.logging.Logger;
 
+import javax.sql.CommonDataSource;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -28,6 +30,7 @@ public abstract class ISAbstractModule {
     private IPacketHandler packethandler;
     private static boolean ic2installed=true;
     private static boolean aeinstalled=true;
+    private static boolean bcinstalled=true;
 
     protected ISAbstractModule(Hashtable<String, Integer> itemIDs, int blockID,
             String prefix, String name, int bitprefix,
@@ -127,6 +130,11 @@ public abstract class ISAbstractModule {
         if(aeinstalled)
             aeinstalled=!(appeng.api.Util.getAppEngApi()==null);
             return aeinstalled;
+    }
+    public static boolean isBCinstalled(){
+        if(bcinstalled)
+            bcinstalled=!(buildcraft.api.core.BuildCraftAPI.class==null);
+            return bcinstalled;
     }
 
     @SideOnly(Side.CLIENT)
