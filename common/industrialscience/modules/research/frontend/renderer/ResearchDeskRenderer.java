@@ -10,8 +10,8 @@ import org.lwjgl.opengl.GL11;
 
 public class ResearchDeskRenderer extends TileEntitySpecialRenderer {
     ResearchDeskModel mb = new ResearchDeskModel();
-    private static final ResourceLocation texture = new ResourceLocation(
-            Modinfo.ModID, "textures/models/Researchtable.png");
+    private static ResourceLocation texture = new ResourceLocation(
+            Modinfo.MODID, "textures/models/Researchtable.png");
 
     @Override
     public void renderTileEntityAt(TileEntity tileentity, double d0, double d1,

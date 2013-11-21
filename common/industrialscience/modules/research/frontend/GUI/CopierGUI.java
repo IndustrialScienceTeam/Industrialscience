@@ -1,5 +1,6 @@
 package industrialscience.modules.research.frontend.GUI;
 
+import industrialscience.Modinfo;
 import industrialscience.modules.research.frontend.GUI.containers.CopierContainer;
 import industrialscience.modules.research.frontend.TileEntities.CopierTile;
 import net.minecraft.client.Minecraft;
@@ -15,8 +16,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class CopierGUI extends GuiContainer {
 
-    private static final ResourceLocation texture = new ResourceLocation(
-            "industrialscience", "textures/gui/GUIResearchCopier.png");
+    private static ResourceLocation texture = new ResourceLocation(
+            Modinfo.MODID, "textures/gui/GUIResearchCopier.png");
 
     public CopierGUI(CopierTile ct, InventoryPlayer ip) {
         super(new CopierContainer(ct, ip));
