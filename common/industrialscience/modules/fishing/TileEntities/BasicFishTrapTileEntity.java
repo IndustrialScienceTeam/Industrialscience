@@ -15,12 +15,7 @@ public class BasicFishTrapTileEntity extends AbstractFishTrapTileEntity implemen
     private int coreY;
     private int coreZ;
     private Cordinate[] StructureBlocks = null;
-
-<<<<<<< HEAD:common/industrialscience/modules/fishing/Fishtraptile.java
-    public Fishtraptile() {
-=======
     public BasicFishTrapTileEntity() {
->>>>>>> master:common/industrialscience/modules/fishing/TileEntities/BasicFishTrapTileEntity.java
         super(2, 64, "Basic Fishtrap");
     }
 

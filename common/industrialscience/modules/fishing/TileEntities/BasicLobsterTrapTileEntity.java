@@ -15,12 +15,7 @@ public class BasicLobsterTrapTileEntity extends AbstractFishTrapTileEntity imple
     protected int neededwater = 1;
     protected int waterforextrafish = 1;
     protected int range = 1;
-
-<<<<<<< HEAD:common/industrialscience/modules/fishing/Lobster_traptile.java
-    public Lobster_traptile() {
-=======
     public BasicLobsterTrapTileEntity() {
->>>>>>> master:common/industrialscience/modules/fishing/TileEntities/BasicLobsterTrapTileEntity.java
         super(2,64,"Lobster Trap");
     }
 
