@@ -10,7 +10,7 @@ public class Packethandler implements IPacketHandler {
     @Override
     public void onPacketData(INetworkManager manager,
             Packet250CustomPayload packet, Player player) {
-        IndustrialScience.modules[Integer
+        IndustrialScience.MODULES[Integer
                 .parseInt(packet.channel.split(".")[1])].onPacketData(manager,
                 packet, player);
 

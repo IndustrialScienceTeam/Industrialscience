@@ -29,7 +29,7 @@ public class ISGUIHandler implements IGuiHandler {
                 }
             }
         else {
-            return IndustrialScience.modules[ID & 7].getServerGUIElement(
+            return IndustrialScience.MODULES[ID & 7].getServerGUIElement(
                     ID >> 3, player, world, x, y, z);
 
         }
@@ -49,7 +49,7 @@ public class ISGUIHandler implements IGuiHandler {
                 }
             }
         else {
-            return IndustrialScience.modules[ID & 7].getClientGUIElement(
+            return IndustrialScience.MODULES[ID & 7].getClientGUIElement(
                     ID >> 3, player, world, x, y, z);
         }
         return null;

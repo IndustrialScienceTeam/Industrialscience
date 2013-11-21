@@ -77,7 +77,7 @@ public class IndustrialScience {
         Configuration configuration = new Configuration(
                 suggestedConfigurationFile);
         configuration.load();
-        for (ISAbstractModule a : modules) {
+        for (ISAbstractModule a : MODULES) {
             int suggestedBlockID = a.getBlockID();
             suggestedBlockID = configuration.getBlock(
                     a.getPrefix() + ".blockID", suggestedBlockID).getInt();
@@ -109,7 +109,7 @@ public class IndustrialScience {
     public void load(FMLInitializationEvent event) {
         instance = this;
         NetworkRegistry.instance().registerGuiHandler(instance,
-                new ISGUIHandler(Arrays.asList(modules)));
+                new ISGUIHandler(Arrays.asList(MODULES)));
         initmodules();
         loadmodules();
         proxy.registerRenderers();
@@ -133,7 +133,7 @@ public class IndustrialScience {
      * Calls the postinit method from every module
      */
     private void postinitmodules() {
-        for (ISAbstractModule a : modules) {
+        for (ISAbstractModule a : MODULES) {
             a.postinit();
         }
 
@@ -143,9 +143,9 @@ public class IndustrialScience {
      * Adds every module to the list.
      */
     private void registermodules() {
-        modules[0] = new industrialscience.modules.ResearchModule(756, 0);
-        modules[1] = new industrialscience.modules.FishingModule(757, 1);
-        modules[2] = new industrialscience.modules.MiningModule(758, 2);
+        MODULES[0] = new industrialscience.modules.ResearchModule(756, 0);
+        MODULES[1] = new industrialscience.modules.FishingModule(757, 1);
+        MODULES[2] = new industrialscience.modules.MiningModule(758, 2);
 
     }
 
@@ -153,7 +153,7 @@ public class IndustrialScience {
      * Calls the init method from every module.
      */
     private void initmodules() {
-        for (ISAbstractModule a : modules) {
+        for (ISAbstractModule a : MODULES) {
             a.init();
         }
 
@@ -163,7 +163,7 @@ public class IndustrialScience {
      * Calls the load method from every module.
      */
     private void loadmodules() {
-        for (ISAbstractModule a : modules) {
+        for (ISAbstractModule a : MODULES) {
             a.load();
         }
     }
