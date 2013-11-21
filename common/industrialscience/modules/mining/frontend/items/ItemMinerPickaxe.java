@@ -1,7 +1,6 @@
 package industrialscience.modules.mining.frontend.items;
 
 import industrialscience.IndustrialScience;
-import industrialscience.modules.ISAbstractModule;
 
 import java.util.Iterator;
 
