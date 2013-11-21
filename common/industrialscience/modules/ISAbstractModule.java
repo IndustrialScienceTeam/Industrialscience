@@ -3,8 +3,6 @@ package industrialscience.modules;
 import java.util.Hashtable;
 import java.util.logging.Logger;
 
-import javax.sql.CommonDataSource;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
