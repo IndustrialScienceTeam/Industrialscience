@@ -1,5 +1,6 @@
 package industrialscience.modules;
 
+import industrialscience.IndustrialScience;
 import industrialscience.modules.mining.MiningPackethandler;
 import industrialscience.modules.mining.frontend.items.ItemMinerPickaxe;
 import industrialscience.modules.mining.frontend.items.MiningSlagItem;
@@ -42,10 +43,6 @@ public class MiningModule extends ISAbstractModule {
         LanguageRegistry.addName(MinerPickaxeIron, "Iron Miner Pickaxe");
         MinerPickaxeDiamond.setCreativeTab(CreativeTab).setTextureName("diamond_pickaxe");
         LanguageRegistry.addName(MinerPickaxeDiamond, "Diamond Miner Pickaxe");
-        if(isIC2installed()){
-            MinerPickaxeICBronze.setCreativeTab(CreativeTab);
-            LanguageRegistry.addName(MinerPickaxeICBronze, "Bronze Miner Pickaxe");
-        }
         
 
     }
@@ -59,9 +56,6 @@ public class MiningModule extends ISAbstractModule {
         MinerPickaxeStone=new ItemMinerPickaxe(getItemIDs().get("MinerPickaxeStone"), EnumToolMaterial.STONE);
         MinerPickaxeIron=new ItemMinerPickaxe(getItemIDs().get("MinerPickaxeIron"), EnumToolMaterial.IRON);
         MinerPickaxeDiamond=new ItemMinerPickaxe(getItemIDs().get("MinerPickaxeDiamond"), EnumToolMaterial.EMERALD);
-        if(isIC2installed()){
-            MinerPickaxeICBronze=new ItemMinerPickaxe(getItemIDs().get("MinerPickaxeICBronze"), EnumToolMaterial.valueOf("IC2_BRONZE"));
-        }
     }
 
     public static Hashtable<String, Integer> NeededItemIDs () {
@@ -77,7 +71,14 @@ public class MiningModule extends ISAbstractModule {
 
     @Override
     public void postinit() {
+        if(IndustrialScience.isIc2installed()){
+            MinerPickaxeICBronze=new ItemMinerPickaxe(getItemIDs().get("MinerPickaxeICBronze"), EnumToolMaterial.valueOf("IC2_BRONZE"));
+        }
         logger.log(Level.INFO, "POST-INIT");
+        if(IndustrialScience.isIc2installed()){
+            MinerPickaxeICBronze.setCreativeTab(CreativeTab);
+            LanguageRegistry.addName(MinerPickaxeICBronze, "Bronze Miner Pickaxe");
+        }
 
     }
 

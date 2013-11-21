@@ -32,7 +32,7 @@ public class ItemMinerPickaxe extends ItemPickaxe implements IStorageCell {
     @Override
     public boolean onBlockStartBreak(ItemStack itemstack, int x, int y, int z,
             EntityPlayer player) {
-        if (ISAbstractModule.isAEinstalled()) {
+        if (IndustrialScience.isAeinstalled()) {
             World world = player.worldObj;
             int blockID = player.worldObj.getBlockId(x, y, z);
             int meta = world.getBlockMetadata(x, y, z);
@@ -78,7 +78,7 @@ public class ItemMinerPickaxe extends ItemPickaxe implements IStorageCell {
 
     @Override
     public String getItemDisplayName(ItemStack par1ItemStack) {
-        if (ISAbstractModule.isAEinstalled()) {
+        if (IndustrialScience.isAeinstalled()) {
             Boolean hasName = !Util.getCellRegistry()
                     .getHandlerForCell(par1ItemStack).getName().isEmpty();
             String partName = Util.getCellRegistry()
@@ -115,7 +115,7 @@ public class ItemMinerPickaxe extends ItemPickaxe implements IStorageCell {
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world,
             int x, int y, int z, int side, float clickX, float clickY,
             float clickZ) {
-        if (ISAbstractModule.isAEinstalled()) {
+        if (IndustrialScience.isAeinstalled()) {
             int posX = x;
             int posY = y;
             int posZ = z;
