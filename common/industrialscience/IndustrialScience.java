@@ -45,7 +45,7 @@ public class IndustrialScience {
     /**
      * This array holds the modules of this mod, which should be loaded.
      */
-    public final static ISAbstractModule[] modules = new ISAbstractModule[3];
+    public final static ISAbstractModule[] MODULES = new ISAbstractModule[3];
     
 
     private static boolean ic2installed=false;
