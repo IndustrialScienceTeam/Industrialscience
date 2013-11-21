@@ -1,9 +1,9 @@
 package industrialscience.modules;
 
-import industrialscience.modules.fishing.FishingBlock;
-import industrialscience.modules.fishing.FishingBlockType;
-import industrialscience.modules.fishing.FishingPackethandler;
-import industrialscience.modules.fishing.LobsterItem;
+import industrialscience.modules.fishing.FishingModulePackethandler;
+import industrialscience.modules.fishing.Blocks.FishingModuleBlock;
+import industrialscience.modules.fishing.Blocks.FishingModuleBlockType;
+import industrialscience.modules.fishing.Items.LobsterItem;
 
 import java.util.Hashtable;
 import java.util.logging.Level;
@@ -18,7 +18,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class FishingModule extends ISAbstractModule {
     public FishingModule(int blockid, int i) {
         super(NeededItemIDs(), blockid, "fishingmodule",
-                "IndustrialScience Fishing", i, new FishingPackethandler());
+                "IndustrialScience Fishing", i, new FishingModulePackethandler());
     }
 
     public static Block fishingblock;
@@ -29,7 +29,7 @@ public class FishingModule extends ISAbstractModule {
     @Override
     public void load() {
         logger.log(Level.INFO, "LOADING");
-        FishingBlockType.register(fishingblock, getPrefix());
+        FishingModuleBlockType.register(fishingblock, getPrefix());
         fishingblock.setCreativeTab(CreativeTab);
         lobsteritem.setCreativeTab(CreativeTab);
         // GameRegistry
@@ -51,7 +51,7 @@ public class FishingModule extends ISAbstractModule {
     public void init() {
         logger.log(Level.INFO, "INIT");
         initCreativeTab(new ItemStack(Item.fishingRod));
-        fishingblock = new FishingBlock(getBlockID());
+        fishingblock = new FishingModuleBlock(getBlockID());
         lobsteritemID = getItemIDs().get("lobsteritem");
         lobsteritem = new LobsterItem(lobsteritemID);
 

@@ -1,4 +1,4 @@
-package industrialscience.modules.fishing;
+package industrialscience.modules.fishing.TileEntities;
 
 import industrialscience.ISIInventory;
 
@@ -19,9 +19,9 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public abstract class FishingTileEntity extends ISIInventory{
+public abstract class AbstractFishTrapTileEntity extends ISIInventory{
 
-    protected FishingTileEntity(int size, int stacklimit, String InvName) {
+    protected AbstractFishTrapTileEntity(int size, int stacklimit, String InvName) {
 		super(size, stacklimit, InvName);
 	}
 

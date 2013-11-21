@@ -1,4 +1,4 @@
-package industrialscience.modules.fishing;
+package industrialscience.modules.fishing.Blocks;
 
 import industrialscience.BlockUtils;
 
@@ -16,12 +16,12 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-public class TrapCraftingTable extends BlockContainer {
+public class TrapCraftingTableBlock extends BlockContainer {
     private Icon side;
     private Icon bottom;
     private Icon top;
 
-    public TrapCraftingTable(int id) {
+    public TrapCraftingTableBlock(int id) {
         super(id, Material.wood);
         setUnlocalizedName("Trap Workbench");
         LanguageRegistry.addName(this, "Trap Workbench");
