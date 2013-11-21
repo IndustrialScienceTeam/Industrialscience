@@ -27,9 +27,9 @@ import cpw.mods.fml.common.network.NetworkRegistry;
  * 
  */
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = {
-        Modinfo.channelbase + "0", Modinfo.channelbase + "1",
-        Modinfo.channelbase + "2" }, packetHandler = Packethandler.class)
-@Mod(modid = Modinfo.ModID, name = Modinfo.ReadableModName, version = "1.0")
+		Modinfo.CHANNELBASE + "0", Modinfo.CHANNELBASE + "1",
+        Modinfo.CHANNELBASE + "2" }, packetHandler = Packethandler.class)
+@Mod(modid = Modinfo.MODID, name = Modinfo.READABLEMODNAME, version = "1.0")
 public class IndustrialScience {
     /**
      * This field holds the proxy for registering the renders.
@@ -40,7 +40,7 @@ public class IndustrialScience {
     /**
      * The instance of this mod for forge.
      */
-    @Instance(Modinfo.ModID)
+    @Instance(Modinfo.MODID)
     public static IndustrialScience instance;
     /**
      * This array holds the modules of this mod, which should be loaded.

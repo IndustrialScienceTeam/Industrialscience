@@ -1,4 +1,4 @@
-package industrialscience.modules.fishing;
+package industrialscience.modules.fishing.TileEntities;
 
 import java.util.Random;
 
@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class Fishtraptile extends FishingTileEntity implements IInventory {
+public class BasicFishTrapTileEntity extends AbstractFishTrapTileEntity implements IInventory {
     private static final int FISHSLOT = 1;
     private boolean StructureIsValid = false;
     private boolean isCore = false;
@@ -16,7 +16,11 @@ public class Fishtraptile extends FishingTileEntity implements IInventory {
     private int coreZ;
     private Cordinate[] StructureBlocks = null;
 
+<<<<<<< HEAD:common/industrialscience/modules/fishing/Fishtraptile.java
     public Fishtraptile() {
+=======
+    public BasicFishTrapTileEntity() {
+>>>>>>> master:common/industrialscience/modules/fishing/TileEntities/BasicFishTrapTileEntity.java
         super(2, 64, "Basic Fishtrap");
     }
 
@@ -49,7 +53,7 @@ public class Fishtraptile extends FishingTileEntity implements IInventory {
                 TileEntity tileentity = worldObj.getBlockTileEntity(c.x, c.y,
                         c.z);
                 if (tileentity != null) {
-                    Fishtraptile structuretileentity = (Fishtraptile) tileentity;
+                    BasicFishTrapTileEntity structuretileentity = (BasicFishTrapTileEntity) tileentity;
                     structuretileentity.setCoreX(xCoord);
                     structuretileentity.setCoreY(yCoord);
                     structuretileentity.setCoreZ(zCoord);

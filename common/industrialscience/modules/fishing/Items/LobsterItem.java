@@ -1,4 +1,4 @@
-package industrialscience.modules.fishing;
+package industrialscience.modules.fishing.Items;
 
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.Item;

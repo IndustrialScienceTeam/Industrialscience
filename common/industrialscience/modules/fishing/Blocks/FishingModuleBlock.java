@@ -1,6 +1,7 @@
-package industrialscience.modules.fishing;
+package industrialscience.modules.fishing.Blocks;
 
 import industrialscience.BlockUtils;
+import industrialscience.modules.fishing.TileEntities.AbstractFishTrapTileEntity;
 
 import java.util.List;
 import java.util.Random;
@@ -15,9 +16,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
-public class FishingBlock extends BlockContainer {
+public class FishingModuleBlock extends BlockContainer {
 
-    public FishingBlock(int id) {
+    public FishingModuleBlock(int id) {
         super(id, Material.wood);
         setUnlocalizedName("FishingBlock");
         setTickRandomly(true);
@@ -33,13 +34,13 @@ public class FishingBlock extends BlockContainer {
             EntityPlayer player, int par6, float par7, float par8, float par9) {
         if (player.isSneaking())
             return false;
-        return FishingBlockType.values()[world.getBlockMetadata(x, y, z)]
+        return FishingModuleBlockType.values()[world.getBlockMetadata(x, y, z)]
                 .activate(world, x, y, z, player, par6, par7, par8, par9);
     }
 
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
-        FishingBlockType.registerIcons(par1IconRegister);
+        FishingModuleBlockType.registerIcons(par1IconRegister);
     }
 
     @Override
@@ -49,7 +50,7 @@ public class FishingBlock extends BlockContainer {
 
     @Override
     public TileEntity createTileEntity(World world, int metadata) {
-        return FishingBlockType.getEntity(metadata);
+        return FishingModuleBlockType.getEntity(metadata);
     }
 
     @Override
@@ -59,14 +60,14 @@ public class FishingBlock extends BlockContainer {
 
     @Override
     public Icon getIcon(int i, int j) {
-        return FishingBlockType.getIcon(i, j);
+        return FishingModuleBlockType.getIcon(i, j);
     }
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs,
             List par3List) {
-        for (int i = 0; i < FishingBlockType.values().length; i++) {
+        for (int i = 0; i < FishingModuleBlockType.values().length; i++) {
             par3List.add(new ItemStack(par1, 1, i));
         }
 
@@ -74,7 +75,7 @@ public class FishingBlock extends BlockContainer {
 
     @Override
     public void breakBlock(World world, int x, int y, int z, int i, int j) {
-        FishingBlockType.values()[world.getBlockMetadata(x, y, z)].breakBlock(
+        FishingModuleBlockType.values()[world.getBlockMetadata(x, y, z)].breakBlock(
                 world, x, y, z, i, j);
         BlockUtils.dropItems(world, x, y, z);
         super.breakBlock(world, x, y, z, i, j);
@@ -83,9 +84,9 @@ public class FishingBlock extends BlockContainer {
     @Override
     public void updateTick(World world, int x, int y, int z, Random random) {
         TileEntity tile = world.getBlockTileEntity(x, y, z);
-        if (!(tile instanceof FishingTileEntity))
+        if (!(tile instanceof AbstractFishTrapTileEntity))
             return;
-        FishingTileEntity fishtile = (FishingTileEntity) tile;
+        AbstractFishTrapTileEntity fishtile = (AbstractFishTrapTileEntity) tile;
         fishtile.doUpdateTick(world, x, y, z, random);
 
     }

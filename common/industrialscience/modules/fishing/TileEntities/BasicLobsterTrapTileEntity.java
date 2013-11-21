@@ -1,4 +1,4 @@
-package industrialscience.modules.fishing;
+package industrialscience.modules.fishing.TileEntities;
 
 import industrialscience.modules.FishingModule;
 
@@ -8,7 +8,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class Lobster_traptile extends FishingTileEntity implements IInventory {
+public class BasicLobsterTrapTileEntity extends AbstractFishTrapTileEntity implements IInventory {
     static final int UPDATESLOT = 1;
     static final int FISHSLOT = 1;
     protected int fishamout = 5;
@@ -16,7 +16,11 @@ public class Lobster_traptile extends FishingTileEntity implements IInventory {
     protected int waterforextrafish = 1;
     protected int range = 1;
 
+<<<<<<< HEAD:common/industrialscience/modules/fishing/Lobster_traptile.java
     public Lobster_traptile() {
+=======
+    public BasicLobsterTrapTileEntity() {
+>>>>>>> master:common/industrialscience/modules/fishing/TileEntities/BasicLobsterTrapTileEntity.java
         super(2,64,"Lobster Trap");
     }
 

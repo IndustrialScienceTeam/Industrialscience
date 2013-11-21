@@ -1,7 +1,10 @@
-package industrialscience.modules.fishing;
+package industrialscience.modules.fishing.Blocks;
 
 import industrialscience.ISBlockInterface;
 import industrialscience.TextureGenerator;
+import industrialscience.modules.fishing.Items.FishingModuleBlockItem;
+import industrialscience.modules.fishing.TileEntities.BasicFishTrapTileEntity;
+import industrialscience.modules.fishing.TileEntities.BasicLobsterTrapTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,9 +15,9 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-public enum FishingBlockType {
+public enum FishingModuleBlockType {
     SIMPLELOBSTERTRAP("Lobster Trap", "simplelobstertrap.png",
-            Lobster_traptile.class, new TextureGenerator() {
+            BasicLobsterTrapTileEntity.class, new TextureGenerator() {
                 Icon texture = null;
 
                 @Override
@@ -45,7 +48,7 @@ public enum FishingBlockType {
                 }
 
             }), SIMPLEFISHTRAP("Simple Fishtrap", "simplefishtrap.png",
-            Fishtraptile.class, new TextureGenerator() {
+            BasicFishTrapTileEntity.class, new TextureGenerator() {
                 Icon texture = null;
 
                 @Override
@@ -65,7 +68,7 @@ public enum FishingBlockType {
                 public boolean onBlockActivated(World world, int x, int y,
                         int z, EntityPlayer player, int par6, float par7,
                         float par8, float par9) {
-                    Fishtraptile traptile = (Fishtraptile) world
+                    BasicFishTrapTileEntity traptile = (BasicFishTrapTileEntity) world
                             .getBlockTileEntity(x, y, z);
                     if (traptile == null) {
                     	return false;
@@ -103,7 +106,7 @@ public enum FishingBlockType {
 
     public Class<? extends TileEntity> tileentity;
 
-    private FishingBlockType(String name, String modelfile,
+    private FishingModuleBlockType(String name, String modelfile,
             Class<? extends TileEntity> tileentity,
             TextureGenerator texturegen, ISBlockInterface iSBlockInterface) {
         friendlyname = name;
@@ -130,16 +133,16 @@ public enum FishingBlockType {
     }
 
     public static void registerIcons(IconRegister par1IconRegister) {
-        for (FishingBlockType BlockTyp : FishingBlockType.values()) {
+        for (FishingModuleBlockType BlockTyp : FishingModuleBlockType.values()) {
             BlockTyp.texturegen.registerIcons(par1IconRegister);
         }
 
     }
 
     public static void register(Block fishingblock, String prefix) {
-        GameRegistry.registerBlock(fishingblock, ItemFishingBlock.class, prefix
+        GameRegistry.registerBlock(fishingblock, FishingModuleBlockItem.class, prefix
                 + fishingblock.getUnlocalizedName());
-        for (FishingBlockType typ : FishingBlockType.values()) {
+        for (FishingModuleBlockType typ : FishingModuleBlockType.values()) {
             GameRegistry.registerTileEntityWithAlternatives(
                     typ.getTileentity(), prefix + typ.name(), typ.name());
             LanguageRegistry.addName(

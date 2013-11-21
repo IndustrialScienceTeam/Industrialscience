@@ -1,11 +1,12 @@
-package industrialscience.modules.fishing;
+package industrialscience.modules.fishing.Items;
 
+import industrialscience.modules.fishing.Blocks.FishingModuleBlockType;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class ItemFishingBlock extends ItemBlock {
+public class FishingModuleBlockItem extends ItemBlock {
 
-    public ItemFishingBlock(int par1) {
+    public FishingModuleBlockItem(int par1) {
         super(par1);
         setHasSubtypes(true);
     }
@@ -13,7 +14,7 @@ public class ItemFishingBlock extends ItemBlock {
     @Override
     public String getUnlocalizedName(ItemStack itemstack) {
         return getUnlocalizedName()
-                + FishingBlockType.values()[itemstack.getItemDamage()].name()
+                + FishingModuleBlockType.values()[itemstack.getItemDamage()].name()
                 + ".name";
     }
 
