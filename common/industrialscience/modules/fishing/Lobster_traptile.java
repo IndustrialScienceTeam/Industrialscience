@@ -17,7 +17,7 @@ public class Lobster_traptile extends FishingTileEntity implements IInventory {
     protected int range = 1;
 
     public Lobster_traptile() {
-        super(new ItemStack[2], "Lobster Trap");
+        super(2,64,"Lobster Trap");
     }
 
     public void addFish(int fishamout, int neededwater, int range,

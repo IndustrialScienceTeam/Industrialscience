@@ -8,6 +8,7 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 
 import net.minecraftforge.common.Configuration;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -45,6 +46,11 @@ public class IndustrialScience {
      * This array holds the modules of this mod, which should be loaded.
      */
     public final static ISAbstractModule[] modules = new ISAbstractModule[3];
+    
+
+    private static boolean ic2installed=false;
+    private static boolean aeinstalled=false;
+	private static boolean bcinstalled=false;
 
     /**
      * The mod PreInit method. Calls the registermodules and giveIDs(with the
@@ -117,6 +123,9 @@ public class IndustrialScience {
      */
     @EventHandler
     public void PostInit(FMLPostInitializationEvent event) {
+    	ic2installed=Loader.isModLoaded("IC2");
+    	aeinstalled=Loader.isModLoaded(""); // Look for the ModId of AE
+    	bcinstalled=Loader.isModLoaded("BuildCraft|Core");
         postinitmodules();
     }
 
@@ -158,5 +167,27 @@ public class IndustrialScience {
             a.load();
         }
     }
+
+	/**
+	 * @return Whether IC2 is installed 
+	 */
+	public static boolean isIc2installed() {
+		return ic2installed;
+	}
+
+	/**
+	 * @return Whether AE is installed 
+	 */
+	public static boolean isAeinstalled() {
+		return aeinstalled;
+	}
+
+	/**
+	 * @return Whether BC is installed 
+	 */
+	public static boolean isBcinstalled() {
+		return bcinstalled;
+	}
+    
 
 }

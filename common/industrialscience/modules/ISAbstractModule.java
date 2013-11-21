@@ -10,6 +10,7 @@ import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.common.FMLModContainer;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -26,8 +27,6 @@ public abstract class ISAbstractModule {
     private ItemStack IconItemStack;
     private int bitprefix;
     private IPacketHandler packethandler;
-    private static boolean ic2installed=true;
-    private static boolean aeinstalled=true;
 
     protected ISAbstractModule(Hashtable<String, Integer> itemIDs, int blockID,
             String prefix, String name, int bitprefix,
@@ -118,16 +117,7 @@ public abstract class ISAbstractModule {
         packethandler.onPacketData(manager, packet, player);
 
     }
-    public static boolean isIC2installed(){
-        if(ic2installed)
-            ic2installed=!(ic2.api.item.Items.getItem("copperOre")==null);
-        return ic2installed;
-    }
-    public static boolean isAEinstalled(){
-        if(aeinstalled)
-            aeinstalled=!(appeng.api.Util.getAppEngApi()==null);
-            return aeinstalled;
-    }
+
 
     @SideOnly(Side.CLIENT)
     public abstract void registerRenderers();
