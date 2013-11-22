@@ -19,9 +19,17 @@ public class Research implements Comparable<Research> {
             Object data, Researchstep[] steps, RecipeLocker locker,
             Researchchecker checker) {
         Name = name;
-        NeededResearches = neededResearches;
+        if(neededResearches==null){
+        	this.NeededResearches=new String[0];
+        }else{
+        	this.NeededResearches= Arrays.copyOf(neededResearches, neededResearches.length);
+        }
         Category = category;
-        Steps = steps;
+        if(steps==null){
+        	this.Steps=new Researchstep[0];
+        }else{
+        	this.Steps=Arrays.copyOf(steps, steps.length);
+        }
         Arrays.sort(Steps);
         Locker = locker;
         Checker = checker;
@@ -107,7 +115,11 @@ public class Research implements Comparable<Research> {
     }
 
     public void setSteps(Researchstep[] steps) {
-        Steps = steps;
+        if(steps==null){
+        	this.Steps= new Researchstep[0];
+        }else{
+        	this.Steps=Arrays.copyOf(steps, steps.length);
+        }
     }
 
     public void enableSteps(Hashtable<Integer, Boolean> steps) {
