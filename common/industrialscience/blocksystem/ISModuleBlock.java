@@ -16,14 +16,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
-public abstract class ISModuleBlock extends BlockContainer {
+public class ISModuleBlock extends BlockContainer {
 	protected String prefix;
 	protected ISBlock[] blocks= {};
 	
 	public ISModuleBlock(int par1, Material par2Material, String prefix) {
 		super(par1, par2Material);
 		this.prefix=prefix+".block";
-		this.setUnlocalizedName(this.prefix);
 	}
 	 @Override
 	    public boolean isOpaqueCube() {
@@ -67,7 +66,7 @@ public abstract class ISModuleBlock extends BlockContainer {
 	        for (int i=0;i<blocks.length;i++) {
 	        	ISBlock typ=blocks[i];
 	            GameRegistry.registerTileEntity(
-	                    typ.getTileEntity(), prefix + typ.getIdName());
+	                    typ.getTileEntity(), prefix + ".tileEntity."+typ.getIdName());
 	            LanguageRegistry.addName(
 	                    new ItemStack(this, 1, i),
 	                    typ.getHumanName());
@@ -113,5 +112,12 @@ public abstract class ISModuleBlock extends BlockContainer {
 		public boolean renderAsNormalBlock() {
 	        return false;
 	    }
-
+	    @Override
+	    public int damageDropped (int metadata) {
+	    	return metadata;
+	    }
+		public String getIDName(int itemDamage) {
+			return prefix+"."+blocks[itemDamage].getIdName();
+		}
+	    
 }
