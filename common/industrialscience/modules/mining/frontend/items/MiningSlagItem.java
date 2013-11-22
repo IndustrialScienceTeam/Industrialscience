@@ -17,7 +17,7 @@ public class MiningSlagItem extends ItemFood {
 
     public MiningSlagItem(int par1) {
         super(par1,1,1.0F,true);
-        setUnlocalizedName(IndustrialScience.modules[2].getPrefix()
+        setUnlocalizedName(IndustrialScience.MODULES[2].getPrefix()
                 + "Mining_Slag");
         LanguageRegistry.addName(this, "Mining Slag");
     }

@@ -15,7 +15,6 @@ public class BasicLobsterTrapTileEntity extends AbstractFishTrapTileEntity imple
     protected int neededwater = 1;
     protected int waterforextrafish = 1;
     protected int range = 1;
-
     public BasicLobsterTrapTileEntity() {
         super(2,64,"Lobster Trap");
     }

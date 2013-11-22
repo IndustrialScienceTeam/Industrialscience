@@ -3,11 +3,7 @@ package industrialscience.modules.research.frontend.TileEntities;
 import industrialscience.ISIInventory;
 import industrialscience.modules.ResearchModule;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.tileentity.TileEntity;
 
 public class CopierTile extends ISIInventory {
     public final static int PAGEINPUT = 0;

@@ -1,8 +1,8 @@
 package industrialscience.modules;
 
+import industrialscience.blocksystem.ISModuleBlock;
+import industrialscience.modules.research.ResearchModuleBlock;
 import industrialscience.modules.research.ResearchPacketHandler;
-import industrialscience.modules.research.frontend.ResearchBlock;
-import industrialscience.modules.research.frontend.ResearchBlockType;
 import industrialscience.modules.research.frontend.ResearchBook;
 import industrialscience.modules.research.frontend.ResearchNote;
 import industrialscience.modules.research.frontend.GUI.CopierGUI;
@@ -10,11 +10,13 @@ import industrialscience.modules.research.frontend.GUI.ResearchBookGUI;
 import industrialscience.modules.research.frontend.GUI.containers.CopierContainer;
 import industrialscience.modules.research.frontend.GUI.containers.ResearchBookContainer;
 import industrialscience.modules.research.frontend.TileEntities.CopierTile;
+import industrialscience.modules.research.frontend.blocks.ResearchDeskISBlock;
 
 import java.util.Hashtable;
 import java.util.logging.Level;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -31,7 +33,7 @@ public class ResearchModule extends ISAbstractModule {
                 new ResearchPacketHandler());
     }
 
-    public static Block researchBlock;
+    public static ISModuleBlock researchBlock;
 
     public static Item researchbook;
     public static int researchbookID;
@@ -42,9 +44,9 @@ public class ResearchModule extends ISAbstractModule {
     @Override
     public void load() {
         logger.log(Level.INFO, "LOADING");
-        ResearchBlockType.register(researchBlock, getPrefix());
-
+        researchBlock.register();
         researchBlock.setCreativeTab(CreativeTab);
+        
         researchbook.setCreativeTab(CreativeTab);
         researchNote.setCreativeTab(CreativeTab);
 
@@ -63,9 +65,9 @@ public class ResearchModule extends ISAbstractModule {
         researchbook = new ResearchBook(researchbookID - 256);
         researchNoteID = getItemIDs().get("researchnote");
         researchNote = new ResearchNote(researchNoteID - 256);
-        researchBlock = new ResearchBlock(getBlockID());
+        researchBlock = new ResearchModuleBlock(getBlockID(), this.getPrefix());
         initCreativeTab(new ItemStack(researchBlock, 1,
-                ResearchBlockType.RESEARCHDESK.ordinal()));
+                1));
     }
 
     @Override
@@ -85,10 +87,10 @@ public class ResearchModule extends ISAbstractModule {
     public Object getServerGUIElement(int id, EntityPlayer player, World world,
             int x, int y, int z) {
         if (id == 0) {
-            if (ResearchBlockType.RESEARCHDESK.ordinal() == world
+            if (ResearchModuleBlock.RESEARCHDESKMETAID == world
                     .getBlockMetadata(x, y, z))
                 return null;
-            if (ResearchBlockType.COPIER.ordinal() == world.getBlockMetadata(x,
+            if (ResearchModuleBlock.COPIERMETAID == world.getBlockMetadata(x,
                     y, z))
                 return new CopierContainer(
                         (CopierTile) world.getBlockTileEntity(x, y, z),
@@ -110,10 +112,10 @@ public class ResearchModule extends ISAbstractModule {
     public Object getClientGUIElement(int id, EntityPlayer player, World world,
             int x, int y, int z) {
         if (id == 0) {
-            if (ResearchBlockType.RESEARCHDESK.ordinal() == world
+            if (ResearchModuleBlock.RESEARCHDESKMETAID == world
                     .getBlockMetadata(x, y, z))
                 return null;
-            if (ResearchBlockType.COPIER.ordinal() == world.getBlockMetadata(x,
+            if (ResearchModuleBlock.COPIERMETAID == world.getBlockMetadata(x,
                     y, z))
                 return new CopierGUI((CopierTile) world.getBlockTileEntity(x,
                         y, z), player.inventory);
@@ -132,19 +134,6 @@ public class ResearchModule extends ISAbstractModule {
 
     @Override
     public void registerRenderers() {
-        try {
-
-            for (ResearchBlockType element : ResearchBlockType.values()) {
-                ClientRegistry
-                        .bindTileEntitySpecialRenderer(element.tileentity,
-                                element.getRenderer().newInstance());
-            }
-        } catch (InstantiationException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+    researchBlock.registerRenderers();
         }
-    }
 }

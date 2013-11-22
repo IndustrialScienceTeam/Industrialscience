@@ -15,7 +15,6 @@ public class BasicFishTrapTileEntity extends AbstractFishTrapTileEntity implemen
     private int coreY;
     private int coreZ;
     private Cordinate[] StructureBlocks = null;
-
     public BasicFishTrapTileEntity() {
         super(2, 64, "Basic Fishtrap");
     }

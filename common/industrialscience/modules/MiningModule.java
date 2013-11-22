@@ -8,12 +8,12 @@ import industrialscience.modules.mining.frontend.items.MiningSlagItem;
 import java.util.Hashtable;
 import java.util.logging.Level;
 
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class MiningModule extends ISAbstractModule {
     public static Item miningslag;
