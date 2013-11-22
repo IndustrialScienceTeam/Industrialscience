@@ -1,5 +1,6 @@
-package industrialscience;
+package industrialscience.proxies;
 
+import industrialscience.IndustrialScience;
 import industrialscience.modules.ISAbstractModule;
 
 public class ClientProxy extends CommonProxy {

@@ -1,6 +1,7 @@
 package industrialscience;
 
 import industrialscience.modules.ISAbstractModule;
+import industrialscience.proxies.CommonProxy;
 
 import java.io.File;
 import java.util.Arrays;
@@ -34,7 +35,7 @@ public class IndustrialScience {
     /**
      * This field holds the proxy for registering the renders.
      */
-    @SidedProxy(clientSide = "industrialscience.ClientProxy", serverSide = "industrialscience.CommonProxy")
+    @SidedProxy(clientSide = "industrialscience.proxies.ClientProxy", serverSide = "industrialscience.proxies.CommonProxy")
     public static CommonProxy proxy;
 
     /**
