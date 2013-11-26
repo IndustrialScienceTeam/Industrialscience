@@ -1,6 +1,6 @@
 package industrialscience.modules.fishing.GUI.containers;
 
-import industrialscience.ISContainer;
+import industrialscience.GUI.ISContainer;
 import industrialscience.modules.fishing.TileEntities.TrapCraftingTableTileEntity;
 import net.minecraft.entity.player.InventoryPlayer;
 

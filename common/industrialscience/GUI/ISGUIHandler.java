@@ -1,5 +1,6 @@
-package industrialscience;
+package industrialscience.GUI;
 
+import industrialscience.IndustrialScience;
 import industrialscience.modules.ISAbstractModule;
 
 import java.util.Collection;

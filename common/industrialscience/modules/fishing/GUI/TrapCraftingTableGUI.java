@@ -1,7 +1,7 @@
 package industrialscience.modules.fishing.GUI;
 
-import industrialscience.ISGUIContainer;
 import industrialscience.Modinfo;
+import industrialscience.GUI.ISGUIContainer;
 import industrialscience.modules.fishing.GUI.containers.TrapCraftingTableContainer;
 import industrialscience.modules.fishing.TileEntities.TrapCraftingTableTileEntity;
 import net.minecraft.client.gui.inventory.GuiContainer;

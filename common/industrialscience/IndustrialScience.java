@@ -1,5 +1,6 @@
 package industrialscience;
 
+import industrialscience.GUI.ISGUIHandler;
 import industrialscience.modules.ISAbstractModule;
 import industrialscience.proxies.CommonProxy;
 
