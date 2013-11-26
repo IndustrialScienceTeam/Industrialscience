@@ -1,4 +1,4 @@
-package industrialscience;
+package industrialscience.GUI;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
