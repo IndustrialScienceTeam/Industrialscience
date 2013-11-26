@@ -1,13 +1,22 @@
 package industrialscience.modules.fishing.TileEntities;
 
+import industrialscience.ISIInventory;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.InventoryCrafting;
+import net.minecraft.tileentity.TileEntity;
 
-public class TrapCraftingTableTileEntity extends InventoryCrafting{
+public class TrapCraftingTableTileEntity extends ISIInventory{
 
-    public TrapCraftingTableTileEntity(Container par1Container) {
-        super(par1Container, 4, 4);
-        // TODO Auto-generated constructor stub
+    public TrapCraftingTableTileEntity() {
+    	super(11,64,"TRAPCRAFTINGTABLE");
     }
+
+	@Override
+	public boolean isUseableByPlayer(EntityPlayer player) {
+		 return worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) == this
+	                && player.getDistanceSq(xCoord + 0.5, yCoord + 0.5,
+	                        zCoord + 0.5) < 64;
+	}
 
 }

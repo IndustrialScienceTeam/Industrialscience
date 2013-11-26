@@ -3,7 +3,10 @@ package industrialscience.modules;
 import industrialscience.blocksystem.ISModuleBlock;
 import industrialscience.modules.fishing.FishingModuleBlock;
 import industrialscience.modules.fishing.FishingModulePackethandler;
+import industrialscience.modules.fishing.GUI.TrapCraftingTableGUI;
+import industrialscience.modules.fishing.GUI.containers.TrapCraftingTableContainer;
 import industrialscience.modules.fishing.Items.LobsterItem;
+import industrialscience.modules.fishing.TileEntities.TrapCraftingTableTileEntity;
 
 import java.util.Hashtable;
 import java.util.logging.Level;
@@ -72,14 +75,20 @@ public class FishingModule extends ISAbstractModule {
     @Override
     public Object getServerGUIElement(int blockMetadata, EntityPlayer player,
             World world, int x, int y, int z) {
-        // TODO Auto-generated method stub
-        return null;
+        switch(world.getBlockMetadata(x, y, z)){
+    	case FishingModuleBlock.TRAPCRAFTINGBLOCKMETAID:
+    		return new TrapCraftingTableContainer((TrapCraftingTableTileEntity)world.getBlockTileEntity(x, y, z), player.inventory);
+    }
+    return null;
     }
 
     @Override
     public Object getClientGUIElement(int blockMetadata, EntityPlayer player,
             World world, int x, int y, int z) {
-        // TODO Auto-generated method stub
+        switch(world.getBlockMetadata(x, y, z)){
+        	case FishingModuleBlock.TRAPCRAFTINGBLOCKMETAID:
+        		return new TrapCraftingTableGUI((TrapCraftingTableTileEntity)world.getBlockTileEntity(x, y, z), player.inventory);
+        }
         return null;
     }
 

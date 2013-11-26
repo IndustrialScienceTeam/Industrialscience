@@ -1,4 +1,4 @@
-package industrialscience.modules.fishing.GUI;
+package industrialscience.modules.fishing.GUI.containers;
 
 import industrialscience.ISContainer;
 import industrialscience.modules.fishing.TileEntities.TrapCraftingTableTileEntity;
