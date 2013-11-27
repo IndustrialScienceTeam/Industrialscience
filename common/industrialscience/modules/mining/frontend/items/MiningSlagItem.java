@@ -15,11 +15,10 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class MiningSlagItem extends ItemFood {
 
-    public MiningSlagItem(int par1) {
+    public MiningSlagItem(int par1, String prefix) {
         super(par1,1,1.0F,true);
-        setUnlocalizedName(IndustrialScience.MODULES[2].getPrefix()
-                + "Mining_Slag");
-        LanguageRegistry.addName(this, "Mining Slag");
+        setUnlocalizedName(prefix
+                + ".Mining_Slag");
     }
 
     @Override

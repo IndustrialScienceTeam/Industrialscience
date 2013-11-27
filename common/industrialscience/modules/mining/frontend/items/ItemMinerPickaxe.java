@@ -18,9 +18,9 @@ import appeng.api.Util;
 import appeng.api.me.items.IStorageCell;
 
 public class ItemMinerPickaxe extends ItemPickaxe implements IStorageCell {
-    public ItemMinerPickaxe(int par1, EnumToolMaterial par2EnumToolMaterial) {
+    public ItemMinerPickaxe(int par1, EnumToolMaterial par2EnumToolMaterial, String prefix) {
         super(par1, par2EnumToolMaterial);
-        this.setUnlocalizedName(IndustrialScience.MODULES[2].getPrefix()
+        this.setUnlocalizedName(prefix
                 + ".MinerPickaxe." + this.toolMaterial.toString());
     }
 

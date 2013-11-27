@@ -36,13 +36,9 @@ public class MiningModule extends ISAbstractModule {
         
         miningslag.setCreativeTab(CreativeTab);
         MinerPickaxeWood.setCreativeTab(CreativeTab).setTextureName("wood_pickaxe");
-        LanguageRegistry.addName(MinerPickaxeWood, "Wooden Miner Pickaxe");
         MinerPickaxeStone.setCreativeTab(CreativeTab).setTextureName("stone_pickaxe");
-        LanguageRegistry.addName(MinerPickaxeStone, "Stone Miner Pickaxe");
         MinerPickaxeIron.setCreativeTab(CreativeTab).setTextureName("iron_pickaxe");
-        LanguageRegistry.addName(MinerPickaxeIron, "Iron Miner Pickaxe");
         MinerPickaxeDiamond.setCreativeTab(CreativeTab).setTextureName("diamond_pickaxe");
-        LanguageRegistry.addName(MinerPickaxeDiamond, "Diamond Miner Pickaxe");
         
 
     }
@@ -51,11 +47,11 @@ public class MiningModule extends ISAbstractModule {
         logger.log(Level.INFO, "INIT");
         initCreativeTab(new ItemStack(Item.pickaxeDiamond));
         miningslagID =getItemIDs().get("mining_slag");
-        miningslag = new MiningSlagItem(miningslagID);
-        MinerPickaxeWood=new ItemMinerPickaxe(getItemIDs().get("MinerPickaxeWood"), EnumToolMaterial.WOOD);
-        MinerPickaxeStone=new ItemMinerPickaxe(getItemIDs().get("MinerPickaxeStone"), EnumToolMaterial.STONE);
-        MinerPickaxeIron=new ItemMinerPickaxe(getItemIDs().get("MinerPickaxeIron"), EnumToolMaterial.IRON);
-        MinerPickaxeDiamond=new ItemMinerPickaxe(getItemIDs().get("MinerPickaxeDiamond"), EnumToolMaterial.EMERALD);
+        miningslag = new MiningSlagItem(miningslagID, this.getPrefix());
+        MinerPickaxeWood=new ItemMinerPickaxe(getItemIDs().get("MinerPickaxeWood"), EnumToolMaterial.WOOD, this.getPrefix());
+        MinerPickaxeStone=new ItemMinerPickaxe(getItemIDs().get("MinerPickaxeStone"), EnumToolMaterial.STONE, this.getPrefix());
+        MinerPickaxeIron=new ItemMinerPickaxe(getItemIDs().get("MinerPickaxeIron"), EnumToolMaterial.IRON, this.getPrefix());
+        MinerPickaxeDiamond=new ItemMinerPickaxe(getItemIDs().get("MinerPickaxeDiamond"), EnumToolMaterial.EMERALD, this.getPrefix());
     }
 
     public static Hashtable<String, Integer> NeededItemIDs () {
@@ -72,12 +68,11 @@ public class MiningModule extends ISAbstractModule {
     @Override
     public void postinit() {
         if(IndustrialScience.isIc2installed()){
-            MinerPickaxeICBronze=new ItemMinerPickaxe(getItemIDs().get("MinerPickaxeICBronze"), EnumToolMaterial.valueOf("IC2_BRONZE"));
+            MinerPickaxeICBronze=new ItemMinerPickaxe(getItemIDs().get("MinerPickaxeICBronze"), EnumToolMaterial.valueOf("IC2_BRONZE"), this.getPrefix());
         }
         logger.log(Level.INFO, "POST-INIT");
         if(IndustrialScience.isIc2installed()){
             MinerPickaxeICBronze.setCreativeTab(CreativeTab);
-            LanguageRegistry.addName(MinerPickaxeICBronze, "Bronze Miner Pickaxe");
         }
 
     }
