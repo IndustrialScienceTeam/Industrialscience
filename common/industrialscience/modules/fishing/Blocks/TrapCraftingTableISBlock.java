@@ -21,7 +21,7 @@ public class TrapCraftingTableISBlock extends ISBlock {
     private Icon top;
 
     public TrapCraftingTableISBlock() {
-        super(TrapCraftingTableTileEntity.class,"trapcraftingtable","Trap Craftingtable",ResearchDeskRenderer.class);
+        super(TrapCraftingTableTileEntity.class,"trapcraftingtable",ResearchDeskRenderer.class);
     }
 
     @Override

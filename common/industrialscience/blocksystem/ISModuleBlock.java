@@ -64,12 +64,10 @@ public class ISModuleBlock extends BlockContainer {
 	        GameRegistry.registerBlock(this, ISModuleBlockItem.class,
 	                prefix);
 	        for (int i=0;i<blocks.length;i++) {
+	        	String name = new ItemStack(this, 1, i).getUnlocalizedName();
 	        	ISBlock typ=blocks[i];
 	            GameRegistry.registerTileEntity(
-	                    typ.getTileEntity(), prefix + ".tileEntity."+typ.getIdName());
-	            LanguageRegistry.addName(
-	                    new ItemStack(this, 1, i),
-	                    typ.getHumanName());
+	                    typ.getTileEntity(), name + ".tileEntity.");
 	        }
 
 	    }

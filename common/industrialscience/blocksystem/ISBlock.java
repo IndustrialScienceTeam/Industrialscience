@@ -8,16 +8,13 @@ import net.minecraft.world.World;
 public abstract class ISBlock {
 	protected Class<? extends TileEntity> tileEntity;
 	protected String idName;
-	protected String humanName;
 	protected Class<? extends TileEntitySpecialRenderer> renderer;
 	
 	protected ISBlock(Class<? extends TileEntity> tileEntity, String idName,
-			String humanName,
 			Class<? extends TileEntitySpecialRenderer> renderer) {
 		super();
 		this.tileEntity = tileEntity;
 		this.idName = idName;
-		this.humanName = humanName;
 		this.renderer = renderer;
 	}
 	
@@ -47,11 +44,6 @@ public abstract class ISBlock {
 	public Class<? extends TileEntitySpecialRenderer> getRenderer() {
 		return renderer;
 	}
-	/**
-	 * @return The ingame name for this block.
-	 */
-	public String getHumanName() {
-		return humanName;
-	}
+
 
 }

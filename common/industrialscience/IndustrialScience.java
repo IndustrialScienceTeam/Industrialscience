@@ -5,10 +5,21 @@ import industrialscience.modules.ISAbstractModule;
 import industrialscience.proxies.CommonProxy;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import org.apache.commons.io.FilenameUtils;
+
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Configuration;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
@@ -20,6 +31,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 
 /**
  * The main mod-class It is responsible to initialize the modules and give the
@@ -49,10 +61,11 @@ public class IndustrialScience {
      */
     public final static ISAbstractModule[] MODULES = new ISAbstractModule[3];
     
-
+    private static Logger logger = Logger.getLogger(Modinfo.MODID);
     private static boolean ic2installed=false;
     private static boolean aeinstalled=false;
 	private static boolean bcinstalled=false;
+	public String langDir="/assets/industrialscience/lang/";
 
     /**
      * The mod PreInit method. Calls the registermodules and giveIDs(with the
@@ -110,6 +123,7 @@ public class IndustrialScience {
     @EventHandler
     public void load(FMLInitializationEvent event) {
         instance = this;
+		loadLanguages();
         NetworkRegistry.instance().registerGuiHandler(instance,
                 new ISGUIHandler(Arrays.asList(MODULES)));
         initmodules();
@@ -117,6 +131,35 @@ public class IndustrialScience {
         proxy.registerRenderers();
     }
 
+	private void loadLanguages() {
+		try {
+			File langdirfile = new File(IndustrialScience.class.getResource(langDir).toURI());
+			for(File lang : langdirfile.listFiles(new LangfileFilter())){
+	        	Properties langprop= new Properties();
+	        	try {
+					langprop.load(new FileInputStream(lang));
+				} catch (FileNotFoundException e) {
+					logger.log(Level.WARNING, "Couldn't find language file.", e);
+				} catch (IOException e) {
+					logger.log(Level.WARNING, "Couldn't load language file.", e);
+				}
+	        	LanguageRegistry.instance().addStringLocalization(langprop, FilenameUtils.removeExtension(lang.getName()));
+	        	}
+		} catch (URISyntaxException e) {
+			logger.log(Level.WARNING, "Couldn't load lang dir", e);
+		}
+	}
+	class LangfileFilter implements FilenameFilter{
+
+		@Override
+		public boolean accept(File dir, String name) {
+			if(name.contains(".properties")){
+			return true;
+			}
+			return false;
+		}
+		
+	}
     /**
      * The postinit method of this mod. Calls postinitmodules method.
      * 

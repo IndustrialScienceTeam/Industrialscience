@@ -11,6 +11,8 @@ import industrialscience.modules.fishing.TileEntities.TrapCraftingTableTileEntit
 import java.util.Hashtable;
 import java.util.logging.Level;
 
+import org.apache.commons.io.filefilter.PrefixFileFilter;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -56,7 +58,7 @@ public class FishingModule extends ISAbstractModule {
         initCreativeTab(new ItemStack(Item.fishingRod));
         fishingblock = new FishingModuleBlock(getBlockID(), getPrefix());
         lobsteritemID = getItemIDs().get("lobsteritem");
-        lobsteritem = new LobsterItem(lobsteritemID);
+        lobsteritem = new LobsterItem(lobsteritemID, this.getPrefix());
 
     }
 

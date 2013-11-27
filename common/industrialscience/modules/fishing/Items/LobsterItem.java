@@ -6,12 +6,10 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class LobsterItem extends Item {
 
-    public LobsterItem(int id) {
+    public LobsterItem(int id, String prefix) {
         super(id);
-
+        setUnlocalizedName(prefix+".item.lobster");
         setMaxStackSize(64);
-        setUnlocalizedName("Lobster Item");
-        LanguageRegistry.addName(this, "Lobster Item");
     }
 
     @Override
