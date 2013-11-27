@@ -6,11 +6,10 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class ResearchNote extends Item {
 
-    public ResearchNote(int id) {
+    public ResearchNote(int id, String prefix) {
         super(id);
         setMaxStackSize(1);
-        setUnlocalizedName("Research Note");
-        LanguageRegistry.addName(this, "Research Note");
+        setUnlocalizedName(prefix+".Research_note");
     }
 
     @Override

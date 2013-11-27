@@ -63,9 +63,9 @@ public class ResearchModule extends ISAbstractModule {
     public void init() {
         logger.log(Level.INFO, "INIT");
         researchbookID = getItemIDs().get("researchbook");
-        researchbook = new ResearchBook(researchbookID - 256);
+        researchbook = new ResearchBook(researchbookID,this.getPrefix());
         researchNoteID = getItemIDs().get("researchnote");
-        researchNote = new ResearchNote(researchNoteID - 256);
+        researchNote = new ResearchNote(researchNoteID - 256, this.getPrefix());
         researchBlock = new ResearchModuleBlock(getBlockID(), this.getPrefix());
         initCreativeTab(new ItemStack(researchBlock, 1,
                 1));

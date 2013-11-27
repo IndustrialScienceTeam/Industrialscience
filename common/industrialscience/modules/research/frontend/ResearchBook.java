@@ -18,11 +18,10 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 public class ResearchBook extends Item {
     public static final String NBTNAME = "Researches";
 
-    public ResearchBook(int id) {
+    public ResearchBook(int id, String prefix) {
         super(id);
         setMaxStackSize(1);
-        setUnlocalizedName("Research Book");
-        LanguageRegistry.addName(this, "Research Book");
+        setUnlocalizedName(prefix+".Research_book");
 
     }
 
