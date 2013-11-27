@@ -1,26 +1,18 @@
 package industrialscience.modules.fishing;
 
-import industrialscience.BlockUtils;
 import industrialscience.IndustrialScience;
 import industrialscience.blocksystem.ISBlock;
 import industrialscience.blocksystem.ISModuleBlock;
 import industrialscience.modules.fishing.Blocks.TrapCraftingTableISBlock;
 import industrialscience.modules.fishing.TileEntities.AbstractFishTrapTileEntity;
-import industrialscience.modules.fishing.TileEntities.TrapCraftingTableTileEntity;
 
-import java.util.List;
 import java.util.Random;
 
-import cpw.mods.fml.common.network.FMLNetworkHandler;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.network.FMLNetworkHandler;
 
 public class FishingModuleBlock extends ISModuleBlock {
 public static final int TRAPCRAFTINGBLOCKMETAID=0;

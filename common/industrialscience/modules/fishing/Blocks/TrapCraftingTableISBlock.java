@@ -5,15 +5,10 @@ import industrialscience.IndustrialScience;
 import industrialscience.blocksystem.ISBlock;
 import industrialscience.modules.fishing.TileEntities.TrapCraftingTableTileEntity;
 import industrialscience.modules.research.frontend.renderer.ResearchDeskRenderer;
-import net.minecraft.block.BlockContainer;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.network.FMLNetworkHandler;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class TrapCraftingTableISBlock extends ISBlock {
     private Icon side;

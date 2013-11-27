@@ -2,7 +2,6 @@ package industrialscience.modules.fishing.Items;
 
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.Item;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class LobsterItem extends Item {
 

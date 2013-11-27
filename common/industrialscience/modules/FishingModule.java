@@ -11,9 +11,6 @@ import industrialscience.modules.fishing.TileEntities.TrapCraftingTableTileEntit
 import java.util.Hashtable;
 import java.util.logging.Level;
 
-import org.apache.commons.io.filefilter.PrefixFileFilter;
-
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

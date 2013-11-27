@@ -13,7 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.network.FMLNetworkHandler;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class ResearchBook extends Item {
     public static final String NBTNAME = "Researches";

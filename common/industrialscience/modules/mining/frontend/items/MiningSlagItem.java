@@ -1,7 +1,5 @@
 package industrialscience.modules.mining.frontend.items;
 
-import industrialscience.IndustrialScience;
-
 import java.util.List;
 
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -11,7 +9,6 @@ import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class MiningSlagItem extends ItemFood {
 

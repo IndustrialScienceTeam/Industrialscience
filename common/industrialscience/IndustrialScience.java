@@ -17,10 +17,10 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import net.minecraftforge.common.Configuration;
+
 import org.apache.commons.io.FilenameUtils;
 
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.Configuration;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;

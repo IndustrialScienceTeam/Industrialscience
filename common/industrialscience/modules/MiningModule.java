@@ -13,7 +13,6 @@ import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class MiningModule extends ISAbstractModule {
     public static Item miningslag;

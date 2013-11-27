@@ -2,7 +2,6 @@ package industrialscience.modules.research.frontend;
 
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.Item;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class ResearchNote extends Item {
 

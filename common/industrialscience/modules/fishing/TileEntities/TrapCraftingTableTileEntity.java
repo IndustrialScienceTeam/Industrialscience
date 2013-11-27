@@ -2,9 +2,6 @@ package industrialscience.modules.fishing.TileEntities;
 
 import industrialscience.ISIInventory;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.InventoryCrafting;
-import net.minecraft.tileentity.TileEntity;
 
 public class TrapCraftingTableTileEntity extends ISIInventory{
 

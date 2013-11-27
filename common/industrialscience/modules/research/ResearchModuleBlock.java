@@ -1,10 +1,10 @@
 package industrialscience.modules.research;
 
-import net.minecraft.block.material.Material;
 import industrialscience.blocksystem.ISBlock;
 import industrialscience.blocksystem.ISModuleBlock;
 import industrialscience.modules.research.frontend.blocks.CopierISBlock;
 import industrialscience.modules.research.frontend.blocks.ResearchDeskISBlock;
+import net.minecraft.block.material.Material;
 
 public class ResearchModuleBlock extends ISModuleBlock {
 	public static final int RESEARCHDESKMETAID=0;

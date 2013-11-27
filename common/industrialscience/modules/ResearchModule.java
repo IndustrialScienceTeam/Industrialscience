@@ -10,22 +10,17 @@ import industrialscience.modules.research.frontend.GUI.ResearchBookGUI;
 import industrialscience.modules.research.frontend.GUI.containers.CopierContainer;
 import industrialscience.modules.research.frontend.GUI.containers.ResearchBookContainer;
 import industrialscience.modules.research.frontend.TileEntities.CopierTile;
-import industrialscience.modules.research.frontend.blocks.ResearchDeskISBlock;
 
 import java.util.Hashtable;
 import java.util.logging.Level;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
-import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class ResearchModule extends ISAbstractModule {
     public ResearchModule(int blockID, int bitprefix) {
