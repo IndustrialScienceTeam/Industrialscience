@@ -17,11 +17,11 @@ import appeng.api.IAEItemStack;
 import appeng.api.Util;
 import appeng.api.me.items.IStorageCell;
 
-public class ItemMinerPickaxe extends ItemPickaxe implements IStorageCell {
-    public ItemMinerPickaxe(int par1, EnumToolMaterial par2EnumToolMaterial, String prefix) {
+public class ItemAEPickaxe extends ItemPickaxe implements IStorageCell {
+    public ItemAEPickaxe(int par1, EnumToolMaterial par2EnumToolMaterial, String prefix) {
         super(par1, par2EnumToolMaterial);
         this.setUnlocalizedName(prefix
-                + ".MinerPickaxe." + this.toolMaterial.toString());
+                + ".AEPickaxe." + this.toolMaterial.toString());
     }
 
     public EnumToolMaterial getToolMaterial() {
@@ -174,8 +174,8 @@ public class ItemMinerPickaxe extends ItemPickaxe implements IStorageCell {
     }
 
     protected int getStorageBytes(ItemStack item) {
-        if (item.getItem() instanceof ItemMinerPickaxe) {
-            EnumToolMaterial material = ((ItemMinerPickaxe) item.getItem())
+        if (item.getItem() instanceof ItemAEPickaxe) {
+            EnumToolMaterial material = ((ItemAEPickaxe) item.getItem())
                     .getToolMaterial();
             switch (material.getHarvestLevel()) {
                 case 0:

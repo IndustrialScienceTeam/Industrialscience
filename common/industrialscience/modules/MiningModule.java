@@ -2,7 +2,7 @@ package industrialscience.modules;
 
 import industrialscience.IndustrialScience;
 import industrialscience.modules.mining.MiningPackethandler;
-import industrialscience.modules.mining.frontend.items.ItemMinerPickaxe;
+import industrialscience.modules.mining.frontend.items.ItemAEPickaxe;
 import industrialscience.modules.mining.frontend.items.MiningSlagItem;
 
 import java.util.Hashtable;
@@ -18,11 +18,11 @@ public class MiningModule extends ISAbstractModule {
     public static Item miningslag;
     public static int miningslagID;
     
-    public static Item MinerPickaxeWood;
-    public static Item MinerPickaxeStone;
-    public static Item MinerPickaxeIron;
-    public static Item MinerPickaxeDiamond;
-    public static Item MinerPickaxeICBronze;
+    public static Item AEPickaxeWood;
+    public static Item AEPickaxeStone;
+    public static Item AEPickaxeIron;
+    public static Item AEPickaxeDiamond;
+    public static Item AEPickaxeICBronze;
 
     public MiningModule(int blockID, int i) {
         super(NeededItemIDs(), blockID, "mining", "IndustrialScience Mining",
@@ -34,10 +34,10 @@ public class MiningModule extends ISAbstractModule {
         logger.log(Level.INFO, "LOADING");
         
         miningslag.setCreativeTab(CreativeTab);
-        MinerPickaxeWood.setCreativeTab(CreativeTab).setTextureName("wood_pickaxe");
-        MinerPickaxeStone.setCreativeTab(CreativeTab).setTextureName("stone_pickaxe");
-        MinerPickaxeIron.setCreativeTab(CreativeTab).setTextureName("iron_pickaxe");
-        MinerPickaxeDiamond.setCreativeTab(CreativeTab).setTextureName("diamond_pickaxe");
+        AEPickaxeWood.setCreativeTab(CreativeTab).setTextureName("wood_pickaxe");
+        AEPickaxeStone.setCreativeTab(CreativeTab).setTextureName("stone_pickaxe");
+        AEPickaxeIron.setCreativeTab(CreativeTab).setTextureName("iron_pickaxe");
+        AEPickaxeDiamond.setCreativeTab(CreativeTab).setTextureName("diamond_pickaxe");
         
 
     }
@@ -47,31 +47,31 @@ public class MiningModule extends ISAbstractModule {
         initCreativeTab(new ItemStack(Item.pickaxeDiamond));
         miningslagID =getItemIDs().get("mining_slag");
         miningslag = new MiningSlagItem(miningslagID, this.getPrefix());
-        MinerPickaxeWood=new ItemMinerPickaxe(getItemIDs().get("MinerPickaxeWood"), EnumToolMaterial.WOOD, this.getPrefix());
-        MinerPickaxeStone=new ItemMinerPickaxe(getItemIDs().get("MinerPickaxeStone"), EnumToolMaterial.STONE, this.getPrefix());
-        MinerPickaxeIron=new ItemMinerPickaxe(getItemIDs().get("MinerPickaxeIron"), EnumToolMaterial.IRON, this.getPrefix());
-        MinerPickaxeDiamond=new ItemMinerPickaxe(getItemIDs().get("MinerPickaxeDiamond"), EnumToolMaterial.EMERALD, this.getPrefix());
+        AEPickaxeWood=new ItemAEPickaxe(getItemIDs().get("AEPickaxeWood"), EnumToolMaterial.WOOD, this.getPrefix());
+        AEPickaxeStone=new ItemAEPickaxe(getItemIDs().get("AEPickaxeStone"), EnumToolMaterial.STONE, this.getPrefix());
+        AEPickaxeIron=new ItemAEPickaxe(getItemIDs().get("AEPickaxeIron"), EnumToolMaterial.IRON, this.getPrefix());
+        AEPickaxeDiamond=new ItemAEPickaxe(getItemIDs().get("AEPickaxeDiamond"), EnumToolMaterial.EMERALD, this.getPrefix());
     }
 
     public static Hashtable<String, Integer> NeededItemIDs () {
         Hashtable<String, Integer> ids = new Hashtable<String, Integer>();
         ids.put("mining_slag", 8003);
-        ids.put("MinerPickaxeWood",8004);
-        ids.put("MinerPickaxeStone",8005);
-        ids.put("MinerPickaxeIron",8006);
-        ids.put("MinerPickaxeDiamond",8007);
-        ids.put("MinerPickaxeICBronze",8008);
+        ids.put("AEPickaxeWood",8004);
+        ids.put("AEPickaxeStone",8005);
+        ids.put("AEPickaxeIron",8006);
+        ids.put("AEPickaxeDiamond",8007);
+        ids.put("AEPickaxeICBronze",8008);
         return ids;
     }
 
     @Override
     public void postinit() {
         if(IndustrialScience.isIc2installed()){
-            MinerPickaxeICBronze=new ItemMinerPickaxe(getItemIDs().get("MinerPickaxeICBronze"), EnumToolMaterial.valueOf("IC2_BRONZE"), this.getPrefix());
+            AEPickaxeICBronze=new ItemAEPickaxe(getItemIDs().get("AEPickaxeICBronze"), EnumToolMaterial.valueOf("IC2_BRONZE"), this.getPrefix());
         }
         logger.log(Level.INFO, "POST-INIT");
         if(IndustrialScience.isIc2installed()){
-            MinerPickaxeICBronze.setCreativeTab(CreativeTab);
+            AEPickaxeICBronze.setCreativeTab(CreativeTab);
         }
 
     }
