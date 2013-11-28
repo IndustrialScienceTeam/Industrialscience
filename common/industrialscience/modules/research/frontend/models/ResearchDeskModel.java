@@ -17,69 +17,41 @@ public class ResearchDeskModel extends ModelBase {
     ModelRenderer Leg3;
     ModelRenderer Leg4;
     ModelRenderer tablebase;
-    ModelRenderer brace1_1;
-    ModelRenderer brace2_1;
-    ModelRenderer brace1_2;
-    ModelRenderer brace2_2;
 
     public ResearchDeskModel() {
-        textureWidth = 128;
+    	textureWidth = 128;
         textureHeight = 32;
-
-        Leg1 = new ModelRenderer(this, 0, 0);
-        Leg1.addBox(0F, 0F, 0F, 2, 14, 2);
-        Leg1.setRotationPoint(-8F, 10F, 6F);
-        Leg1.setTextureSize(128, 32);
-        Leg1.mirror = true;
-        setRotation(Leg1, 0F, 0F, 0F);
-        Leg2 = new ModelRenderer(this, 0, 0);
-        Leg2.addBox(0F, 0F, 0F, 2, 14, 2);
-        Leg2.setRotationPoint(6F, 10F, 6F);
-        Leg2.setTextureSize(128, 32);
-        Leg2.mirror = true;
-        setRotation(Leg2, 0F, 0F, 0F);
-        Leg3 = new ModelRenderer(this, 0, 0);
-        Leg3.addBox(0F, 0F, 0F, 2, 14, 2);
-        Leg3.setRotationPoint(6F, 10F, -8F);
-        Leg3.setTextureSize(128, 32);
-        Leg3.mirror = true;
-        setRotation(Leg3, 0F, 0F, 0F);
-        Leg4 = new ModelRenderer(this, 0, 0);
-        Leg4.addBox(0F, 0F, 0F, 2, 14, 2);
-        Leg4.setRotationPoint(-8F, 10F, -8F);
-        Leg4.setTextureSize(128, 32);
-        Leg4.mirror = true;
-        setRotation(Leg4, 0F, 0F, 0F);
-        tablebase = new ModelRenderer(this, 0, 0);
-        tablebase.addBox(0F, 0F, 0F, 16, 2, 16);
-        tablebase.setRotationPoint(-8F, 8F, -8F);
-        tablebase.setTextureSize(128, 32);
-        tablebase.mirror = true;
-        setRotation(tablebase, 0F, 0F, 0F);
-        brace1_1 = new ModelRenderer(this, 0, 20);
-        brace1_1.addBox(0F, 0F, 0F, 2, 9, 1);
-        brace1_1.setRotationPoint(6F, 8F, -1F);
-        brace1_1.setTextureSize(128, 32);
-        brace1_1.mirror = true;
-        setRotation(brace1_1, -0.7853982F, 0F, 0F);
-        brace2_1 = new ModelRenderer(this, 0, 20);
-        brace2_1.addBox(0F, 0F, 0F, 2, 9, 1);
-        brace2_1.setRotationPoint(-8F, 8F, -1F);
-        brace2_1.setTextureSize(128, 32);
-        brace2_1.mirror = true;
-        setRotation(brace2_1, -0.7853982F, 0F, 0F);
-        brace1_2 = new ModelRenderer(this, 0, 20);
-        brace1_2.addBox(0F, 0F, 0F, 2, 8, 1);
-        brace1_2.setRotationPoint(6F, 9F, 1F);
-        brace1_2.setTextureSize(128, 32);
-        brace1_2.mirror = true;
-        setRotation(brace1_2, 0.7853982F, 0F, 0F);
-        brace2_2 = new ModelRenderer(this, 0, 20);
-        brace2_2.addBox(0F, 0F, 0F, 2, 8, 1);
-        brace2_2.setRotationPoint(-8F, 9F, 1F);
-        brace2_2.setTextureSize(128, 32);
-        brace2_2.mirror = true;
-        setRotation(brace2_2, 0.7853982F, 0F, 0F);
+        
+          Leg1 = new ModelRenderer(this, 0, 0);
+          Leg1.addBox(0F, 0F, 0F, 2, 14, 2);
+          Leg1.setRotationPoint(-8F, 10F, 6F);
+          Leg1.setTextureSize(128, 32);
+          Leg1.mirror = true;
+          setRotation(Leg1, 0F, 0F, 0F);
+          Leg2 = new ModelRenderer(this, 0, 0);
+          Leg2.addBox(0F, 0F, 0F, 2, 14, 2);
+          Leg2.setRotationPoint(6F, 10F, 6F);
+          Leg2.setTextureSize(128, 32);
+          Leg2.mirror = true;
+          setRotation(Leg2, 0F, 0F, 0F);
+          Leg3 = new ModelRenderer(this, 0, 0);
+          Leg3.addBox(0F, 0F, 0F, 2, 14, 2);
+          Leg3.setRotationPoint(6F, 10F, -8F);
+          Leg3.setTextureSize(128, 32);
+          Leg3.mirror = true;
+          setRotation(Leg3, 0F, 0F, 0F);
+          Leg4 = new ModelRenderer(this, 0, 0);
+          Leg4.addBox(0F, 0F, 0F, 2, 14, 2);
+          Leg4.setRotationPoint(-8F, 10F, -8F);
+          Leg4.setTextureSize(128, 32);
+          Leg4.mirror = true;
+          setRotation(Leg4, 0F, 0F, 0F);
+          tablebase = new ModelRenderer(this, 0, 0);
+          tablebase.addBox(0F, 0F, 0F, 16, 2, 16);
+          tablebase.setRotationPoint(-8F, 8F, -8F);
+          tablebase.setTextureSize(128, 32);
+          tablebase.mirror = true;
+          setRotation(tablebase, 0F, 0F, 0F);
     }
 
     public void render(TileEntity entity, float f, float f1, float f2,
@@ -91,10 +63,6 @@ public class ResearchDeskModel extends ModelBase {
         Leg3.render(f5);
         Leg4.render(f5);
         tablebase.render(f5);
-        brace1_1.render(f5);
-        brace2_1.render(f5);
-        brace1_2.render(f5);
-        brace2_2.render(f5);
     }
 
     private void setRotation(ModelRenderer model, float x, float y, float z) {
