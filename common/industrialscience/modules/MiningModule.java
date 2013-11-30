@@ -8,6 +8,7 @@ import industrialscience.modules.mining.frontend.items.MiningSlagItem;
 import java.util.Hashtable;
 import java.util.logging.Level;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
@@ -34,10 +35,7 @@ public class MiningModule extends ISAbstractModule {
         logger.log(Level.INFO, "LOADING");
         
         miningslag.setCreativeTab(CreativeTab);
-        AEPickaxeWood.setCreativeTab(CreativeTab).setTextureName("wood_pickaxe");
-        AEPickaxeStone.setCreativeTab(CreativeTab).setTextureName("stone_pickaxe");
-        AEPickaxeIron.setCreativeTab(CreativeTab).setTextureName("iron_pickaxe");
-        AEPickaxeDiamond.setCreativeTab(CreativeTab).setTextureName("diamond_pickaxe");
+        
         
 
     }
@@ -66,6 +64,11 @@ public class MiningModule extends ISAbstractModule {
 
     @Override
     public void postinit() {
+    	if(IndustrialScience.isAeinstalled()){
+    	AEPickaxeWood.setCreativeTab(CreativeTab).setTextureName("wood_pickaxe");
+        AEPickaxeStone.setCreativeTab(CreativeTab).setTextureName("stone_pickaxe");
+        AEPickaxeIron.setCreativeTab(CreativeTab).setTextureName("iron_pickaxe");
+        AEPickaxeDiamond.setCreativeTab(CreativeTab).setTextureName("diamond_pickaxe");
         if(IndustrialScience.isIc2installed()){
             AEPickaxeICBronze=new ItemAEPickaxe(getItemIDs().get("AEPickaxeICBronze"), EnumToolMaterial.valueOf("IC2_BRONZE"), this.getPrefix());
         }
@@ -73,7 +76,11 @@ public class MiningModule extends ISAbstractModule {
         if(IndustrialScience.isIc2installed()){
             AEPickaxeICBronze.setCreativeTab(CreativeTab);
         }
+        }
 
+    }
+    private void addAEPickaxeRecipe(){
+    	
     }
 
     @Override

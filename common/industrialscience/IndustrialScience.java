@@ -169,7 +169,7 @@ public class IndustrialScience {
     @EventHandler
     public void PostInit(FMLPostInitializationEvent event) {
     	ic2installed=Loader.isModLoaded("IC2");
-    	aeinstalled=Loader.isModLoaded(""); // Look for the ModId of AE
+    	aeinstalled=Loader.isModLoaded("AppliedEnergistics-Core");
     	bcinstalled=Loader.isModLoaded("BuildCraft|Core");
         postinitmodules();
     }
