@@ -62,7 +62,8 @@ public class IndustrialScience {
     public final static ISAbstractModule[] MODULES = new ISAbstractModule[3];
     
     private static Logger logger = Logger.getLogger(Modinfo.MODID);
-    private static boolean ic2installed=false;
+
+	private static boolean ic2installed=false;
     private static boolean aeinstalled=false;
 	private static boolean bcinstalled=false;
 	public String langDir="/assets/industrialscience/lang/";
@@ -232,6 +233,12 @@ public class IndustrialScience {
 	 */
 	public static boolean isBcinstalled() {
 		return bcinstalled;
+	}
+    /**
+	 * @return The logger
+	 */
+	public static Logger getLogger() {
+		return logger;
 	}
     
 

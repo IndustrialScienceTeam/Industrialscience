@@ -1,6 +1,9 @@
 package industrialscience.modules.mining.frontend.items;
 
+import industrialscience.modules.MiningModule;
+
 import java.util.ArrayList;
+import java.util.logging.Level;
 
 import net.minecraft.item.ItemStack;
 
@@ -19,21 +22,8 @@ public static void init(){
 	sizes.add(new MESize(16384, (ItemStack) Class.forName("appeng.api.Materials").getField("matStorageBlock").get(null)));
 	sizes.add(new MESize(65536, (ItemStack) Class.forName("appeng.api.Materials").getField("matStorageCluster").get(null)));
 	}
-	 catch (IllegalArgumentException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (SecurityException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (IllegalAccessException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (NoSuchFieldException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (ClassNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+	 catch (Exception e) {
+		MiningModule.getLogger().log(Level.WARNING, "Couldn't get AppEng material", e);
 	}
 }
 public int getSize() {

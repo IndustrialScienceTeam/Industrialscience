@@ -18,7 +18,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public abstract class ISAbstractModule {
     protected CreativeTabs CreativeTab = null;
-    protected Logger logger;
+    protected static Logger logger;
     private Hashtable<String, Integer> ItemIDs;
     private int BlockID;
     private String prefix;
@@ -77,7 +77,7 @@ public abstract class ISAbstractModule {
         return CreativeTab;
     }
 
-    public Logger getLogger() {
+    public static Logger getLogger() {
         return logger;
     }
 

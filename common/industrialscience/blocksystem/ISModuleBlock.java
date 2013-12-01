@@ -1,6 +1,9 @@
 package industrialscience.blocksystem;
 
+import industrialscience.IndustrialScience;
+
 import java.util.List;
+import java.util.logging.Level;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -11,6 +14,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ISModuleBlock extends BlockContainer {
 	protected String prefix;
@@ -35,10 +40,8 @@ public class ISModuleBlock extends BlockContainer {
 	    	 try {
 		            TileEntity te = blocks[metadata].getTileEntity().newInstance();
 		            return te;
-		        } catch (InstantiationException e) {
-		            e.printStackTrace();
-		        } catch (IllegalAccessException e) {
-		            e.printStackTrace();
+		        } catch (Exception e) {
+		           IndustrialScience.getLogger().log(Level.SEVERE, "Couldn't create TileEntity for "+prefix+":"+metadata, e);
 		        }
 		        return null;
 	    }
@@ -67,22 +70,19 @@ public class ISModuleBlock extends BlockContainer {
 	        }
 
 	    }
+	    @SideOnly(Side.CLIENT)
 	    public void registerRenderers() {
-	        try {
-
 		        for (int i=0;i<blocks.length;i++) {
 		        	ISBlock typ=blocks[i];
+		        	 try {
 	                ClientRegistry
 	                        .bindTileEntitySpecialRenderer(typ.getTileEntity(),
 	                                typ.getRenderer().newInstance());
 	            }
-	        } catch (InstantiationException e) {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
-	        } catch (IllegalAccessException e) {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
-	        }
+		        catch (Exception e) {
+		           IndustrialScience.getLogger().log(Level.SEVERE, "Couldn't create SpecialRenderer for "+prefix+":"+i, e);
+		        }
+		        	 }
 	    }
 
 	    public boolean onBlockActivated(World par1World, int par2, int par3,
