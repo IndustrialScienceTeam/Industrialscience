@@ -3,17 +3,20 @@ package industrialscience.modules;
 import industrialscience.IndustrialScience;
 import industrialscience.modules.mining.MiningPackethandler;
 import industrialscience.modules.mining.frontend.items.ItemAEPickaxe;
+import industrialscience.modules.mining.frontend.items.MESize;
 import industrialscience.modules.mining.frontend.items.MiningSlagItem;
-
+import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.logging.Level;
 
+import appeng.api.Util;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class MiningModule extends ISAbstractModule {
     public static Item miningslag;
@@ -64,6 +67,7 @@ public class MiningModule extends ISAbstractModule {
 
     @Override
     public void postinit() {
+        logger.log(Level.INFO, "POST-INIT");
     	if(IndustrialScience.isAeinstalled()){
     	AEPickaxeWood.setCreativeTab(CreativeTab).setTextureName("wood_pickaxe");
         AEPickaxeStone.setCreativeTab(CreativeTab).setTextureName("stone_pickaxe");
@@ -71,16 +75,35 @@ public class MiningModule extends ISAbstractModule {
         AEPickaxeDiamond.setCreativeTab(CreativeTab).setTextureName("diamond_pickaxe");
         if(IndustrialScience.isIc2installed()){
             AEPickaxeICBronze=new ItemAEPickaxe(getItemIDs().get("AEPickaxeICBronze"), EnumToolMaterial.valueOf("IC2_BRONZE"), this.getPrefix());
-        }
-        logger.log(Level.INFO, "POST-INIT");
-        if(IndustrialScience.isIc2installed()){
             AEPickaxeICBronze.setCreativeTab(CreativeTab);
         }
+
+        MESize.init();
+        addAEPickaxeRecipes();
         }
 
     }
-    private void addAEPickaxeRecipe(){
-    	
+    private void addAEPickaxeRecipes(){
+    	for (MESize size : MESize.getSizes()) {
+			GameRegistry.addRecipe(getAEPickaxeRecipe(size, new ItemStack(Item.pickaxeWood), new ItemStack(AEPickaxeWood)));
+			GameRegistry.addRecipe(getAEPickaxeRecipe(size, new ItemStack(Item.pickaxeStone), new ItemStack(AEPickaxeStone)));
+			GameRegistry.addRecipe(getAEPickaxeRecipe(size, new ItemStack(Item.pickaxeIron), new ItemStack(AEPickaxeIron)));
+			GameRegistry.addRecipe(getAEPickaxeRecipe(size, new ItemStack(Item.pickaxeDiamond), new ItemStack(AEPickaxeDiamond)));
+			if(IndustrialScience.isIc2installed()){
+				GameRegistry.addRecipe(getAEPickaxeRecipe(size, new ItemStack(Item.appleGold), new ItemStack(AEPickaxeICBronze)));
+			}
+    	}
+    }
+    private ShapedOreRecipe getAEPickaxeRecipe(MESize size, ItemStack pick, ItemStack resultpick){
+    	ItemStack result=resultpick.copy();
+		ItemStack blockbr=null;
+		try {
+			blockbr=((ItemStack)Class.forName("appeng.api.Blocks").getField("blkTransitionPlane").get(null)).copy();
+		} catch (Exception e) {
+			logger.log(Level.SEVERE, "Unable to get 'ME Transitionplane'", e);
+		} 
+		ItemAEPickaxe.setStorageAmount(size.getSize(), result);
+		return new ShapedOreRecipe(result,true,  new Object[]{"xyz"," s ", " s ",Character.valueOf('s'),"stickWood", Character.valueOf('x'),size.getStoragepart(),Character.valueOf('y'),pick.copy(),Character.valueOf('z'),blockbr});
     }
 
     @Override

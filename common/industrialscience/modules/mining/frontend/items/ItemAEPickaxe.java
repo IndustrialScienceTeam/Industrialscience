@@ -1,6 +1,8 @@
 package industrialscience.modules.mining.frontend.items;
 
+import ibxm.Module;
 import industrialscience.IndustrialScience;
+import industrialscience.modules.MiningModule;
 
 import java.util.Iterator;
 
@@ -12,6 +14,7 @@ import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import appeng.api.IAEItemStack;
 import appeng.api.Util;
@@ -174,22 +177,17 @@ public class ItemAEPickaxe extends ItemPickaxe implements IStorageCell {
     }
 
     protected int getStorageBytes(ItemStack item) {
-        if (item.getItem() instanceof ItemAEPickaxe) {
-            EnumToolMaterial material = ((ItemAEPickaxe) item.getItem())
-                    .getToolMaterial();
-            switch (material.getHarvestLevel()) {
-                case 0:
-                    return 1024;
-                case 1:
-                    return 4096;
-                case 2:
-                    return 16384;
-                case 3:
-                    return 65536;
-                default:
-                    break;
-            }
-        }
-        return 0;
+        return getStorageAmount(item);
+    }
+    public static int getStorageAmount(ItemStack item){
+    	return item.stackTagCompound.getCompoundTag("IndustrialScience.AEPickaxe").getInteger("size");
+    }
+    public static void setStorageAmount(int bytes, ItemStack itemstack){
+    	NBTTagCompound pickaxecompound= new NBTTagCompound();
+    	pickaxecompound.setInteger("size", bytes);
+    	if(itemstack.stackTagCompound==null){
+    		itemstack.stackTagCompound=new NBTTagCompound();
+    	}
+    	itemstack.stackTagCompound.setCompoundTag("IndustrialScience.AEPickaxe", pickaxecompound);
     }
 }
