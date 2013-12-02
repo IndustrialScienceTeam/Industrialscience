@@ -5,6 +5,8 @@ import industrialscience.IndustrialScience;
 import industrialscience.modules.MiningModule;
 
 import java.util.Iterator;
+import java.util.List;
+import java.util.logging.Level;
 
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
@@ -15,6 +17,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import appeng.api.IAEItemStack;
 import appeng.api.Util;
@@ -190,4 +193,29 @@ public class ItemAEPickaxe extends ItemPickaxe implements IStorageCell {
     	}
     	itemstack.stackTagCompound.setCompoundTag("IndustrialScience.AEPickaxe", pickaxecompound);
     }
+	@Override
+	public void addInformation(ItemStack par1ItemStack,
+			EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
+		String storinfo="";
+		String nextblockinfo="";
+		String usedbytes="";
+		try{
+		Object cell=Class.forName("appeng.api.Util").getMethod("getCell", ItemStack.class).invoke(null, par1ItemStack);
+		usedbytes=cell.getClass().getMethod("usedBytes", new Class[0]).invoke(cell, new Object[0]).toString();
+		}
+		catch(Exception e){
+			MiningModule.getLogger().log(Level.WARNING, "Unable to get cell object!", e);
+			return;
+		}
+		
+		storinfo=usedbytes+"/"+getStorageBytes(par1ItemStack)+" Bytes";
+		par3List.add(storinfo);
+		
+		if(getPlaceableItem(par1ItemStack)!=null){
+		nextblockinfo=getPlaceableItem(par1ItemStack).getItem().getItemDisplayName(getPlaceableItem(par1ItemStack).getItemStack());
+		par3List.add(nextblockinfo);
+		}
+		super.addInformation(par1ItemStack, par2EntityPlayer, par3List, par4);
+	}
+    
 }
