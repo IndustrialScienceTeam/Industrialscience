@@ -27,6 +27,8 @@ public class MiningModule extends ISAbstractModule {
     public static Item AEPickaxeIron;
     public static Item AEPickaxeDiamond;
     public static Item AEPickaxeICBronze;
+    
+    public final int APPENGTIERLIMIT=4096;
 
     public MiningModule(int blockID, int i) {
         super(NeededItemIDs(), blockID, "mining", "IndustrialScience Mining",
@@ -96,14 +98,30 @@ public class MiningModule extends ISAbstractModule {
     }
     private ShapedOreRecipe getAEPickaxeRecipe(MESize size, ItemStack pick, ItemStack resultpick){
     	ItemStack result=resultpick.copy();
+    	ItemStack basicprocessor=null;
+    	ItemStack advancedprocessor=null;
 		ItemStack blockbr=null;
 		try {
 			blockbr=((ItemStack)Class.forName("appeng.api.Blocks").getField("blkTransitionPlane").get(null)).copy();
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, "Unable to get 'ME Transitionplane'", e);
 		} 
+		try {
+			basicprocessor=((ItemStack)Class.forName("appeng.api.Materials").getField("matProcessorBasic").get(null)).copy();
+		} catch (Exception e) {
+			logger.log(Level.SEVERE, "Unable to get 'basic processor'", e);
+		} 
+		try {
+			advancedprocessor=((ItemStack)Class.forName("appeng.api.Materials").getField("matProcessorAdvanced").get(null)).copy();
+		} catch (Exception e) {
+			logger.log(Level.SEVERE, "Unable to get 'advanced processor'", e);
+		} 
 		ItemAEPickaxe.setStorageAmount(size.getSize(), result);
-		return new ShapedOreRecipe(result,true,  new Object[]{"xyz"," s ", " s ",Character.valueOf('s'),"stickWood", Character.valueOf('x'),size.getStoragepart(),Character.valueOf('y'),pick.copy(),Character.valueOf('z'),blockbr});
+		ItemStack processor=basicprocessor;
+		if(size.getSize()>=APPENGTIERLIMIT){
+			processor=advancedprocessor;
+		}
+		return new ShapedOreRecipe(result,true,  new Object[]{"xyz"," a ", " s ",Character.valueOf('s'),"stickWood",Character.valueOf('a'),processor, Character.valueOf('x'),size.getStoragepart(),Character.valueOf('y'),pick.copy(),Character.valueOf('z'),blockbr});
     }
 
     @Override
