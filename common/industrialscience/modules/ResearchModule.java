@@ -60,13 +60,8 @@ public class ResearchModule extends ISAbstractModule {
         researchbookID = getItemIDs().get("researchbook");
         researchbook = new ResearchBook(researchbookID,this.getPrefix());
         researchNoteID = getItemIDs().get("researchnote");
-<<<<<<< HEAD
-        researchNote = new ResearchNote(researchNoteID - 256, this.getPrefix());
-        researchBlock = new ResearchModuleBlock(getBlockID(), this.getPrefix());
-=======
-        researchNote = new ResearchNote(researchNoteID - 256);
+        researchNote = new ResearchNote(researchNoteID - 256,getPrefix());
         researchBlock = new ResearchModuleModelBlock(getModelBlockID(), this.getPrefix());
->>>>>>> master
         initCreativeTab(new ItemStack(researchBlock, 1,
                 1));
     }

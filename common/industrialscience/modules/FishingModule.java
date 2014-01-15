@@ -75,7 +75,7 @@ public class FishingModule extends ISAbstractModule {
     public Object getServerGUIElement(int blockMetadata, EntityPlayer player,
             World world, int x, int y, int z) {
         switch(world.getBlockMetadata(x, y, z)){
-    	case FishingModuleBlock.TRAPCRAFTINGBLOCKMETAID:
+    	case FishingModuleModelBlock.TRAPCRAFTINGBLOCKMETAID:
     		return new TrapCraftingTableContainer((TrapCraftingTableTileEntity)world.getBlockTileEntity(x, y, z), player.inventory);
     }
     return null;
@@ -85,7 +85,7 @@ public class FishingModule extends ISAbstractModule {
     public Object getClientGUIElement(int blockMetadata, EntityPlayer player,
             World world, int x, int y, int z) {
         switch(world.getBlockMetadata(x, y, z)){
-        	case FishingModuleBlock.TRAPCRAFTINGBLOCKMETAID:
+        	case FishingModuleModelBlock.TRAPCRAFTINGBLOCKMETAID:
         		return new TrapCraftingTableGUI((TrapCraftingTableTileEntity)world.getBlockTileEntity(x, y, z), player.inventory);
         }
         return null;

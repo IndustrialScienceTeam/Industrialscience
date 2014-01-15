@@ -5,11 +5,6 @@ import industrialscience.IndustrialScience;
 import java.util.List;
 import java.util.logging.Level;
 
-<<<<<<< HEAD
-=======
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
->>>>>>> master
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -19,6 +14,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -30,78 +26,6 @@ public abstract class ISModuleBlock extends BlockContainer {
 		super(par1, par2Material);
 		this.prefix=prefix+".block";
 	}
-<<<<<<< HEAD
-	 @Override
-	    public boolean isOpaqueCube() {
-	        return false;
-	    }
-
-	    @Override
-	    public TileEntity createNewTileEntity(World world) {
-	        return null;
-	    }
-
-	    @Override
-	    public TileEntity createTileEntity(World world, int metadata) {
-	    	 try {
-		            TileEntity te = blocks[metadata].getTileEntity().newInstance();
-		            return te;
-		        } catch (Exception e) {
-		           IndustrialScience.getLogger().log(Level.SEVERE, "Couldn't create TileEntity for "+prefix+":"+metadata, e);
-		        }
-		        return null;
-	    }
-
-	    @Override
-	    public boolean hasTileEntity(int metadata) {
-	        return true;
-	    }
-	    @SuppressWarnings({ "rawtypes", "unchecked" })
-	    @Override
-	    public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs,
-	            List par3List) {
-	        for (int i = 0; i < blocks.length; i++) {
-	            par3List.add(new ItemStack(par1, 1, i));
-	        }
-
-	    }
-	    public void register() {
-	        GameRegistry.registerBlock(this, ISModuleBlockItem.class,
-	                prefix);
-	        for (int i=0;i<blocks.length;i++) {
-	        	String name = new ItemStack(this, 1, i).getUnlocalizedName();
-	        	ISBlock typ=blocks[i];
-	            GameRegistry.registerTileEntity(
-	                    typ.getTileEntity(), name + ".tileEntity.");
-	        }
-
-	    }
-	    @SideOnly(Side.CLIENT)
-	    public void registerRenderers() {
-		        for (int i=0;i<blocks.length;i++) {
-		        	ISBlock typ=blocks[i];
-		        	 try {
-	                ClientRegistry
-	                        .bindTileEntitySpecialRenderer(typ.getTileEntity(),
-	                                typ.getRenderer().newInstance());
-	            }
-		        catch (Exception e) {
-		           IndustrialScience.getLogger().log(Level.SEVERE, "Couldn't create SpecialRenderer for "+prefix+":"+i, e);
-		        }
-		        	 }
-	    }
-
-	    public boolean onBlockActivated(World par1World, int par2, int par3,
-	            int par4, EntityPlayer par5EntityPlayer, int par6, float par7,
-	            float par8, float par9) {
-	        return blocks[par1World.getBlockMetadata(par2, par3, par4)].onBlockActivated(par1World, par2, par3, par4,
-	                par5EntityPlayer, par6, par7, par8, par9);
-	    }
-
-	    public void breakBlock(World world, int x, int y, int z, int i, int j) {
-	    	blocks[world.getBlockMetadata(x, y, z)].breakBlock(world, x, y, z, i, j);
-	    }
-=======
     @Override
     public TileEntity createTileEntity(World world, int metadata) {
     	 try {
@@ -129,7 +53,6 @@ public abstract class ISModuleBlock extends BlockContainer {
         for (int i = 0; i < blocks.length; i++) {
             par3List.add(new ItemStack(par1, 1, i));
         }
->>>>>>> master
 
     }
     public void register() {
@@ -139,9 +62,6 @@ public abstract class ISModuleBlock extends BlockContainer {
         	ISBlock typ=blocks[i];
             GameRegistry.registerTileEntity(
                     typ.getTileEntity(), prefix + ".tileEntity."+typ.getIdName());
-            LanguageRegistry.addName(
-                    new ItemStack(this, 1, i),
-                    typ.getHumanName());
         }
     }
     public boolean onBlockActivated(World par1World, int par2, int par3,
