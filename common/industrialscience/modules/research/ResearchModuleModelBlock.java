@@ -2,11 +2,11 @@ package industrialscience.modules.research;
 
 import net.minecraft.block.material.Material;
 import industrialscience.blocksystem.ISBlock;
-import industrialscience.blocksystem.ISModuleBlock;
+import industrialscience.blocksystem.ISModuleModelBlock;
 import industrialscience.modules.research.frontend.blocks.CopierISBlock;
 import industrialscience.modules.research.frontend.blocks.ResearchDeskISBlock;
 
-public class ResearchModuleModelBlock extends ISModuleBlock {
+public class ResearchModuleModelBlock extends ISModuleModelBlock {
 	public static final int RESEARCHDESKMETAID=0;
 	public static final int COPIERMETAID = 1;
 	

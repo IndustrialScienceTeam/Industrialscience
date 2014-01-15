@@ -16,8 +16,8 @@ public class ISModuleBlockItem extends ItemBlock{
 	}
 	@Override
 	public String getUnlocalizedName(ItemStack itemstack) {
-		if(Block.blocksList[itemstack.itemID] instanceof ISModuleBlock){
-			ISModuleBlock mBlock=(ISModuleBlock)Block.blocksList[itemstack.itemID];
+		if(Block.blocksList[itemstack.itemID] instanceof ISModuleModelBlock){
+			ISModuleModelBlock mBlock=(ISModuleModelBlock)Block.blocksList[itemstack.itemID];
 			return mBlock.getIDName(itemstack.getItemDamage());
 		}
 		return "NO NAME";

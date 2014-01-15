@@ -1,6 +1,6 @@
 package industrialscience.modules;
 
-import industrialscience.blocksystem.ISModuleBlock;
+import industrialscience.blocksystem.ISModuleModelBlock;
 import industrialscience.modules.fishing.FishingModuleModelBlock;
 import industrialscience.modules.fishing.FishingModulePackethandler;
 import industrialscience.modules.fishing.Items.LobsterItem;
@@ -21,7 +21,7 @@ public class FishingModule extends ISAbstractModule {
                 "IndustrialScience Fishing", i, new FishingModulePackethandler());
     }
 
-    public static ISModuleBlock fishingblock;
+    public static ISModuleModelBlock fishingblock;
 
     public static Item lobsteritem;
     public static int lobsteritemID;

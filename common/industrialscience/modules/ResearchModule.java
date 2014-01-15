@@ -1,6 +1,6 @@
 package industrialscience.modules;
 
-import industrialscience.blocksystem.ISModuleBlock;
+import industrialscience.blocksystem.ISModuleModelBlock;
 import industrialscience.modules.research.ResearchModuleModelBlock;
 import industrialscience.modules.research.ResearchPacketHandler;
 import industrialscience.modules.research.frontend.ResearchBook;
@@ -33,7 +33,7 @@ public class ResearchModule extends ISAbstractModule {
                 new ResearchPacketHandler());
     }
 
-    public static ISModuleBlock researchBlock;
+    public static ISModuleModelBlock researchBlock;
 
     public static Item researchbook;
     public static int researchbookID;
