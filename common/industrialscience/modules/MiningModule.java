@@ -1,6 +1,7 @@
 package industrialscience.modules;
 
 import industrialscience.IndustrialScience;
+import industrialscience.blocksystem.ISModuleModelBlock;
 import industrialscience.blocksystem.ISModuleNormalBlock;
 import industrialscience.modules.mining.MiningModuleNormalBlock;
 import industrialscience.modules.mining.MiningPackethandler;
@@ -32,6 +33,7 @@ public class MiningModule extends ISAbstractModule {
     public static Item AEPickaxeICBronze;
     
     public static ISModuleNormalBlock normalBlocks;
+    public static ISModuleModelBlock modelBlocks;
     
     public final int APPENGTIERLIMIT=4096;
 
@@ -55,6 +57,7 @@ public class MiningModule extends ISAbstractModule {
         logger.log(Level.INFO, "INIT");
         initCreativeTab(new ItemStack(Item.pickaxeDiamond));
         normalBlocks=new MiningModuleNormalBlock(this.getNormalBlockID(),this.getPrefix());
+        modelBlocks=new MiningModuleModelBlock(this.getModelBlockID(), this.getPrefix());
         miningslagID =getItemIDs().get("mining_slag");
         miningslag = new MiningSlagItem(miningslagID, this.getPrefix());
         if(IndustrialScience.isAeinstalled()){
