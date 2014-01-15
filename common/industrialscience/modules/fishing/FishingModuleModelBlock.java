@@ -17,11 +17,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
-public class FishingModuleBlock extends ISModuleBlock {
+public class FishingModuleModelBlock extends ISModuleBlock {
 
     
 
-    public FishingModuleBlock(int par1, String prefix) {
+    public FishingModuleModelBlock(int par1, String prefix) {
 		super(par1, Material.iron, prefix);
 		
 	}

@@ -1,7 +1,7 @@
 package industrialscience.modules;
 
 import industrialscience.blocksystem.ISModuleBlock;
-import industrialscience.modules.research.ResearchModuleBlock;
+import industrialscience.modules.research.ResearchModuleModelBlock;
 import industrialscience.modules.research.ResearchPacketHandler;
 import industrialscience.modules.research.frontend.ResearchBook;
 import industrialscience.modules.research.frontend.ResearchNote;
@@ -65,7 +65,7 @@ public class ResearchModule extends ISAbstractModule {
         researchbook = new ResearchBook(researchbookID - 256);
         researchNoteID = getItemIDs().get("researchnote");
         researchNote = new ResearchNote(researchNoteID - 256);
-        researchBlock = new ResearchModuleBlock(getModelBlockID(), this.getPrefix());
+        researchBlock = new ResearchModuleModelBlock(getModelBlockID(), this.getPrefix());
         initCreativeTab(new ItemStack(researchBlock, 1,
                 1));
     }
@@ -87,10 +87,10 @@ public class ResearchModule extends ISAbstractModule {
     public Object getServerGUIElement(int id, EntityPlayer player, World world,
             int x, int y, int z) {
         if (id == 0) {
-            if (ResearchModuleBlock.RESEARCHDESKMETAID == world
+            if (ResearchModuleModelBlock.RESEARCHDESKMETAID == world
                     .getBlockMetadata(x, y, z))
                 return null;
-            if (ResearchModuleBlock.COPIERMETAID == world.getBlockMetadata(x,
+            if (ResearchModuleModelBlock.COPIERMETAID == world.getBlockMetadata(x,
                     y, z))
                 return new CopierContainer(
                         (CopierTile) world.getBlockTileEntity(x, y, z),
@@ -112,10 +112,10 @@ public class ResearchModule extends ISAbstractModule {
     public Object getClientGUIElement(int id, EntityPlayer player, World world,
             int x, int y, int z) {
         if (id == 0) {
-            if (ResearchModuleBlock.RESEARCHDESKMETAID == world
+            if (ResearchModuleModelBlock.RESEARCHDESKMETAID == world
                     .getBlockMetadata(x, y, z))
                 return null;
-            if (ResearchModuleBlock.COPIERMETAID == world.getBlockMetadata(x,
+            if (ResearchModuleModelBlock.COPIERMETAID == world.getBlockMetadata(x,
                     y, z))
                 return new CopierGUI((CopierTile) world.getBlockTileEntity(x,
                         y, z), player.inventory);

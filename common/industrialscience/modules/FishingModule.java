@@ -1,7 +1,7 @@
 package industrialscience.modules;
 
 import industrialscience.blocksystem.ISModuleBlock;
-import industrialscience.modules.fishing.FishingModuleBlock;
+import industrialscience.modules.fishing.FishingModuleModelBlock;
 import industrialscience.modules.fishing.FishingModulePackethandler;
 import industrialscience.modules.fishing.Items.LobsterItem;
 
@@ -51,7 +51,7 @@ public class FishingModule extends ISAbstractModule {
     public void init() {
         logger.log(Level.INFO, "INIT");
         initCreativeTab(new ItemStack(Item.fishingRod));
-        fishingblock = new FishingModuleBlock(getModelBlockID(), getPrefix());
+        fishingblock = new FishingModuleModelBlock(getModelBlockID(), getPrefix());
         lobsteritemID = getItemIDs().get("lobsteritem");
         lobsteritem = new LobsterItem(lobsteritemID);
 
