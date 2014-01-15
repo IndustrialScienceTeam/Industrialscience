@@ -27,8 +27,8 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ResearchModule extends ISAbstractModule {
-    public ResearchModule(int blockID, int bitprefix) {
-        super(NeededItemIDs(), blockID, "research",
+    public ResearchModule(int normalblockID,int modelblockid, int bitprefix) {
+        super(NeededItemIDs(), normalblockID,modelblockid, "research",
                 "IndustrialScience Research", bitprefix,
                 new ResearchPacketHandler());
     }
@@ -65,7 +65,7 @@ public class ResearchModule extends ISAbstractModule {
         researchbook = new ResearchBook(researchbookID - 256);
         researchNoteID = getItemIDs().get("researchnote");
         researchNote = new ResearchNote(researchNoteID - 256);
-        researchBlock = new ResearchModuleBlock(getBlockID(), this.getPrefix());
+        researchBlock = new ResearchModuleBlock(getModelBlockID(), this.getPrefix());
         initCreativeTab(new ItemStack(researchBlock, 1,
                 1));
     }

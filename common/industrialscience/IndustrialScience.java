@@ -79,9 +79,12 @@ public class IndustrialScience {
                 suggestedConfigurationFile);
         configuration.load();
         for (ISAbstractModule a : MODULES) {
-            int suggestedBlockID = a.getBlockID();
-            suggestedBlockID = configuration.getBlock(
-                    a.getPrefix() + ".blockID", suggestedBlockID).getInt();
+            int suggestedNormalBlockID = a.getNormalBlockID();
+            suggestedNormalBlockID = configuration.getBlock(
+                    a.getPrefix() + ".blockNormalID", suggestedNormalBlockID).getInt();
+            int suggestedModelBlockID = a.getModelBlockID();
+            suggestedModelBlockID = configuration.getBlock(
+                    a.getPrefix() + ".blockModelID", suggestedModelBlockID).getInt();
 
             Hashtable<String, Integer> neededItemIDs = a.getItemIDs();
             Hashtable<String, Integer> ItemIDs = new Hashtable<String, Integer>();
@@ -94,7 +97,8 @@ public class IndustrialScience {
                                 neededItemIDs.get(itemname)).getInt()-256);
             }
             a.setItemIDs(ItemIDs);
-            a.setBlockID(suggestedBlockID);
+            a.setNormalBlockID(suggestedNormalBlockID);
+            a.setModelBlockID(suggestedModelBlockID);
         }
         configuration.save();
     }
@@ -144,9 +148,9 @@ public class IndustrialScience {
      * Adds every module to the list.
      */
     private void registermodules() {
-        MODULES[0] = new industrialscience.modules.ResearchModule(756, 0);
-        MODULES[1] = new industrialscience.modules.FishingModule(757, 1);
-        MODULES[2] = new industrialscience.modules.MiningModule(758, 2);
+        MODULES[0] = new industrialscience.modules.ResearchModule(756,757, 0);
+        MODULES[1] = new industrialscience.modules.FishingModule(758,759, 1);
+        MODULES[2] = new industrialscience.modules.MiningModule(760,761, 2);
 
     }
 

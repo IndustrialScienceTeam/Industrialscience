@@ -25,8 +25,8 @@ public class MiningModule extends ISAbstractModule {
     public static Item MinerPickaxeDiamond;
     public static Item MinerPickaxeICBronze;
 
-    public MiningModule(int blockID, int i) {
-        super(NeededItemIDs(), blockID, "mining", "IndustrialScience Mining",
+    public MiningModule(int normalblockID, int modelblockid, int i) {
+        super(NeededItemIDs(), normalblockID,modelblockid, "mining", "IndustrialScience Mining",
                 i, new MiningPackethandler());
     }
 

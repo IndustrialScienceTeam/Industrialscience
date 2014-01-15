@@ -16,8 +16,8 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class FishingModule extends ISAbstractModule {
-    public FishingModule(int blockid, int i) {
-        super(NeededItemIDs(), blockid, "fishingmodule",
+    public FishingModule(int normalblockid,int modelblockid, int i) {
+        super(NeededItemIDs(), normalblockid,modelblockid, "fishingmodule",
                 "IndustrialScience Fishing", i, new FishingModulePackethandler());
     }
 
@@ -51,7 +51,7 @@ public class FishingModule extends ISAbstractModule {
     public void init() {
         logger.log(Level.INFO, "INIT");
         initCreativeTab(new ItemStack(Item.fishingRod));
-        fishingblock = new FishingModuleBlock(getBlockID(), getPrefix());
+        fishingblock = new FishingModuleBlock(getModelBlockID(), getPrefix());
         lobsteritemID = getItemIDs().get("lobsteritem");
         lobsteritem = new LobsterItem(lobsteritemID);
 

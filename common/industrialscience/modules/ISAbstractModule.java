@@ -20,33 +20,31 @@ public abstract class ISAbstractModule {
     protected CreativeTabs CreativeTab = null;
     protected Logger logger;
     private Hashtable<String, Integer> ItemIDs;
-    private int BlockID;
+    private int normalBlockID;
+    private int modelBlockID;
     private String prefix;
     private String name;
     private ItemStack IconItemStack;
     private int bitprefix;
     private IPacketHandler packethandler;
 
-    protected ISAbstractModule(Hashtable<String, Integer> itemIDs, int blockID,
+    protected ISAbstractModule(Hashtable<String, Integer> itemIDs, int normalBlockID, int modelBlockID,
             String prefix, String name, int bitprefix,
             IPacketHandler packethandler) {
         super();
         ItemIDs = itemIDs;
-        BlockID = blockID;
+        this.normalBlockID=normalBlockID;
+        this.modelBlockID=modelBlockID;
         this.prefix = "industrialscience." + prefix;
         this.name = name;
         logger = Logger.getLogger(this.prefix);
         logger.setParent(FMLLog.getLogger());
         this.bitprefix = bitprefix;
         this.packethandler = packethandler;
+        
     }
 
     public abstract void load();
-
-    public void setIDs(int suggestedBlockID, Hashtable<String, Integer> ItemIDs) {
-        BlockID = suggestedBlockID;
-        this.ItemIDs = ItemIDs;
-    }
 
     public abstract void init();
 
@@ -65,7 +63,23 @@ public abstract class ISAbstractModule {
 
     }
 
-    public Hashtable<String, Integer> getItemIDs() {
+    public void setNormalBlockID(int normalBlockID) {
+		this.normalBlockID = normalBlockID;
+	}
+
+	public void setModelBlockID(int modelBlockID) {
+		this.modelBlockID = modelBlockID;
+	}
+
+	public int getNormalBlockID() {
+		return normalBlockID;
+	}
+
+	public int getModelBlockID() {
+		return modelBlockID;
+	}
+
+	public Hashtable<String, Integer> getItemIDs() {
         return ItemIDs;
     }
 
@@ -79,14 +93,6 @@ public abstract class ISAbstractModule {
 
     public Logger getLogger() {
         return logger;
-    }
-
-    public void setBlockID(int blockID) {
-        BlockID = blockID;
-    }
-
-    public int getBlockID() {
-        return BlockID;
     }
 
     public String getPrefix() {
