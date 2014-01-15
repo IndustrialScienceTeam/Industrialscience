@@ -1,10 +1,13 @@
 package industrialscience.modules;
 
 import industrialscience.IndustrialScience;
+import industrialscience.blocksystem.ISModuleNormalBlock;
+import industrialscience.modules.mining.MiningModuleNormalBlock;
 import industrialscience.modules.mining.MiningPackethandler;
-import industrialscience.modules.mining.frontend.items.ItemAEPickaxe;
-import industrialscience.modules.mining.frontend.items.MESize;
-import industrialscience.modules.mining.frontend.items.MiningSlagItem;
+import industrialscience.modules.mining.items.ItemAEPickaxe;
+import industrialscience.modules.mining.items.MESize;
+import industrialscience.modules.mining.items.MiningSlagItem;
+
 import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.logging.Level;
@@ -28,6 +31,8 @@ public class MiningModule extends ISAbstractModule {
     public static Item AEPickaxeDiamond;
     public static Item AEPickaxeICBronze;
     
+    public static ISModuleNormalBlock normalBlocks;
+    
     public final int APPENGTIERLIMIT=4096;
 
     public MiningModule(int normalblockID, int modelblockid, int i) {
@@ -38,7 +43,8 @@ public class MiningModule extends ISAbstractModule {
     @Override
     public void load() {
         logger.log(Level.INFO, "LOADING");
-        
+        normalBlocks.register();
+        normalBlocks.setCreativeTab(getCreativeTab());
         miningslag.setCreativeTab(CreativeTab);
         
         
@@ -48,6 +54,7 @@ public class MiningModule extends ISAbstractModule {
     public void init() {
         logger.log(Level.INFO, "INIT");
         initCreativeTab(new ItemStack(Item.pickaxeDiamond));
+        normalBlocks=new MiningModuleNormalBlock(this.getNormalBlockID(),this.getPrefix());
         miningslagID =getItemIDs().get("mining_slag");
         miningslag = new MiningSlagItem(miningslagID, this.getPrefix());
         if(IndustrialScience.isAeinstalled()){
