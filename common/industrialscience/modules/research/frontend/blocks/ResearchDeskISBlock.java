@@ -2,14 +2,14 @@ package industrialscience.modules.research.frontend.blocks;
 
 import industrialscience.BlockUtils;
 import industrialscience.IndustrialScience;
-import industrialscience.blocksystem.ISBlock;
+import industrialscience.blocksystem.ModelISBlock;
 import industrialscience.modules.research.frontend.TileEntities.ResearchDeskTile;
 import industrialscience.modules.research.frontend.renderer.ResearchDeskRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.network.FMLNetworkHandler;
 
-public class ResearchDeskISBlock extends ISBlock {
+public class ResearchDeskISBlock extends ModelISBlock {
 
 	public ResearchDeskISBlock() {
 		super(ResearchDeskTile.class, "ResearchDesk", ResearchDeskRenderer.class);

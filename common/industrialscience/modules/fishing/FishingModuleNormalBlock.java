@@ -1,6 +1,6 @@
 package industrialscience.modules.fishing;
 import industrialscience.IndustrialScience;
-import industrialscience.blocksystem.ISBlock;
+import industrialscience.blocksystem.ModelISBlock;
 import industrialscience.blocksystem.ISModuleBlock;
 import industrialscience.modules.fishing.Blocks.TrapCraftingTableISBlock;
 import industrialscience.BlockUtils;

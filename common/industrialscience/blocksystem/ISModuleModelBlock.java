@@ -28,7 +28,7 @@ public class ISModuleModelBlock extends ISModuleBlock {
 	        try {
 
 		        for (int i=0;i<blocks.length;i++) {
-		        	ISBlock typ=blocks[i];
+		        	ModelISBlock typ=(ModelISBlock)blocks[i];
 	                ClientRegistry
 	                        .bindTileEntitySpecialRenderer(typ.getTileEntity(),
 	                                typ.getRenderer().newInstance());

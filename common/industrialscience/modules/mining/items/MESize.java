@@ -1,4 +1,4 @@
-package industrialscience.modules.mining.frontend.items;
+package industrialscience.modules.mining.items;
 
 import industrialscience.modules.MiningModule;
 

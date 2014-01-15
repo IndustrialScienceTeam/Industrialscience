@@ -2,7 +2,7 @@ package industrialscience.modules.fishing.Blocks;
 
 import industrialscience.BlockUtils;
 import industrialscience.IndustrialScience;
-import industrialscience.blocksystem.ISBlock;
+import industrialscience.blocksystem.ModelISBlock;
 import industrialscience.modules.fishing.TileEntities.TrapCraftingTableTileEntity;
 import industrialscience.modules.research.frontend.renderer.ResearchDeskRenderer;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,7 +10,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.network.FMLNetworkHandler;
 
-public class TrapCraftingTableISBlock extends ISBlock {
+public class TrapCraftingTableISBlock extends ModelISBlock {
     private Icon side;
     private Icon bottom;
     private Icon top;

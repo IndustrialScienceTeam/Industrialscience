@@ -1,7 +1,7 @@
 package industrialscience.modules.fishing;
 
 import industrialscience.BlockUtils;
-import industrialscience.blocksystem.ISBlock;
+import industrialscience.blocksystem.ModelISBlock;
 import industrialscience.blocksystem.ISModuleModelBlock;
 import industrialscience.modules.fishing.Blocks.TrapCraftingTableISBlock;
 import industrialscience.modules.fishing.TileEntities.AbstractFishTrapTileEntity;
@@ -27,7 +27,7 @@ public class FishingModuleModelBlock extends ISModuleModelBlock {
 
 	public FishingModuleModelBlock(int par1, String prefix) {
 		super(par1, Material.iron, prefix);
-		blocks=new ISBlock[1];
+		blocks=new ModelISBlock[1];
 		blocks[TRAPCRAFTINGBLOCKMETAID]=new TrapCraftingTableISBlock();
 	}
 

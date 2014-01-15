@@ -1,7 +1,7 @@
 package industrialscience.modules.research;
 
 import net.minecraft.block.material.Material;
-import industrialscience.blocksystem.ISBlock;
+import industrialscience.blocksystem.ModelISBlock;
 import industrialscience.blocksystem.ISModuleModelBlock;
 import industrialscience.blocksystem.ISModuleNormalBlock;
 import industrialscience.modules.research.frontend.blocks.CopierISBlock;
