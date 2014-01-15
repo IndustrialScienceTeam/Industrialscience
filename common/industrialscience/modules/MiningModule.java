@@ -50,10 +50,12 @@ public class MiningModule extends ISAbstractModule {
         initCreativeTab(new ItemStack(Item.pickaxeDiamond));
         miningslagID =getItemIDs().get("mining_slag");
         miningslag = new MiningSlagItem(miningslagID, this.getPrefix());
+        if(IndustrialScience.isAeinstalled()){
         AEPickaxeWood=new ItemAEPickaxe(getItemIDs().get("AEPickaxeWood"), EnumToolMaterial.WOOD, this.getPrefix());
         AEPickaxeStone=new ItemAEPickaxe(getItemIDs().get("AEPickaxeStone"), EnumToolMaterial.STONE, this.getPrefix());
         AEPickaxeIron=new ItemAEPickaxe(getItemIDs().get("AEPickaxeIron"), EnumToolMaterial.IRON, this.getPrefix());
         AEPickaxeDiamond=new ItemAEPickaxe(getItemIDs().get("AEPickaxeDiamond"), EnumToolMaterial.EMERALD, this.getPrefix());
+        }    
     }
 
     public static Hashtable<String, Integer> NeededItemIDs () {
