@@ -57,7 +57,7 @@ public abstract class ISModuleBlock extends BlockContainer {
     }
     public void register() {
         GameRegistry.registerBlock(this, ISModuleBlockItem.class,
-                prefix);
+                prefix+"."+this.getClass().getName());
         for (int i=0;i<blocks.length;i++) {
         	ISBlock typ=blocks[i];
             GameRegistry.registerTileEntity(
