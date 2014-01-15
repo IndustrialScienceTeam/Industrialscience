@@ -47,6 +47,8 @@ public class MiningModule extends ISAbstractModule {
         logger.log(Level.INFO, "LOADING");
         normalBlocks.register();
         normalBlocks.setCreativeTab(getCreativeTab());
+        modelBlocks.register();
+        modelBlocks.setCreativeTab(getCreativeTab());
         miningslag.setCreativeTab(CreativeTab);
         
         
