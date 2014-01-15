@@ -12,11 +12,11 @@ import net.minecraft.tileentity.TileEntity;
 
 public class ResearchDeskModel extends ModelBase {
     // fields
-    ModelRenderer Leg1;
-    ModelRenderer Leg2;
-    ModelRenderer Leg3;
-    ModelRenderer Leg4;
-    ModelRenderer tablebase;
+   private ModelRenderer Leg1;
+   private ModelRenderer Leg2;
+   private ModelRenderer Leg3;
+   private ModelRenderer Leg4;
+   private ModelRenderer tablebase;
 
     public ResearchDeskModel() {
     	textureWidth = 128;
