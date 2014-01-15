@@ -30,8 +30,8 @@ public class MiningModule extends ISAbstractModule {
     
     public final int APPENGTIERLIMIT=4096;
 
-    public MiningModule(int blockID, int i) {
-        super(NeededItemIDs(), blockID, "mining", "IndustrialScience Mining",
+    public MiningModule(int normalblockID, int modelblockid, int i) {
+        super(NeededItemIDs(), normalblockID,modelblockid, "mining", "IndustrialScience Mining",
                 i, new MiningPackethandler());
     }
 

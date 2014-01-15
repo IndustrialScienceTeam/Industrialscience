@@ -20,12 +20,12 @@
 	<property name="mcpsrc.dir" value="${mcp.dir}/src" />
 
 	<property name="mc.version" value="1.6.4" />
-	<property name="forge.version" value="9.11.1.953" />
+	<property name="forge.version" value="9.11.1.965" />
 	<!-- <property name="project.version" value="0.0.0"/> -->
 
 	<property name="industrialscience.name" value="industrialscience" />
 
-	<property name="forge.name" value="minecraftforge-src-${mc.version}-${forge.version}.zip"/>
+	<property name="forge.name" value="forge-${mc.version}-${forge.version}-src.zip"/>
 	
 	<property name="sonar.jdbc.url" value="jdbc:mysql://localhost:3306/sonar?useUnicode=true&amp;characterEncoding=utf8" />
 	<property name="sonar.jdbc.username" value="sonar" />
@@ -66,7 +66,7 @@
 
 	<!-- Download forge (if it doesn't exist) -->
 	<target name="download-forge" unless="forge-exists">
-		<get src="http://files.minecraftforge.net/${forge.name}" dest="${download.dir}" usetimestamp="True"/>
+		<get src="http://files.minecraftforge.net/maven/net/minecraftforge/forge/${mc.version}-${forge.version}/${forge.name}" dest="${download.dir}" usetimestamp="True"/>
 	</target>
 
 	<!-- Setup mcp and forge -->

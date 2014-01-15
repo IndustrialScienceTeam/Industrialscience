@@ -1,7 +1,7 @@
 package industrialscience.modules;
 
-import industrialscience.blocksystem.ISModuleBlock;
-import industrialscience.modules.research.ResearchModuleBlock;
+import industrialscience.blocksystem.ISModuleModelBlock;
+import industrialscience.modules.research.ResearchModuleModelBlock;
 import industrialscience.modules.research.ResearchPacketHandler;
 import industrialscience.modules.research.frontend.ResearchBook;
 import industrialscience.modules.research.frontend.ResearchNote;
@@ -23,13 +23,13 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ResearchModule extends ISAbstractModule {
-    public ResearchModule(int blockID, int bitprefix) {
-        super(NeededItemIDs(), blockID, "research",
+    public ResearchModule(int normalblockID,int modelblockid, int bitprefix) {
+        super(NeededItemIDs(), normalblockID,modelblockid, "research",
                 "IndustrialScience Research", bitprefix,
                 new ResearchPacketHandler());
     }
 
-    public static ISModuleBlock researchBlock;
+    public static ISModuleModelBlock researchBlock;
 
     public static Item researchbook;
     public static int researchbookID;
@@ -60,8 +60,13 @@ public class ResearchModule extends ISAbstractModule {
         researchbookID = getItemIDs().get("researchbook");
         researchbook = new ResearchBook(researchbookID,this.getPrefix());
         researchNoteID = getItemIDs().get("researchnote");
+<<<<<<< HEAD
         researchNote = new ResearchNote(researchNoteID - 256, this.getPrefix());
         researchBlock = new ResearchModuleBlock(getBlockID(), this.getPrefix());
+=======
+        researchNote = new ResearchNote(researchNoteID - 256);
+        researchBlock = new ResearchModuleModelBlock(getModelBlockID(), this.getPrefix());
+>>>>>>> master
         initCreativeTab(new ItemStack(researchBlock, 1,
                 1));
     }
@@ -83,10 +88,10 @@ public class ResearchModule extends ISAbstractModule {
     public Object getServerGUIElement(int id, EntityPlayer player, World world,
             int x, int y, int z) {
         if (id == 0) {
-            if (ResearchModuleBlock.RESEARCHDESKMETAID == world
+            if (ResearchModuleModelBlock.RESEARCHDESKMETAID == world
                     .getBlockMetadata(x, y, z))
                 return null;
-            if (ResearchModuleBlock.COPIERMETAID == world.getBlockMetadata(x,
+            if (ResearchModuleModelBlock.COPIERMETAID == world.getBlockMetadata(x,
                     y, z))
                 return new CopierContainer(
                         (CopierTile) world.getBlockTileEntity(x, y, z),
@@ -108,10 +113,10 @@ public class ResearchModule extends ISAbstractModule {
     public Object getClientGUIElement(int id, EntityPlayer player, World world,
             int x, int y, int z) {
         if (id == 0) {
-            if (ResearchModuleBlock.RESEARCHDESKMETAID == world
+            if (ResearchModuleModelBlock.RESEARCHDESKMETAID == world
                     .getBlockMetadata(x, y, z))
                 return null;
-            if (ResearchModuleBlock.COPIERMETAID == world.getBlockMetadata(x,
+            if (ResearchModuleModelBlock.COPIERMETAID == world.getBlockMetadata(x,
                     y, z))
                 return new CopierGUI((CopierTile) world.getBlockTileEntity(x,
                         y, z), player.inventory);

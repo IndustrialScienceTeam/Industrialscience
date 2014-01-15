@@ -1,7 +1,7 @@
 package industrialscience.modules;
 
-import industrialscience.blocksystem.ISModuleBlock;
-import industrialscience.modules.fishing.FishingModuleBlock;
+import industrialscience.blocksystem.ISModuleModelBlock;
+import industrialscience.modules.fishing.FishingModuleModelBlock;
 import industrialscience.modules.fishing.FishingModulePackethandler;
 import industrialscience.modules.fishing.GUI.TrapCraftingTableGUI;
 import industrialscience.modules.fishing.GUI.containers.TrapCraftingTableContainer;
@@ -18,12 +18,12 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class FishingModule extends ISAbstractModule {
-    public FishingModule(int blockid, int i) {
-        super(NeededItemIDs(), blockid, "fishingmodule",
+    public FishingModule(int normalblockid,int modelblockid, int i) {
+        super(NeededItemIDs(), normalblockid,modelblockid, "fishingmodule",
                 "IndustrialScience Fishing", i, new FishingModulePackethandler());
     }
 
-    public static ISModuleBlock fishingblock;
+    public static ISModuleModelBlock fishingblock;
 
     public static Item lobsteritem;
     public static int lobsteritemID;
@@ -53,7 +53,7 @@ public class FishingModule extends ISAbstractModule {
     public void init() {
         logger.log(Level.INFO, "INIT");
         initCreativeTab(new ItemStack(Item.fishingRod));
-        fishingblock = new FishingModuleBlock(getBlockID(), getPrefix());
+        fishingblock = new FishingModuleModelBlock(getModelBlockID(), getPrefix());
         lobsteritemID = getItemIDs().get("lobsteritem");
         lobsteritem = new LobsterItem(lobsteritemID, this.getPrefix());
 

@@ -1,9 +1,15 @@
 package industrialscience.modules.fishing;
 
+<<<<<<< HEAD:common/industrialscience/modules/fishing/FishingModuleBlock.java
 import industrialscience.IndustrialScience;
 import industrialscience.blocksystem.ISBlock;
 import industrialscience.blocksystem.ISModuleBlock;
 import industrialscience.modules.fishing.Blocks.TrapCraftingTableISBlock;
+=======
+import industrialscience.BlockUtils;
+import industrialscience.blocksystem.ISModuleModelBlock;
+import industrialscience.blocksystem.ISModuleNormalBlock;
+>>>>>>> master:common/industrialscience/modules/fishing/FishingModuleNormalBlock.java
 import industrialscience.modules.fishing.TileEntities.AbstractFishTrapTileEntity;
 
 import java.util.Random;
@@ -14,11 +20,16 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.network.FMLNetworkHandler;
 
+<<<<<<< HEAD:common/industrialscience/modules/fishing/FishingModuleBlock.java
 public class FishingModuleBlock extends ISModuleBlock {
 public static final int TRAPCRAFTINGBLOCKMETAID=0;
+=======
+public class FishingModuleNormalBlock extends ISModuleNormalBlock {
+
+>>>>>>> master:common/industrialscience/modules/fishing/FishingModuleNormalBlock.java
     
 
-    public FishingModuleBlock(int par1, String prefix) {
+    public FishingModuleNormalBlock(int par1, String prefix) {
 		super(par1, Material.iron, prefix);
 		blocks=new ISBlock[1];
 		blocks[TRAPCRAFTINGBLOCKMETAID]=new TrapCraftingTableISBlock();
