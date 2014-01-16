@@ -1,4 +1,4 @@
-package industrialscience.modules;
+package industrialscience.modules.mining;
 
 import net.minecraft.block.material.Material;
 import industrialscience.blocksystem.ISModuleModelBlock;

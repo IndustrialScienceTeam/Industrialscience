@@ -3,6 +3,7 @@ package industrialscience.modules;
 import industrialscience.IndustrialScience;
 import industrialscience.blocksystem.ISModuleModelBlock;
 import industrialscience.blocksystem.ISModuleNormalBlock;
+import industrialscience.modules.mining.MiningModuleModelBlock;
 import industrialscience.modules.mining.MiningModuleNormalBlock;
 import industrialscience.modules.mining.MiningPackethandler;
 import industrialscience.modules.mining.items.ItemAEPickaxe;
