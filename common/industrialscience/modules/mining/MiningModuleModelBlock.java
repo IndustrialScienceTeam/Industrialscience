@@ -1,5 +1,6 @@
 package industrialscience.modules.mining;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.block.material.Material;
 import industrialscience.blocksystem.ISModuleModelBlock;
 import industrialscience.blocksystem.ModelISBlock;
@@ -15,8 +16,9 @@ public static final int IRONDRILLEMETAID=1;
 		super(par1, Material.iron, prefix);
 		blocks = new ModelISBlock[2];
 		blocks[DRILLINGPIPEMETAID]=new DrillingPipeBlock();
-		blocks[IRONDRILLEMETAID]=new Drill(IronDrillTileEntity.class, "IronDrill", ResearchDeskRenderer.class);
-		
+		blocks[IRONDRILLEMETAID]=new Drill(IronDrillTileEntity.class, "IronDrill");
+		if(FMLCommonHandler.instance().getSide().isClient())
+		((ModelISBlock)blocks[IRONDRILLEMETAID]).setRenderer(ResearchDeskRenderer.class);
 	}
 
 }

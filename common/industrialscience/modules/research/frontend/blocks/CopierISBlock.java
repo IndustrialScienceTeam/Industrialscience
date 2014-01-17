@@ -5,14 +5,19 @@ import industrialscience.IndustrialScience;
 import industrialscience.blocksystem.ModelISBlock;
 import industrialscience.modules.research.frontend.TileEntities.CopierTile;
 import industrialscience.modules.research.frontend.renderer.ResearchCopierRenderer;
+import industrialscience.modules.research.frontend.renderer.ResearchDeskRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.FMLNetworkHandler;
 
 public class CopierISBlock extends ModelISBlock {
 
 	public CopierISBlock() {
-		super(CopierTile.class,"ResearchCopier",ResearchCopierRenderer.class);
+		super(CopierTile.class,"ResearchCopier");
+		if(FMLCommonHandler.instance().getSide().isClient()){
+			this.setRenderer(ResearchDeskRenderer.class);
+		}
 	}
 	public boolean onBlockActivated(World par1World, int par2, int par3,
 			int par4, EntityPlayer par5EntityPlayer, int par6, float par7,

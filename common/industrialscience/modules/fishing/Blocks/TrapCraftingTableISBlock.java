@@ -8,6 +8,7 @@ import industrialscience.modules.research.frontend.renderer.ResearchDeskRenderer
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.FMLNetworkHandler;
 
 public class TrapCraftingTableISBlock extends ModelISBlock {
@@ -16,7 +17,9 @@ public class TrapCraftingTableISBlock extends ModelISBlock {
     private Icon top;
 
     public TrapCraftingTableISBlock() {
-        super(TrapCraftingTableTileEntity.class,"trapcraftingtable",ResearchDeskRenderer.class);
+        super(TrapCraftingTableTileEntity.class,"trapcraftingtable");
+        if(FMLCommonHandler.instance().getSide().isClient())
+        	this.setRenderer(ResearchDeskRenderer.class);
     }
 
     @Override
