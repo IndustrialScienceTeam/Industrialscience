@@ -7,12 +7,12 @@ public enum RedstoneModeOutput implements IConfigEnum  {
 	WhenOn;
 	
 	@Override
-	public IConfigEnum[] getValues() {
-		return values();
+	public String getName() {
+		return "RedstoneMode";
 	}
 
 	@Override
-	public String getName() {
-		return "RedstoneMode";
+	public IConfigEnum[] getValues() {
+		return values();
 	}
 }

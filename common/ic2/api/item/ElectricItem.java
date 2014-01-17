@@ -25,6 +25,22 @@ public final class ElectricItem {
 	public static IElectricItemManager rawManager;
 
 	/**
+	 * Determine if the specified electric item has at least a specific amount of EU.
+	 * This is supposed to be used in the item code during operation, for example if you want to implement your own electric item.
+	 * BatPacks are not taken into account.
+	 *
+	 * @param itemStack electric item's stack
+	 * @param amount minimum amount of energy required
+	 * @return true if there's enough energy
+	 * 
+	 * @deprecated use manager.canUse() instead
+	 */
+	@Deprecated
+	public static boolean canUse(ItemStack itemStack, int amount) {
+		return manager.canUse(itemStack, amount);
+	}
+
+	/**
 	 * Charge an item with a specified amount of energy
 	 *
 	 * @param itemStack electric item's stack
@@ -39,6 +55,21 @@ public final class ElectricItem {
 	@Deprecated
 	public static int charge(ItemStack itemStack, int amount, int tier, boolean ignoreTransferLimit, boolean simulate) {
 		return manager.charge(itemStack, amount, tier, ignoreTransferLimit, simulate);
+	}
+
+	/**
+	 * Charge an item from the BatPack a player is wearing.
+	 * This is supposed to be used in the item code during operation, for example if you want to implement your own electric item.
+	 * use() already contains this functionality.
+	 *
+	 * @param itemStack electric item's stack
+	 * @param player player holding the item
+	 * 
+	 * @deprecated use manager.chargeFromArmor() instead
+	 */
+	@Deprecated
+	public static void chargeFromArmor(ItemStack itemStack, EntityPlayer player) {
+		manager.chargeFromArmor(itemStack, player);
 	}
 
 	/**
@@ -59,22 +90,6 @@ public final class ElectricItem {
 	}
 
 	/**
-	 * Determine if the specified electric item has at least a specific amount of EU.
-	 * This is supposed to be used in the item code during operation, for example if you want to implement your own electric item.
-	 * BatPacks are not taken into account.
-	 *
-	 * @param itemStack electric item's stack
-	 * @param amount minimum amount of energy required
-	 * @return true if there's enough energy
-	 * 
-	 * @deprecated use manager.canUse() instead
-	 */
-	@Deprecated
-	public static boolean canUse(ItemStack itemStack, int amount) {
-		return manager.canUse(itemStack, amount);
-	}
-
-	/**
 	 * Try to retrieve a specific amount of energy from an Item, and if applicable, a BatPack.
 	 * This is supposed to be used in the item code during operation, for example if you want to implement your own electric item.
 	 *
@@ -88,21 +103,6 @@ public final class ElectricItem {
 	@Deprecated
 	public static boolean use(ItemStack itemStack, int amount, EntityPlayer player) {
 		return manager.use(itemStack, amount, player);
-	}
-
-	/**
-	 * Charge an item from the BatPack a player is wearing.
-	 * This is supposed to be used in the item code during operation, for example if you want to implement your own electric item.
-	 * use() already contains this functionality.
-	 *
-	 * @param itemStack electric item's stack
-	 * @param player player holding the item
-	 * 
-	 * @deprecated use manager.chargeFromArmor() instead
-	 */
-	@Deprecated
-	public static void chargeFromArmor(ItemStack itemStack, EntityPlayer player) {
-		manager.chargeFromArmor(itemStack, player);
 	}
 }
 

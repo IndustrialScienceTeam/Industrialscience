@@ -14,11 +14,6 @@ public abstract class ISContainer extends Container {
         bindPlayerInventory(ip);
     }
 
-    @Override
-    public boolean canInteractWith(EntityPlayer entityplayer) {
-        return tile_entity.isUseableByPlayer(entityplayer);
-    }
-
     private void bindPlayerInventory(InventoryPlayer ip) {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 9; j++) {
@@ -32,5 +27,10 @@ public abstract class ISContainer extends Container {
             addSlotToContainer(new Slot(ip, i, 8 + i * 18, 142));
         }
 
+    }
+
+    @Override
+    public boolean canInteractWith(EntityPlayer entityplayer) {
+        return tile_entity.isUseableByPlayer(entityplayer);
     }
 }

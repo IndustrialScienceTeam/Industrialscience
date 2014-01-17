@@ -17,13 +17,13 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ResearchBookGUI extends GuiScreen {
-    private int bookImageWidth = 192;
     private int bookImageHeight = 192;
-    private int bookTotalPages = 1;
-    private int currPage;
+    private int bookImageWidth = 192;
     private NBTTagList bookPages;
+    private int bookTotalPages = 1;
     private GuiButtonNextPage buttonNextPage;
     private GuiButtonNextPage buttonPreviousPage;
+    private int currPage;
 
     public ResearchBookGUI(EntityPlayer player, ItemStack istack) {
         NBTTagCompound nbttagcompound = istack.getTagCompound();
@@ -32,17 +32,59 @@ public class ResearchBookGUI extends GuiScreen {
 
     }
 
-    private void generateBookPages(ItemStack istack) {
-        // TODO Auto-generated method stub
+    /**
+     * Fired when a control is clicked. This is the equivalent of
+     * ActionListener.actionPerformed(ActionEvent e).
+     */
+    @Override
+    protected void actionPerformed(GuiButton par1GuiButton) {
+        if (par1GuiButton.enabled) {
 
+            if (par1GuiButton.id == 1) {
+                if (currPage < bookTotalPages - 1) {
+                    ++currPage;
+                }
+
+            } else if (par1GuiButton.id == 2 && currPage > 0) {
+                    --currPage;
+            }
+            this.updateButtons();
+        }
     }
 
     /**
-     * Called from the main game loop to update the screen.
+     * Draws the screen and all the components in it.
      */
     @Override
-    public void updateScreen() {
-        super.updateScreen();
+    public void drawScreen(int par1, int par2, float par3) {
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        // mc.renderEngine.bindTexture("/gui/book.png");
+        int k = (width - bookImageWidth) / 2;
+        byte b0 = 2;
+        this.drawTexturedModalRect(k, b0, 0, 0, bookImageWidth, bookImageHeight);
+        String s;
+        String s1;
+        int l;
+        s = String.format(
+                StatCollector.translateToLocal("book.pageIndicator"),
+                new Object[] { Integer.valueOf(currPage + 1),
+                        Integer.valueOf(bookTotalPages) });
+        s1 = "";
+        if (bookPages != null && currPage >= 0
+                && currPage < bookPages.tagCount()) {
+            NBTTagString nbttagstring = (NBTTagString) bookPages
+                    .tagAt(currPage);
+            s1 = nbttagstring.toString();
+        }
+        l = fontRenderer.getStringWidth(s);
+        fontRenderer.drawString(s, k - l + bookImageWidth - 44, b0 + 16, 0);
+        fontRenderer.drawSplitString(s1, k + 36, b0 + 16 + 16, 116, 0);
+        super.drawScreen(par1, par2, par3);
+    }
+
+    private void generateBookPages(ItemStack istack) {
+        // TODO Auto-generated method stub
+
     }
 
     /**
@@ -63,17 +105,12 @@ public class ResearchBookGUI extends GuiScreen {
     }
 
     /**
-     * Called when the screen is unloaded. Used to disable keyboard repeat
-     * events
+     * Fired when a key is typed. This is the equivalent of
+     * KeyListener.keyTyped(KeyEvent e).
      */
     @Override
-    public void onGuiClosed() {
-        Keyboard.enableRepeatEvents(false);
-    }
-
-    private void updateButtons() {
-        buttonNextPage.drawButton = currPage < bookTotalPages - 1;
-        buttonPreviousPage.drawButton = currPage > 0;
+    protected void keyTyped(char par1, int par2) {
+        super.keyTyped(par1, par2);
     }
 
     // private void sendBookToServer(boolean par1)
@@ -137,23 +174,12 @@ public class ResearchBookGUI extends GuiScreen {
     // }
 
     /**
-     * Fired when a control is clicked. This is the equivalent of
-     * ActionListener.actionPerformed(ActionEvent e).
+     * Called when the screen is unloaded. Used to disable keyboard repeat
+     * events
      */
     @Override
-    protected void actionPerformed(GuiButton par1GuiButton) {
-        if (par1GuiButton.enabled) {
-
-            if (par1GuiButton.id == 1) {
-                if (currPage < bookTotalPages - 1) {
-                    ++currPage;
-                }
-
-            } else if (par1GuiButton.id == 2 && currPage > 0) {
-                    --currPage;
-            }
-            this.updateButtons();
-        }
+    public void onGuiClosed() {
+        Keyboard.enableRepeatEvents(false);
     }
 
     // private void addNewPage()
@@ -167,43 +193,17 @@ public class ResearchBookGUI extends GuiScreen {
     // }
     // }
 
-    /**
-     * Fired when a key is typed. This is the equivalent of
-     * KeyListener.keyTyped(KeyEvent e).
-     */
-    @Override
-    protected void keyTyped(char par1, int par2) {
-        super.keyTyped(par1, par2);
+    private void updateButtons() {
+        buttonNextPage.drawButton = currPage < bookTotalPages - 1;
+        buttonPreviousPage.drawButton = currPage > 0;
     }
 
     /**
-     * Draws the screen and all the components in it.
+     * Called from the main game loop to update the screen.
      */
     @Override
-    public void drawScreen(int par1, int par2, float par3) {
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        // mc.renderEngine.bindTexture("/gui/book.png");
-        int k = (width - bookImageWidth) / 2;
-        byte b0 = 2;
-        this.drawTexturedModalRect(k, b0, 0, 0, bookImageWidth, bookImageHeight);
-        String s;
-        String s1;
-        int l;
-        s = String.format(
-                StatCollector.translateToLocal("book.pageIndicator"),
-                new Object[] { Integer.valueOf(currPage + 1),
-                        Integer.valueOf(bookTotalPages) });
-        s1 = "";
-        if (bookPages != null && currPage >= 0
-                && currPage < bookPages.tagCount()) {
-            NBTTagString nbttagstring = (NBTTagString) bookPages
-                    .tagAt(currPage);
-            s1 = nbttagstring.toString();
-        }
-        l = fontRenderer.getStringWidth(s);
-        fontRenderer.drawString(s, k - l + bookImageWidth - 44, b0 + 16, 0);
-        fontRenderer.drawSplitString(s1, k + 36, b0 + 16 + 16, 116, 0);
-        super.drawScreen(par1, par2, par3);
+    public void updateScreen() {
+        super.updateScreen();
     }
 
 }

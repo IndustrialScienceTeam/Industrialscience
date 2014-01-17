@@ -12,10 +12,10 @@ import tconstruct.library.tools.ToolCore;
 
 public class ToolRecipe
 {
-    protected LinkedList<Item> headList = new LinkedList<Item>();
-    protected LinkedList<Item> handleList = new LinkedList<Item>();
     protected LinkedList<Item> accessoryList = new LinkedList<Item>();
     protected LinkedList<Item> extraList = new LinkedList<Item>();
+    protected LinkedList<Item> handleList = new LinkedList<Item>();
+    protected LinkedList<Item> headList = new LinkedList<Item>();
     protected ToolCore result;
     protected Item toolRod = TConstructRegistry.getItem("toolRod");
 
@@ -23,16 +23,6 @@ public class ToolRecipe
     {
     	this(head, TContent.toolRod, null, null, tool);
     }*/
-
-    public ToolRecipe(Item head, Item handle, ToolCore tool)
-    {
-        this(head, handle, null, null, tool);
-    }
-
-    public ToolRecipe(Item head, Item handle, Item accessory, ToolCore tool)
-    {
-        this(head, handle, accessory, null, tool);
-    }
 
     public ToolRecipe(Item head, Item handle, Item accessory, Item extra, ToolCore tool)
     {
@@ -45,14 +35,14 @@ public class ToolRecipe
         result = tool;
     }
 
-    public void addHeadItem (Item head)
+    public ToolRecipe(Item head, Item handle, Item accessory, ToolCore tool)
     {
-        this.headList.add(head);
+        this(head, handle, accessory, null, tool);
     }
 
-    public void addHandleItem (Item head)
+    public ToolRecipe(Item head, Item handle, ToolCore tool)
     {
-        this.handleList.add(head);
+        this(head, handle, null, null, tool);
     }
 
     public void addAccessoryItem (Item head)
@@ -65,26 +55,19 @@ public class ToolRecipe
         this.extraList.add(head);
     }
 
-    public boolean validHead (Item input)
+    public void addHandleItem (Item head)
     {
-        for (Item part : headList)
-        {
-            if (part == input)
-                return true;
-        }
-        return false;
+        this.handleList.add(head);
     }
 
-    public boolean validHandle (Item input)
+    public void addHeadItem (Item head)
     {
-        for (Item part : handleList)
-        {
-            if (part == input)
-                return true;
-            if (toolRod != null && part == toolRod && (input == Item.stick || input == Item.bone))
-                return true;
-        }
-        return false;
+        this.headList.add(head);
+    }
+
+    public ToolCore getType ()
+    {
+        return result;
     }
 
     public boolean validAccessory (Item input)
@@ -123,8 +106,25 @@ public class ToolRecipe
         return false;
     }
 
-    public ToolCore getType ()
+    public boolean validHandle (Item input)
     {
-        return result;
+        for (Item part : handleList)
+        {
+            if (part == input)
+                return true;
+            if (toolRod != null && part == toolRod && (input == Item.stick || input == Item.bone))
+                return true;
+        }
+        return false;
+    }
+
+    public boolean validHead (Item input)
+    {
+        for (Item part : headList)
+        {
+            if (part == input)
+                return true;
+        }
+        return false;
     }
 }

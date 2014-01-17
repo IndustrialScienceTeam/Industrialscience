@@ -1,7 +1,7 @@
 package appeng.api.me.items;
 
-import appeng.api.IAEItemStack;
 import net.minecraft.item.ItemStack;
+import appeng.api.IAEItemStack;
 
 /**
  * Any item which implements this can be treated as an IMEInventory via Util.getCell / Util.isCell
@@ -10,18 +10,18 @@ import net.minecraft.item.ItemStack;
 public interface IStorageCell
 {
     /**
-     * rv0 - If this returns something where N % 8 != 0 Then you will be shot on sight, or your car will explode, something like that least...
-     * @param cellItem
-     * @return numberofBytes
-     */
-    int getBytes( ItemStack cellItem );
-    
-    /**
      * rv0 - Determines the number of bytes used for any type included on the cell.
      * @param cellItem
      * @return numberOfBytes
      */
 	int BytePerType( ItemStack iscellItem );
+    
+    /**
+     * rv0 - If this returns something where N % 8 != 0 Then you will be shot on sight, or your car will explode, something like that least...
+     * @param cellItem
+     * @return numberofBytes
+     */
+    int getBytes( ItemStack cellItem );
 	
 	/**
 	 * rv11 - Must be between 1 and 63, indicates how many types you want to store on the item.

@@ -3,10 +3,10 @@ package appeng.api.config;
 
 public enum FuzzyMode implements IConfigEnum<FuzzyMode> {
 	IgnoreAll(-1.0F),
-	Percent_99(1.0F),
-	Percent_75(0.75F),
+	Percent_25(0.25F),
 	Percent_50(0.5F),
-	Percent_25(0.25F);
+	Percent_75(0.75F),
+	Percent_99(1.0F);
 	
 	public float breakPoint;
 	
@@ -16,12 +16,12 @@ public enum FuzzyMode implements IConfigEnum<FuzzyMode> {
 	}
 
 	@Override
-	public IConfigEnum[] getValues() {
-		return values();
+	public String getName() {
+		return "FuzzyMode";
 	}
 
 	@Override
-	public String getName() {
-		return "FuzzyMode";
+	public IConfigEnum[] getValues() {
+		return values();
 	}
 }

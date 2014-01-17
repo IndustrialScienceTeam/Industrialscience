@@ -45,42 +45,67 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
         Modinfo.CHANNELBASE + "2" }, packetHandler = Packethandler.class)
 @Mod(modid = Modinfo.MODID, name = Modinfo.READABLEMODNAME, version = "1.0")
 public class IndustrialScience {
-    /**
+    class LangfileFilter implements FilenameFilter{
+
+		@Override
+		public boolean accept(File dir, String name) {
+			if(name.contains(".properties")){
+			return true;
+			}
+			return false;
+		}
+		
+	}
+
+    private static boolean aeinstalled=false;
+    private static boolean bcinstalled=false;
+    
+    private static boolean ic2installed=false;
+
+	/**
+     * The instance of this mod for forge.
+     */
+    @Instance(Modinfo.MODID)
+    public static IndustrialScience instance;
+    private static Logger logger = Logger.getLogger(Modinfo.MODID);
+	/**
+     * This array holds the modules of this mod, which should be loaded.
+     */
+    public final static ISAbstractModule[] MODULES = new ISAbstractModule[3];
+	/**
      * This field holds the proxy for registering the renders.
      */
     @SidedProxy(clientSide = "industrialscience.proxies.ClientProxy", serverSide = "industrialscience.proxies.CommonProxy")
     public static CommonProxy proxy;
 
     /**
-     * The instance of this mod for forge.
-     */
-    @Instance(Modinfo.MODID)
-    public static IndustrialScience instance;
-    /**
-     * This array holds the modules of this mod, which should be loaded.
-     */
-    public final static ISAbstractModule[] MODULES = new ISAbstractModule[3];
-    
-    private static Logger logger = Logger.getLogger(Modinfo.MODID);
+	 * @return The logger
+	 */
+	public static Logger getLogger() {
+		return logger;
+	}
 
-	private static boolean ic2installed=false;
-    private static boolean aeinstalled=false;
-	private static boolean bcinstalled=false;
+    /**
+	 * @return Whether AE is installed 
+	 */
+	public static boolean isAeinstalled() {
+		return aeinstalled;
+	}
+
+    /**
+	 * @return Whether BC is installed 
+	 */
+	public static boolean isBcinstalled() {
+		return bcinstalled;
+	}
+
+	/**
+	 * @return Whether IC2 is installed 
+	 */
+	public static boolean isIc2installed() {
+		return ic2installed;
+	}
 	public String langDir="/assets/industrialscience/lang/";
-
-    /**
-     * The mod PreInit method. Calls the registermodules and giveIDs(with the
-     * suggested config file by forge) method.
-     * 
-     * @param event
-     *            The FMLPreInitializationEvent given by forge.
-     */
-    @EventHandler
-    public void preLoad(FMLPreInitializationEvent event) {
-        registermodules();
-        giveIDs(event.getSuggestedConfigurationFile());
-    }
-
     /**
      * Generates the defalut config file with the IDs and also reads from the
      * config file and gives the modules their requested IDs.
@@ -119,6 +144,16 @@ public class IndustrialScience {
     }
 
     /**
+     * Calls the init method from every module.
+     */
+    private void initmodules() {
+        for (ISAbstractModule a : MODULES) {
+            a.init();
+        }
+
+    }
+
+    /**
      * The init method of this mod. Calls first initmodules and then
      * loadmodules.
      * 
@@ -136,7 +171,7 @@ public class IndustrialScience {
         proxy.registerRenderers();
     }
 
-	private void loadLanguages() {
+    private void loadLanguages() {
 		try {
 			File langdirfile = new File(IndustrialScience.class.getResource(langDir).toURI());
 			for(File lang : langdirfile.listFiles(new LangfileFilter())){
@@ -154,18 +189,17 @@ public class IndustrialScience {
 			logger.log(Level.WARNING, "Couldn't load lang dir", e);
 		}
 	}
-	class LangfileFilter implements FilenameFilter{
 
-		@Override
-		public boolean accept(File dir, String name) {
-			if(name.contains(".properties")){
-			return true;
-			}
-			return false;
-		}
-		
-	}
     /**
+     * Calls the load method from every module.
+     */
+    private void loadmodules() {
+        for (ISAbstractModule a : MODULES) {
+            a.load();
+        }
+    }
+
+	/**
      * The postinit method of this mod. Calls postinitmodules method.
      * 
      * @param event
@@ -179,7 +213,7 @@ public class IndustrialScience {
         postinitmodules();
     }
 
-    /**
+	/**
      * Calls the postinit method from every module
      */
     private void postinitmodules() {
@@ -189,6 +223,18 @@ public class IndustrialScience {
 
     }
 
+	/**
+     * The mod PreInit method. Calls the registermodules and giveIDs(with the
+     * suggested config file by forge) method.
+     * 
+     * @param event
+     *            The FMLPreInitializationEvent given by forge.
+     */
+    @EventHandler
+    public void preLoad(FMLPreInitializationEvent event) {
+        registermodules();
+        giveIDs(event.getSuggestedConfigurationFile());
+    }
     /**
      * Adds every module to the list.
      */
@@ -198,52 +244,6 @@ public class IndustrialScience {
         MODULES[2] = new industrialscience.modules.MiningModule(760,761, 2);
 
     }
-
-    /**
-     * Calls the init method from every module.
-     */
-    private void initmodules() {
-        for (ISAbstractModule a : MODULES) {
-            a.init();
-        }
-
-    }
-
-    /**
-     * Calls the load method from every module.
-     */
-    private void loadmodules() {
-        for (ISAbstractModule a : MODULES) {
-            a.load();
-        }
-    }
-
-	/**
-	 * @return Whether IC2 is installed 
-	 */
-	public static boolean isIc2installed() {
-		return ic2installed;
-	}
-
-	/**
-	 * @return Whether AE is installed 
-	 */
-	public static boolean isAeinstalled() {
-		return aeinstalled;
-	}
-
-	/**
-	 * @return Whether BC is installed 
-	 */
-	public static boolean isBcinstalled() {
-		return bcinstalled;
-	}
-    /**
-	 * @return The logger
-	 */
-	public static Logger getLogger() {
-		return logger;
-	}
     
 
 }

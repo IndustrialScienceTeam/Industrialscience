@@ -5,15 +5,15 @@ import net.minecraftforge.common.ForgeDirection;
 
 public interface IFacingLogic
 {
-    public byte getRenderDirection ();
-
     public ForgeDirection getForgeDirection ();
 
-    @Deprecated
-    public void setDirection (int side);
+    public byte getRenderDirection ();
 
     @Deprecated
     public void setDirection (float yaw, float pitch, EntityLivingBase player);
+
+    @Deprecated
+    public void setDirection (int side);
 
     /** This will be added next version
     * public void setDirection(int side, float yaw, float pitch, EntityLivingBase player); */

@@ -23,6 +23,176 @@ public final class NetworkHelper {
 	// server -> client
 
 
+	private static Object instance;
+
+	private static Method NetworkManager_announceBlockUpdate;
+
+	private static Method NetworkManager_initiateClientItemEvent;
+
+	private static Method NetworkManager_initiateClientTileEntityEvent;
+
+
+	// client -> server
+
+
+	private static Method NetworkManager_initiateItemEvent;
+
+	private static Method NetworkManager_initiateTileEntityEvent;
+
+	private static Method NetworkManager_updateTileEntityField;
+
+	/**
+	 * Schedule a block update (re-render) on the clients in range.
+	 *
+	 * If this method is being executed on the client (i.e. Singleplayer), it'll just trigger the
+	 * block update locally.
+	 *
+	 * @param world World containing the block
+	 * @param x The block's x coordinate
+	 * @param y The block's y coordinate
+	 * @param z The block's z coordinate
+	 */
+	public static void announceBlockUpdate(World world, int x, int y, int z) {
+		try {
+			if (NetworkManager_announceBlockUpdate == null) NetworkManager_announceBlockUpdate = Class.forName(getPackage() + ".core.network.NetworkManager").getMethod("announceBlockUpdate", World.class, Integer.TYPE, Integer.TYPE, Integer.TYPE);
+			if (instance == null) instance = getInstance();
+
+			NetworkManager_announceBlockUpdate.invoke(instance, world, x, y, z);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * Get the NetworkManager instance, used internally.
+	 *
+	 * @return NetworkManager instance
+	 */
+	private static Object getInstance() {
+		try {
+			return Class.forName(getPackage() + ".core.IC2").getDeclaredField("network").get(null);
+		} catch (Throwable e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * Get the base IC2 package name, used internally.
+	 *
+	 * @return IC2 package name, if unable to be determined defaults to ic2
+	 */
+	private static String getPackage() {
+		Package pkg = NetworkHelper.class.getPackage();
+
+		if (pkg != null) {
+			String packageName = pkg.getName();
+
+			return packageName.substring(0, packageName.length() - ".api.network".length());
+		}
+
+		return "ic2";
+	}
+	/**
+	 * Immediately send an event for the specified Item to the clients in range.
+	 *
+	 * The item should implement INetworkItemEventListener to receive the event.
+	 *
+	 * This method doesn't do anything if executed on the server.
+	 *
+	 * @param itemStack ItemStack containing the item
+	 * @param event Arbitrary integer to represent the event, choosing the values is up to you
+	 */
+	public static void initiateClientItemEvent(ItemStack itemStack, int event) {
+		try {
+			if (NetworkManager_initiateClientItemEvent == null) NetworkManager_initiateClientItemEvent = Class.forName(getPackage() + ".core.network.NetworkManager").getMethod("initiateClientItemEvent", ItemStack.class, Integer.TYPE);
+			if (instance == null) instance = getInstance();
+
+			NetworkManager_initiateClientItemEvent.invoke(instance, itemStack, event);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+	/**
+	 * Immediately send an event for the specified TileEntity to the server.
+	 *
+	 * This method doesn't do anything if executed on the server.
+	 *
+	 * @param te TileEntity to notify, should implement INetworkClientTileEntityEventListener
+	 * @param event Arbitrary integer to represent the event, choosing the values is up to you
+	 */
+	public static void initiateClientTileEntityEvent(TileEntity te, int event) {
+		try {
+			if (NetworkManager_initiateClientTileEntityEvent == null) NetworkManager_initiateClientTileEntityEvent = Class.forName(getPackage() + ".core.network.NetworkManager").getMethod("initiateClientTileEntityEvent", TileEntity.class, Integer.TYPE);
+			if (instance == null) instance = getInstance();
+
+			NetworkManager_initiateClientTileEntityEvent.invoke(instance, te, event);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+	/**
+	 * Immediately send an event for the specified Item to the clients in range.
+	 *
+	 * The item should implement INetworkItemEventListener to receive the event.
+	 *
+	 * If this method is being executed on the client (i.e. Singleplayer), it'll just call
+	 * INetworkItemEventListener.onNetworkEvent (if implemented by the item).
+	 *
+	 * @param player EntityPlayer holding the item
+	 * @param itemStack ItemStack containing the item
+	 * @param event Arbitrary integer to represent the event, choosing the values is up to you
+	 * @param limitRange Limit the notification range to (currently) 20 blocks instead of the
+	 *        tracking distance if true
+	 */
+	public static void initiateItemEvent(EntityPlayer player, ItemStack itemStack, int event, boolean limitRange) {
+		try {
+			if (NetworkManager_initiateItemEvent == null) NetworkManager_initiateItemEvent = Class.forName(getPackage() + ".core.network.NetworkManager").getMethod("initiateItemEvent", EntityPlayer.class, ItemStack.class, Integer.TYPE, Boolean.TYPE);
+			if (instance == null) instance = getInstance();
+
+			NetworkManager_initiateItemEvent.invoke(instance, player, itemStack, event, limitRange);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+	/**
+	 * Immediately send an event for the specified TileEntity to the clients in range.
+	 *
+	 * If this method is being executed on the client (i.e. Singleplayer), it'll just call
+	 * INetworkTileEntityEventListener.onNetworkEvent (if implemented by the te).
+	 *
+	 * @param te TileEntity to notify, should implement INetworkTileEntityEventListener
+	 * @param event Arbitrary integer to represent the event, choosing the values is up to you
+	 * @param limitRange Limit the notification range to (currently) 20 blocks instead of the
+	 *        tracking distance if true
+	 */
+	public static void initiateTileEntityEvent(TileEntity te, int event, boolean limitRange) {
+		try {
+			if (NetworkManager_initiateTileEntityEvent == null) NetworkManager_initiateTileEntityEvent = Class.forName(getPackage() + ".core.network.NetworkManager").getMethod("initiateTileEntityEvent", TileEntity.class, Integer.TYPE, Boolean.TYPE);
+			if (instance == null) instance = getInstance();
+
+			NetworkManager_initiateTileEntityEvent.invoke(instance, te, event, limitRange);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+	/**
+	 * Ask the server to send the values of the fields specified.
+	 *
+	 * See updateTileEntityField for the supported field types.
+	 *
+	 * The implementation is currently limited to TileEntitys as data providers. The tile entity
+	 * has to be fully initialized when executing this method (i.e. valid worldObj+coords).
+	 *
+	 * This method doesn't do anything if executed on the server.
+	 *
+	 * @param dataProvider Object implementing the INetworkDataProvider interface
+	 * 
+	 * @deprecated no need to call this anymore, IC2 initiates it automatically
+	 */
+	@Deprecated
+	public static void requestInitialData(INetworkDataProvider dataProvider) {
+		//
+	}
 	/**
 	 * Schedule a TileEntity's field to be updated to the clients in range.
 	 *
@@ -64,175 +234,5 @@ public final class NetworkHelper {
 			throw new RuntimeException(e);
 		}
 	}
-
-	/**
-	 * Immediately send an event for the specified TileEntity to the clients in range.
-	 *
-	 * If this method is being executed on the client (i.e. Singleplayer), it'll just call
-	 * INetworkTileEntityEventListener.onNetworkEvent (if implemented by the te).
-	 *
-	 * @param te TileEntity to notify, should implement INetworkTileEntityEventListener
-	 * @param event Arbitrary integer to represent the event, choosing the values is up to you
-	 * @param limitRange Limit the notification range to (currently) 20 blocks instead of the
-	 *        tracking distance if true
-	 */
-	public static void initiateTileEntityEvent(TileEntity te, int event, boolean limitRange) {
-		try {
-			if (NetworkManager_initiateTileEntityEvent == null) NetworkManager_initiateTileEntityEvent = Class.forName(getPackage() + ".core.network.NetworkManager").getMethod("initiateTileEntityEvent", TileEntity.class, Integer.TYPE, Boolean.TYPE);
-			if (instance == null) instance = getInstance();
-
-			NetworkManager_initiateTileEntityEvent.invoke(instance, te, event, limitRange);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	/**
-	 * Immediately send an event for the specified Item to the clients in range.
-	 *
-	 * The item should implement INetworkItemEventListener to receive the event.
-	 *
-	 * If this method is being executed on the client (i.e. Singleplayer), it'll just call
-	 * INetworkItemEventListener.onNetworkEvent (if implemented by the item).
-	 *
-	 * @param player EntityPlayer holding the item
-	 * @param itemStack ItemStack containing the item
-	 * @param event Arbitrary integer to represent the event, choosing the values is up to you
-	 * @param limitRange Limit the notification range to (currently) 20 blocks instead of the
-	 *        tracking distance if true
-	 */
-	public static void initiateItemEvent(EntityPlayer player, ItemStack itemStack, int event, boolean limitRange) {
-		try {
-			if (NetworkManager_initiateItemEvent == null) NetworkManager_initiateItemEvent = Class.forName(getPackage() + ".core.network.NetworkManager").getMethod("initiateItemEvent", EntityPlayer.class, ItemStack.class, Integer.TYPE, Boolean.TYPE);
-			if (instance == null) instance = getInstance();
-
-			NetworkManager_initiateItemEvent.invoke(instance, player, itemStack, event, limitRange);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	/**
-	 * Schedule a block update (re-render) on the clients in range.
-	 *
-	 * If this method is being executed on the client (i.e. Singleplayer), it'll just trigger the
-	 * block update locally.
-	 *
-	 * @param world World containing the block
-	 * @param x The block's x coordinate
-	 * @param y The block's y coordinate
-	 * @param z The block's z coordinate
-	 */
-	public static void announceBlockUpdate(World world, int x, int y, int z) {
-		try {
-			if (NetworkManager_announceBlockUpdate == null) NetworkManager_announceBlockUpdate = Class.forName(getPackage() + ".core.network.NetworkManager").getMethod("announceBlockUpdate", World.class, Integer.TYPE, Integer.TYPE, Integer.TYPE);
-			if (instance == null) instance = getInstance();
-
-			NetworkManager_announceBlockUpdate.invoke(instance, world, x, y, z);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-
-	// client -> server
-
-
-	/**
-	 * Ask the server to send the values of the fields specified.
-	 *
-	 * See updateTileEntityField for the supported field types.
-	 *
-	 * The implementation is currently limited to TileEntitys as data providers. The tile entity
-	 * has to be fully initialized when executing this method (i.e. valid worldObj+coords).
-	 *
-	 * This method doesn't do anything if executed on the server.
-	 *
-	 * @param dataProvider Object implementing the INetworkDataProvider interface
-	 * 
-	 * @deprecated no need to call this anymore, IC2 initiates it automatically
-	 */
-	@Deprecated
-	public static void requestInitialData(INetworkDataProvider dataProvider) {
-		//
-	}
-
-	/**
-	 * Immediately send an event for the specified TileEntity to the server.
-	 *
-	 * This method doesn't do anything if executed on the server.
-	 *
-	 * @param te TileEntity to notify, should implement INetworkClientTileEntityEventListener
-	 * @param event Arbitrary integer to represent the event, choosing the values is up to you
-	 */
-	public static void initiateClientTileEntityEvent(TileEntity te, int event) {
-		try {
-			if (NetworkManager_initiateClientTileEntityEvent == null) NetworkManager_initiateClientTileEntityEvent = Class.forName(getPackage() + ".core.network.NetworkManager").getMethod("initiateClientTileEntityEvent", TileEntity.class, Integer.TYPE);
-			if (instance == null) instance = getInstance();
-
-			NetworkManager_initiateClientTileEntityEvent.invoke(instance, te, event);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	/**
-	 * Immediately send an event for the specified Item to the clients in range.
-	 *
-	 * The item should implement INetworkItemEventListener to receive the event.
-	 *
-	 * This method doesn't do anything if executed on the server.
-	 *
-	 * @param itemStack ItemStack containing the item
-	 * @param event Arbitrary integer to represent the event, choosing the values is up to you
-	 */
-	public static void initiateClientItemEvent(ItemStack itemStack, int event) {
-		try {
-			if (NetworkManager_initiateClientItemEvent == null) NetworkManager_initiateClientItemEvent = Class.forName(getPackage() + ".core.network.NetworkManager").getMethod("initiateClientItemEvent", ItemStack.class, Integer.TYPE);
-			if (instance == null) instance = getInstance();
-
-			NetworkManager_initiateClientItemEvent.invoke(instance, itemStack, event);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	/**
-	 * Get the base IC2 package name, used internally.
-	 *
-	 * @return IC2 package name, if unable to be determined defaults to ic2
-	 */
-	private static String getPackage() {
-		Package pkg = NetworkHelper.class.getPackage();
-
-		if (pkg != null) {
-			String packageName = pkg.getName();
-
-			return packageName.substring(0, packageName.length() - ".api.network".length());
-		}
-
-		return "ic2";
-	}
-
-	/**
-	 * Get the NetworkManager instance, used internally.
-	 *
-	 * @return NetworkManager instance
-	 */
-	private static Object getInstance() {
-		try {
-			return Class.forName(getPackage() + ".core.IC2").getDeclaredField("network").get(null);
-		} catch (Throwable e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	private static Object instance;
-	private static Method NetworkManager_updateTileEntityField;
-	private static Method NetworkManager_initiateTileEntityEvent;
-	private static Method NetworkManager_initiateItemEvent;
-	private static Method NetworkManager_announceBlockUpdate;
-	private static Method NetworkManager_initiateClientTileEntityEvent;
-	private static Method NetworkManager_initiateClientItemEvent;
 }
 

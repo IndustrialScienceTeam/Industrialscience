@@ -14,6 +14,10 @@ import cpw.mods.fml.relauncher.SideOnly;
 public abstract class Weapon extends ToolCore
 {
 
+    public static Material[] none = new Material[0];
+
+    public static Material[] web = new Material[] { Material.web };
+
     public Weapon(int itemID, int baseDamage)
     {
         super(itemID, baseDamage);
@@ -24,25 +28,28 @@ public abstract class Weapon extends ToolCore
         return 1.5f;
     }
 
+    /**
+     * Returns if the item (tool) can harvest results from the block type.
+     */
+    @Override
+	public boolean canHarvestBlock (Block block)
+    {
+        for (int i = 0; i < web.length; i++)
+        {
+            if (block.blockMaterial == web[i])
+                return true;
+        }
+        return super.canHarvestBlock(block);
+    }
+
     protected float effectiveSpeed ()
     {
         return 15f;
     }
 
-    @Override
-    public float getStrVsBlock (ItemStack stack, Block block, int meta)
+    protected Material[] getEffectiveMaterials ()
     {
-        if (stack.getTagCompound().getCompoundTag("InfiTool").getBoolean("Broken"))
-            return 0.1f;
-
-        for (int i = 0; i < web.length; i++)
-        {
-            if (web[i] == block.blockMaterial)
-            {
-                return effectiveSpeed();
-            }
-        }
-        return baseSpeed();
+        return web;
     }
 
     /**
@@ -63,6 +70,22 @@ public abstract class Weapon extends ToolCore
         return 72000;
     }
 
+    @Override
+    public float getStrVsBlock (ItemStack stack, Block block, int meta)
+    {
+        if (stack.getTagCompound().getCompoundTag("InfiTool").getBoolean("Broken"))
+            return 0.1f;
+
+        for (int i = 0; i < web.length; i++)
+        {
+            if (web[i] == block.blockMaterial)
+            {
+                return effectiveSpeed();
+            }
+        }
+        return baseSpeed();
+    }
+
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
@@ -73,29 +96,17 @@ public abstract class Weapon extends ToolCore
         return stack;
     }
 
+    /*@Override
+    public boolean onLeftClickEntity (ItemStack stack, EntityPlayer player, Entity entity)
+    {
+        TContent.modL.midStreamModify(stack);
+        return super.onLeftClickEntity(stack, player, entity);
+    }*/
+
     @Override
 	public boolean onItemUse (ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float clickX, float clickY, float clickZ)
     {
         return false;
-    }
-
-    /**
-     * Returns if the item (tool) can harvest results from the block type.
-     */
-    @Override
-	public boolean canHarvestBlock (Block block)
-    {
-        for (int i = 0; i < web.length; i++)
-        {
-            if (block.blockMaterial == web[i])
-                return true;
-        }
-        return super.canHarvestBlock(block);
-    }
-
-    protected Material[] getEffectiveMaterials ()
-    {
-        return web;
     }
 
     @Override
@@ -114,22 +125,11 @@ public abstract class Weapon extends ToolCore
             }
         }
     }
-
-    /*@Override
-    public boolean onLeftClickEntity (ItemStack stack, EntityPlayer player, Entity entity)
-    {
-        TContent.modL.midStreamModify(stack);
-        return super.onLeftClickEntity(stack, player, entity);
-    }*/
-
     @Override
     public String[] toolCategories ()
     {
         return new String[] { "weapon", "melee" };
     }
-
-    public static Material[] web = new Material[] { Material.web };
-    public static Material[] none = new Material[0];
     
     
 }

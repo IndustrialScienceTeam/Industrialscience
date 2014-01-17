@@ -5,9 +5,9 @@ import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 
 public class QuiverArrowEvent extends PlayerEventChild{
 
+	public boolean addEnchantments = true;
 	public int bowDamage = 1;
 	public float bowSoundVolume = 1.0F;
-	public boolean addEnchantments = true;
 	public ArrowLooseEvent event;
 
 	public QuiverArrowEvent(ArrowLooseEvent parent) {

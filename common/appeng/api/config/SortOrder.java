@@ -3,18 +3,18 @@ package appeng.api.config;
 
 public enum SortOrder implements IConfigEnum
 {
+	ItemID,
 	Name,
-	Size,
 	Priority,
-	ItemID;
+	Size;
 	
-	@Override
-	public IConfigEnum[] getValues() {
-		return values();
-	}
-
 	@Override
 	public String getName() {
 		return "SortOrder";
+	}
+
+	@Override
+	public IConfigEnum[] getValues() {
+		return values();
 	}
 }

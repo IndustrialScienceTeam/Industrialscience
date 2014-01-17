@@ -8,8 +8,8 @@ import net.minecraft.tileentity.TileEntity;
 
 public abstract class ISIInventory extends TileEntity implements IInventory {
 	protected ItemStack[] Inventory;
-	protected int stacklimit;
 	protected String InvName;
+	protected int stacklimit;
 	protected ISIInventory(int size, int stacklimit, String InvName){
 		if(size>-1){
 			Inventory= new ItemStack[size];
@@ -26,13 +26,8 @@ public abstract class ISIInventory extends TileEntity implements IInventory {
 		
 	}
 	@Override
-	public int getSizeInventory() {
-		return Inventory.length;
-	}
+	public void closeChest() {
 
-	@Override
-	public ItemStack getStackInSlot(int i) {
-		return Inventory[i];
 	}
 
 	@Override
@@ -55,6 +50,26 @@ public abstract class ISIInventory extends TileEntity implements IInventory {
 	}
 
 	@Override
+	public int getInventoryStackLimit() {
+		return stacklimit;
+	}
+
+	@Override
+	public String getInvName() {
+		return InvName;
+	}
+
+	@Override
+	public int getSizeInventory() {
+		return Inventory.length;
+	}
+
+	@Override
+	public ItemStack getStackInSlot(int i) {
+		return Inventory[i];
+	}
+
+	@Override
 	public ItemStack getStackInSlotOnClosing(int i) {
 	     ItemStack stack = getStackInSlot(i);
 
@@ -66,44 +81,21 @@ public abstract class ISIInventory extends TileEntity implements IInventory {
 	}
 
 	@Override
-	public void setInventorySlotContents(int i, ItemStack itemstack) {
-		Inventory[i] = itemstack;
-        if (itemstack != null && itemstack.stackSize > getInventoryStackLimit()) {
-            itemstack.stackSize = getInventoryStackLimit();
-        }
-
-	}
-
-	@Override
-	public String getInvName() {
-		return InvName;
-	}
-
-	@Override
 	public boolean isInvNameLocalized() {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
 	@Override
-	public int getInventoryStackLimit() {
-		return stacklimit;
+	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
+		return true;
 	}
+
 	@Override
 	public void openChest() {
 
 	}
 
 	@Override
-	public void closeChest() {
-
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		return true;
-	}
-    @Override
     public void readFromNBT(NBTTagCompound tagCompound) {
         super.readFromNBT(tagCompound);
 
@@ -119,6 +111,14 @@ public abstract class ISIInventory extends TileEntity implements IInventory {
             }
         }
     }
+    @Override
+	public void setInventorySlotContents(int i, ItemStack itemstack) {
+		Inventory[i] = itemstack;
+        if (itemstack != null && itemstack.stackSize > getInventoryStackLimit()) {
+            itemstack.stackSize = getInventoryStackLimit();
+        }
+
+	}
 
     @Override
     public void writeToNBT(NBTTagCompound tagCompound) {

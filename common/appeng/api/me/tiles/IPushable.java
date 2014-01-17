@@ -9,6 +9,13 @@ import net.minecraft.item.ItemStack;
 public interface IPushable
 {
 	/**
+	 * Test if a push is possible.
+	 * @param out
+	 * @return
+	 */
+	boolean canPushItem(ItemStack out);
+	
+	/**
 	 * is this pushable busy?
 	 * @return
 	 */
@@ -20,11 +27,4 @@ public interface IPushable
 	 * @return
 	 */
 	ItemStack pushItem( ItemStack out );
-	
-	/**
-	 * Test if a push is possible.
-	 * @param out
-	 * @return
-	 */
-	boolean canPushItem(ItemStack out);
 }

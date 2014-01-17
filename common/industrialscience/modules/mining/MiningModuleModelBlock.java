@@ -1,13 +1,13 @@
 package industrialscience.modules.mining;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import net.minecraft.block.material.Material;
 import industrialscience.blocksystem.ISModuleModelBlock;
 import industrialscience.blocksystem.ModelISBlock;
 import industrialscience.modules.mining.blocks.Drill;
 import industrialscience.modules.mining.blocks.DrillingPipeBlock;
 import industrialscience.modules.mining.tileentities.drill.IronDrillTileEntity;
 import industrialscience.modules.research.frontend.renderer.ResearchDeskRenderer;
+import net.minecraft.block.material.Material;
+import cpw.mods.fml.common.FMLCommonHandler;
 
 public class MiningModuleModelBlock extends ISModuleModelBlock {
 public static final int DRILLINGPIPEMETAID=0;

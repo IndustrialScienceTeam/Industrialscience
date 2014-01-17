@@ -1,7 +1,6 @@
 package ic2.api;
 
 import net.minecraft.tileentity.TileEntity;
-
 import net.minecraftforge.common.ForgeDirection;
 
 /**
@@ -35,9 +34,7 @@ public enum Direction {
 	 */
 	ZP(5);
 
-	Direction(int dir1) {
-		this.dir = dir1;
-	}
+	public static final Direction[] directions = Direction.values();
 
 	/*public CoordinateTuple ApplyToCoordinates(CoordinateTuple coordinates) {
 		CoordinateTuple ret = new CoordinateTuple(coordinates);
@@ -46,6 +43,12 @@ public enum Direction {
 
 		return ret;
 	}*/
+
+	private int dir;
+
+	Direction(int dir1) {
+		this.dir = dir1;
+	}
 
 	/**
 	 * Get the tile entity next to a tile entity following this direction.
@@ -84,15 +87,6 @@ public enum Direction {
 	}
 
 	/**
-	 * Convert this direction to a Minecraft side value.
-	 * 
-	 * @return Minecraft side value
-	 */
-	public int toSideValue() {
-		return (dir + 4) % 6;
-	}
-
-	/**
 	 * Determine direction sign (N for negative or P for positive).
 	 *
 	 * @return -1 if the direction is negative, +1 if the direction is positive
@@ -104,8 +98,13 @@ public enum Direction {
 	public ForgeDirection toForgeDirection() {
 		return ForgeDirection.getOrientation(toSideValue());
 	}
-
-	private int dir;
-	public static final Direction[] directions = Direction.values();
+	/**
+	 * Convert this direction to a Minecraft side value.
+	 * 
+	 * @return Minecraft side value
+	 */
+	public int toSideValue() {
+		return (dir + 4) % 6;
+	}
 }
 

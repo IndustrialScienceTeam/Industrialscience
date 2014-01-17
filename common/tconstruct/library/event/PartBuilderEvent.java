@@ -9,24 +9,17 @@ import net.minecraftforge.event.Event;
 
 public class PartBuilderEvent extends Event
 {
-    public final ItemStack material;
-    public final ItemStack pattern;
-    public final ItemStack otherPattern;
-    protected ItemStack[] resultStacks;
-
-    public PartBuilderEvent(ItemStack material, ItemStack pattern, ItemStack otherPattern)
-    {
-        this.material = material;
-        this.pattern = pattern;
-        this.otherPattern = otherPattern;
-    }
-
     @HasResult
     public static class NormalPart extends PartBuilderEvent
     {
         public NormalPart(ItemStack material, ItemStack pattern, ItemStack otherPattern)
         {
             super(material, pattern, otherPattern);
+        }
+
+        public ItemStack[] getResultStacks ()
+        {
+            return resultStacks;
         }
 
         /** Fires before other processing is done
@@ -42,10 +35,17 @@ public class PartBuilderEvent extends Event
             resultStacks = result;
             this.setResult(Result.ALLOW);
         }
+    }
+    public final ItemStack material;
+    public final ItemStack otherPattern;
+    public final ItemStack pattern;
 
-        public ItemStack[] getResultStacks ()
-        {
-            return resultStacks;
-        }
+    protected ItemStack[] resultStacks;
+
+    public PartBuilderEvent(ItemStack material, ItemStack pattern, ItemStack otherPattern)
+    {
+        this.material = material;
+        this.pattern = pattern;
+        this.otherPattern = otherPattern;
     }
 }

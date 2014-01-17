@@ -1,19 +1,18 @@
 package industrialscience.modules.mining.tileentities.drill;
 
-import java.util.Random;
-
-import cpw.mods.fml.relauncher.Side;
 import industrialscience.ICDirection;
 import industrialscience.modules.mining.borersystem.IBorer;
+
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 
 public abstract class DrillTileEntity extends TileEntity implements IBorer{
-protected int speed=1;
 protected ICDirection movmentdir=ICDirection.YN;
+protected int speed=1;
 private int waitticks=0;
 
 @Override
@@ -38,6 +37,16 @@ public boolean bore(ItemStack borer) {
 	return false;
 }
 
+public int getSpeed() {
+	return speed;
+}
+
+protected abstract boolean isDrillAbleToMineBlock(Material material);
+
+public void setSpeed(int speed) {
+	this.speed = speed;
+}
+
 @Override
 public void updateEntity() {
 	if(waitticks==40){
@@ -45,16 +54,6 @@ public void updateEntity() {
 		waitticks=0;
 	}
 	waitticks++;
-}
-
-protected abstract boolean isDrillAbleToMineBlock(Material material);
-
-public int getSpeed() {
-	return speed;
-}
-
-public void setSpeed(int speed) {
-	this.speed = speed;
 }
 
 }

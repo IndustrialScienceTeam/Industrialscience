@@ -4,8 +4,8 @@ import net.minecraft.world.World;
 
 public class DimentionalCoord extends WorldCoord
 {
-	private World w;
 	private int dimId;
+	private World w;
 	
 	public DimentionalCoord( DimentionalCoord s )
 	{
@@ -27,11 +27,6 @@ public class DimentionalCoord extends WorldCoord
 		return new DimentionalCoord( this );
 	}
 
-	public boolean isEqual( DimentionalCoord c )
-	{
-		return x == c.x && y == c.y && z == c.z && c.w == this.w;
-	}
-	
 	@Override
 	public boolean equals(Object obj)
 	{
@@ -40,19 +35,24 @@ public class DimentionalCoord extends WorldCoord
 		return false;
 	}
 	
+	public World getWorld()
+	{
+		return w;
+	}
+	
 	@Override
 	public int hashCode()
 	{
 		return super.hashCode() ^ dimId;
 	}
 	
+	public boolean isEqual( DimentionalCoord c )
+	{
+		return x == c.x && y == c.y && z == c.z && c.w == this.w;
+	}
+
 	public boolean isInWorld(World world)
 	{
 		return w == world;
-	}
-
-	public World getWorld()
-	{
-		return w;
 	}
 }

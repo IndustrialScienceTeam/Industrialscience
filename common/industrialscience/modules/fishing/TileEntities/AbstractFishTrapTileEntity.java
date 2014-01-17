@@ -17,54 +17,6 @@ import net.minecraft.world.World;
 
 public abstract class AbstractFishTrapTileEntity extends ISIInventory{
 
-    protected AbstractFishTrapTileEntity(int size, int stacklimit, String InvName) {
-		super(size, stacklimit, InvName);
-	}
-
-	@Override
-    public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-        return worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) == this
-                && entityplayer.getDistanceSq(xCoord + 0.5, yCoord + 0.5,
-                        zCoord + 0.5) < 64;
-    }
-
-    protected class Cordinate {
-        int x;
-        int y;
-        int z;
-
-        Cordinate(int x, int y, int z) {
-            this.x = x;
-            this.y = y;
-            this.z = z;
-        }
-
-        @Override
-        public boolean equals(Object e) {
-            if (!(e instanceof Cordinate)) {
-				return false;
-			}
-            Cordinate c = (Cordinate) e;
-            if (x != c.getX() || y != c.getY() || z != c.getZ()) {
-				return false;
-			}
-            return true;
-        }
-
-        public int getX() {
-            return x;
-        }
-
-        public int getY() {
-            return y;
-        }
-
-        public int getZ() {
-            return z;
-        }
-
-    }
-
     protected class Coordinateset implements Set<Cordinate> {
         private ArrayList<Cordinate> list = new ArrayList<Cordinate>();
 
@@ -73,17 +25,6 @@ public abstract class AbstractFishTrapTileEntity extends ISIInventory{
             if (!isAlredayInList(e)) {
 				return list.add(e);
 			}
-            return false;
-        }
-
-        private boolean isAlredayInList(Cordinate e) {
-            for (Iterator<Cordinate> iterator = list.iterator(); iterator
-                    .hasNext();) {
-                Cordinate cordinate = iterator.next();
-                if (cordinate.equals(e)) {
-					return true;
-				}
-            }
             return false;
         }
 
@@ -123,6 +64,17 @@ public abstract class AbstractFishTrapTileEntity extends ISIInventory{
 
         public int indexOf(Object o) {
             return list.indexOf(o);
+        }
+
+        private boolean isAlredayInList(Cordinate e) {
+            for (Iterator<Cordinate> iterator = list.iterator(); iterator
+                    .hasNext();) {
+                Cordinate cordinate = iterator.next();
+                if (cordinate.equals(e)) {
+					return true;
+				}
+            }
+            return false;
         }
 
         @Override
@@ -188,6 +140,67 @@ public abstract class AbstractFishTrapTileEntity extends ISIInventory{
 
         public void trimToSize() {
             list.trimToSize();
+        }
+    }
+
+	protected class Cordinate {
+        int x;
+        int y;
+        int z;
+
+        Cordinate(int x, int y, int z) {
+            this.x = x;
+            this.y = y;
+            this.z = z;
+        }
+
+        @Override
+        public boolean equals(Object e) {
+            if (!(e instanceof Cordinate)) {
+				return false;
+			}
+            Cordinate c = (Cordinate) e;
+            if (x != c.getX() || y != c.getY() || z != c.getZ()) {
+				return false;
+			}
+            return true;
+        }
+
+        public int getX() {
+            return x;
+        }
+
+        public int getY() {
+            return y;
+        }
+
+        public int getZ() {
+            return z;
+        }
+
+    }
+
+    protected AbstractFishTrapTileEntity(int size, int stacklimit, String InvName) {
+		super(size, stacklimit, InvName);
+	}
+
+    protected void addFish(int fishamout, int neededwater, int range,
+            int waterforextrafish, int fishslot) {
+        int waterblocks = countWater(range);
+        int fishes = fishamout;
+        if (waterblocks >= neededwater) {
+            waterblocks = waterblocks - neededwater;
+            if (waterblocks > 0) {
+
+            }
+            ItemStack stack = null;
+            if (Inventory[fishslot] != null) {
+                stack = Inventory[fishslot];
+                stack.stackSize = stack.stackSize + fishes;
+            } else {
+                stack = new ItemStack(Item.fishRaw, fishes);
+            }
+            Inventory[fishslot] = stack;
         }
     }
 
@@ -346,26 +359,13 @@ public abstract class AbstractFishTrapTileEntity extends ISIInventory{
 
     }
 
-    protected void addFish(int fishamout, int neededwater, int range,
-            int waterforextrafish, int fishslot) {
-        int waterblocks = countWater(range);
-        int fishes = fishamout;
-        if (waterblocks >= neededwater) {
-            waterblocks = waterblocks - neededwater;
-            if (waterblocks > 0) {
-
-            }
-            ItemStack stack = null;
-            if (Inventory[fishslot] != null) {
-                stack = Inventory[fishslot];
-                stack.stackSize = stack.stackSize + fishes;
-            } else {
-                stack = new ItemStack(Item.fishRaw, fishes);
-            }
-            Inventory[fishslot] = stack;
-        }
-    }
-
     public abstract void doUpdateTick(World world, int x, int y, int z,
             Random random);
+
+    @Override
+    public boolean isUseableByPlayer(EntityPlayer entityplayer) {
+        return worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) == this
+                && entityplayer.getDistanceSq(xCoord + 0.5, yCoord + 0.5,
+                        zCoord + 0.5) < 64;
+    }
 }

@@ -6,8 +6,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 
 public class DefaultLocker implements RecipeLocker {
-    private Object[] recipe;
     private ItemStack istack;
+    private Object[] recipe;
 
     public DefaultLocker(Object[] recipe, ItemStack istack) {
     	if(recipe==null){

@@ -10,10 +10,11 @@ import net.minecraft.world.World;
 public interface IWirelessTermRegistery {
 	
 	/**
-	 * add thsi handler to the list of other wireless handler.
-	 * @param handler
+	 * returns a register handler for the item in question, or null if there isn't one.
+	 * @param is
+	 * @return
 	 */
-	void registerWirelessHandler( IWirelessTermHandler handler );
+	IWirelessTermHandler getWirelessTerminalHandler( ItemStack is );
 
 	/**
 	 * returns true if theres a handler for this item.
@@ -23,15 +24,14 @@ public interface IWirelessTermRegistery {
 	boolean isWirelessTerminal( ItemStack is );
 	
 	/**
-	 * returns a register handler for the item in question, or null if there isn't one.
-	 * @param is
-	 * @return
-	 */
-	IWirelessTermHandler getWirelessTerminalHandler( ItemStack is );
-	
-	/**
 	 * opens the wireless terminal gui, the wireless terminal item, must be in the active slot on the tool bar.
 	 */
 	void OpenWirelessTermainlGui( ItemStack item, World w, EntityPlayer player );
+	
+	/**
+	 * add thsi handler to the list of other wireless handler.
+	 * @param handler
+	 */
+	void registerWirelessHandler( IWirelessTermHandler handler );
 	
 }

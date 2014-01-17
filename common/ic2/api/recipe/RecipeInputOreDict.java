@@ -3,10 +3,13 @@ package ic2.api.recipe;
 import java.util.List;
 
 import net.minecraft.item.ItemStack;
-
 import net.minecraftforge.oredict.OreDictionary;
 
 public class RecipeInputOreDict implements IRecipeInput {
+	public final int amount;
+
+	public final String input;
+
 	public RecipeInputOreDict(String input1) {
 		this(input1, 1);
 	}
@@ -16,6 +19,15 @@ public class RecipeInputOreDict implements IRecipeInput {
 		this.amount = amount1;
 	}
 
+	@Override
+	public int getAmount() {
+		return amount;
+	}
+
+	@Override
+	public List<ItemStack> getInputs() {
+		return OreDictionary.getOres(input);
+	}
 	@Override
 	public boolean matches(ItemStack subject) {
 		List<ItemStack> inputs = OreDictionary.getOres(input);
@@ -29,17 +41,4 @@ public class RecipeInputOreDict implements IRecipeInput {
 
 		return false;
 	}
-
-	@Override
-	public int getAmount() {
-		return amount;
-	}
-
-	@Override
-	public List<ItemStack> getInputs() {
-		return OreDictionary.getOres(input);
-	}
-
-	public final String input;
-	public final int amount;
 }

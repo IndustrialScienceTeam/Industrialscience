@@ -11,19 +11,18 @@ public class WorldCoord
     public int y;
     public int z;
     
+    public WorldCoord(int _x, int _y, int _z)
+    {
+        x = _x;
+        y = _y;
+        z = _z;
+    }
+
     public WorldCoord add(ForgeDirection direction, int length)
     {
         x += direction.offsetX * length;
         y += direction.offsetY * length;
         z += direction.offsetZ * length;
-        return this;
-    }
-
-    public WorldCoord subtract(ForgeDirection direction, int length)
-    {
-        x -= direction.offsetX * length;
-        y -= direction.offsetY * length;
-        z -= direction.offsetZ * length;
         return this;
     }
     
@@ -35,36 +34,10 @@ public class WorldCoord
         return this;
     }
     
-    public WorldCoord subtract(int _x, int _y, int _z)
-    {
-        x -= _x;
-        y -= _y;
-        z -= _z;
-        return this;
-    }
-    
-    public WorldCoord multiple(int _x, int _y, int _z)
-    {
-        x *= _x;
-        y *= _y;
-        z *= _z;
-        return this;
-    }
-    
-    public WorldCoord divide(int _x, int _y, int _z)
-    {
-        x /= _x;
-        y /= _y;
-        z /= _z;
-        return this;
-    }
-    
-    public WorldCoord(int _x, int _y, int _z)
-    {
-        x = _x;
-        y = _y;
-        z = _z;
-    }
+    public WorldCoord copy()
+	{
+		return new WorldCoord( x, y, z );
+	}
     
     /**
      * Will Return NULL if it's at some diagonal!
@@ -99,34 +72,61 @@ public class WorldCoord
 		
 		return null;
 	}
-	
-	public boolean isEqual( WorldCoord c )
-	{
-		return x == c.x && y == c.y && z == c.z;
-	}
-	
-	public WorldCoord copy()
-	{
-		return new WorldCoord( x, y, z );
-	}
-	
-	@Override
+    
+    public WorldCoord divide(int _x, int _y, int _z)
+    {
+        x /= _x;
+        y /= _y;
+        z /= _z;
+        return this;
+    }
+    
+    @Override
 	public boolean equals(Object obj)
 	{
 		if ( obj instanceof WorldCoord )
 			return isEqual( (WorldCoord)obj );
 		return false;
 	}
-
-    @Override
-	public String toString()
-    {
-        return "" + x + "," + y + "," + z;
-    }
     
-	@Override
+    @Override
 	public int hashCode()
 	{
 		return (y << 24) ^ x ^ z;
 	}
+	
+	public boolean isEqual( WorldCoord c )
+	{
+		return x == c.x && y == c.y && z == c.z;
+	}
+	
+	public WorldCoord multiple(int _x, int _y, int _z)
+    {
+        x *= _x;
+        y *= _y;
+        z *= _z;
+        return this;
+    }
+	
+	public WorldCoord subtract(ForgeDirection direction, int length)
+    {
+        x -= direction.offsetX * length;
+        y -= direction.offsetY * length;
+        z -= direction.offsetZ * length;
+        return this;
+    }
+
+    public WorldCoord subtract(int _x, int _y, int _z)
+    {
+        x -= _x;
+        y -= _y;
+        z -= _z;
+        return this;
+    }
+    
+	@Override
+	public String toString()
+    {
+        return "" + x + "," + y + "," + z;
+    }
 }

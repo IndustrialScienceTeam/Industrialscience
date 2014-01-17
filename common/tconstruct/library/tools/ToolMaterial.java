@@ -7,17 +7,17 @@ public class ToolMaterial
 {
     //mining level, durability, mining speed, baseDamage, handle modifier, Reinforced level, shoddy/spiny level, color/style on name
 
-    public final String materialName;
-    public final String displayName;
-    public final int harvestLevel;
-    public final int durability;
-    public final int miningspeed; // <-- divided by 100
+    public final String ability;
     public final int attack;
+    public final String displayName;
+    public final int durability;
     public final float handleModifier;
+    public final int harvestLevel;
+    public final String materialName;
+    public final int miningspeed; // <-- divided by 100
     public final int reinforced;
     public final float stonebound;
     public final String tipStyle;
-    public final String ability;
 
     public ToolMaterial(String name, int level, int durability, int speed, int damage, float handle, int reinforced, float stonebound, String style, String ability)
     {
@@ -39,19 +39,9 @@ public class ToolMaterial
         this.ability = ability;
     }
 
-    public String name ()
+    public String ability ()
     {
-        return materialName;
-    }
-
-    public int durability ()
-    {
-        return this.durability;
-    }
-
-    public int toolSpeed ()
-    {
-        return this.miningspeed;
+        return this.ability;
     }
 
     public int attack ()
@@ -59,14 +49,24 @@ public class ToolMaterial
         return this.attack;
     }
 
-    public int harvestLevel ()
+    public int durability ()
     {
-        return this.harvestLevel;
+        return this.durability;
     }
 
     public float handleDurability ()
     {
         return this.handleModifier;
+    }
+
+    public int harvestLevel ()
+    {
+        return this.harvestLevel;
+    }
+
+    public String name ()
+    {
+        return materialName;
     }
 
     public int reinforced ()
@@ -84,8 +84,8 @@ public class ToolMaterial
         return this.tipStyle;
     }
 
-    public String ability ()
+    public int toolSpeed ()
     {
-        return this.ability;
+        return this.miningspeed;
     }
 }

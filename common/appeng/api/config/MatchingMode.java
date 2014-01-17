@@ -6,12 +6,12 @@ public enum MatchingMode implements IConfigEnum<MatchingMode> {
 	Precision;
 	
 	@Override
-	public IConfigEnum[] getValues() {
-		return MatchingMode.values();
+	public String getName() {
+		return "MatchingMode";
 	}
 
 	@Override
-	public String getName() {
-		return "MatchingMode";
+	public IConfigEnum[] getValues() {
+		return MatchingMode.values();
 	}
 }

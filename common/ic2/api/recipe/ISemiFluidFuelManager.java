@@ -6,6 +6,16 @@ import net.minecraftforge.fluids.Fluid;
 
 
 public interface ISemiFluidFuelManager extends ILiquidAcceptManager {
+	public static class BurnProperty {
+		public final int amount;
+
+		public final double power;
+		public BurnProperty(int amount1, double power1) {
+			this.amount = amount1;
+			this.power = power1;
+		}
+	}
+
 	/**
 	 * Add a new fluid to the semi fluid generator.
 	 * 
@@ -15,18 +25,8 @@ public interface ISemiFluidFuelManager extends ILiquidAcceptManager {
 	 */
 	void addFluid(String fluidName, int amount, double power);
 
-	BurnProperty getBurnProperty(Fluid fluid);
-
 	Map<String, BurnProperty> getBurnProperties();
 
 
-	public static class BurnProperty {
-		public BurnProperty(int amount1, double power1) {
-			this.amount = amount1;
-			this.power = power1;
-		}
-
-		public final int amount;
-		public final double power;
-	}
+	BurnProperty getBurnProperty(Fluid fluid);
 }

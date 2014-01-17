@@ -8,11 +8,22 @@ import net.minecraft.world.World;
 public interface IArrowContainer2 {
 
     /**
-     * Returns the maximum amout of slots in the arrow container
-     * @param container {@link #ItemStack} representing this item
-     * @return the amount of slots
+     * Crafts the item with the items from {@link #isCraftableWithArrows(ItemStack, ItemStack)}
+     * @param container The {@link #ItemStack} representing this item
+     * @param arrows Another valid item on the crafting bench
+     * @return Number of arrows that couldn't fit in
      */
-    public int getSlotCount(ItemStack container);
+    public ItemStack addArrows(ItemStack container, ItemStack newStack);
+
+    /**
+     * The arrow spawned when bow is used with this non empty container equipped
+     * @param container The {@link #ItemStack} representing this item
+     * @param charge Amount of charge in the bow, ranging from 0.2F to 2.0F
+     * @param player The {@link #EntityPlayer} using the bow
+     * @param world
+     * @return the arrow entity to spawn when bow is used
+     */
+    public EntityArrow getArrowType(ItemStack container, World world, EntityPlayer player, float charge);
 
     /**
      * Returns the currently selected slot in the arrow container
@@ -22,11 +33,11 @@ public interface IArrowContainer2 {
     public int getSelectedSlot(ItemStack container);
 
     /**
-     * Sets the currently selected slot to the given value
+     * Returns the maximum amout of slots in the arrow container
      * @param container {@link #ItemStack} representing this item
-     * @param newSlot the new slot index
+     * @return the amount of slots
      */
-    public void setSelectedSlot(ItemStack container, int newSlot);
+    public int getSlotCount(ItemStack container);
 
     /**
      * Returns the itemStack in the currently selected slot
@@ -35,14 +46,6 @@ public interface IArrowContainer2 {
      * @return The {@link #ItemStack} in the given slot.
      */
     public ItemStack getStackInSlot(ItemStack container, int slot);
-
-    /**
-     * Sets places the given item stack in the give slot
-     * @param container {@link #ItemStack} representing this item
-     * @param slot the slot index
-     * @param container {@link #ItemStack} representing the new stack
-     */
-    public void setStackInSlot(ItemStack container, int slot, ItemStack stack);
 
 
     /**
@@ -55,14 +58,12 @@ public interface IArrowContainer2 {
     public boolean hasArrowFor(ItemStack container, ItemStack bow, EntityPlayer player, int slot);
 
     /**
-     * The arrow spawned when bow is used with this non empty container equipped
+     * Called when the container is put on a crafting bench with other items
      * @param container The {@link #ItemStack} representing this item
-     * @param charge Amount of charge in the bow, ranging from 0.2F to 2.0F
-     * @param player The {@link #EntityPlayer} using the bow
-     * @param world
-     * @return the arrow entity to spawn when bow is used
+     * @param arrowStack The {@link #ItemStack} representing other items
+     * @return True to receive {@link #addArrows(ItemStack, ItemStack)}
      */
-    public EntityArrow getArrowType(ItemStack container, World world, EntityPlayer player, float charge);
+    public boolean isCraftableWithArrows(ItemStack contaner, ItemStack arrowStack);
     /**
      * Action to take after an arrow has been fired
      * Usually equal to removing an arrow from the container
@@ -79,20 +80,19 @@ public interface IArrowContainer2 {
      */
     public void onPreArrowFired(QuiverArrowEvent arrowEvent);
     /**
-     * Called when the container is put on a crafting bench with other items
-     * @param container The {@link #ItemStack} representing this item
-     * @param arrowStack The {@link #ItemStack} representing other items
-     * @return True to receive {@link #addArrows(ItemStack, ItemStack)}
+     * Sets the currently selected slot to the given value
+     * @param container {@link #ItemStack} representing this item
+     * @param newSlot the new slot index
      */
-    public boolean isCraftableWithArrows(ItemStack contaner, ItemStack arrowStack);
+    public void setSelectedSlot(ItemStack container, int newSlot);
 
     /**
-     * Crafts the item with the items from {@link #isCraftableWithArrows(ItemStack, ItemStack)}
-     * @param container The {@link #ItemStack} representing this item
-     * @param arrows Another valid item on the crafting bench
-     * @return Number of arrows that couldn't fit in
+     * Sets places the given item stack in the give slot
+     * @param container {@link #ItemStack} representing this item
+     * @param slot the slot index
+     * @param container {@link #ItemStack} representing the new stack
      */
-    public ItemStack addArrows(ItemStack container, ItemStack newStack);
+    public void setStackInSlot(ItemStack container, int slot, ItemStack stack);
 
 
 

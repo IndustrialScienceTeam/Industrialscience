@@ -14,11 +14,6 @@ public class ResearchDeskGUI extends GuiContainer {
     }
 
     @Override
-    protected void drawGuiContainerForegroundLayer(int i, int j) {
-
-    }
-
-    @Override
     protected void drawGuiContainerBackgroundLayer(float f, int i, int j) {
 
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
@@ -29,5 +24,10 @@ public class ResearchDeskGUI extends GuiContainer {
         int y = (height - ySize) / 2;
 
         this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
+    }
+
+    @Override
+    protected void drawGuiContainerForegroundLayer(int i, int j) {
+
     }
 }

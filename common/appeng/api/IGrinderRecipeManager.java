@@ -10,12 +10,6 @@ import net.minecraft.item.ItemStack;
 public interface IGrinderRecipeManager {
 	
 	/**
-	 * Current list of registered recipes, you can modify this if you want too.
-	 * @return currentlyRegistredRecipes
-	 */
-	public List<IAppEngGrinderRecipe> getRecipes();
-	
-	/**
 	 * add a new recipe the easy way, in -> out, how many turns.
 	 * @param in
 	 * @param out
@@ -29,4 +23,10 @@ public interface IGrinderRecipeManager {
 	 * @return identified recipe, or null
 	 */
 	public IAppEngGrinderRecipe getRecipeForInput(ItemStack input);
+	
+	/**
+	 * Current list of registered recipes, you can modify this if you want too.
+	 * @return currentlyRegistredRecipes
+	 */
+	public List<IAppEngGrinderRecipe> getRecipes();
 }

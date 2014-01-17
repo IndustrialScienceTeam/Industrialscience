@@ -7,14 +7,6 @@ package ic2.api.energy.tile;
  */
 public interface IEnergySource extends IEnergyEmitter {
 	/**
-	 * Energy output provided by the source this tick.
-	 * This is typically Math.min(stored energy, max output/tick).
-	 * 
-	 * @return Energy offered this tick
-	 */
-	double getOfferedEnergy();
-
-	/**
 	 * Draw energy from this source's buffer.
 	 * 
 	 * If the source doesn't have a buffer, this is a no-op.
@@ -22,5 +14,13 @@ public interface IEnergySource extends IEnergyEmitter {
 	 * @param amount amount of EU to draw, may be negative
 	 */
 	void drawEnergy(double amount);
+
+	/**
+	 * Energy output provided by the source this tick.
+	 * This is typically Math.min(stored energy, max output/tick).
+	 * 
+	 * @return Energy offered this tick
+	 */
+	double getOfferedEnergy();
 }
 

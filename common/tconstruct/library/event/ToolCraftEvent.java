@@ -1,10 +1,10 @@
 package tconstruct.library.event;
 
-import tconstruct.library.tools.ToolCore;
-import tconstruct.library.tools.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.Event;
+import tconstruct.library.tools.ToolCore;
+import tconstruct.library.tools.ToolMaterial;
 
 /* This event fires after all of the other construction. The resulting nbttag is added to the tool 
  * Note: The tag is the base tag. toolTag.getCompoundTag("InfiTool") will have all of the tool's data.
@@ -12,24 +12,17 @@ import net.minecraftforge.event.Event;
 
 public class ToolCraftEvent extends Event
 {
-    public final ToolCore tool;
-    public final NBTTagCompound toolTag;
-    public final ToolMaterial[] materials;
-    protected ItemStack resultStack;
-
-    public ToolCraftEvent(ToolCore tool, NBTTagCompound toolTag, ToolMaterial[] materials)
-    {
-        this.tool = tool;
-        this.toolTag = toolTag;
-        this.materials = materials;
-    }
-
     @HasResult
     public static class NormalTool extends ToolCraftEvent
     {
         public NormalTool(ToolCore tool, NBTTagCompound toolTag, ToolMaterial[] materials)
         {
             super(tool, toolTag, materials);
+        }
+
+        public ItemStack getResultStack ()
+        {
+            return resultStack;
         }
 
         /** Fires just before the tool is put together
@@ -45,10 +38,17 @@ public class ToolCraftEvent extends Event
             resultStack = result;
             this.setResult(Result.ALLOW);
         }
+    }
+    public final ToolMaterial[] materials;
+    protected ItemStack resultStack;
+    public final ToolCore tool;
 
-        public ItemStack getResultStack ()
-        {
-            return resultStack;
-        }
+    public final NBTTagCompound toolTag;
+
+    public ToolCraftEvent(ToolCore tool, NBTTagCompound toolTag, ToolMaterial[] materials)
+    {
+        this.tool = tool;
+        this.toolTag = toolTag;
+        this.materials = materials;
     }
 }

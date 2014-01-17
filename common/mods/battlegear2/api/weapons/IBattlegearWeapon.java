@@ -1,30 +1,15 @@
 package mods.battlegear2.api.weapons;
 
-import cpw.mods.fml.relauncher.Side;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import cpw.mods.fml.relauncher.Side;
 
 public interface IBattlegearWeapon {
-
-    /**
-     * Returns true if the weapon will allow other weapons to be placed in the partner offhand slot
-     */
-    public boolean willAllowOffhandWeapon();
-
-    /**
-     * Will allow shield
-     */
-    public boolean willAllowShield();
 
     /**
      * Returns true if the weapon be dual wielded in the offhand slot
      */
     public boolean isOffhandHandDualWeapon();
-
-    /**
-     * Returns true if the weapon should always be sheathed on the back, false if it should be sheathed on the hip
-     */
-    public boolean sheatheOnBack();
 
     /**
      * Perform any function when the item is held in the offhand and the user right clicks an entity.
@@ -66,5 +51,20 @@ public interface IBattlegearWeapon {
      * @param offhandItem   the ItemStack currently being held in the left hand
      */
     public void performPassiveEffects(Side effectiveSide, ItemStack mainhandItem, ItemStack offhandItem);
+
+    /**
+     * Returns true if the weapon should always be sheathed on the back, false if it should be sheathed on the hip
+     */
+    public boolean sheatheOnBack();
+
+    /**
+     * Returns true if the weapon will allow other weapons to be placed in the partner offhand slot
+     */
+    public boolean willAllowOffhandWeapon();
+
+    /**
+     * Will allow shield
+     */
+    public boolean willAllowShield();
 
 }

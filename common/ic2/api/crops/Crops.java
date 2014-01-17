@@ -3,7 +3,6 @@ package ic2.api.crops;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.BiomeGenBase;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -25,12 +24,34 @@ public abstract class Crops {
 	public abstract void addBiomeBonus(BiomeGenBase biome, int humidityBonus, int nutrientsBonus);
 
 	/**
+	 * Finds a base seed from the given item.
+	 * 
+	 * @return Base seed or null if none found
+	 */
+	public abstract BaseSeed getBaseSeed(ItemStack stack);
+
+	/**
+	 * Returns the list of registered crops.
+	 * 
+	 * @return Registered crops by ID
+	 */
+	public abstract CropCard[] getCropList();
+
+	/**
 	 * Gets the humidity bonus for a biome.
 	 * 
 	 * @param biome Biome to check
 	 * @return Humidity bonus or 0 if none
 	 */
 	public abstract int getHumidityBiomeBonus(BiomeGenBase biome);
+
+	/**
+	 * Returns the ID for the given crop.
+	 * 
+	 * @param crop Crop to look up
+	 * @return ID, or -1 if not found
+	 */
+	public abstract int getIdFor(CropCard crop);
 
 	/**
 	 * Gets the nutrient bonus for a biome.
@@ -41,11 +62,17 @@ public abstract class Crops {
 	public abstract int getNutrientBiomeBonus(BiomeGenBase biome);
 
 	/**
-	 * Returns the list of registered crops.
+	 * Registers a base seed, an item used to plant a crop.
 	 * 
-	 * @return Registered crops by ID
+	 * @param stack item
+	 * @param id plant ID
+	 * @param size initial size
+	 * @param growth initial growth stat
+	 * @param gain initial gain stat
+	 * @param resistance initial resistance stat
+	 * @return True if successful
 	 */
-	public abstract CropCard[] getCropList();
+	public abstract boolean registerBaseSeed(ItemStack stack, int id, int size, int growth, int gain, int resistance);
 
 	/**
 	 * Auto-assign an ID to a plant and register it.
@@ -67,38 +94,10 @@ public abstract class Crops {
 	public abstract boolean registerCrop(CropCard crop, int i);
 
 	/**
-	 * Registers a base seed, an item used to plant a crop.
-	 * 
-	 * @param stack item
-	 * @param id plant ID
-	 * @param size initial size
-	 * @param growth initial growth stat
-	 * @param gain initial gain stat
-	 * @param resistance initial resistance stat
-	 * @return True if successful
-	 */
-	public abstract boolean registerBaseSeed(ItemStack stack, int id, int size, int growth, int gain, int resistance);
-
-	/**
-	 * Finds a base seed from the given item.
-	 * 
-	 * @return Base seed or null if none found
-	 */
-	public abstract BaseSeed getBaseSeed(ItemStack stack);
-
-	/**
 	 * Execute registerSprites for all registered crop cards.
 	 * 
 	 * This method will get called by IC2, don't call it yourself.
 	 */
 	@SideOnly(Side.CLIENT)
 	public abstract void startSpriteRegistration(IconRegister iconRegister);
-
-	/**
-	 * Returns the ID for the given crop.
-	 * 
-	 * @param crop Crop to look up
-	 * @return ID, or -1 if not found
-	 */
-	public abstract int getIdFor(CropCard crop);
 }

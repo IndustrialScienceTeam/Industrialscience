@@ -17,16 +17,20 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public abstract class ISAbstractModule {
-    protected CreativeTabs CreativeTab = null;
     protected static Logger logger;
-    private Hashtable<String, Integer> ItemIDs;
-    private int normalBlockID;
-    private int modelBlockID;
-    private String prefix;
-    private String name;
-    private ItemStack IconItemStack;
+    public static Logger getLogger() {
+        return logger;
+    }
     private int bitprefix;
+    protected CreativeTabs CreativeTab = null;
+    private ItemStack IconItemStack;
+    private Hashtable<String, Integer> ItemIDs;
+    private int modelBlockID;
+    private String name;
+    private int normalBlockID;
     private IPacketHandler packethandler;
+
+    private String prefix;
 
     protected ISAbstractModule(Hashtable<String, Integer> itemIDs, int normalBlockID, int modelBlockID,
             String prefix, String name, int bitprefix,
@@ -44,11 +48,45 @@ public abstract class ISAbstractModule {
         
     }
 
-    public abstract void load();
+    public int formGUIID(int GUIID) {
+        return (GUIID << 3) | bitprefix;
+    }
+
+    public int getBitprefix() {
+        return bitprefix;
+    }
+
+    public abstract Object getClientGUIElement(int blockMetadata,
+            EntityPlayer player, World world, int x, int y, int z);
+
+    public CreativeTabs getCreativeTab() {
+        return CreativeTab;
+    }
+
+	public Hashtable<String, Integer> getItemIDs() {
+        return ItemIDs;
+    }
+
+	public int getModelBlockID() {
+		return modelBlockID;
+	}
+
+	public String getName() {
+        return name;
+    }
+
+	public int getNormalBlockID() {
+		return normalBlockID;
+	}
+
+    public String getPrefix() {
+        return prefix;
+    }
+
+    public abstract Object getServerGUIElement(int blockMetadata,
+            EntityPlayer player, World world, int x, int y, int z);
 
     public abstract void init();
-
-    public abstract void postinit();
 
     public void initCreativeTab(ItemStack iconitemstack) {
         IconItemStack = iconitemstack;
@@ -63,59 +101,7 @@ public abstract class ISAbstractModule {
 
     }
 
-    public void setNormalBlockID(int normalBlockID) {
-		this.normalBlockID = normalBlockID;
-	}
-
-	public void setModelBlockID(int modelBlockID) {
-		this.modelBlockID = modelBlockID;
-	}
-
-	public int getNormalBlockID() {
-		return normalBlockID;
-	}
-
-	public int getModelBlockID() {
-		return modelBlockID;
-	}
-
-	public Hashtable<String, Integer> getItemIDs() {
-        return ItemIDs;
-    }
-
-    public void setItemIDs(Hashtable<String, Integer> itemIDs) {
-        ItemIDs = itemIDs;
-    }
-
-    public CreativeTabs getCreativeTab() {
-        return CreativeTab;
-    }
-
-    public static Logger getLogger() {
-        return logger;
-    }
-
-    public String getPrefix() {
-        return prefix;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getBitprefix() {
-        return bitprefix;
-    }
-
-    public int formGUIID(int GUIID) {
-        return (GUIID << 3) | bitprefix;
-    }
-
-    public abstract Object getServerGUIElement(int blockMetadata,
-            EntityPlayer player, World world, int x, int y, int z);
-
-    public abstract Object getClientGUIElement(int blockMetadata,
-            EntityPlayer player, World world, int x, int y, int z);
+    public abstract void load();
 
     public void onPacketData(INetworkManager manager,
             Packet250CustomPayload packet, Player player) {
@@ -123,7 +109,21 @@ public abstract class ISAbstractModule {
 
     }
 
+    public abstract void postinit();
 
     @SideOnly(Side.CLIENT)
     public abstract void registerRenderers();
+
+    public void setItemIDs(Hashtable<String, Integer> itemIDs) {
+        ItemIDs = itemIDs;
+    }
+
+    public void setModelBlockID(int modelBlockID) {
+		this.modelBlockID = modelBlockID;
+	}
+
+
+    public void setNormalBlockID(int normalBlockID) {
+		this.normalBlockID = normalBlockID;
+	}
 }

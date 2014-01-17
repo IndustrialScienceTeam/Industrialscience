@@ -13,6 +13,14 @@ import appeng.api.me.util.InterfaceCraftingResponse;
 public interface ITileInterfaceApi {
 	
 	/**
+	 * Adds an item to the network
+	 * @param i
+	 * @param doAdd, or simulate
+	 * @return any items that couldn't be added, or nul
+	 */
+	ItemStack apiAddNetworkItem(ItemStack i, boolean doAdd);
+	
+	/**
 	 * how much space is available.
 	 * @param i
 	 * @param MaxNeeded, a cut off where you stop caring
@@ -29,18 +37,23 @@ public interface ITileInterfaceApi {
 	ItemStack apiExtractNetworkItem(ItemStack i, boolean doExtract);
 	
 	/**
-	 * Adds an item to the network
-	 * @param i
-	 * @param doAdd, or simulate
-	 * @return any items that couldn't be added, or nul
-	 */
-	ItemStack apiAddNetworkItem(ItemStack i, boolean doAdd);
-	
-	/**
 	 * returns a list of ItemStacks that are contined in the network.
 	 * @return
 	 */
 	List<ItemStack> apiGetNetworkContents();
+	
+	/**
+	 * if there is anything at all available it returns true.
+	 * @return
+	 */
+	boolean containsItems();
+	
+	/**
+	 * get access to the crafting patterns.
+	 * @param req
+	 * @return
+	 */
+	List<InterfaceCraftingPattern> findCraftingPatterns( ItemStack req );
 	
 	/**
 	 * get access to the networks IMEInventory.
@@ -53,14 +66,7 @@ public interface ITileInterfaceApi {
 	 * @return
 	 */
 	List<ItemStack> getCraftingOptions();
-	
-	/**
-	 * get access to the crafting patterns.
-	 * @param req
-	 * @return
-	 */
-	List<InterfaceCraftingPattern> findCraftingPatterns( ItemStack req );
-	
+
 	/**
 	 * issue a new crafting request.
 	 * @param req
@@ -68,11 +74,5 @@ public interface ITileInterfaceApi {
 	 * @return
 	 */
 	InterfaceCraftingResponse requestCrafting( ItemStack req, boolean enableRecursive );
-
-	/**
-	 * if there is anything at all available it returns true.
-	 * @return
-	 */
-	boolean containsItems();
 	
 }

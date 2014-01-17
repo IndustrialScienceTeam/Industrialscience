@@ -10,18 +10,18 @@ import tconstruct.library.crafting.Smeltery;
 
 public class SmelteryComponent extends LogicComponent
 {
-    World world;
-    IInventory master;
-    MultiFluidTank multitank;
+    public int[] activeTemps;
+    public int fuelAmount;
+    public int fuelGague;
     
     int internalTemp;
-    public int useTime;
-    public int fuelGague;
-    public int fuelAmount;
     boolean inUse;
-    
-    public int[] activeTemps;
+    IInventory master;
     public int[] meltingTemps;
+    MultiFluidTank multitank;
+    
+    public int useTime;
+    World world;
 
     public SmelteryComponent(IInventory inventory, World world, MultiFluidTank multitank, int maxTemp)
     {
@@ -56,6 +56,26 @@ public class SmelteryComponent extends LogicComponent
         }
     }
     
+    public int getInternalTemperature ()
+    {
+        return internalTemp;
+    }
+    
+    public int getMeltingPointForSlot (int slot)
+    {
+        return meltingTemps[slot];
+    }
+    
+    public FluidStack getResultFor (ItemStack stack)
+    {
+        return Smeltery.getSmelteryResult(stack);
+    }
+
+    public int getTempForSlot (int slot)
+    {
+        return activeTemps[slot];
+    }
+
     void heatItems ()
     {
         if (useTime > 0)
@@ -101,25 +121,5 @@ public class SmelteryComponent extends LogicComponent
             }
             inUse = hasUse;
         }
-    }
-    
-    public FluidStack getResultFor (ItemStack stack)
-    {
-        return Smeltery.getSmelteryResult(stack);
-    }
-    
-    public int getInternalTemperature ()
-    {
-        return internalTemp;
-    }
-
-    public int getTempForSlot (int slot)
-    {
-        return activeTemps[slot];
-    }
-
-    public int getMeltingPointForSlot (int slot)
-    {
-        return meltingTemps[slot];
     }
 }

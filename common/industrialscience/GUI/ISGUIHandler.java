@@ -18,6 +18,25 @@ public class ISGUIHandler implements IGuiHandler {
     }
 
     @Override
+    public Object getClientGuiElement(int ID, EntityPlayer player, World world,
+            int x, int y, int z) {
+        if (ID == 0)
+            for (Iterator<ISAbstractModule> iterator = modules.iterator(); iterator
+                    .hasNext();) {
+                ISAbstractModule module = iterator.next();
+                if ((world.getBlockId(x, y, z) == module.getNormalBlockID())|world.getBlockId(x, y, z) == module.getModelBlockID()) {
+                    return module
+                            .getClientGUIElement(0, player, world, x, y, z);
+                }
+            }
+        else {
+            return IndustrialScience.MODULES[ID & 7].getClientGUIElement(
+                    ID >> 3, player, world, x, y, z);
+        }
+        return null;
+    }
+
+    @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world,
             int x, int y, int z) {
         if (ID == 0)
@@ -33,25 +52,6 @@ public class ISGUIHandler implements IGuiHandler {
             return IndustrialScience.MODULES[ID & 7].getServerGUIElement(
                     ID >> 3, player, world, x, y, z);
 
-        }
-        return null;
-    }
-
-    @Override
-    public Object getClientGuiElement(int ID, EntityPlayer player, World world,
-            int x, int y, int z) {
-        if (ID == 0)
-            for (Iterator<ISAbstractModule> iterator = modules.iterator(); iterator
-                    .hasNext();) {
-                ISAbstractModule module = iterator.next();
-                if ((world.getBlockId(x, y, z) == module.getNormalBlockID())|world.getBlockId(x, y, z) == module.getModelBlockID()) {
-                    return module
-                            .getClientGUIElement(0, player, world, x, y, z);
-                }
-            }
-        else {
-            return IndustrialScience.MODULES[ID & 7].getClientGUIElement(
-                    ID >> 3, player, world, x, y, z);
         }
         return null;
     }

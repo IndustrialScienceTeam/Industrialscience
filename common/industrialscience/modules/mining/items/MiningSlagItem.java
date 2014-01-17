@@ -18,11 +18,6 @@ public class MiningSlagItem extends ItemFood {
                 + ".Mining_Slag");
     }
 
-    @Override
-    public void registerIcons(IconRegister iconRegister) {
-        itemIcon = iconRegister.registerIcon("apple");
-    }
-
     @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
     public void addInformation(ItemStack par1ItemStack,
@@ -43,6 +38,11 @@ public class MiningSlagItem extends ItemFood {
         tnt.setPosition(par3EntityPlayer.posX, par3EntityPlayer.posY, par3EntityPlayer.posZ);
         par2World.spawnEntityInWorld(tnt);}
         return super.onEaten(par1ItemStack, par2World, par3EntityPlayer);
+    }
+
+    @Override
+    public void registerIcons(IconRegister iconRegister) {
+        itemIcon = iconRegister.registerIcon("apple");
     }
     
 }

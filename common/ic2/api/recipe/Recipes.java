@@ -8,19 +8,13 @@ package ic2.api.recipe;
  * @author Richard
  */
 public class Recipes {
-	public static IMachineRecipeManager macerator;
-	public static IMachineRecipeManager extractor;
-	public static IMachineRecipeManager compressor;
-	public static IMachineRecipeManager centrifuge;
-	public static IMachineRecipeManager recycler;
-	public static IMachineRecipeManager metalformerExtruding;
-	public static IMachineRecipeManager metalformerCutting;
-	public static IMachineRecipeManager metalformerRolling;
-	public static IMachineRecipeManager oreWashing;
-	public static IMachineRecipeManager Scanner;
+	public static ICraftingRecipeManager advRecipes;
 	public static ICannerBottleRecipeManager cannerBottle;
 	public static ICannerEnrichRecipeManager cannerEnrich;
-
+	public static IMachineRecipeManager centrifuge;
+	public static IMachineRecipeManager compressor;
+	public static IMachineRecipeManager extractor;
+	public static IMachineRecipeManager macerator;
 	/**
 	 * Reference amplifier values:
 	 * 
@@ -34,6 +28,14 @@ public class Recipes {
 	 * matterAmplifier.addRecipe(yourStack, nbt);
 	 */
 	public static IMachineRecipeManager matterAmplifier;
+	public static IMachineRecipeManager metalformerCutting;
+	public static IMachineRecipeManager metalformerExtruding;
+	public static IMachineRecipeManager metalformerRolling;
+	public static IMachineRecipeManager oreWashing;
+
+	public static IMachineRecipeManager recycler;
+	public static IListRecipeManager recyclerBlacklist;
+	public static IMachineRecipeManager Scanner;
 	/**
 	 * Reference scrap box chance values:
 	 *
@@ -47,8 +49,6 @@ public class Recipes {
 	 * 5.0: Dirt, Wooden Hoe
 	 */
 	public static IScrapboxManager scrapboxDrops;
-	public static IListRecipeManager recyclerBlacklist;
-	public static ICraftingRecipeManager advRecipes;
 
 	public static ISemiFluidFuelManager semiFluidGenerator;
 

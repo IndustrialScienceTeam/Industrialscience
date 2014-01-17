@@ -5,11 +5,11 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class CastingRecipe
 {
-    public ItemStack output;
-    public FluidStack castingMetal;
     public ItemStack cast;
+    public FluidStack castingMetal;
     public boolean consumeCast;
     public int coolTime;
+    public ItemStack output;
 
     public CastingRecipe(ItemStack replacement, FluidStack metal, ItemStack cast, boolean consume, int delay)
     {
@@ -18,6 +18,11 @@ public class CastingRecipe
         output = replacement;
         consumeCast = consume;
         coolTime = delay;
+    }
+
+    public ItemStack getResult ()
+    {
+        return output.copy();
     }
 
     public boolean matches (FluidStack metal, ItemStack inputCast)
@@ -29,10 +34,5 @@ public class CastingRecipe
         }
         else
             return false;
-    }
-
-    public ItemStack getResult ()
-    {
-        return output.copy();
     }
 }

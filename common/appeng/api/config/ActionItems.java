@@ -2,16 +2,16 @@ package appeng.api.config;
 
 
 public enum ActionItems implements IConfigEnum<ActionItems> {
-	Wrench,
-	Close;
-
-	@Override
-	public IConfigEnum[] getValues() {
-		return values();
-	}
+	Close,
+	Wrench;
 
 	@Override
 	public String getName() {
 		return "FuzzyMode";
+	}
+
+	@Override
+	public IConfigEnum[] getValues() {
+		return values();
 	}
 }

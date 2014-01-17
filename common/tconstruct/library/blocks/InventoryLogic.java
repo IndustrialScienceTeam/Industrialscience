@@ -27,42 +27,14 @@ public abstract class InventoryLogic extends TileEntity implements IInventory
 
     /* Inventory management */
 
-    @Override
-    public ItemStack getStackInSlot (int slot)
-    {
-        return inventory[slot];
-    }
-
-    public boolean isStackInSlot (int slot)
-    {
-        return inventory[slot] != null;
-    }
-
-    @Override
-    public int getSizeInventory ()
-    {
-        return inventory.length;
-    }
-
-    @Override
-    public int getInventoryStackLimit ()
-    {
-        return 64;
-    }
-
     public boolean canDropInventorySlot (int slot)
     {
         return true;
     }
 
     @Override
-    public void setInventorySlotContents (int slot, ItemStack itemstack)
+	public void closeChest ()
     {
-        inventory[slot] = itemstack;
-        if (itemstack != null && itemstack.stackSize > getInventoryStackLimit())
-        {
-            itemstack.stackSize = getInventoryStackLimit();
-        }
     }
 
     @Override
@@ -89,6 +61,63 @@ public abstract class InventoryLogic extends TileEntity implements IInventory
         }
     }
 
+    protected abstract String getDefaultName ();
+
+    public abstract Container getGuiContainer (InventoryPlayer inventoryplayer, World world, int x, int y, int z);
+
+    @Override
+    public int getInventoryStackLimit ()
+    {
+        return 64;
+    }
+
+    @Override
+	public String getInvName ()
+    {
+        return this.isInvNameLocalized() ? this.invName : getDefaultName();
+    }
+
+    @Override
+    public int getSizeInventory ()
+    {
+        return inventory.length;
+    }
+
+    @Override
+    public ItemStack getStackInSlot (int slot)
+    {
+        return inventory[slot];
+    }
+
+    /* Default implementations of hardly used methods */
+    @Override
+	public ItemStack getStackInSlotOnClosing (int slot)
+    {
+        return null;
+    }
+
+    @Override
+	public boolean isInvNameLocalized ()
+    {
+        return this.invName != null && this.invName.length() > 0;
+    }
+
+    @Override
+    public boolean isItemValidForSlot (int slot, ItemStack itemstack)
+    {
+        if (slot < getSizeInventory())
+        {
+            if (inventory[slot] == null || itemstack.stackSize + inventory[slot].stackSize <= getInventoryStackLimit())
+                return true;
+        }
+        return false;
+    }
+
+    public boolean isStackInSlot (int slot)
+    {
+        return inventory[slot] != null;
+    }
+
     /* Supporting methods */
     @Override
     public boolean isUseableByPlayer (EntityPlayer entityplayer)
@@ -101,7 +130,10 @@ public abstract class InventoryLogic extends TileEntity implements IInventory
 
     }
 
-    public abstract Container getGuiContainer (InventoryPlayer inventoryplayer, World world, int x, int y, int z);
+    @Override
+	public void openChest ()
+    {
+    }
 
     /* NBT */
     @Override
@@ -123,6 +155,21 @@ public abstract class InventoryLogic extends TileEntity implements IInventory
     }
 
     @Override
+    public void setInventorySlotContents (int slot, ItemStack itemstack)
+    {
+        inventory[slot] = itemstack;
+        if (itemstack != null && itemstack.stackSize > getInventoryStackLimit())
+        {
+            itemstack.stackSize = getInventoryStackLimit();
+        }
+    }
+
+    public void setInvName (String name)
+    {
+        this.invName = name;
+    }
+
+    @Override
     public void writeToNBT (NBTTagCompound tags)
     {
         super.writeToNBT(tags);
@@ -141,52 +188,5 @@ public abstract class InventoryLogic extends TileEntity implements IInventory
         }
 
         tags.setTag("Items", nbttaglist);
-    }
-
-    /* Default implementations of hardly used methods */
-    @Override
-	public ItemStack getStackInSlotOnClosing (int slot)
-    {
-        return null;
-    }
-
-    @Override
-	public void openChest ()
-    {
-    }
-
-    @Override
-	public void closeChest ()
-    {
-    }
-
-    protected abstract String getDefaultName ();
-
-    public void setInvName (String name)
-    {
-        this.invName = name;
-    }
-
-    @Override
-	public String getInvName ()
-    {
-        return this.isInvNameLocalized() ? this.invName : getDefaultName();
-    }
-
-    @Override
-	public boolean isInvNameLocalized ()
-    {
-        return this.invName != null && this.invName.length() > 0;
-    }
-
-    @Override
-    public boolean isItemValidForSlot (int slot, ItemStack itemstack)
-    {
-        if (slot < getSizeInventory())
-        {
-            if (inventory[slot] == null || itemstack.stackSize + inventory[slot].stackSize <= getInventoryStackLimit())
-                return true;
-        }
-        return false;
     }
 }

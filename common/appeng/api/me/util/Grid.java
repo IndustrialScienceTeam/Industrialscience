@@ -10,6 +10,26 @@ import appeng.api.me.tiles.IGridTileEntity;
 public class Grid
 {
 	/**
+     * Returns the grid entity at the given location, or null if its not a grid entity.
+     * @param w
+     * @param x
+     * @param y
+     * @param z
+     * @return gridEntity
+     */
+    public static IGridTileEntity getGridEntity(World w, int x, int y, int z)
+    {
+        TileEntity te = w.getBlockTileEntity(x, y, z);
+
+        if (te instanceof IGridTileEntity)
+        {
+            return (IGridTileEntity)te;
+        }
+
+        return null;
+    }
+    
+    /**
 	 * Attempts to find a grid interface for the specified location.
 	 * @param w
 	 * @param x
@@ -40,26 +60,6 @@ public class Grid
     public static boolean isGridEntity(World w, int x, int y, int z)
     {
         return getGridEntity(w, x, y, z) != null;
-    }
-    
-    /**
-     * Returns the grid entity at the given location, or null if its not a grid entity.
-     * @param w
-     * @param x
-     * @param y
-     * @param z
-     * @return gridEntity
-     */
-    public static IGridTileEntity getGridEntity(World w, int x, int y, int z)
-    {
-        TileEntity te = w.getBlockTileEntity(x, y, z);
-
-        if (te instanceof IGridTileEntity)
-        {
-            return (IGridTileEntity)te;
-        }
-
-        return null;
     }
     
     /**

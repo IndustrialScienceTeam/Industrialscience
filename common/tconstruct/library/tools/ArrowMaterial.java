@@ -2,9 +2,9 @@ package tconstruct.library.tools;
 
 public class ArrowMaterial
 {
-    public final float mass;
-    public final float breakChance;
     public final float accuracy;
+    public final float breakChance;
+    public final float mass;
 
     public ArrowMaterial(float weight, float breakChance, float accuracy)
     {

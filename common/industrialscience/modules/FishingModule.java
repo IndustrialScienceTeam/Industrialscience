@@ -18,15 +18,51 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class FishingModule extends ISAbstractModule {
+    public static ISModuleModelBlock fishingblock;
+
+    public static Item lobsteritem;
+
+    public static int lobsteritemID;
+    private static Hashtable<String, Integer> NeededItemIDs() {
+        Hashtable<String, Integer> NeededItemIDs = new Hashtable<String, Integer>();
+        NeededItemIDs.put("lobsteritem", 760);
+        return NeededItemIDs;
+    }
+
     public FishingModule(int normalblockid,int modelblockid, int i) {
         super(NeededItemIDs(), normalblockid,modelblockid, "fishingmodule",
                 "IndustrialScience Fishing", i, new FishingModulePackethandler());
     }
 
-    public static ISModuleModelBlock fishingblock;
+    @Override
+    public Object getClientGUIElement(int blockMetadata, EntityPlayer player,
+            World world, int x, int y, int z) {
+        switch(world.getBlockMetadata(x, y, z)){
+        	case FishingModuleModelBlock.TRAPCRAFTINGBLOCKMETAID:
+        		return new TrapCraftingTableGUI((TrapCraftingTableTileEntity)world.getBlockTileEntity(x, y, z), player.inventory);
+        }
+        return null;
+    }
 
-    public static Item lobsteritem;
-    public static int lobsteritemID;
+    @Override
+    public Object getServerGUIElement(int blockMetadata, EntityPlayer player,
+            World world, int x, int y, int z) {
+        switch(world.getBlockMetadata(x, y, z)){
+    	case FishingModuleModelBlock.TRAPCRAFTINGBLOCKMETAID:
+    		return new TrapCraftingTableContainer((TrapCraftingTableTileEntity)world.getBlockTileEntity(x, y, z), player.inventory);
+    }
+    return null;
+    }
+
+    @Override
+    public void init() {
+        logger.log(Level.INFO, "INIT");
+        initCreativeTab(new ItemStack(Item.fishingRod));
+        fishingblock = new FishingModuleModelBlock(getModelBlockID(), getPrefix());
+        lobsteritemID = getItemIDs().get("lobsteritem");
+        lobsteritem = new LobsterItem(lobsteritemID, this.getPrefix());
+
+    }
 
     @Override
     public void load() {
@@ -50,45 +86,9 @@ public class FishingModule extends ISAbstractModule {
     }
 
     @Override
-    public void init() {
-        logger.log(Level.INFO, "INIT");
-        initCreativeTab(new ItemStack(Item.fishingRod));
-        fishingblock = new FishingModuleModelBlock(getModelBlockID(), getPrefix());
-        lobsteritemID = getItemIDs().get("lobsteritem");
-        lobsteritem = new LobsterItem(lobsteritemID, this.getPrefix());
-
-    }
-
-    @Override
     public void postinit() {
         logger.log(Level.INFO, "POST-INIT");
 
-    }
-
-    private static Hashtable<String, Integer> NeededItemIDs() {
-        Hashtable<String, Integer> NeededItemIDs = new Hashtable<String, Integer>();
-        NeededItemIDs.put("lobsteritem", 760);
-        return NeededItemIDs;
-    }
-
-    @Override
-    public Object getServerGUIElement(int blockMetadata, EntityPlayer player,
-            World world, int x, int y, int z) {
-        switch(world.getBlockMetadata(x, y, z)){
-    	case FishingModuleModelBlock.TRAPCRAFTINGBLOCKMETAID:
-    		return new TrapCraftingTableContainer((TrapCraftingTableTileEntity)world.getBlockTileEntity(x, y, z), player.inventory);
-    }
-    return null;
-    }
-
-    @Override
-    public Object getClientGUIElement(int blockMetadata, EntityPlayer player,
-            World world, int x, int y, int z) {
-        switch(world.getBlockMetadata(x, y, z)){
-        	case FishingModuleModelBlock.TRAPCRAFTINGBLOCKMETAID:
-        		return new TrapCraftingTableGUI((TrapCraftingTableTileEntity)world.getBlockTileEntity(x, y, z), player.inventory);
-        }
-        return null;
     }
 
     @Override

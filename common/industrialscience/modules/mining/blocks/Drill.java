@@ -1,8 +1,7 @@
 package industrialscience.modules.mining.blocks;
 
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
 import industrialscience.blocksystem.ModelISBlock;
+import net.minecraft.tileentity.TileEntity;
 
 public class Drill extends ModelISBlock {
 

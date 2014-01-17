@@ -9,8 +9,8 @@ import tconstruct.library.util.IFacingLogic;
 
 public abstract class AdaptiveInventoryLogic extends InventoryLogic implements IFacingLogic
 {
-    Random random = new Random();
     protected int inventorySize;
+    Random random = new Random();
 
     public AdaptiveInventoryLogic()
     {
@@ -95,10 +95,10 @@ public abstract class AdaptiveInventoryLogic extends InventoryLogic implements I
         }
     }
     
-    public abstract void setNeedsUpdate();
-
     public int getTossDirection ()
     {
         return getRenderDirection();
     }
+
+    public abstract void setNeedsUpdate();
 }

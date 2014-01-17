@@ -15,17 +15,17 @@ public interface ICellRegistry {
 	void addCellHandler( ICellHandler h );
 	
 	/**
-	 * returns true if the provided item, can be handled by a handler in AE, ( AE May choose to skip this and just get the handler instead. )
-	 * @param is
-	 * @return returns true, if you can get a InventoryHandler for the item passed.
-	 */
-	boolean isCellHandled( ItemStack is );
-	
-	/**
 	 * returns an IMEInventoryHandler for the provided item.
 	 * @param is
 	 * @return new IMEInventoryHandler, or null if there isn't one.
 	 */
 	IMEInventoryHandler getHandlerForCell( ItemStack is );
+	
+	/**
+	 * returns true if the provided item, can be handled by a handler in AE, ( AE May choose to skip this and just get the handler instead. )
+	 * @param is
+	 * @return returns true, if you can get a InventoryHandler for the item passed.
+	 */
+	boolean isCellHandled( ItemStack is );
 	
 }

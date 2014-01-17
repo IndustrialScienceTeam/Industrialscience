@@ -1,20 +1,12 @@
 package industrialscience.modules.fishing;
-import industrialscience.IndustrialScience;
-import industrialscience.blocksystem.ModelISBlock;
-import industrialscience.blocksystem.ISModuleBlock;
-import industrialscience.modules.fishing.Blocks.TrapCraftingTableISBlock;
-import industrialscience.BlockUtils;
-import industrialscience.blocksystem.ISModuleModelBlock;
 import industrialscience.blocksystem.ISModuleNormalBlock;
 import industrialscience.modules.fishing.TileEntities.AbstractFishTrapTileEntity;
 
 import java.util.Random;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.network.FMLNetworkHandler;
 
 public class FishingModuleNormalBlock extends ISModuleNormalBlock {
 	public FishingModuleNormalBlock(int par1, String prefix) {

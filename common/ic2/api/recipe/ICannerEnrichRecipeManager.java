@@ -3,10 +3,24 @@ package ic2.api.recipe;
 import java.util.Map;
 
 import net.minecraft.item.ItemStack;
-
 import net.minecraftforge.fluids.FluidStack;
 
 public interface ICannerEnrichRecipeManager {
+	public static class Input {
+		public final IRecipeInput additive;
+
+		public final FluidStack fluid;
+
+		public Input(FluidStack fluid1, IRecipeInput additive1) {
+			this.fluid = fluid1;
+			this.additive = additive1;
+		}
+		public boolean matches(FluidStack fluid1, ItemStack additive1) {
+			return (this.fluid == null || this.fluid.isFluidEqual(fluid1)) &&
+					this.additive.matches(additive1);
+		}
+	}
+
 	/**
 	 * Adds a recipe to the machine.
 	 * 
@@ -27,6 +41,7 @@ public interface ICannerEnrichRecipeManager {
 	 */
 	public RecipeOutput getOutputFor(FluidStack input, ItemStack additive, boolean adjustInput, boolean acceptTest);
 
+
 	/**
 	 * Gets a list of recipes.
 	 * 
@@ -35,20 +50,4 @@ public interface ICannerEnrichRecipeManager {
 	 * @return List of recipes
 	 */
 	public Map<Input, FluidStack> getRecipes();
-
-
-	public static class Input {
-		public Input(FluidStack fluid1, IRecipeInput additive1) {
-			this.fluid = fluid1;
-			this.additive = additive1;
-		}
-
-		public boolean matches(FluidStack fluid1, ItemStack additive1) {
-			return (this.fluid == null || this.fluid.isFluidEqual(fluid1)) &&
-					this.additive.matches(additive1);
-		}
-
-		public final FluidStack fluid;
-		public final IRecipeInput additive;
-	}
 }

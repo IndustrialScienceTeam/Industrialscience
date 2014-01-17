@@ -4,10 +4,10 @@ import net.minecraft.item.ItemStack;
 
 public abstract class CustomMaterial
 {
+    public final ItemStack craftingItem;
+    public final ItemStack input;
     public final int materialID;
     public final int value;
-    public final ItemStack input;
-    public final ItemStack craftingItem;
 
     public CustomMaterial(int materialID, int value, ItemStack input, ItemStack craftingItem)
     {

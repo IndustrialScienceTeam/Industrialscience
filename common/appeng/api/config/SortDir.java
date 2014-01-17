@@ -7,12 +7,12 @@ public enum SortDir implements IConfigEnum
 	DESC;
 	
 	@Override
-	public IConfigEnum[] getValues() {
-		return values();
+	public String getName() {
+		return "SortDir";
 	}
 
 	@Override
-	public String getName() {
-		return "SortDir";
+	public IConfigEnum[] getValues() {
+		return values();
 	}
 }

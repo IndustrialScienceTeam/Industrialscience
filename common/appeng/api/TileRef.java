@@ -22,6 +22,10 @@ public class TileRef<T> extends WorldCoord {
 			throw new RuntimeException("Tile has no world.");
 	}
 	
+	public DimentionalCoord getCoord() {
+		return new DimentionalCoord( w, x, y, z );
+	}
+
 	@SuppressWarnings("unchecked")
 	public T getTile() throws AppEngTileMissingException
 	{
@@ -50,10 +54,6 @@ public class TileRef<T> extends WorldCoord {
 			MinecraftForge.EVENT_BUS.post( new GridTileUnloadEvent( null, w, this ) );
 		
 		throw new AppEngTileMissingException( w, x,y,z);
-	}
-
-	public DimentionalCoord getCoord() {
-		return new DimentionalCoord( w, x, y, z );
 	}
 			
 };

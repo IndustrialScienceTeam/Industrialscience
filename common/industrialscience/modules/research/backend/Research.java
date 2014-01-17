@@ -6,14 +6,14 @@ import java.util.Hashtable;
 
 public class Research implements Comparable<Research> {
     public final static String RESEARCH_CATEGORY = "Researching";
-    private String Name;
-    private String[] NeededResearches;
     private String Category;
-    private Researchstep[] Steps;
-    private Hashtable<Integer, Boolean> EnabledSteps;
-    private RecipeLocker Locker;
     private Researchchecker Checker;
     private Object Data;
+    private Hashtable<Integer, Boolean> EnabledSteps;
+    private RecipeLocker Locker;
+    private String Name;
+    private String[] NeededResearches;
+    private Researchstep[] Steps;
 
     public Research(String name, String[] neededResearches, String category,
             Object data, Researchstep[] steps, RecipeLocker locker,
@@ -34,6 +34,59 @@ public class Research implements Comparable<Research> {
         Locker = locker;
         Checker = checker;
         Data = data;
+    }
+
+    public boolean check() {
+        return Checker.check();
+    }
+
+    @Override
+    public int compareTo(Research o) {
+        return Name.compareTo(o.getName());
+    }
+
+    public void enableSteps(Hashtable<Integer, Boolean> steps) {
+        if (steps.size() != EnabledSteps.size())
+            throw new RuntimeException();
+        EnabledSteps = steps;
+
+    }
+
+    public String getCategory() {
+        return Category;
+    }
+
+    public Object getData() {
+        return Data;
+    }
+
+    public Hashtable<Integer, Boolean> getEnabledSteps() {
+        return EnabledSteps;
+    }
+
+    public String getName() {
+        return Name;
+    }
+
+    public String[] getNeededResearches() {
+        return NeededResearches;
+    }
+
+    public synchronized Researchstep[] getSteps() {
+        return Steps;
+    }
+
+    public boolean isResearched() {
+        for (Enumeration<Boolean> list = EnabledSteps.elements(); list
+                .hasMoreElements();) {
+            if (!list.nextElement())
+                return false;
+        }
+        return true;
+    }
+
+    public synchronized void lock() {
+        Locker.lock();
     }
 
     public boolean research(ResearchObject object) {
@@ -62,58 +115,6 @@ public class Research implements Comparable<Research> {
         return false;
     }
 
-    public boolean check() {
-        return Checker.check();
-    }
-
-    public boolean isResearched() {
-        for (Enumeration<Boolean> list = EnabledSteps.elements(); list
-                .hasMoreElements();) {
-            if (!list.nextElement())
-                return false;
-        }
-        return true;
-    }
-
-    @Override
-    public int compareTo(Research o) {
-        return Name.compareTo(o.getName());
-    }
-
-    private synchronized void unlock() {
-        Locker.unlock();
-    }
-
-    public synchronized void lock() {
-        Locker.lock();
-    }
-
-    public String getName() {
-        return Name;
-    }
-
-    public String[] getNeededResearches() {
-        return NeededResearches;
-    }
-
-    public String getCategory() {
-        return Category;
-    }
-
-    public synchronized Researchstep[] getSteps() {
-        return Steps;
-    }
-
-    public Hashtable<Integer, Boolean> getEnabledSteps() {
-        return EnabledSteps;
-    }
-
-    @Override
-    public String toString() {
-        return "Researchname: " + Name + ", ResearchCategory: " + Category;
-
-    }
-
     public void setSteps(Researchstep[] steps) {
         if(steps==null){
         	this.Steps= new Researchstep[0];
@@ -122,15 +123,14 @@ public class Research implements Comparable<Research> {
         }
     }
 
-    public void enableSteps(Hashtable<Integer, Boolean> steps) {
-        if (steps.size() != EnabledSteps.size())
-            throw new RuntimeException();
-        EnabledSteps = steps;
+    @Override
+    public String toString() {
+        return "Researchname: " + Name + ", ResearchCategory: " + Category;
 
     }
 
-    public Object getData() {
-        return Data;
+    private synchronized void unlock() {
+        Locker.unlock();
     }
 
 }

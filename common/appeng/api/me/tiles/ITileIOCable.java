@@ -9,13 +9,8 @@ import net.minecraft.inventory.IInventory;
 public interface ITileIOCable {
 	
 	public enum Version {
-		Basic, Precision, Fuzzy
+		Basic, Fuzzy, Precision
 	};
-	
-	/**
-	 * returns one of the above, to indicate which version of the bus it is.
-	 */
-	Version getVersion();
 	
 	/**
 	 * Returns an IInventory that represents the configuration.
@@ -26,5 +21,10 @@ public interface ITileIOCable {
 	 * Returns the name of the bus..
 	 */
 	String getName();
+	
+	/**
+	 * returns one of the above, to indicate which version of the bus it is.
+	 */
+	Version getVersion();
 	
 }

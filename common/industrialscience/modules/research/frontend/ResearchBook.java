@@ -25,8 +25,22 @@ public class ResearchBook extends Item {
     }
 
     @Override
-    public void registerIcons(IconRegister iconRegister) {
-        itemIcon = iconRegister.registerIcon("industrialscience:research-book");
+    @SuppressWarnings("unchecked")
+    public void addInformation(ItemStack par1ItemStack,
+            EntityPlayer par2EntityPlayer,
+            @SuppressWarnings("rawtypes") List par3List, boolean par4) {
+        if (par1ItemStack.stackTagCompound == null) {
+            par1ItemStack.setTagCompound(new NBTTagCompound());
+        }
+        int[] researchesid = par1ItemStack.stackTagCompound
+                .getIntArray(NBTNAME);
+        if (researchesid != null) {
+            par3List.add("Researches: " + researchesid.length);
+        }
+    }
+
+    public int[] getResearchID() {
+        return null;
     }
 
     @Override
@@ -51,25 +65,6 @@ public class ResearchBook extends Item {
                 par3EntityPlayer);
     }
 
-    public int[] getResearchID() {
-        return null;
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public void addInformation(ItemStack par1ItemStack,
-            EntityPlayer par2EntityPlayer,
-            @SuppressWarnings("rawtypes") List par3List, boolean par4) {
-        if (par1ItemStack.stackTagCompound == null) {
-            par1ItemStack.setTagCompound(new NBTTagCompound());
-        }
-        int[] researchesid = par1ItemStack.stackTagCompound
-                .getIntArray(NBTNAME);
-        if (researchesid != null) {
-            par3List.add("Researches: " + researchesid.length);
-        }
-    }
-
     @Override
     public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player,
             Entity entity) {
@@ -88,6 +83,11 @@ public class ResearchBook extends Item {
         }
         stack.stackTagCompound.setIntArray(NBTNAME, researchesid);
         return false;
+    }
+
+    @Override
+    public void registerIcons(IconRegister iconRegister) {
+        itemIcon = iconRegister.registerIcon("industrialscience:research-book");
     }
 
 }

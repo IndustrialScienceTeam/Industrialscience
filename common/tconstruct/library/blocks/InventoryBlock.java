@@ -2,9 +2,6 @@ package tconstruct.library.blocks;
 
 import java.util.Random;
 
-import tconstruct.library.util.IActiveLogic;
-import tconstruct.library.util.IFacingLogic;
-
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -17,50 +14,32 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import tconstruct.library.util.IActiveLogic;
+import tconstruct.library.util.IFacingLogic;
 
 public abstract class InventoryBlock extends BlockContainer
 {
+    public static boolean isActive (IBlockAccess world, int x, int y, int z)
+    {
+        TileEntity logic = world.getBlockTileEntity(x, y, z);
+        if (logic instanceof IActiveLogic)
+        {
+            return ((IActiveLogic) logic).getActive();
+        }
+        return false;
+    }
+
+    /* Textures */
+    public Icon[] icons;
+
     protected Random rand = new Random();
+
+    int side = -1;
 
     protected InventoryBlock(int id, Material material)
     {
         super(id, material);
     }
-
-    /* Logic backend */
-    @Override
-	public TileEntity createNewTileEntity (World var1)
-    {
-        return null;
-    }
-
-    @Override
-	public abstract TileEntity createTileEntity (World world, int metadata);
-
-    public abstract Integer getGui (World world, int x, int y, int z, EntityPlayer entityplayer);
-
-    public abstract Object getModInstance ();
-
-    @Override
-    public boolean onBlockActivated (World world, int x, int y, int z, EntityPlayer player, int side, float clickX, float clickY, float clickZ)
-    {
-        if (player.isSneaking())
-            return false;
-
-        Integer integer = getGui(world, x, y, z, player);
-        if (integer == null || integer == -1)
-        {
-            return false;
-        }
-        else
-        {
-            if (!world.isRemote)
-                player.openGui(getModInstance(), integer, world, x, y, z);
-            return true;
-        }
-    }
-
-    /* Inventory */
 
     @Override
     public void breakBlock (World par1World, int x, int y, int z, int par5, int meta)
@@ -111,9 +90,50 @@ public abstract class InventoryBlock extends BlockContainer
         super.breakBlock(par1World, x, y, z, par5, meta);
     }
 
+    /* Logic backend */
+    @Override
+	public TileEntity createNewTileEntity (World var1)
+    {
+        return null;
+    }
+
+    /* Inventory */
+
+    @Override
+	public abstract TileEntity createTileEntity (World world, int metadata);
+
     /* Placement */
 
-    int side = -1;
+    @Override
+	public int damageDropped (int meta)
+    {
+        return meta;
+    }
+
+    public abstract Integer getGui (World world, int x, int y, int z, EntityPlayer entityplayer);
+
+    public abstract Object getModInstance ();
+
+    public abstract String[] getTextureNames ();
+
+    @Override
+    public boolean onBlockActivated (World world, int x, int y, int z, EntityPlayer player, int side, float clickX, float clickY, float clickZ)
+    {
+        if (player.isSneaking())
+            return false;
+
+        Integer integer = getGui(world, x, y, z, player);
+        if (integer == null || integer == -1)
+        {
+            return false;
+        }
+        else
+        {
+            if (!world.isRemote)
+                player.openGui(getModInstance(), integer, world, x, y, z);
+            return true;
+        }
+    }
 
     //This class does not have an actual block placed in the world
     @Override
@@ -150,27 +170,6 @@ public abstract class InventoryBlock extends BlockContainer
             ((InventoryLogic) world.getBlockTileEntity(x, y, z)).setInvName(stack.getDisplayName());
         }
     }
-
-    public static boolean isActive (IBlockAccess world, int x, int y, int z)
-    {
-        TileEntity logic = world.getBlockTileEntity(x, y, z);
-        if (logic instanceof IActiveLogic)
-        {
-            return ((IActiveLogic) logic).getActive();
-        }
-        return false;
-    }
-
-    @Override
-	public int damageDropped (int meta)
-    {
-        return meta;
-    }
-
-    /* Textures */
-    public Icon[] icons;
-
-    public abstract String[] getTextureNames ();
 
     @Override
     public void registerIcons (IconRegister iconRegister)

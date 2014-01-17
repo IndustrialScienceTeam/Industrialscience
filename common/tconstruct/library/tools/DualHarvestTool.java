@@ -1,7 +1,5 @@
 package tconstruct.library.tools;
 
-import tconstruct.library.ActiveToolMod;
-import tconstruct.library.TConstructRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,6 +7,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import tconstruct.library.ActiveToolMod;
+import tconstruct.library.TConstructRegistry;
 
 /* Base class for harvest tools with each head having a different purpose */
 
@@ -20,39 +20,28 @@ public abstract class DualHarvestTool extends HarvestTool
     }
 
     @Override
-    public boolean onBlockStartBreak (ItemStack stack, int x, int y, int z, EntityPlayer player)
+	public boolean canHarvestBlock (Block block)
     {
-        NBTTagCompound tags = stack.getTagCompound().getCompoundTag("InfiTool");
-        World world = player.worldObj;
-        int bID = player.worldObj.getBlockId(x, y, z);
-        int meta = world.getBlockMetadata(x, y, z);
-        Block block = Block.blocksList[bID];
-        if (block == null || bID < 1)
-            return false;
-        int hlvl = MinecraftForge.getBlockHarvestLevel(block, meta, getHarvestType());
-        int shlvl = MinecraftForge.getBlockHarvestLevel(block, meta, getSecondHarvestType());
-
-        if (hlvl <= tags.getInteger("HarvestLevel") && shlvl <= tags.getInteger("HarvestLevel2"))
+        if (block.blockMaterial.isToolNotRequired())
         {
-            boolean cancelHarvest = false;
-            for (ActiveToolMod mod : TConstructRegistry.activeModifiers)
-            {
-                if (mod.beforeBlockBreak(this, stack, x, y, z, player))
-                    cancelHarvest = true;
-            }
-
-            return cancelHarvest;
-        }
-        else
-        {
-            if (!player.capabilities.isCreativeMode)
-                onBlockDestroyed(stack, world, bID, x, y, z, player);
-            world.setBlockToAir(x, y, z);
-            if (!world.isRemote)
-                world.playAuxSFX(2001, x, y, z, bID + (meta << 12));
             return true;
         }
+        for (Material m : getEffectiveMaterials())
+        {
+            if (m == block.blockMaterial)
+                return true;
+        }
+        for (Material m : getEffectiveSecondaryMaterials())
+        {
+            if (m == block.blockMaterial)
+                return true;
+        }
+        return false;
     }
+
+    protected abstract Material[] getEffectiveSecondaryMaterials ();
+
+    protected abstract String getSecondHarvestType ();
 
     @Override
     public float getStrVsBlock (ItemStack stack, Block block, int meta)
@@ -102,23 +91,38 @@ public abstract class DualHarvestTool extends HarvestTool
     }
 
     @Override
-	public boolean canHarvestBlock (Block block)
+    public boolean onBlockStartBreak (ItemStack stack, int x, int y, int z, EntityPlayer player)
     {
-        if (block.blockMaterial.isToolNotRequired())
+        NBTTagCompound tags = stack.getTagCompound().getCompoundTag("InfiTool");
+        World world = player.worldObj;
+        int bID = player.worldObj.getBlockId(x, y, z);
+        int meta = world.getBlockMetadata(x, y, z);
+        Block block = Block.blocksList[bID];
+        if (block == null || bID < 1)
+            return false;
+        int hlvl = MinecraftForge.getBlockHarvestLevel(block, meta, getHarvestType());
+        int shlvl = MinecraftForge.getBlockHarvestLevel(block, meta, getSecondHarvestType());
+
+        if (hlvl <= tags.getInteger("HarvestLevel") && shlvl <= tags.getInteger("HarvestLevel2"))
         {
+            boolean cancelHarvest = false;
+            for (ActiveToolMod mod : TConstructRegistry.activeModifiers)
+            {
+                if (mod.beforeBlockBreak(this, stack, x, y, z, player))
+                    cancelHarvest = true;
+            }
+
+            return cancelHarvest;
+        }
+        else
+        {
+            if (!player.capabilities.isCreativeMode)
+                onBlockDestroyed(stack, world, bID, x, y, z, player);
+            world.setBlockToAir(x, y, z);
+            if (!world.isRemote)
+                world.playAuxSFX(2001, x, y, z, bID + (meta << 12));
             return true;
         }
-        for (Material m : getEffectiveMaterials())
-        {
-            if (m == block.blockMaterial)
-                return true;
-        }
-        for (Material m : getEffectiveSecondaryMaterials())
-        {
-            if (m == block.blockMaterial)
-                return true;
-        }
-        return false;
     }
 
     @Override
@@ -126,8 +130,4 @@ public abstract class DualHarvestTool extends HarvestTool
     {
         return new String[] { "harvest", "dualharvest" };
     }
-
-    protected abstract Material[] getEffectiveSecondaryMaterials ();
-
-    protected abstract String getSecondHarvestType ();
 }

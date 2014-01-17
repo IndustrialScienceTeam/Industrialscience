@@ -1,43 +1,24 @@
 package tconstruct.library.blocks;
 
-import java.util.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.inventory.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.*;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 
 public abstract class ExpandableInventoryLogic extends InventoryLogic implements IInventory {
 
+	protected ArrayList<ItemStack> inventory = new ArrayList<ItemStack>();
+
+	protected String invName;
 	public ExpandableInventoryLogic() {
 		super(0);
-	}
-
-	protected ArrayList<ItemStack> inventory = new ArrayList<ItemStack>();
-	protected String invName;
-
-	@Override
-	public ItemStack getStackInSlot(int slot) {
-		return slot < inventory.size() ? inventory.get(slot) : null;
-	}
-
-	@Override
-	public boolean isStackInSlot(int slot) {
-		return slot < inventory.size() && inventory.get(slot) != null;
-	}
-
-	@Override
-	public int getSizeInventory() {
-		return inventory.size();
-	}
-
-	public int getMaxSize() {
-		return 64;
-	}
-
-	@Override
-	public int getInventoryStackLimit() {
-		return 64;
 	}
 
 	@Override
@@ -45,21 +26,17 @@ public abstract class ExpandableInventoryLogic extends InventoryLogic implements
 		return true;
 	}
 
+	public void cleanInventory(){
+		Iterator<ItemStack> i1 = inventory.iterator();
+		while(i1.hasNext()){
+			if(i1.next() == null){
+				i1.remove();
+			}
+		}
+	}
+
 	@Override
-	public void setInventorySlotContents(int slot, ItemStack itemstack) {
-		if (slot < inventory.size()) {
-			inventory.set(slot, itemstack);
-		} else if (slot == inventory.size()) {
-			inventory.add(itemstack);
-		} else if (slot < getMaxSize()) {
-			inventory.ensureCapacity(slot);
-			inventory.set(slot, itemstack);
-		} else {
-			return;
-		}
-		if (itemstack != null && itemstack.stackSize > getInventoryStackLimit()) {
-			itemstack.stackSize = getInventoryStackLimit();
-		}
+	public void closeChest() {
 	}
 
 	@Override
@@ -80,6 +57,63 @@ public abstract class ExpandableInventoryLogic extends InventoryLogic implements
 		}
 	}
 
+	@Override
+	protected abstract String getDefaultName();
+
+	@Override
+	public abstract Container getGuiContainer(InventoryPlayer inventoryplayer, World world, int x, int y, int z);
+
+	@Override
+	public int getInventoryStackLimit() {
+		return 64;
+	}
+
+	@Override
+	public String getInvName() {
+		return this.isInvNameLocalized() ? this.invName : getDefaultName();
+	}
+
+	public int getMaxSize() {
+		return 64;
+	}
+
+	@Override
+	public int getSizeInventory() {
+		return inventory.size();
+	}
+
+	@Override
+	public ItemStack getStackInSlot(int slot) {
+		return slot < inventory.size() ? inventory.get(slot) : null;
+	}
+
+	/* Default implementations of hardly used methods */
+	@Override
+	public ItemStack getStackInSlotOnClosing(int slot) {
+		return null;
+	}
+
+	@Override
+	public boolean isInvNameLocalized() {
+		return this.invName != null && this.invName.length() > 0;
+	}
+
+	@Override
+	public boolean isItemValidForSlot(int slot, ItemStack itemstack) {
+		if (slot < getSizeInventory()) {
+			if (inventory.get(slot) == null || itemstack.stackSize + inventory.get(slot).stackSize <= getInventoryStackLimit())
+				return true;
+		}else{
+			return slot < getMaxSize();
+		}
+		return false;
+	}
+
+	@Override
+	public boolean isStackInSlot(int slot) {
+		return slot < inventory.size() && inventory.get(slot) != null;
+	}
+
 	/* Supporting methods */
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
@@ -92,7 +126,8 @@ public abstract class ExpandableInventoryLogic extends InventoryLogic implements
 	}
 
 	@Override
-	public abstract Container getGuiContainer(InventoryPlayer inventoryplayer, World world, int x, int y, int z);
+	public void openChest() {
+	}
 
 	/* NBT */
 	@Override
@@ -112,6 +147,28 @@ public abstract class ExpandableInventoryLogic extends InventoryLogic implements
 	}
 
 	@Override
+	public void setInventorySlotContents(int slot, ItemStack itemstack) {
+		if (slot < inventory.size()) {
+			inventory.set(slot, itemstack);
+		} else if (slot == inventory.size()) {
+			inventory.add(itemstack);
+		} else if (slot < getMaxSize()) {
+			inventory.ensureCapacity(slot);
+			inventory.set(slot, itemstack);
+		} else {
+			return;
+		}
+		if (itemstack != null && itemstack.stackSize > getInventoryStackLimit()) {
+			itemstack.stackSize = getInventoryStackLimit();
+		}
+	}
+
+	@Override
+	public void setInvName(String name) {
+		this.invName = name;
+	}
+	
+	@Override
 	public void writeToNBT(NBTTagCompound tags) {
 		super.writeToNBT(tags);
 		if (invName != null)
@@ -127,58 +184,6 @@ public abstract class ExpandableInventoryLogic extends InventoryLogic implements
 		}
 
 		tags.setTag("Items", nbttaglist);
-	}
-
-	/* Default implementations of hardly used methods */
-	@Override
-	public ItemStack getStackInSlotOnClosing(int slot) {
-		return null;
-	}
-
-	@Override
-	public void openChest() {
-	}
-
-	@Override
-	public void closeChest() {
-	}
-
-	@Override
-	protected abstract String getDefaultName();
-
-	@Override
-	public void setInvName(String name) {
-		this.invName = name;
-	}
-
-	@Override
-	public String getInvName() {
-		return this.isInvNameLocalized() ? this.invName : getDefaultName();
-	}
-
-	@Override
-	public boolean isInvNameLocalized() {
-		return this.invName != null && this.invName.length() > 0;
-	}
-
-	public void cleanInventory(){
-		Iterator<ItemStack> i1 = inventory.iterator();
-		while(i1.hasNext()){
-			if(i1.next() == null){
-				i1.remove();
-			}
-		}
-	}
-	
-	@Override
-	public boolean isItemValidForSlot(int slot, ItemStack itemstack) {
-		if (slot < getSizeInventory()) {
-			if (inventory.get(slot) == null || itemstack.stackSize + inventory.get(slot).stackSize <= getInventoryStackLimit())
-				return true;
-		}else{
-			return slot < getMaxSize();
-		}
-		return false;
 	}
 
 }

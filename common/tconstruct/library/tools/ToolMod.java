@@ -10,10 +10,10 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public abstract class ToolMod
 {
+    public static Random random = new Random();
+    public final int effectIndex;
     public final String key;
     public final List stacks;
-    public final int effectIndex;
-    public static Random random = new Random();
 
     public ToolMod(ItemStack[] items, int effect, String dataKey)
     {
@@ -25,70 +25,6 @@ public abstract class ToolMod
         effectIndex = effect;
         key = dataKey;
     }
-
-    /** Checks to see if the inputs match the stored items
-     * Note: Works like ShapelessRecipes
-     * 
-     * @param input The ItemStacks to compare against
-     * @param tool Item to modify, used for restrictions
-     * @return Whether the recipe matches the input
-     */
-    public boolean matches (ItemStack[] input, ItemStack tool)
-    {
-        if (!canModify(tool, input))
-            return false;
-
-        ArrayList list = new ArrayList(this.stacks);
-
-        for (int iter = 0; iter < input.length; ++iter)
-        {
-            ItemStack craftingStack = input[iter];
-
-            if (craftingStack != null)
-            {
-                boolean canCraft = false;
-                Iterator iterate = list.iterator();
-
-                while (iterate.hasNext())
-                {
-                    ItemStack removeStack = (ItemStack) iterate.next();
-
-                    if (craftingStack.itemID == removeStack.itemID && (removeStack.getItemDamage() == Short.MAX_VALUE || craftingStack.getItemDamage() == removeStack.getItemDamage()))
-                    {
-                        canCraft = true;
-                        list.remove(removeStack);
-                        break;
-                    }
-                }
-
-                if (!canCraft)
-                {
-                    return false;
-                }
-            }
-        }
-
-        return list.isEmpty();
-    }
-
-    /**
-     * 
-     * @param tool Tool to compare against
-     * @return Whether the tool can be modified
-     */
-
-    protected boolean canModify (ItemStack tool, ItemStack[] input)
-    {
-        NBTTagCompound tags = tool.getTagCompound().getCompoundTag("InfiTool");
-        return tags.getInteger("Modifiers") > 0;
-    }
-
-    /** Modifies the tool. Adds nbttags, changes existing ones, ticks down modification counter, etc
-     * 
-     * @param input ItemStacks to pull info from
-     * @param tool The tool to modify
-     */
-    public abstract void modify (ItemStack[] input, ItemStack tool);
 
     public void addMatchingEffect (ItemStack tool)
     {
@@ -170,6 +106,18 @@ public abstract class ToolMod
         }
     }
 
+    /**
+     * 
+     * @param tool Tool to compare against
+     * @return Whether the tool can be modified
+     */
+
+    protected boolean canModify (ItemStack tool, ItemStack[] input)
+    {
+        NBTTagCompound tags = tool.getTagCompound().getCompoundTag("InfiTool");
+        return tags.getInteger("Modifiers") > 0;
+    }
+
     protected String getProperName (String tooltip, String tag)
     {
         if (tag.equals(tooltip))
@@ -201,6 +149,58 @@ public abstract class ToolMod
 
         return tooltip + " X+";
     }
+
+    /** Checks to see if the inputs match the stored items
+     * Note: Works like ShapelessRecipes
+     * 
+     * @param input The ItemStacks to compare against
+     * @param tool Item to modify, used for restrictions
+     * @return Whether the recipe matches the input
+     */
+    public boolean matches (ItemStack[] input, ItemStack tool)
+    {
+        if (!canModify(tool, input))
+            return false;
+
+        ArrayList list = new ArrayList(this.stacks);
+
+        for (int iter = 0; iter < input.length; ++iter)
+        {
+            ItemStack craftingStack = input[iter];
+
+            if (craftingStack != null)
+            {
+                boolean canCraft = false;
+                Iterator iterate = list.iterator();
+
+                while (iterate.hasNext())
+                {
+                    ItemStack removeStack = (ItemStack) iterate.next();
+
+                    if (craftingStack.itemID == removeStack.itemID && (removeStack.getItemDamage() == Short.MAX_VALUE || craftingStack.getItemDamage() == removeStack.getItemDamage()))
+                    {
+                        canCraft = true;
+                        list.remove(removeStack);
+                        break;
+                    }
+                }
+
+                if (!canCraft)
+                {
+                    return false;
+                }
+            }
+        }
+
+        return list.isEmpty();
+    }
+
+    /** Modifies the tool. Adds nbttags, changes existing ones, ticks down modification counter, etc
+     * 
+     * @param input ItemStacks to pull info from
+     * @param tool The tool to modify
+     */
+    public abstract void modify (ItemStack[] input, ItemStack tool);
 
     public boolean validType (ToolCore tool)
     {

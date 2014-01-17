@@ -1,7 +1,6 @@
 package industrialscience;
 
 import net.minecraft.tileentity.TileEntity;
-
 import net.minecraftforge.common.ForgeDirection;
 
 /**
@@ -35,9 +34,7 @@ public enum ICDirection {
 	 */
 	ZP(5);
 
-	ICDirection(int dir1) {
-		this.dir = dir1;
-	}
+	public static final ICDirection[] directions = ICDirection.values();
 
 	/*public CoordinateTuple ApplyToCoordinates(CoordinateTuple coordinates) {
 		CoordinateTuple ret = new CoordinateTuple(coordinates);
@@ -46,6 +43,25 @@ public enum ICDirection {
 
 		return ret;
 	}*/
+
+	private int dir;
+
+	ICDirection(int dir1) {
+		this.dir = dir1;
+	}
+
+	//IndustrialScience Additions:
+	/**
+	 * Get the tile entity next to a tile entity following this direction.
+	 *
+	 * @param tileEntity tile entity to check
+	 * @return Adjacent tile entity or null if none exists
+	 */
+	public int[] applyToCoords(int coords[]) {
+
+		coords[dir/2] += getSign();
+		return coords;
+	}
 
 	/**
 	 * Get the tile entity next to a tile entity following this direction.
@@ -84,15 +100,6 @@ public enum ICDirection {
 	}
 
 	/**
-	 * Convert this direction to a Minecraft side value.
-	 * 
-	 * @return Minecraft side value
-	 */
-	public int toSideValue() {
-		return (dir + 4) % 6;
-	}
-
-	/**
 	 * Determine direction sign (N for negative or P for positive).
 	 *
 	 * @return -1 if the direction is negative, +1 if the direction is positive
@@ -100,24 +107,16 @@ public enum ICDirection {
 	private int getSign() {
 		return (dir % 2) * 2 - 1;
 	}
-
 	public ForgeDirection toForgeDirection() {
 		return ForgeDirection.getOrientation(toSideValue());
 	}
-
-	private int dir;
-	public static final ICDirection[] directions = ICDirection.values();
-	//IndustrialScience Additions:
 	/**
-	 * Get the tile entity next to a tile entity following this direction.
-	 *
-	 * @param tileEntity tile entity to check
-	 * @return Adjacent tile entity or null if none exists
+	 * Convert this direction to a Minecraft side value.
+	 * 
+	 * @return Minecraft side value
 	 */
-	public int[] applyToCoords(int coords[]) {
-
-		coords[dir/2] += getSign();
-		return coords;
+	public int toSideValue() {
+		return (dir + 4) % 6;
 	}
 }
 

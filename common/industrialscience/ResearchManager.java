@@ -6,8 +6,15 @@ import java.util.Hashtable;
 
 public class ResearchManager {
     private static ResearchManager instance = null;
-    private Hashtable<String, Research> allResearches = null;
+    public static ResearchManager getInstance() {
+        if (instance == null) {
+            instance = new ResearchManager();
+        }
+        return instance;
+    }
     private Hashtable<String, Research> activatedResearches = null;
+    private Hashtable<String, Research> allResearches = null;
+
     private boolean enabled = true;
 
     private ResearchManager() {
@@ -15,11 +22,12 @@ public class ResearchManager {
         activatedResearches = new Hashtable<String, Research>();
     }
 
-    public static ResearchManager getInstance() {
-        if (instance == null) {
-            instance = new ResearchManager();
-        }
-        return instance;
+    public Hashtable<String, Research> getActivatedResearches() {
+        return activatedResearches;
+    }
+
+    public Hashtable<String, Research> getAllResearches() {
+        return allResearches;
     }
 
     public void registerResearch(Research r) throws Exception {
@@ -33,13 +41,5 @@ public class ResearchManager {
                 activatedResearches.put(r.getName(), r);
             }
         }
-    }
-
-    public Hashtable<String, Research> getActivatedResearches() {
-        return activatedResearches;
-    }
-
-    public Hashtable<String, Research> getAllResearches() {
-        return allResearches;
     }
 }

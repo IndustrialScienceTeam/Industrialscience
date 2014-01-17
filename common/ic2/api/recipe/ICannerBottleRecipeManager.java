@@ -5,6 +5,20 @@ import java.util.Map;
 import net.minecraft.item.ItemStack;
 
 public interface ICannerBottleRecipeManager {
+	public static class Input {
+		public final IRecipeInput container;
+
+		public final IRecipeInput fill;
+
+		public Input(IRecipeInput container1, IRecipeInput fill1) {
+			this.container = container1;
+			this.fill = fill1;
+		}
+		public boolean matches(ItemStack container1, ItemStack fill1) {
+			return this.container.matches(container1) && this.fill.matches(fill1);
+		}
+	}
+
 	/**
 	 * Adds a recipe to the machine.
 	 * 
@@ -25,6 +39,7 @@ public interface ICannerBottleRecipeManager {
 	 */
 	public RecipeOutput getOutputFor(ItemStack container, ItemStack fill, boolean adjustInput, boolean acceptTest);
 
+
 	/**
 	 * Gets a list of recipes.
 	 * 
@@ -33,19 +48,4 @@ public interface ICannerBottleRecipeManager {
 	 * @return List of recipes
 	 */
 	public Map<Input, RecipeOutput> getRecipes();
-
-
-	public static class Input {
-		public Input(IRecipeInput container1, IRecipeInput fill1) {
-			this.container = container1;
-			this.fill = fill1;
-		}
-
-		public boolean matches(ItemStack container1, ItemStack fill1) {
-			return this.container.matches(container1) && this.fill.matches(fill1);
-		}
-
-		public final IRecipeInput container;
-		public final IRecipeInput fill;
-	}
 }

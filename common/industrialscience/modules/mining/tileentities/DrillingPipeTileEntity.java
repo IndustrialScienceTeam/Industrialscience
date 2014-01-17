@@ -1,7 +1,5 @@
 package industrialscience.modules.mining.tileentities;
 
-import org.bouncycastle.jcajce.provider.asymmetric.dsa.DSASigner.noneDSA;
-
 import industrialscience.ICDirection;
 import industrialscience.modules.mining.borersystem.IBorer;
 import industrialscience.modules.mining.borersystem.IBorerItemReceiver;
@@ -13,16 +11,16 @@ import net.minecraft.tileentity.TileEntity;
 public class DrillingPipeTileEntity extends TileEntity implements IBorerItemReceiver, IBorer{
 private ICDirection movmentdir;
 private ItemStack transportstack=null;
-public boolean receiveStack(ItemStack transported){
-	if(transportstack!=null|transported==null)
-		return false;
-	if(consumePower()){
-		transportstack=transported.copy();
+@Override
+public boolean bore(ItemStack drill){
+	if(movmentdir.applyToTileEntity(this) instanceof IBorer){
+		((IBorer)movmentdir.applyToTileEntity(this)).bore(drill);
 		return true;
 	}
 	return false;
-		
-	
+}
+private boolean consumePower() {
+	return true;
 }
 public boolean giveStack(){
 	if(transportstack==null)
@@ -36,16 +34,6 @@ public boolean giveStack(){
 	}
 	return false;
 }
-private boolean consumePower() {
-	return true;
-}
-public boolean bore(ItemStack drill){
-	if(movmentdir.applyToTileEntity(this) instanceof IBorer){
-		((IBorer)movmentdir.applyToTileEntity(this)).bore(drill);
-		return true;
-	}
-	return false;
-}
 @Override
 public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
 	movmentdir=ICDirection.values()[par1nbtTagCompound.getInteger("MOVMENTDIR")];
@@ -56,6 +44,18 @@ public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
 	ItemStack nbtItemStack= new ItemStack(Block.dirt);
 	nbtItemStack.readFromNBT(par1nbtTagCompound.getCompoundTag("TRANSPORTSTACK"));
 	transportstack=nbtItemStack.copy();
+}
+@Override
+public boolean receiveStack(ItemStack transported){
+	if(transportstack!=null|transported==null)
+		return false;
+	if(consumePower()){
+		transportstack=transported.copy();
+		return true;
+	}
+	return false;
+		
+	
 }
 @Override
 public void writeToNBT(NBTTagCompound par1nbtTagCompound) {

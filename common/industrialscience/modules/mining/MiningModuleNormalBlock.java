@@ -1,11 +1,9 @@
 package industrialscience.modules.mining;
 
-import net.minecraft.block.material.Material;
-import industrialscience.blocksystem.ModelISBlock;
 import industrialscience.blocksystem.ISModuleNormalBlock;
 import industrialscience.blocksystem.NormalISBlock;
-import industrialscience.modules.MiningModule;
 import industrialscience.modules.mining.blocks.MinerBasicMachine;
+import net.minecraft.block.material.Material;
 
 public class MiningModuleNormalBlock extends ISModuleNormalBlock {
 

@@ -1,11 +1,8 @@
 package industrialscience.blocksystem;
 
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
-import net.minecraft.world.World;
 
 public abstract class NormalISBlock extends ISBlock{
 

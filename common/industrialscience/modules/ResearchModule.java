@@ -23,60 +23,49 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ResearchModule extends ISAbstractModule {
+    public static ISModuleModelBlock researchBlock;
+
+    public static Item researchbook;
+
+    public static int researchbookID;
+    public static Item researchNote;
+
+    public static int researchNoteID;
+    public static Hashtable<String, Integer> NeededItemIDs() {
+        Hashtable<String, Integer> neededItemIDs = new Hashtable<String, Integer>();
+        neededItemIDs.put("researchbook", 8123);
+        neededItemIDs.put("researchnote", 8124);
+        return neededItemIDs;
+    }
+
     public ResearchModule(int normalblockID,int modelblockid, int bitprefix) {
         super(NeededItemIDs(), normalblockID,modelblockid, "research",
                 "IndustrialScience Research", bitprefix,
                 new ResearchPacketHandler());
     }
 
-    public static ISModuleModelBlock researchBlock;
-
-    public static Item researchbook;
-    public static int researchbookID;
-
-    public static Item researchNote;
-    public static int researchNoteID;
-
     @Override
-    public void load() {
-        logger.log(Level.INFO, "LOADING");
-        researchBlock.register();
-        researchBlock.setCreativeTab(CreativeTab);
-        
-        researchbook.setCreativeTab(CreativeTab);
-        researchNote.setCreativeTab(CreativeTab);
+    public Object getClientGUIElement(int id, EntityPlayer player, World world,
+            int x, int y, int z) {
+        if (id == 0) {
+            if (ResearchModuleModelBlock.RESEARCHDESKMETAID == world
+                    .getBlockMetadata(x, y, z))
+                return null;
+            if (ResearchModuleModelBlock.COPIERMETAID == world.getBlockMetadata(x,
+                    y, z))
+                return new CopierGUI((CopierTile) world.getBlockTileEntity(x,
+                        y, z), player.inventory);
+            return null;
+        } else {
+            switch (id) {
+                case 1:
+                    return new ResearchBookGUI(player,
+                            player.getCurrentEquippedItem());
 
-        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(researchBlock,
-                1, 1), new Object[] { "WWW", "S S", "S S",
-                Character.valueOf('W'), "slabWood", Character.valueOf('S'),
-                "stickWood" }));
-        GameRegistry.addRecipe(new ShapelessOreRecipe(researchbook,
-                new Object[] { Item.book, "dyeLime", "dyeLime" }));
-    }
-
-    @Override
-    public void init() {
-        logger.log(Level.INFO, "INIT");
-        researchbookID = getItemIDs().get("researchbook");
-        researchbook = new ResearchBook(researchbookID,this.getPrefix());
-        researchNoteID = getItemIDs().get("researchnote");
-        researchNote = new ResearchNote(researchNoteID - 256,getPrefix());
-        researchBlock = new ResearchModuleModelBlock(getModelBlockID(), this.getPrefix());
-        initCreativeTab(new ItemStack(researchBlock, 1,
-                1));
-    }
-
-    @Override
-    public void postinit() {
-        logger.log(Level.INFO, "POST-INIT");
-
-    }
-
-    public static Hashtable<String, Integer> NeededItemIDs() {
-        Hashtable<String, Integer> neededItemIDs = new Hashtable<String, Integer>();
-        neededItemIDs.put("researchbook", 8123);
-        neededItemIDs.put("researchnote", 8124);
-        return neededItemIDs;
+                default:
+                    return null;
+            }
+        }
     }
 
     @Override
@@ -105,27 +94,38 @@ public class ResearchModule extends ISAbstractModule {
     }
 
     @Override
-    public Object getClientGUIElement(int id, EntityPlayer player, World world,
-            int x, int y, int z) {
-        if (id == 0) {
-            if (ResearchModuleModelBlock.RESEARCHDESKMETAID == world
-                    .getBlockMetadata(x, y, z))
-                return null;
-            if (ResearchModuleModelBlock.COPIERMETAID == world.getBlockMetadata(x,
-                    y, z))
-                return new CopierGUI((CopierTile) world.getBlockTileEntity(x,
-                        y, z), player.inventory);
-            return null;
-        } else {
-            switch (id) {
-                case 1:
-                    return new ResearchBookGUI(player,
-                            player.getCurrentEquippedItem());
+    public void init() {
+        logger.log(Level.INFO, "INIT");
+        researchbookID = getItemIDs().get("researchbook");
+        researchbook = new ResearchBook(researchbookID,this.getPrefix());
+        researchNoteID = getItemIDs().get("researchnote");
+        researchNote = new ResearchNote(researchNoteID - 256,getPrefix());
+        researchBlock = new ResearchModuleModelBlock(getModelBlockID(), this.getPrefix());
+        initCreativeTab(new ItemStack(researchBlock, 1,
+                1));
+    }
 
-                default:
-                    return null;
-            }
-        }
+    @Override
+    public void load() {
+        logger.log(Level.INFO, "LOADING");
+        researchBlock.register();
+        researchBlock.setCreativeTab(CreativeTab);
+        
+        researchbook.setCreativeTab(CreativeTab);
+        researchNote.setCreativeTab(CreativeTab);
+
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(researchBlock,
+                1, 1), new Object[] { "WWW", "S S", "S S",
+                Character.valueOf('W'), "slabWood", Character.valueOf('S'),
+                "stickWood" }));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(researchbook,
+                new Object[] { Item.book, "dyeLime", "dyeLime" }));
+    }
+
+    @Override
+    public void postinit() {
+        logger.log(Level.INFO, "POST-INIT");
+
     }
 
     @Override

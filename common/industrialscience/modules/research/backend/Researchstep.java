@@ -13,28 +13,28 @@ public class Researchstep implements Comparable<Researchstep> {
         ResearchStepText = researchStepText;
     }
 
-    public boolean research(ResearchObject ro) {
-        if (ro.isOkay(neededobject))
-            return true;
-        return false;
-    }
-
-    public String getResearchStepText() {
-        return ResearchStepText;
-    }
-
     @Override
     public int compareTo(Researchstep o) {
         Integer id = new Integer(ID);
         return id.compareTo(new Integer(o.getID()));
     }
 
+    public int getID() {
+        return ID;
+    }
+
     public ResearchObject getNeededobject() {
         return neededobject;
     }
 
-    public int getID() {
-        return ID;
+    public String getResearchStepText() {
+        return ResearchStepText;
+    }
+
+    public boolean research(ResearchObject ro) {
+        if (ro.isOkay(neededobject))
+            return true;
+        return false;
     }
 
 }

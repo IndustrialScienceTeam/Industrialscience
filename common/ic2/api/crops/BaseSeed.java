@@ -15,9 +15,9 @@ public class BaseSeed {
 	public int size;
 
 	/**
-	 * Plant growth stat.
+	 * For internal usage only.
 	 */
-	public int statGrowth;
+	public int stackSize;
 
 	/**
 	 * Plant gain stat.
@@ -25,14 +25,14 @@ public class BaseSeed {
 	public int statGain;
 
 	/**
+	 * Plant growth stat.
+	 */
+	public int statGrowth;
+
+	/**
 	 * Plant resistance stat.
 	 */
 	public int statResistance;
-
-	/**
-	 * For internal usage only.
-	 */
-	public int stackSize;
 
 	/**
 	 * Create a BaseSeed object.

@@ -9,34 +9,14 @@ import net.minecraft.world.World;
 
 public class BasicFishTrapTileEntity extends AbstractFishTrapTileEntity implements IInventory {
     private static final int FISHSLOT = 1;
-    private boolean StructureIsValid = false;
-    private boolean isCore = false;
     private int coreX;
     private int coreY;
     private int coreZ;
+    private boolean isCore = false;
     private Cordinate[] StructureBlocks = null;
+    private boolean StructureIsValid = false;
     public BasicFishTrapTileEntity() {
         super(2, 64, "Basic Fishtrap");
-    }
-
-    public void destroyStructure() {
-
-    }
-
-    @Override
-    public void doUpdateTick(World world, int x, int y, int z, Random random) {
-        if (isCore)
-            addFish(1, 4, 10, 5, FISHSLOT);
-
-    }
-
-    public boolean isStructureValid() {
-        return StructureIsValid;
-    }
-
-    public boolean isStructureProperlyFormed() {
-        // TODO Auto-generated method stub
-        return false;
     }
 
     public void activate() {
@@ -58,41 +38,61 @@ public class BasicFishTrapTileEntity extends AbstractFishTrapTileEntity implemen
         }
     }
 
-    public Cordinate[] getStructureBlocks() {
-        return StructureBlocks;
+    public void destroyStructure() {
+
     }
 
-    public void setStructureBlocks() {
+    @Override
+    public void doUpdateTick(World world, int x, int y, int z, Random random) {
+        if (isCore)
+            addFish(1, 4, 10, 5, FISHSLOT);
+
     }
 
     public int getCoreX() {
         return coreX;
     }
 
-    public void setCoreX(int coreX) {
-        this.coreX = coreX;
-    }
-
     public int getCoreY() {
         return coreY;
-    }
-
-    public void setCoreY(int coreY) {
-        this.coreY = coreY;
     }
 
     public int getCoreZ() {
         return coreZ;
     }
 
-    public void setCoreZ(int coreZ) {
-        this.coreZ = coreZ;
+    public Cordinate[] getStructureBlocks() {
+        return StructureBlocks;
     }
 
     @Override
     public boolean isItemValidForSlot(int i, ItemStack itemstack) {
         // TODO Auto-generated method stub
         return false;
+    }
+
+    public boolean isStructureProperlyFormed() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    public boolean isStructureValid() {
+        return StructureIsValid;
+    }
+
+    public void setCoreX(int coreX) {
+        this.coreX = coreX;
+    }
+
+    public void setCoreY(int coreY) {
+        this.coreY = coreY;
+    }
+
+    public void setCoreZ(int coreZ) {
+        this.coreZ = coreZ;
+    }
+
+    public void setStructureBlocks() {
     }
 
 }

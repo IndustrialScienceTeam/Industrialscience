@@ -4,20 +4,54 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import tconstruct.library.TConstructRegistry;
 import tconstruct.library.crafting.ToolBuilder;
 import tconstruct.library.tools.ToolCore;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-
 public class TConstructClientRegistry
 {
-    public static ArrayList<ToolGuiElement> toolButtons = new ArrayList<ToolGuiElement>(20);
-    public static ArrayList<ToolGuiElement> tierTwoButtons = new ArrayList<ToolGuiElement>();
+    public static ItemStack defaultStack = new ItemStack(Item.ingotIron);
     public static Map<String, ItemStack> manualIcons = new HashMap<String, ItemStack>();
     public static Map<String, ItemStack[]> recipeIcons = new HashMap<String, ItemStack[]>();
-    public static ItemStack defaultStack = new ItemStack(Item.ingotIron);
+    public static ArrayList<ToolGuiElement> tierTwoButtons = new ArrayList<ToolGuiElement>();
+    public static ArrayList<ToolGuiElement> toolButtons = new ArrayList<ToolGuiElement>(20);
+
+    public static void addAlternateMaterialRenderMapping (ToolCore tool, int materialID, String domain, String renderName, boolean useDefaultFolder)
+    {
+        String[] toolIcons = new String[tool.getPartAmount() + 1];
+        for (int i = 0; i < tool.getPartAmount() + 1; i++)
+        {
+            String icon = domain + ":";
+            if (useDefaultFolder)
+                icon += tool.getDefaultFolder() + "/";
+            icon += renderName + tool.getIconSuffix(i);
+            toolIcons[i] = icon;
+        }
+        tool.registerAlternatePartPaths(materialID, toolIcons);
+    }
+
+    public static void addEffectRenderMapping (int materialID, String domain, String renderName, boolean useDefaultFolder)
+    {
+        for (ToolCore tool : TConstructRegistry.getToolMapping())
+        {
+            String icon = domain + ":";
+            if (useDefaultFolder)
+                icon += tool.getDefaultFolder() + "/";
+            icon += renderName + tool.getEffectSuffix();
+            tool.registerEffectPath(materialID, icon);
+        }
+    }
+
+    public static void addEffectRenderMapping (ToolCore tool, int materialID, String domain, String renderName, boolean useDefaultFolder)
+    {
+        String icon = domain + ":";
+        if (useDefaultFolder)
+            icon += tool.getDefaultFolder() + "/";
+        icon += renderName + tool.getEffectSuffix();
+        tool.registerEffectPath(materialID, icon);
+    }
 
     public static void addMaterialRenderMapping (int materialID, String domain, String renderName, boolean useDefaultFolder)
     {
@@ -36,41 +70,6 @@ public class TConstructClientRegistry
         }
     }
 
-    public static void addAlternateMaterialRenderMapping (ToolCore tool, int materialID, String domain, String renderName, boolean useDefaultFolder)
-    {
-        String[] toolIcons = new String[tool.getPartAmount() + 1];
-        for (int i = 0; i < tool.getPartAmount() + 1; i++)
-        {
-            String icon = domain + ":";
-            if (useDefaultFolder)
-                icon += tool.getDefaultFolder() + "/";
-            icon += renderName + tool.getIconSuffix(i);
-            toolIcons[i] = icon;
-        }
-        tool.registerAlternatePartPaths(materialID, toolIcons);
-    }
-
-    public static void addEffectRenderMapping (ToolCore tool, int materialID, String domain, String renderName, boolean useDefaultFolder)
-    {
-        String icon = domain + ":";
-        if (useDefaultFolder)
-            icon += tool.getDefaultFolder() + "/";
-        icon += renderName + tool.getEffectSuffix();
-        tool.registerEffectPath(materialID, icon);
-    }
-
-    public static void addEffectRenderMapping (int materialID, String domain, String renderName, boolean useDefaultFolder)
-    {
-        for (ToolCore tool : TConstructRegistry.getToolMapping())
-        {
-            String icon = domain + ":";
-            if (useDefaultFolder)
-                icon += tool.getDefaultFolder() + "/";
-            icon += renderName + tool.getEffectSuffix();
-            tool.registerEffectPath(materialID, icon);
-        }
-    }
-
     public static void addSingleEffectRenderMapping (ToolCore tool, int materialID, String domain, String renderName, boolean useDefaultFolder)
     {
         String icon = domain + ":";
@@ -80,9 +79,25 @@ public class TConstructClientRegistry
         tool.registerEffectPath(materialID, icon);
     }
 
-    public static void registerManualIcon (String name, ItemStack stack)
+    public static void addTierTwoButton (int slotType, int xButton, int yButton, int[] xIcons, int[] yIcons, String title, String body, String domain, String texture)
     {
-        manualIcons.put(name, stack);
+        tierTwoButtons.add(new ToolGuiElement(slotType, xButton, yButton, xIcons, yIcons, title, body, domain, texture));
+    }
+
+    public static void addTierTwoButton (ToolGuiElement element)
+    {
+        tierTwoButtons.add(element);
+    }
+
+    public static void addToolButton (int slotType, int xButton, int yButton, int[] xIcons, int[] yIcons, String title, String body, String domain, String texture)
+    {
+        toolButtons.add(new ToolGuiElement(slotType, xButton, yButton, xIcons, yIcons, title, body, domain, texture));
+    }
+
+    //Gui
+    public static void addToolButton (ToolGuiElement element)
+    {
+        toolButtons.add(element);
     }
 
     public static ItemStack getManualIcon (String textContent)
@@ -93,20 +108,14 @@ public class TConstructClientRegistry
         return defaultStack;
     }
 
-    public static void registerManualSmallRecipe (String name, ItemStack output, ItemStack... stacks)
+    public static ItemStack[] getRecipeIcons (String recipeName)
     {
-        ItemStack[] recipe = new ItemStack[5];
-        recipe[0] = output;
-        System.arraycopy(stacks, 0, recipe, 1, 4);
-        recipeIcons.put(name, recipe);
+        return recipeIcons.get(recipeName);
     }
 
-    public static void registerManualLargeRecipe (String name, ItemStack output, ItemStack... stacks)
+    public static ArrayList<ToolGuiElement> getToolButtons ()
     {
-        ItemStack[] recipe = new ItemStack[10];
-        recipe[0] = output;
-        System.arraycopy(stacks, 0, recipe, 1, 9);
-        recipeIcons.put(name, recipe);
+        return toolButtons;
     }
 
     public static void registerManualFurnaceRecipe (String name, ItemStack output, ItemStack input)
@@ -114,6 +123,19 @@ public class TConstructClientRegistry
         ItemStack[] recipe = new ItemStack[2];
         recipe[0] = output;
         recipe[1] = input;
+        recipeIcons.put(name, recipe);
+    }
+
+    public static void registerManualIcon (String name, ItemStack stack)
+    {
+        manualIcons.put(name, stack);
+    }
+
+    public static void registerManualLargeRecipe (String name, ItemStack output, ItemStack... stacks)
+    {
+        ItemStack[] recipe = new ItemStack[10];
+        recipe[0] = output;
+        System.arraycopy(stacks, 0, recipe, 1, 9);
         recipeIcons.put(name, recipe);
     }
 
@@ -131,6 +153,14 @@ public class TConstructClientRegistry
         recipeIcons.put(name, recipe);
     }
 
+    public static void registerManualSmallRecipe (String name, ItemStack output, ItemStack... stacks)
+    {
+        ItemStack[] recipe = new ItemStack[5];
+        recipe[0] = output;
+        System.arraycopy(stacks, 0, recipe, 1, 4);
+        recipeIcons.put(name, recipe);
+    }
+
     public static void registerManualSmeltery (String name, ItemStack output, ItemStack liquid, ItemStack cast)
     {
         ItemStack[] recipe = new ItemStack[3];
@@ -138,36 +168,5 @@ public class TConstructClientRegistry
         recipe[1] = liquid;
         recipe[2] = cast;
         recipeIcons.put(name, recipe);
-    }
-
-    public static ItemStack[] getRecipeIcons (String recipeName)
-    {
-        return recipeIcons.get(recipeName);
-    }
-
-    //Gui
-    public static void addToolButton (ToolGuiElement element)
-    {
-        toolButtons.add(element);
-    }
-
-    public static void addToolButton (int slotType, int xButton, int yButton, int[] xIcons, int[] yIcons, String title, String body, String domain, String texture)
-    {
-        toolButtons.add(new ToolGuiElement(slotType, xButton, yButton, xIcons, yIcons, title, body, domain, texture));
-    }
-
-    public static void addTierTwoButton (ToolGuiElement element)
-    {
-        tierTwoButtons.add(element);
-    }
-
-    public static void addTierTwoButton (int slotType, int xButton, int yButton, int[] xIcons, int[] yIcons, String title, String body, String domain, String texture)
-    {
-        tierTwoButtons.add(new ToolGuiElement(slotType, xButton, yButton, xIcons, yIcons, title, body, domain, texture));
-    }
-
-    public static ArrayList<ToolGuiElement> getToolButtons ()
-    {
-        return toolButtons;
     }
 }

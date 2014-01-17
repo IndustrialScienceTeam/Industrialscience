@@ -6,9 +6,9 @@ import net.minecraftforge.event.entity.player.EntityInteractEvent;
 
 public class OffhandAttackEvent extends PlayerEventChild {
 
-    public boolean swingOffhand = true;
-    public boolean shouldAttack = true;
     public EntityInteractEvent event;
+    public boolean shouldAttack = true;
+    public boolean swingOffhand = true;
 
     public OffhandAttackEvent(EntityInteractEvent parent) {
         super(parent);

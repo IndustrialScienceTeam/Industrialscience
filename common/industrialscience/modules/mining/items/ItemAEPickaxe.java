@@ -1,8 +1,7 @@
 package industrialscience.modules.mining.items;
 
-import ibxm.Module;
 import industrialscience.IndustrialScience;
-import industrialscience.modules.MiningModule;
+import industrialscience.modules.ISAbstractModule;
 
 import java.util.Iterator;
 import java.util.List;
@@ -17,23 +16,121 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import appeng.api.IAEItemStack;
 import appeng.api.Util;
 import appeng.api.me.items.IStorageCell;
 
 public class ItemAEPickaxe extends ItemPickaxe implements IStorageCell {
+    public static int getStorageAmount(ItemStack item){
+    	return item.stackTagCompound.getCompoundTag("IndustrialScience.AEPickaxe").getInteger("size");
+    }
+
+    public static void setStorageAmount(int bytes, ItemStack itemstack){
+    	NBTTagCompound pickaxecompound= new NBTTagCompound();
+    	pickaxecompound.setInteger("size", bytes);
+    	if(itemstack.stackTagCompound==null){
+    		itemstack.stackTagCompound=new NBTTagCompound();
+    	}
+    	itemstack.stackTagCompound.setCompoundTag("IndustrialScience.AEPickaxe", pickaxecompound);
+    }
+
     public ItemAEPickaxe(int par1, EnumToolMaterial par2EnumToolMaterial, String prefix) {
         super(par1, par2EnumToolMaterial);
         this.setUnlocalizedName(prefix
                 + ".AEPickaxe." + this.toolMaterial.toString());
     }
 
+    @Override
+	public void addInformation(ItemStack par1ItemStack,
+			EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
+		String storinfo="";
+		String nextblockinfo="";
+		String usedbytes="";
+		try{
+		Object cell=Class.forName("appeng.api.Util").getMethod("getCell", ItemStack.class).invoke(null, par1ItemStack);
+		usedbytes=cell.getClass().getMethod("usedBytes", new Class[0]).invoke(cell, new Object[0]).toString();
+		}
+		catch(Exception e){
+			ISAbstractModule.getLogger().log(Level.WARNING, "Unable to get cell object!", e);
+			return;
+		}
+		
+		storinfo=usedbytes+"/"+getStorageBytes(par1ItemStack)+" Bytes";
+		par3List.add(storinfo);
+		
+		if(getPlaceableItem(par1ItemStack)!=null){
+		nextblockinfo=getPlaceableItem(par1ItemStack).getItem().getItemDisplayName(getPlaceableItem(par1ItemStack).getItemStack());
+		par3List.add(nextblockinfo);
+		}
+		super.addInformation(par1ItemStack, par2EntityPlayer, par3List, par4);
+	}
+
+    @Override
+    public int BytePerType(ItemStack iscellItem) {
+        return getStorageBytes(iscellItem) / 128;
+    }
+
+    @Override
+    public int getBytes(ItemStack cellItem) {
+        return getStorageBytes(cellItem);
+    }
+
+    @Override
+    public String getItemDisplayName(ItemStack par1ItemStack) {
+        if (IndustrialScience.isAeinstalled()) {
+            Boolean hasName = !Util.getCellRegistry()
+                    .getHandlerForCell(par1ItemStack).getName().isEmpty();
+            String partName = Util.getCellRegistry()
+                    .getHandlerForCell(par1ItemStack).getName();
+            if (hasName)
+                return super.getItemDisplayName(par1ItemStack) + " - "
+                        + partName;
+        }
+        return super.getItemDisplayName(par1ItemStack);
+    }
+
+    protected IAEItemStack getPlaceableItem(ItemStack stack) {
+        IAEItemStack toReturn = null;
+        Iterator<IAEItemStack> iter = Util.getCell(stack).getAvailableItems()
+                .iterator();
+        while (iter.hasNext()) {
+            IAEItemStack contentstack = iter.next();
+            if (toReturn == null)
+                toReturn = contentstack;
+            else if (contentstack.getStackSize() > toReturn.getStackSize()
+                    && contentstack.getItem() instanceof ItemBlock)
+                toReturn = contentstack;
+        }
+        return toReturn;
+    }
+
+    protected int getStorageBytes(ItemStack item) {
+        return getStorageAmount(item);
+    }
+
+    @Override
+    public float getStrVsBlock(ItemStack par1ItemStack, Block par2Block) {
+        float str = super.getStrVsBlock(par1ItemStack, par2Block);
+        if (str == 1.0F)
+            return 0F;
+        return str;
+    }
+
     public EnumToolMaterial getToolMaterial() {
         return toolMaterial;
     }
 
+    @Override
+    public int getTotalTypes(ItemStack cellItem) {
+        return 63;
+    }
+
+    @Override
+    public boolean isBlackListed(ItemStack cellItem,
+            IAEItemStack requsetedAddition) {
+        return false;
+    }
     @Override
     public boolean onBlockStartBreak(ItemStack itemstack, int x, int y, int z,
             EntityPlayer player) {
@@ -67,55 +164,6 @@ public class ItemAEPickaxe extends ItemPickaxe implements IStorageCell {
         }
         return false;
     }
-
-    @Override
-    public float getStrVsBlock(ItemStack par1ItemStack, Block par2Block) {
-        float str = super.getStrVsBlock(par1ItemStack, par2Block);
-        if (str == 1.0F)
-            return 0F;
-        return str;
-    }
-
-    @Override
-    public int getBytes(ItemStack cellItem) {
-        return getStorageBytes(cellItem);
-    }
-
-    @Override
-    public String getItemDisplayName(ItemStack par1ItemStack) {
-        if (IndustrialScience.isAeinstalled()) {
-            Boolean hasName = !Util.getCellRegistry()
-                    .getHandlerForCell(par1ItemStack).getName().isEmpty();
-            String partName = Util.getCellRegistry()
-                    .getHandlerForCell(par1ItemStack).getName();
-            if (hasName)
-                return super.getItemDisplayName(par1ItemStack) + " - "
-                        + partName;
-        }
-        return super.getItemDisplayName(par1ItemStack);
-    }
-
-    @Override
-    public int BytePerType(ItemStack iscellItem) {
-        return getStorageBytes(iscellItem) / 128;
-    }
-
-    @Override
-    public int getTotalTypes(ItemStack cellItem) {
-        return 63;
-    }
-
-    @Override
-    public boolean isBlackListed(ItemStack cellItem,
-            IAEItemStack requsetedAddition) {
-        return false;
-    }
-
-    @Override
-    public boolean storableInStorageCell() {
-        return true;
-    }
-
     @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world,
             int x, int y, int z, int side, float clickX, float clickY,
@@ -163,59 +211,9 @@ public class ItemAEPickaxe extends ItemPickaxe implements IStorageCell {
         }
         return false;
     }
-
-    protected IAEItemStack getPlaceableItem(ItemStack stack) {
-        IAEItemStack toReturn = null;
-        Iterator<IAEItemStack> iter = Util.getCell(stack).getAvailableItems()
-                .iterator();
-        while (iter.hasNext()) {
-            IAEItemStack contentstack = iter.next();
-            if (toReturn == null)
-                toReturn = contentstack;
-            else if (contentstack.getStackSize() > toReturn.getStackSize()
-                    && contentstack.getItem() instanceof ItemBlock)
-                toReturn = contentstack;
-        }
-        return toReturn;
-    }
-
-    protected int getStorageBytes(ItemStack item) {
-        return getStorageAmount(item);
-    }
-    public static int getStorageAmount(ItemStack item){
-    	return item.stackTagCompound.getCompoundTag("IndustrialScience.AEPickaxe").getInteger("size");
-    }
-    public static void setStorageAmount(int bytes, ItemStack itemstack){
-    	NBTTagCompound pickaxecompound= new NBTTagCompound();
-    	pickaxecompound.setInteger("size", bytes);
-    	if(itemstack.stackTagCompound==null){
-    		itemstack.stackTagCompound=new NBTTagCompound();
-    	}
-    	itemstack.stackTagCompound.setCompoundTag("IndustrialScience.AEPickaxe", pickaxecompound);
-    }
 	@Override
-	public void addInformation(ItemStack par1ItemStack,
-			EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
-		String storinfo="";
-		String nextblockinfo="";
-		String usedbytes="";
-		try{
-		Object cell=Class.forName("appeng.api.Util").getMethod("getCell", ItemStack.class).invoke(null, par1ItemStack);
-		usedbytes=cell.getClass().getMethod("usedBytes", new Class[0]).invoke(cell, new Object[0]).toString();
-		}
-		catch(Exception e){
-			MiningModule.getLogger().log(Level.WARNING, "Unable to get cell object!", e);
-			return;
-		}
-		
-		storinfo=usedbytes+"/"+getStorageBytes(par1ItemStack)+" Bytes";
-		par3List.add(storinfo);
-		
-		if(getPlaceableItem(par1ItemStack)!=null){
-		nextblockinfo=getPlaceableItem(par1ItemStack).getItem().getItemDisplayName(getPlaceableItem(par1ItemStack).getItemStack());
-		par3List.add(nextblockinfo);
-		}
-		super.addInformation(par1ItemStack, par2EntityPlayer, par3List, par4);
-	}
+    public boolean storableInStorageCell() {
+        return true;
+    }
     
 }

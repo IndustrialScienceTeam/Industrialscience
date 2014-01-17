@@ -1,13 +1,9 @@
 package industrialscience.modules.mining.blocks;
 
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
-import net.minecraft.util.ResourceLocation;
-import industrialscience.blocksystem.ModelISBlock;
 import industrialscience.blocksystem.NormalISBlock;
 import industrialscience.modules.mining.tileentities.BasicMinerMachineTileEntity;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.util.Icon;
 
 public class MinerBasicMachine extends NormalISBlock {
 	private Icon testingicon;

@@ -7,20 +7,6 @@ import net.minecraftforge.common.ForgeDirection;
  */
 public interface IEnergyStorage {
 	/**
-	 * Get the amount of energy currently stored in the block.
-	 * 
-	 * @return Energy stored in the block
-	 */
-	public int getStored();
-
-	/**
-	 * Set the amount of energy currently stored in the block.
-	 * 
-	 * @param energy stored energy
-	 */
-	public void setStored(int energy);
-
-	/**
 	 * Add the specified amount of energy.
 	 * 
 	 * Use negative values to decrease.
@@ -52,10 +38,24 @@ public interface IEnergyStorage {
 	public double getOutputEnergyUnitsPerTick();
 
 	/**
+	 * Get the amount of energy currently stored in the block.
+	 * 
+	 * @return Energy stored in the block
+	 */
+	public int getStored();
+
+	/**
 	 * Get whether this block can have its energy used by an adjacent teleporter.
 	 * 
 	 * @param side side the teleporter is draining energy from
 	 * @return Whether the block is teleporter compatible
 	 */
 	public boolean isTeleporterCompatible(ForgeDirection side);
+
+	/**
+	 * Set the amount of energy currently stored in the block.
+	 * 
+	 * @param energy stored energy
+	 */
+	public void setStored(int energy);
 }

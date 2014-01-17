@@ -10,21 +10,20 @@ import appeng.api.me.util.IGridInterface;
 public abstract interface IGridTileEntity
 {
     /**
+     * Return your last grid you got via setGrid.
+     */
+    public IGridInterface getGrid();
+    
+    /**
      *  Do this:
      *  	return new WorldCoord( TileEntity.xCoord, TileEntity.yCoord, TileEntity.zCoord );
      */
     public abstract WorldCoord getLocation();
     
     /**
-     * If your tile entity is valid return true.
+     * Return worldObj
      */
-    public boolean isValid();
-    
-    /**
-     * Informs you of either true or false.
-     * if the power feed has stopped, or been continued, only called when changes happens, or when grid updates happen.
-     */
-    public abstract void setPowerStatus(boolean hasPower);
+	public World getWorld();
     
     /**
      * Yes if the device has a powered status.
@@ -32,9 +31,9 @@ public abstract interface IGridTileEntity
     public abstract boolean isPowered();
     
     /**
-     * Return your last grid you got via setGrid.
+     * If your tile entity is valid return true.
      */
-    public IGridInterface getGrid();
+    public boolean isValid();
     
     /**
      * Informs you of your new grid, YOU MUST return this via getGrid.
@@ -43,7 +42,8 @@ public abstract interface IGridTileEntity
     public void setGrid(IGridInterface gi);
     
     /**
-     * Return worldObj
+     * Informs you of either true or false.
+     * if the power feed has stopped, or been continued, only called when changes happens, or when grid updates happen.
      */
-	public World getWorld();
+    public abstract void setPowerStatus(boolean hasPower);
 }

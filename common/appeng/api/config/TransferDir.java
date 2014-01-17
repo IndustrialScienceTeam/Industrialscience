@@ -7,12 +7,12 @@ public enum TransferDir implements IConfigEnum
 	RIGHT;
 	
 	@Override
-	public IConfigEnum[] getValues() {
-		return values();
+	public String getName() {
+		return "TransferDir";
 	}
 
 	@Override
-	public String getName() {
-		return "TransferDir";
+	public IConfigEnum[] getValues() {
+		return values();
 	}
 }

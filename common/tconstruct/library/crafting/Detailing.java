@@ -3,17 +3,49 @@ package tconstruct.library.crafting;
 import java.util.ArrayList;
 import java.util.List;
 
-import tconstruct.library.tools.ToolCore;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import tconstruct.library.tools.ToolCore;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class Detailing
 {
+    public class DetailInput
+    {
+        public int inputID;
+        public int inputMeta;
+        public int outputID;
+        public int outputMeta;
+
+        public DetailInput(int inputID, int inputMeta, int outputID, int outputMeta)
+        {
+            this.inputID = inputID;
+            this.inputMeta = inputMeta;
+            this.outputID = outputID;
+            this.outputMeta = outputMeta;
+        }
+    }
+
     public List<DetailInput> detailing = new ArrayList<DetailInput>();
+
+    public void addDetailing (DetailInput details, ToolCore tool)
+    {
+        detailing.add(details);
+        ItemStack toolstack = new ItemStack(tool, 1, Short.MAX_VALUE);
+
+        NBTTagCompound compound = new NBTTagCompound();
+        NBTTagCompound toolTag = new NBTTagCompound();
+        toolTag.setInteger("RenderHandle", 0);
+        toolTag.setInteger("RenderHead", 2);
+        toolTag.setInteger("RenderAccessory", 2);
+        toolTag.setInteger("Damage", 0);
+        toolTag.setInteger("TotalDurability", 100);
+        compound.setCompoundTag("InfiTool", toolTag);
+        toolstack.setTagCompound(compound);
+        addShapelessToolRecipe(new ItemStack(details.outputID, 1, details.outputMeta), toolstack, new ItemStack(details.inputID, 1, details.inputMeta));
+    }
 
     public void addDetailing (Object input, int inputMeta, Object output, int outputMeta, ToolCore tool)
     {
@@ -44,23 +76,6 @@ public class Detailing
             throw new RuntimeException("Invalid detail output!");
 
         this.addDetailing(new DetailInput(iID, iMeta, oID, oMeta), tool);
-    }
-
-    public void addDetailing (DetailInput details, ToolCore tool)
-    {
-        detailing.add(details);
-        ItemStack toolstack = new ItemStack(tool, 1, Short.MAX_VALUE);
-
-        NBTTagCompound compound = new NBTTagCompound();
-        NBTTagCompound toolTag = new NBTTagCompound();
-        toolTag.setInteger("RenderHandle", 0);
-        toolTag.setInteger("RenderHead", 2);
-        toolTag.setInteger("RenderAccessory", 2);
-        toolTag.setInteger("Damage", 0);
-        toolTag.setInteger("TotalDurability", 100);
-        compound.setCompoundTag("InfiTool", toolTag);
-        toolstack.setTagCompound(compound);
-        addShapelessToolRecipe(new ItemStack(details.outputID, 1, details.outputMeta), toolstack, new ItemStack(details.inputID, 1, details.inputMeta));
     }
 
     public void addShapelessToolRecipe (ItemStack par1ItemStack, Object... par2ArrayOfObj)
@@ -106,21 +121,5 @@ public class Detailing
             }
         }
         return null;
-    }
-
-    public class DetailInput
-    {
-        public int inputID;
-        public int inputMeta;
-        public int outputID;
-        public int outputMeta;
-
-        public DetailInput(int inputID, int inputMeta, int outputID, int outputMeta)
-        {
-            this.inputID = inputID;
-            this.inputMeta = inputMeta;
-            this.outputID = outputID;
-            this.outputMeta = outputMeta;
-        }
     }
 }

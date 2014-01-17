@@ -7,12 +7,12 @@ public enum StackModeInput implements IConfigEnum {
 	Stack;
 	
 	@Override
-	public IConfigEnum[] getValues() {
-		return values();
+	public String getName() {
+		return "StackMode";
 	}
 
 	@Override
-	public String getName() {
-		return "StackMode";
+	public IConfigEnum[] getValues() {
+		return values();
 	}
 }

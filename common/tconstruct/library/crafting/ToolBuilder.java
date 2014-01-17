@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.Event.Result;
 import tconstruct.library.TConstructRegistry;
 import tconstruct.library.event.ToolCraftEvent;
 import tconstruct.library.tools.ToolCore;
@@ -12,21 +17,14 @@ import tconstruct.library.tools.ToolMaterial;
 import tconstruct.library.tools.ToolMod;
 import tconstruct.library.util.IToolPart;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.Event.Result;
-
 public class ToolBuilder
 {
     public static ToolBuilder instance = new ToolBuilder();
 
-    public HashMap<String, ToolRecipe> recipeList = new HashMap<String, ToolRecipe>();
-    public List<ToolRecipe> combos = new ArrayList<ToolRecipe>();
-    public HashMap<String, String> modifiers = new HashMap<String, String>();
-    public List<ToolMod> toolMods = new ArrayList<ToolMod>();
-
+    public static void addCustomToolRecipe (ToolRecipe recipe)
+    {
+        instance.combos.add(recipe);
+    }
     /* Build tools */
     public static void addNormalToolRecipe (ToolCore output, Item head, Item handle)
     {
@@ -43,7 +41,6 @@ public class ToolBuilder
             instance.recipeList.put(output.getToolName(), recipe);
         }
     }
-
     public static void addNormalToolRecipe (ToolCore output, Item head, Item handle, Item accessory)
     {
         //instance.combos.add(new ToolRecipe(head, accessory, output));
@@ -61,7 +58,6 @@ public class ToolBuilder
             instance.recipeList.put(output.getToolName(), recipe);
         }
     }
-
     public static void addNormalToolRecipe (ToolCore output, Item head, Item handle, Item accessory, Item extra)
     {
         ToolRecipe recipe = instance.recipeList.get(output.getToolName());
@@ -80,11 +76,6 @@ public class ToolBuilder
         }
     }
 
-    public static void addCustomToolRecipe (ToolRecipe recipe)
-    {
-        instance.combos.add(recipe);
-    }
-
     public static void addToolRecipe (ToolCore output, Item... items)
     {
         if (items.length == 2)
@@ -95,35 +86,61 @@ public class ToolBuilder
             addNormalToolRecipe(output, items[0], items[1], items[2], items[3]);
     }
 
-    public ToolCore getMatchingRecipe (Item head, Item handle, Item accessory, Item extra)
+    public static void registerToolMod (ToolMod mod)
     {
-        for (ToolRecipe recipe : combos)
+        instance.toolMods.add(mod);
+    }
+
+    public List<ToolRecipe> combos = new ArrayList<ToolRecipe>();
+
+    public HashMap<String, String> modifiers = new HashMap<String, String>();
+
+    public HashMap<String, ToolRecipe> recipeList = new HashMap<String, ToolRecipe>();
+
+    public List<ToolMod> toolMods = new ArrayList<ToolMod>();
+
+    int buildReinforced (ToolMaterial headMat, ToolMaterial handleMat, ToolMaterial accessoryMat, ToolMaterial extraMat)
+    {
+        int reinforced = 0;
+
+        int dHead = headMat.reinforced();
+        int dHandle = handleMat.reinforced();
+        int dAccessory = 0;
+        if (accessoryMat != null)
+            dAccessory = accessoryMat.reinforced();
+        int dExtra = 0;
+        if (extraMat != null)
+            dExtra = extraMat.reinforced();
+
+        if (dHead > reinforced)
+            reinforced = dHead;
+        if (dHandle > reinforced)
+            reinforced = dHandle;
+        if (dAccessory > reinforced)
+            reinforced = dAccessory;
+        if (dExtra > reinforced)
+            reinforced = dExtra;
+
+        return reinforced;
+    }
+
+    float buildShoddy (ToolMaterial headMat, ToolMaterial handleMat, ToolMaterial accessoryMat, ToolMaterial extraMat)
+    {
+        float sHead = headMat.shoddy();
+        float sHandle = handleMat.shoddy();
+        if (extraMat != null)
         {
-            if (recipe.validHead(head) && recipe.validHandle(handle) && recipe.validAccessory(accessory) && recipe.validExtra(extra))
-                return recipe.getType();
+            float sAccessory = accessoryMat.shoddy();
+            float sExtra = extraMat.shoddy();
+            return (sHead + sHandle + sAccessory + sExtra) / 4f;
         }
-        return null;
-    }
 
-    //Builds a tool from the parts given
-    public ItemStack buildTool (ItemStack headStack, ItemStack handleStack, ItemStack accessoryStack, String name)
-    {
-        return buildTool(headStack, handleStack, accessoryStack, null, name);
-    }
-
-    public int getMaterialID (ItemStack stack)
-    {
-        if (stack == null)
-            return -1;
-        Item item = stack.getItem();
-        if (item == Item.stick)
-            return 0;
-        else if (item == Item.bone)
-            return 5;
-        else if (item instanceof IToolPart)
-            return ((IToolPart) item).getMaterialID(stack);
-
-        return -1;
+        if (accessoryMat != null)
+        {
+            float sAccessory = accessoryMat.shoddy();
+            return (sHead + sHandle + sAccessory) / 3f;
+        }
+        return (sHead + sHandle) / 2f;
     }
 
     public ItemStack buildTool (ItemStack headStack, ItemStack handleStack, ItemStack accessoryStack, ItemStack extraStack, String name)
@@ -356,6 +373,37 @@ public class ToolBuilder
         return tool;
     }
 
+    //Builds a tool from the parts given
+    public ItemStack buildTool (ItemStack headStack, ItemStack handleStack, ItemStack accessoryStack, String name)
+    {
+        return buildTool(headStack, handleStack, accessoryStack, null, name);
+    }
+
+    public ToolCore getMatchingRecipe (Item head, Item handle, Item accessory, Item extra)
+    {
+        for (ToolRecipe recipe : combos)
+        {
+            if (recipe.validHead(head) && recipe.validHandle(handle) && recipe.validAccessory(accessory) && recipe.validExtra(extra))
+                return recipe.getType();
+        }
+        return null;
+    }
+
+    public int getMaterialID (ItemStack stack)
+    {
+        if (stack == null)
+            return -1;
+        Item item = stack.getItem();
+        if (item == Item.stick)
+            return 0;
+        else if (item == Item.bone)
+            return 5;
+        else if (item instanceof IToolPart)
+            return ((IToolPart) item).getMaterialID(stack);
+
+        return -1;
+    }
+
     public ItemStack modifyTool (ItemStack input, ItemStack topSlot, ItemStack bottomSlot, ItemStack extraStack)
     {
         if (extraStack != null)
@@ -384,54 +432,5 @@ public class ToolBuilder
             return tool;
         else
             return null;
-    }
-
-    int buildReinforced (ToolMaterial headMat, ToolMaterial handleMat, ToolMaterial accessoryMat, ToolMaterial extraMat)
-    {
-        int reinforced = 0;
-
-        int dHead = headMat.reinforced();
-        int dHandle = handleMat.reinforced();
-        int dAccessory = 0;
-        if (accessoryMat != null)
-            dAccessory = accessoryMat.reinforced();
-        int dExtra = 0;
-        if (extraMat != null)
-            dExtra = extraMat.reinforced();
-
-        if (dHead > reinforced)
-            reinforced = dHead;
-        if (dHandle > reinforced)
-            reinforced = dHandle;
-        if (dAccessory > reinforced)
-            reinforced = dAccessory;
-        if (dExtra > reinforced)
-            reinforced = dExtra;
-
-        return reinforced;
-    }
-
-    float buildShoddy (ToolMaterial headMat, ToolMaterial handleMat, ToolMaterial accessoryMat, ToolMaterial extraMat)
-    {
-        float sHead = headMat.shoddy();
-        float sHandle = handleMat.shoddy();
-        if (extraMat != null)
-        {
-            float sAccessory = accessoryMat.shoddy();
-            float sExtra = extraMat.shoddy();
-            return (sHead + sHandle + sAccessory + sExtra) / 4f;
-        }
-
-        if (accessoryMat != null)
-        {
-            float sAccessory = accessoryMat.shoddy();
-            return (sHead + sHandle + sAccessory) / 3f;
-        }
-        return (sHead + sHandle) / 2f;
-    }
-
-    public static void registerToolMod (ToolMod mod)
-    {
-        instance.toolMods.add(mod);
     }
 }

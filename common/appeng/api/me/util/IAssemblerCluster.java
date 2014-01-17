@@ -9,11 +9,6 @@ import net.minecraft.tileentity.TileEntity;
 public interface IAssemblerCluster {
 	
 	/**
-	 * cycles the cpus, should be called once a tick, if called more, crafting will accelerate.
-	 */
-	public void cycleCpus();
-	
-	/**
 	 * Tells the MAC one of the cpus was used.
 	 */
 	void addCraft();
@@ -23,6 +18,11 @@ public interface IAssemblerCluster {
 	 * @return hasCPUReady
 	 */
 	boolean canCraft();
+	
+	/**
+	 * cycles the cpus, should be called once a tick, if called more, crafting will accelerate.
+	 */
+	public void cycleCpus();
 	
 	/**
 	 * Gets a TileAssembler from the MAC

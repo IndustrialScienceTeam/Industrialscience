@@ -7,20 +7,9 @@ import net.minecraft.nbt.NBTTagCompound;
 //Quantitive Trait Locus
 public class Trait
 {
-    protected int[] alleles;
     static Random rand = new Random();
+    protected int[] alleles;
     String traitName;
-
-    public Trait(String name, NBTTagCompound tags)
-    {
-        traitName = name;
-        loadFromNBT(tags);
-    }
-
-    public Trait(int[] alleles)
-    {
-        this.alleles = alleles;
-    }
 
     public Trait(int minimum, int maximum, int quantity, boolean bellCurve)
     {
@@ -43,25 +32,15 @@ public class Trait
         }
     }
 
-    public Trait setName (String name)
+    public Trait(int[] alleles)
     {
-        this.traitName = name;
-        return this;
+        this.alleles = alleles;
     }
 
-    public int getAverage ()
+    public Trait(String name, NBTTagCompound tags)
     {
-        int average = 0;
-
-        if (alleles.length > 0)
-        {
-            for (byte i = 0; i < alleles.length; i++)
-                average += alleles[i];
-
-            average /= alleles.length;
-        }
-
-        return average;
+        traitName = name;
+        loadFromNBT(tags);
     }
 
     public Trait breed (byte[] other, float mutationChance, float mutationVariance)
@@ -92,6 +71,26 @@ public class Trait
         return result;
     }
 
+    public int getAverage ()
+    {
+        int average = 0;
+
+        if (alleles.length > 0)
+        {
+            for (byte i = 0; i < alleles.length; i++)
+                average += alleles[i];
+
+            average /= alleles.length;
+        }
+
+        return average;
+    }
+
+    public void loadFromNBT (NBTTagCompound tags)
+    {
+        alleles = tags.getIntArray(traitName + ".Alleles");
+    }
+
     //Assumes linear progression from worst to best. Use other methods for other types
     protected int mutate (int allele, int other, float variance)
     {
@@ -115,8 +114,9 @@ public class Trait
         tags.setIntArray(traitName + ".Alleles", alleles);
     }
 
-    public void loadFromNBT (NBTTagCompound tags)
+    public Trait setName (String name)
     {
-        alleles = tags.getIntArray(traitName + ".Alleles");
+        this.traitName = name;
+        return this;
     }
 }

@@ -24,6 +24,8 @@ public abstract  class ISGUIContainer extends GuiContainer {
         this.title=title;
     }
 
+    protected abstract void _drawGuiContainerBackgroundLayer(float f, int i, int j);
+    protected abstract void _drawGuiContainerForegroundLayer(int par1, int par2);
     @Override
     protected void drawGuiContainerBackgroundLayer(float f, int i, int j) {
         GL11.glColor4f(1, 1, 1, 1);
@@ -37,8 +39,6 @@ public abstract  class ISGUIContainer extends GuiContainer {
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
         fontRenderer.drawString(title, 8, 6, 0x404040);
     }
-    protected abstract void _drawGuiContainerBackgroundLayer(float f, int i, int j);
-    protected abstract void _drawGuiContainerForegroundLayer(int par1, int par2);
     
     
 

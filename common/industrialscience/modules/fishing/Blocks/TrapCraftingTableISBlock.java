@@ -12,8 +12,8 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.FMLNetworkHandler;
 
 public class TrapCraftingTableISBlock extends ModelISBlock {
-    private Icon side;
     private Icon bottom;
+    private Icon side;
     private Icon top;
 
     public TrapCraftingTableISBlock() {

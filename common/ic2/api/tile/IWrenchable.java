@@ -8,21 +8,29 @@ import net.minecraft.item.ItemStack;
  */
 public interface IWrenchable {
 	/**
-	 * Determine if the wrench can be used to set the block's facing.
-	 * Called before wrenchCanRemove().
-	 * 
-	 * @param entityPlayer player using the wrench, may be null
-	 * @param side block's side the wrench was clicked on
-	 * @return Whether the wrenching was done and the wrench should be damaged
-	 */
-	boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int side);
-
-	/**
 	 * Get the block's facing.
 	 * 
 	 * @return Block facing
 	 */
 	short getFacing();
+
+	/**
+	 * Determine the item the block will drop when the wrenching is successful.
+	 * 
+	 * The ItemStack will be copied before creating the EntityItem.
+	 * 
+	 * @param entityPlayer player using the wrench, may be null
+	 * @return ItemStack to drop, may be null
+	 */
+	ItemStack getWrenchDrop(EntityPlayer entityPlayer);
+
+	/**
+	 * Determine the probability to drop the block as it is.
+	 * The first entry in getBlockDropped will be replaced by blockid:meta if the drop is successful.
+	 * 
+	 * @return Probability from 0 to 1
+	 */
+	float getWrenchDropRate();
 
 	/**
 	 * Set the block's facing
@@ -41,21 +49,13 @@ public interface IWrenchable {
 	boolean wrenchCanRemove(EntityPlayer entityPlayer);
 
 	/**
-	 * Determine the probability to drop the block as it is.
-	 * The first entry in getBlockDropped will be replaced by blockid:meta if the drop is successful.
-	 * 
-	 * @return Probability from 0 to 1
-	 */
-	float getWrenchDropRate();
-
-	/**
-	 * Determine the item the block will drop when the wrenching is successful.
-	 * 
-	 * The ItemStack will be copied before creating the EntityItem.
+	 * Determine if the wrench can be used to set the block's facing.
+	 * Called before wrenchCanRemove().
 	 * 
 	 * @param entityPlayer player using the wrench, may be null
-	 * @return ItemStack to drop, may be null
+	 * @param side block's side the wrench was clicked on
+	 * @return Whether the wrenching was done and the wrench should be damaged
 	 */
-	ItemStack getWrenchDrop(EntityPlayer entityPlayer);
+	boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int side);
 }
 

@@ -6,14 +6,6 @@ import net.minecraft.item.ItemStack;
 
 public interface IRecipeInput {
 	/**
-	 * Check if subject matches this recipe input, ignoring the amount.
-	 * 
-	 * @param subject ItemStack to check
-	 * @return true if it matches the requirement
-	 */
-	boolean matches(ItemStack subject);
-
-	/**
 	 * Determine the minimum input stack size.
 	 * 
 	 * @return input amount required
@@ -28,4 +20,12 @@ public interface IRecipeInput {
 	 * @return list of inputs, may be incomplete
 	 */
 	List<ItemStack> getInputs();
+
+	/**
+	 * Check if subject matches this recipe input, ignoring the amount.
+	 * 
+	 * @param subject ItemStack to check
+	 * @return true if it matches the requirement
+	 */
+	boolean matches(ItemStack subject);
 }

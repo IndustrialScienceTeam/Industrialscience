@@ -12,14 +12,14 @@ public class TabTools extends CreativeTabs
         super(label);
     }
 
-    public void init (ItemStack stack)
-    {
-        display = stack;
-    }
-
     @Override
 	public ItemStack getIconItemStack ()
     {
         return display;
+    }
+
+    public void init (ItemStack stack)
+    {
+        display = stack;
     }
 }

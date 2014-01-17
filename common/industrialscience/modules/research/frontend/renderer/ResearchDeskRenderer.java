@@ -9,9 +9,9 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public class ResearchDeskRenderer extends TileEntitySpecialRenderer {
-    ResearchDeskModel mb = new ResearchDeskModel();
     private static ResourceLocation texture = new ResourceLocation(
             Modinfo.MODID, "textures/models/Researchtable.png");
+    ResearchDeskModel mb = new ResearchDeskModel();
 
     @Override
     public void renderTileEntityAt(TileEntity tileentity, double d0, double d1,

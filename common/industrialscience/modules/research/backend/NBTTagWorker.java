@@ -7,16 +7,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
 public class NBTTagWorker {
-    public static void writeResearchesToNBT(NBTTagCompound compund,
-            Research[] researches) {
-        NBTTagList researchlist = new NBTTagList();
-        for (Research research : researches) {
-            researchlist.appendTag(getResearchAsNBTTag(research));
-        }
-        compund.setTag("Researches", researchlist);
-
-    }
-
     public static NBTTagCompound getResearchAsNBTTag(Research r) {
         NBTTagCompound rNBT = new NBTTagCompound();
         rNBT.setName(r.getName());
@@ -66,6 +56,16 @@ public class NBTTagWorker {
                     ((NBTTagCompound) tagList.tagAt(i)).getBoolean("Enabled"));
         }
         return steps;
+    }
+
+    public static void writeResearchesToNBT(NBTTagCompound compund,
+            Research[] researches) {
+        NBTTagList researchlist = new NBTTagList();
+        for (Research research : researches) {
+            researchlist.appendTag(getResearchAsNBTTag(research));
+        }
+        compund.setTag("Researches", researchlist);
+
     }
 
 }

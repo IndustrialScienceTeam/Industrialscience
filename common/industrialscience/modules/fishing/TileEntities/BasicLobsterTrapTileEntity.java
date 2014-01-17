@@ -9,12 +9,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class BasicLobsterTrapTileEntity extends AbstractFishTrapTileEntity implements IInventory {
-    static final int UPDATESLOT = 1;
     static final int FISHSLOT = 1;
+    static final int UPDATESLOT = 1;
     protected int fishamout = 5;
     protected int neededwater = 1;
-    protected int waterforextrafish = 1;
     protected int range = 1;
+    protected int waterforextrafish = 1;
     public BasicLobsterTrapTileEntity() {
         super(2,64,"Lobster Trap");
     }

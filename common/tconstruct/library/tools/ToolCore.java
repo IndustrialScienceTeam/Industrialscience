@@ -9,10 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import tconstruct.library.ActiveToolMod;
-import tconstruct.library.TConstructRegistry;
-import tconstruct.library.crafting.ToolBuilder;
-
 import mods.battlegear2.api.weapons.IBattlegearWeapon;
 import mods.battlegear2.api.weapons.OffhandAttackEvent;
 import net.minecraft.block.Block;
@@ -28,6 +24,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import tconstruct.library.ActiveToolMod;
+import tconstruct.library.TConstructRegistry;
+import tconstruct.library.crafting.ToolBuilder;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -59,11 +58,37 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public abstract class ToolCore extends Item implements ICustomElectricItem, IBoxable, IBattlegearWeapon
 {
-    protected Random random = new Random();
-    protected int damageVsEntity;
     public static Icon blankSprite;
     public static Icon emptyIcon;
+    public static String getStyleForType (int type)
+    {
+        return TConstructRegistry.getMaterial(type).style();
+    }
+    public HashMap<Integer, Icon> accessoryIcons = new HashMap<Integer, Icon>();
 
+    public HashMap<Integer, String> accessoryStrings = new HashMap<Integer, String>();
+
+    public HashMap<Integer, Icon> brokenIcons = new HashMap<Integer, Icon>();
+
+    public HashMap<Integer, String> brokenPartStrings = new HashMap<Integer, String>();
+
+    protected int damageVsEntity;
+
+    public HashMap<Integer, Icon> effectIcons = new HashMap<Integer, Icon>();
+
+    public HashMap<Integer, String> effectStrings = new HashMap<Integer, String>();
+
+    /* Rendering */
+
+    public HashMap<Integer, Icon> extraIcons = new HashMap<Integer, Icon>();
+    public HashMap<Integer, String> extraStrings = new HashMap<Integer, String>();
+    public HashMap<Integer, Icon> handleIcons = new HashMap<Integer, Icon>();
+    public HashMap<Integer, String> handleStrings = new HashMap<Integer, String>();
+    public HashMap<Integer, Icon> headIcons = new HashMap<Integer, Icon>();
+    //Not liking this
+    public HashMap<Integer, String> headStrings = new HashMap<Integer, String>();
+
+    protected Random random = new Random();
     public ToolCore(int id, int baseDamage)
     {
         super(id);
@@ -76,255 +101,6 @@ public abstract class ToolCore extends Item implements ICustomElectricItem, IBox
         setNoRepair();
         canRepair = false;
     }
-
-    /** Determines crafting behavior with regards to durability
-     * 0: None
-     * 1: Adds handle modifier
-     * 2: Averages part with the rest of the tool (head)
-     * @return type
-     */
-
-    public int durabilityTypeHandle ()
-    {
-        return 1;
-    }
-
-    public int durabilityTypeAccessory ()
-    {
-        return 0;
-    }
-
-    public int durabilityTypeExtra ()
-    {
-        return 0;
-    }
-
-    public int getModifierAmount ()
-    {
-        return 3;
-    }
-
-    public String getToolName ()
-    {
-        return this.getClass().getSimpleName();
-    }
-
-    /* Rendering */
-
-    public HashMap<Integer, Icon> headIcons = new HashMap<Integer, Icon>();
-    public HashMap<Integer, Icon> brokenIcons = new HashMap<Integer, Icon>();
-    public HashMap<Integer, Icon> handleIcons = new HashMap<Integer, Icon>();
-    public HashMap<Integer, Icon> accessoryIcons = new HashMap<Integer, Icon>();
-    public HashMap<Integer, Icon> effectIcons = new HashMap<Integer, Icon>();
-    public HashMap<Integer, Icon> extraIcons = new HashMap<Integer, Icon>();
-
-    //Not liking this
-    public HashMap<Integer, String> headStrings = new HashMap<Integer, String>();
-    public HashMap<Integer, String> brokenPartStrings = new HashMap<Integer, String>();
-    public HashMap<Integer, String> handleStrings = new HashMap<Integer, String>();
-    public HashMap<Integer, String> accessoryStrings = new HashMap<Integer, String>();
-    public HashMap<Integer, String> effectStrings = new HashMap<Integer, String>();
-    public HashMap<Integer, String> extraStrings = new HashMap<Integer, String>();
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public boolean requiresMultipleRenderPasses ()
-    {
-        return true;
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public int getRenderPasses (int metadata)
-    {
-        return 9;
-    }
-
-    @Override
-	@SideOnly(Side.CLIENT)
-    public boolean hasEffect (ItemStack par1ItemStack)
-    {
-        return false;
-    }
-
-    //Override me please!
-    public int getPartAmount ()
-    {
-        return 3;
-    }
-
-    public abstract String getIconSuffix (int partType);
-
-    public abstract String getEffectSuffix ();
-
-    public abstract String getDefaultFolder ();
-
-    public void registerPartPaths (int index, String[] location)
-    {
-        headStrings.put(index, location[0]);
-        brokenPartStrings.put(index, location[1]);
-        handleStrings.put(index, location[2]);
-        if (location.length > 3)
-            accessoryStrings.put(index, location[3]);
-        if (location.length > 4)
-            extraStrings.put(index, location[4]);
-    }
-
-    public void registerAlternatePartPaths (int index, String[] location)
-    {
-
-    }
-
-    public void registerEffectPath (int index, String location)
-    {
-        effectStrings.put(index, location);
-    }
-
-    @Override
-    public void registerIcons (IconRegister iconRegister)
-    {
-        headIcons.clear();
-        brokenIcons.clear();
-        handleIcons.clear();
-        accessoryIcons.clear();
-        extraIcons.clear();
-        effectIcons.clear();
-        Iterator iter = headStrings.entrySet().iterator();
-        while (iter.hasNext())
-        {
-            Map.Entry pairs = (Map.Entry) iter.next();
-            headIcons.put((Integer) pairs.getKey(), iconRegister.registerIcon((String) pairs.getValue()));
-        }
-
-        iter = brokenPartStrings.entrySet().iterator();
-        while (iter.hasNext())
-        {
-            Map.Entry pairs = (Map.Entry) iter.next();
-            brokenIcons.put((Integer) pairs.getKey(), iconRegister.registerIcon((String) pairs.getValue()));
-        }
-
-        iter = handleStrings.entrySet().iterator();
-        while (iter.hasNext())
-        {
-            Map.Entry pairs = (Map.Entry) iter.next();
-            handleIcons.put((Integer) pairs.getKey(), iconRegister.registerIcon((String) pairs.getValue()));
-        }
-
-        if (getPartAmount() > 2)
-        {
-            iter = accessoryStrings.entrySet().iterator();
-            while (iter.hasNext())
-            {
-                Map.Entry pairs = (Map.Entry) iter.next();
-                accessoryIcons.put((Integer) pairs.getKey(), iconRegister.registerIcon((String) pairs.getValue()));
-            }
-        }
-
-        if (getPartAmount() > 3)
-        {
-            iter = extraStrings.entrySet().iterator();
-            while (iter.hasNext())
-            {
-                Map.Entry pairs = (Map.Entry) iter.next();
-                extraIcons.put((Integer) pairs.getKey(), iconRegister.registerIcon((String) pairs.getValue()));
-            }
-        }
-
-        iter = effectStrings.entrySet().iterator();
-        while (iter.hasNext())
-        {
-            Map.Entry pairs = (Map.Entry) iter.next();
-            effectIcons.put((Integer) pairs.getKey(), iconRegister.registerIcon((String) pairs.getValue()));
-        }
-
-        emptyIcon = iconRegister.registerIcon("tinker:blankface");
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public Icon getIconFromDamage (int meta)
-    {
-        return blankSprite;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public Icon getIcon (ItemStack stack, int renderPass)
-    {
-        NBTTagCompound tags = stack.getTagCompound();
-
-        if (tags != null)
-        {
-            tags = stack.getTagCompound().getCompoundTag("InfiTool");
-            if (renderPass < getPartAmount())
-            {
-                if (renderPass == 0) // Handle
-                {
-                    return handleIcons.get(tags.getInteger("RenderHandle"));
-                }
-
-                else if (renderPass == 1) // Head
-                {
-                    if (tags.getBoolean("Broken"))
-                        return (brokenIcons.get(tags.getInteger("RenderHead")));
-                    else
-                        return (headIcons.get(tags.getInteger("RenderHead")));
-                }
-
-                else if (renderPass == 2) // Accessory
-                {
-                    return (accessoryIcons.get(tags.getInteger("RenderAccessory")));
-                }
-
-                else if (renderPass == 3) // Extra
-                {
-                    return (extraIcons.get(tags.getInteger("RenderExtra")));
-                }
-            }
-
-            else
-            {
-                if (renderPass == getPartAmount())
-                {
-                    if (tags.hasKey("Effect1"))
-                        return (effectIcons.get(tags.getInteger("Effect1")));
-                }
-
-                else if (renderPass == getPartAmount() + 1)
-                {
-                    if (tags.hasKey("Effect2"))
-                        return (effectIcons.get(tags.getInteger("Effect2")));
-                }
-
-                else if (renderPass == getPartAmount() + 2)
-                {
-                    if (tags.hasKey("Effect3"))
-                        return (effectIcons.get(tags.getInteger("Effect3")));
-                }
-
-                else if (renderPass == getPartAmount() + 3)
-                {
-                    if (tags.hasKey("Effect4"))
-                        return (effectIcons.get(tags.getInteger("Effect4")));
-                }
-
-                else if (renderPass == getPartAmount() + 4)
-                {
-                    if (tags.hasKey("Effect5"))
-                        return (effectIcons.get(tags.getInteger("Effect5")));
-                }
-
-                else if (renderPass == getPartAmount() + 5)
-                {
-                    if (tags.hasKey("Effect6"))
-                        return (effectIcons.get(tags.getInteger("Effect6")));
-                }
-            }
-            return blankSprite;
-        }
-        return emptyIcon;
-    }
-
     /* Tags and information about the tool */
     @Override
     @SideOnly(Side.CLIENT)
@@ -410,15 +186,363 @@ public abstract class ToolCore extends Item implements ICustomElectricItem, IBox
             }
         }
     }
-
-    public static String getStyleForType (int type)
+    public void buildTool (int id, String name, List list)
     {
-        return TConstructRegistry.getMaterial(type).style();
+        Item accessory = getAccessoryItem();
+        ItemStack accessoryStack = accessory != null ? new ItemStack(getAccessoryItem(), 1, id) : null;
+        Item extra = getExtraItem();
+        ItemStack extraStack = extra != null ? new ItemStack(extra, 1, id) : null;
+        ItemStack tool = ToolBuilder.instance.buildTool(new ItemStack(getHeadItem(), 1, id), new ItemStack(getHandleItem(), 1, id), accessoryStack, extraStack, name + getToolName());
+        if (tool == null)
+        {
+            System.out.println("Creative builder failed tool for " + name + this.getToolName());
+            System.out.println("Make sure you do not have item ID conflicts");
+        }
+        else
+        {
+            tool.getTagCompound().getCompoundTag("InfiTool").setBoolean("Built", true);
+            list.add(tool);
+        }
+    }
+    /* IC2 Support
+     * Every tool can be an electric tool if you modify it right
+     */
+    @Override
+    public boolean canBeStoredInToolbox (ItemStack stack)
+    {
+        return true;
+    }
+    @Override
+    public boolean canProvideEnergy (ItemStack stack)
+    {
+        NBTTagCompound tags = stack.getTagCompound();
+        if (!tags.hasKey("charge"))
+            return false;
+
+        return true;
+    }
+
+    @Override
+    public boolean canShowChargeToolTip (ItemStack itemStack)
+    {
+        return false;
+    }
+
+    @Override
+    public boolean canUse (ItemStack itemStack, int amount)
+    {
+        return false;
+    }
+
+    @Override
+    public int charge (ItemStack stack, int amount, int tier, boolean ignoreTransferLimit, boolean simulate)
+    {
+        NBTTagCompound tags = stack.getTagCompound();
+        if (!tags.hasKey("charge"))
+            return 0;
+
+        if (amount > 0)
+        {
+            if (amount > getTransferLimit(stack) && !ignoreTransferLimit)
+            {
+                amount = getTransferLimit(stack);
+            }
+
+            int charge = tags.getInteger("charge");
+
+            if (amount > getMaxCharge(stack) - charge)
+            {
+                amount = getMaxCharge(stack) - charge;
+            }
+
+            charge += amount;
+
+            if (!simulate)
+            {
+                tags.setInteger("charge", charge);
+                stack.setItemDamage(1 + (getMaxCharge(stack) - charge) * (stack.getMaxDamage() - 2) / getMaxCharge(stack));
+            }
+
+            return amount;
+        }
+
+        else
+            return 0;
+    }
+
+    public float chargeAttack ()
+    {
+        return 1f;
+    }
+
+    @Override
+    public int discharge (ItemStack stack, int amount, int tier, boolean ignoreTransferLimit, boolean simulate)
+    {
+        NBTTagCompound tags = stack.getTagCompound();
+        if (tags == null || !tags.hasKey("charge"))
+            return 0;
+
+        if (amount > 0)
+        {
+            if (amount > getTransferLimit(stack) && !ignoreTransferLimit)
+            {
+                amount = getTransferLimit(stack);
+            }
+
+            int charge = tags.getInteger("charge");
+
+            if (amount > charge)
+            {
+                amount = charge;
+            }
+
+            charge -= amount;
+
+            if (!simulate)
+            {
+                tags.setInteger("charge", charge);
+                stack.setItemDamage(1 + (getMaxCharge(stack) - charge) * (stack.getMaxDamage() - 1) / getMaxCharge(stack));
+            }
+
+            return amount;
+        }
+
+        else
+            return 0;
+    }
+
+    public int durabilityTypeAccessory ()
+    {
+        return 0;
+    }
+
+    public int durabilityTypeExtra ()
+    {
+        return 0;
+    }
+
+    /** Determines crafting behavior with regards to durability
+     * 0: None
+     * 1: Adds handle modifier
+     * 2: Averages part with the rest of the tool (head)
+     * @return type
+     */
+
+    public int durabilityTypeHandle ()
+    {
+        return 1;
     }
 
     public String getAbilityNameForType (int type)
     {
         return TConstructRegistry.getMaterial(type).ability();
+    }
+
+    public abstract Item getAccessoryItem ();
+
+    @Override
+    public int getChargedItemId (ItemStack stack)
+    {
+        return this.itemID;
+    }
+
+    public float getDamageModifier ()
+    {
+        return 1.0f;
+    }
+
+    public int getDamageVsEntity (Entity par1Entity)
+    {
+        return this.damageVsEntity;
+    }
+
+    public abstract String getDefaultFolder ();
+
+    //Changes how much durability the base tool has
+    public float getDurabilityModifier ()
+    {
+        return 1f;
+    }
+
+    public abstract String getEffectSuffix ();
+
+    @Override
+    public int getEmptyItemId (ItemStack stack)
+    {
+        return this.itemID;
+    }
+
+    public Item getExtraItem ()
+    {
+        return null;
+    }
+
+    public Item getHandleItem ()
+    {
+        return TConstructRegistry.getItem("toolRod");//TContent.toolRod;
+    }
+
+    /* Creative mode tools */
+
+    public abstract Item getHeadItem ();
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public Icon getIcon (ItemStack stack, int renderPass)
+    {
+        NBTTagCompound tags = stack.getTagCompound();
+
+        if (tags != null)
+        {
+            tags = stack.getTagCompound().getCompoundTag("InfiTool");
+            if (renderPass < getPartAmount())
+            {
+                if (renderPass == 0) // Handle
+                {
+                    return handleIcons.get(tags.getInteger("RenderHandle"));
+                }
+
+                else if (renderPass == 1) // Head
+                {
+                    if (tags.getBoolean("Broken"))
+                        return (brokenIcons.get(tags.getInteger("RenderHead")));
+                    else
+                        return (headIcons.get(tags.getInteger("RenderHead")));
+                }
+
+                else if (renderPass == 2) // Accessory
+                {
+                    return (accessoryIcons.get(tags.getInteger("RenderAccessory")));
+                }
+
+                else if (renderPass == 3) // Extra
+                {
+                    return (extraIcons.get(tags.getInteger("RenderExtra")));
+                }
+            }
+
+            else
+            {
+                if (renderPass == getPartAmount())
+                {
+                    if (tags.hasKey("Effect1"))
+                        return (effectIcons.get(tags.getInteger("Effect1")));
+                }
+
+                else if (renderPass == getPartAmount() + 1)
+                {
+                    if (tags.hasKey("Effect2"))
+                        return (effectIcons.get(tags.getInteger("Effect2")));
+                }
+
+                else if (renderPass == getPartAmount() + 2)
+                {
+                    if (tags.hasKey("Effect3"))
+                        return (effectIcons.get(tags.getInteger("Effect3")));
+                }
+
+                else if (renderPass == getPartAmount() + 3)
+                {
+                    if (tags.hasKey("Effect4"))
+                        return (effectIcons.get(tags.getInteger("Effect4")));
+                }
+
+                else if (renderPass == getPartAmount() + 4)
+                {
+                    if (tags.hasKey("Effect5"))
+                        return (effectIcons.get(tags.getInteger("Effect5")));
+                }
+
+                else if (renderPass == getPartAmount() + 5)
+                {
+                    if (tags.hasKey("Effect6"))
+                        return (effectIcons.get(tags.getInteger("Effect6")));
+                }
+            }
+            return blankSprite;
+        }
+        return emptyIcon;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public Icon getIconFromDamage (int meta)
+    {
+        return blankSprite;
+    }
+
+    public abstract String getIconSuffix (int partType);
+
+    @Override
+    public boolean getIsRepairable (ItemStack par1ItemStack, ItemStack par2ItemStack)
+    {
+        return false;
+    }
+
+    public int getItemDamageFromStackForDisplay (ItemStack stack)
+    {
+        NBTTagCompound tags = stack.getTagCompound();
+        if (tags == null)
+        {
+            return 0;
+        }
+
+        if (tags.hasKey("charge"))
+        {
+            int charge = tags.getInteger("charge");
+            if (charge > 0)
+                return getMaxCharge(stack) - charge;
+        }
+        return tags.getCompoundTag("InfiTool").getInteger("Damage");
+    }
+
+    /* Updating */
+
+    @Override
+	public int getItemEnchantability ()
+    {
+        return 0;
+    }
+
+    /* Tool uses */
+
+    /* Proper stack damage */
+    public int getItemMaxDamageFromStack (ItemStack stack)
+    {
+        NBTTagCompound tags = stack.getTagCompound();
+        if (tags == null)
+        {
+            return 0;
+        }
+
+        if (tags.hasKey("charge"))
+        {
+            int charge = tags.getInteger("charge");
+            if (charge > 0)
+                return this.getMaxCharge(stack);
+        }
+        return tags.getCompoundTag("InfiTool").getInteger("TotalDurability");
+    }
+
+    @Override
+    public int getMaxCharge (ItemStack stack)
+    {
+        NBTTagCompound tags = stack.getTagCompound();
+        if (!tags.hasKey("charge"))
+            return 0;
+
+        return 10000;
+    }
+
+    public int getModifierAmount ()
+    {
+        return 3;
+    }
+
+    //Override me please!
+    public int getPartAmount ()
+    {
+        return 3;
     }
 
     public String getReinforcedName (int head, int handle, int accessory, int extra, int unbreaking)
@@ -511,13 +635,26 @@ public abstract class ToolCore extends Item implements ICustomElectricItem, IBox
         return ret;
     }
 
-    //Used for sounds and the like
-    public void onEntityDamaged (World world, EntityLivingBase player, Entity entity)
+    @SideOnly(Side.CLIENT)
+    @Override
+    public int getRenderPasses (int metadata)
     {
-
+        return 9;
     }
 
-    /* Creative mode tools */
+    public float getRepairCost ()
+    {
+        return getDurabilityModifier();
+    }
+
+    @Override
+    public float getStrVsBlock (ItemStack stack, Block block, int meta)
+    {
+        NBTTagCompound tags = stack.getTagCompound();
+        if (tags.getCompoundTag("InfiTool").getBoolean("Broken"))
+            return 0.1f;
+        return 1f;
+    }
 
     @Override
 	public void getSubItems (int id, CreativeTabs tab, List list)
@@ -531,54 +668,99 @@ public abstract class ToolCore extends Item implements ICustomElectricItem, IBox
         }
     }
 
-    public void buildTool (int id, String name, List list)
+    @Override
+    public int getTier (ItemStack itemStack)
     {
-        Item accessory = getAccessoryItem();
-        ItemStack accessoryStack = accessory != null ? new ItemStack(getAccessoryItem(), 1, id) : null;
-        Item extra = getExtraItem();
-        ItemStack extraStack = extra != null ? new ItemStack(extra, 1, id) : null;
-        ItemStack tool = ToolBuilder.instance.buildTool(new ItemStack(getHeadItem(), 1, id), new ItemStack(getHandleItem(), 1, id), accessoryStack, extraStack, name + getToolName());
-        if (tool == null)
-        {
-            System.out.println("Creative builder failed tool for " + name + this.getToolName());
-            System.out.println("Make sure you do not have item ID conflicts");
-        }
-        else
-        {
-            tool.getTagCompound().getCompoundTag("InfiTool").setBoolean("Built", true);
-            list.add(tool);
-        }
+        return 0;
     }
 
-    public abstract Item getHeadItem ();
-
-    public abstract Item getAccessoryItem ();
-
-    public Item getExtraItem ()
+    public String getToolName ()
     {
-        return null;
+        return this.getClass().getSimpleName();
     }
-
-    public Item getHandleItem ()
-    {
-        return TConstructRegistry.getItem("toolRod");//TContent.toolRod;
-    }
-
-    /* Updating */
 
     @Override
-    public void onUpdate (ItemStack stack, World world, Entity entity, int par4, boolean par5)
+    public int getTransferLimit (ItemStack stack)
     {
-        for (ActiveToolMod mod : TConstructRegistry.activeModifiers)
-        {
-            mod.updateTool(this, stack, world, entity);
-        }
+        NBTTagCompound tags = stack.getTagCompound();
+        if (!tags.hasKey("charge"))
+            return 0;
+
+        return 32;
     }
 
-    /* Tool uses */
+    @Override
+	@SideOnly(Side.CLIENT)
+    public boolean hasEffect (ItemStack par1ItemStack)
+    {
+        return false;
+    }
 
-    //Types
-    public abstract String[] toolCategories ();
+    @Override
+	@SideOnly(Side.CLIENT)
+    public boolean hasEffect (ItemStack par1ItemStack, int pass)
+    {
+        return false;
+    }
+
+    @Override
+    public boolean hitEntity (ItemStack stack, EntityLivingBase mob, EntityLivingBase player)
+    {
+        return true;
+    }
+
+    @Override
+	public boolean isFull3D ()
+    {
+        return true;
+    }
+
+    //Vanilla overrides
+    @Override
+	public boolean isItemTool (ItemStack par1ItemStack)
+    {
+        return false;
+    }
+
+    @Override
+	public boolean isOffhandHandDualWeapon() {
+		return true;
+	}
+
+    @Override
+	public boolean isRepairable ()
+    {
+        return false;
+    }
+
+    @Override
+	public boolean offhandAttackEntity(OffhandAttackEvent event,
+			ItemStack mainhandItem, ItemStack offhandItem) {
+		return true;
+	}
+
+    @Override
+	public boolean offhandClickAir(PlayerInteractEvent event,
+			ItemStack mainhandItem, ItemStack offhandItem) {
+		return true;
+	}
+
+    @Override
+	public boolean offhandClickBlock(PlayerInteractEvent event,
+			ItemStack mainhandItem, ItemStack offhandItem) {
+		return true;
+	}
+
+    @Override
+    public boolean onBlockDestroyed (ItemStack itemstack, World world, int blockID, int x, int y, int z, EntityLivingBase player)
+    {
+        Block block = Block.blocksList[blockID];
+        if (block != null && block.getBlockHardness(world, x, y, z) != 0.0D)
+        {
+            return AbilityHelper.onBlockChanged(itemstack, world, blockID, x, y, z, player, random);
+        }
+        return true;
+    }
 
     //Mining
     @Override
@@ -594,69 +776,10 @@ public abstract class ToolCore extends Item implements ICustomElectricItem, IBox
         return cancelHarvest;
     }
 
-    @Override
-    public boolean onBlockDestroyed (ItemStack itemstack, World world, int blockID, int x, int y, int z, EntityLivingBase player)
+    //Used for sounds and the like
+    public void onEntityDamaged (World world, EntityLivingBase player, Entity entity)
     {
-        Block block = Block.blocksList[blockID];
-        if (block != null && block.getBlockHardness(world, x, y, z) != 0.0D)
-        {
-            return AbilityHelper.onBlockChanged(itemstack, world, blockID, x, y, z, player, random);
-        }
-        return true;
-    }
 
-    @Override
-    public float getStrVsBlock (ItemStack stack, Block block, int meta)
-    {
-        NBTTagCompound tags = stack.getTagCompound();
-        if (tags.getCompoundTag("InfiTool").getBoolean("Broken"))
-            return 0.1f;
-        return 1f;
-    }
-
-    // Attacking
-    @Override
-    public boolean onLeftClickEntity (ItemStack stack, EntityPlayer player, Entity entity)
-    {
-        AbilityHelper.onLeftClickEntity(stack, player, entity, this, 0);
-        return false;
-    }
-
-    @Override
-    public boolean hitEntity (ItemStack stack, EntityLivingBase mob, EntityLivingBase player)
-    {
-        return true;
-    }
-
-    public boolean pierceArmor ()
-    {
-        return false;
-    }
-
-    public float chargeAttack ()
-    {
-        return 1f;
-    }
-
-    public int getDamageVsEntity (Entity par1Entity)
-    {
-        return this.damageVsEntity;
-    }
-
-    //Changes how much durability the base tool has
-    public float getDurabilityModifier ()
-    {
-        return 1f;
-    }
-
-    public float getRepairCost ()
-    {
-        return getDurabilityModifier();
-    }
-
-    public float getDamageModifier ()
-    {
-        return 1.0f;
     }
 
     //Right-click
@@ -733,220 +856,129 @@ public abstract class ToolCore extends Item implements ICustomElectricItem, IBox
         return used;
     }
 
-    /* IC2 Support
-     * Every tool can be an electric tool if you modify it right
-     */
+    // Attacking
     @Override
-    public boolean canBeStoredInToolbox (ItemStack stack)
+    public boolean onLeftClickEntity (ItemStack stack, EntityPlayer player, Entity entity)
     {
-        return true;
+        AbilityHelper.onLeftClickEntity(stack, player, entity, this, 0);
+        return false;
     }
 
     @Override
-    public boolean canProvideEnergy (ItemStack stack)
+    public void onUpdate (ItemStack stack, World world, Entity entity, int par4, boolean par5)
     {
-        NBTTagCompound tags = stack.getTagCompound();
-        if (!tags.hasKey("charge"))
-            return false;
-
-        return true;
-    }
-
-    @Override
-    public int getChargedItemId (ItemStack stack)
-    {
-        return this.itemID;
-    }
-
-    @Override
-    public int getEmptyItemId (ItemStack stack)
-    {
-        return this.itemID;
-    }
-
-    @Override
-    public int getMaxCharge (ItemStack stack)
-    {
-        NBTTagCompound tags = stack.getTagCompound();
-        if (!tags.hasKey("charge"))
-            return 0;
-
-        return 10000;
-    }
-
-    @Override
-    public int getTier (ItemStack itemStack)
-    {
-        return 0;
-    }
-
-    @Override
-    public int getTransferLimit (ItemStack stack)
-    {
-        NBTTagCompound tags = stack.getTagCompound();
-        if (!tags.hasKey("charge"))
-            return 0;
-
-        return 32;
-    }
-
-    @Override
-    public int charge (ItemStack stack, int amount, int tier, boolean ignoreTransferLimit, boolean simulate)
-    {
-        NBTTagCompound tags = stack.getTagCompound();
-        if (!tags.hasKey("charge"))
-            return 0;
-
-        if (amount > 0)
+        for (ActiveToolMod mod : TConstructRegistry.activeModifiers)
         {
-            if (amount > getTransferLimit(stack) && !ignoreTransferLimit)
-            {
-                amount = getTransferLimit(stack);
-            }
+            mod.updateTool(this, stack, world, entity);
+        }
+    }
 
-            int charge = tags.getInteger("charge");
+    @Override
+	public void performPassiveEffects(Side effectiveSide,
+			ItemStack mainhandItem, ItemStack offhandItem) {		
+	}
 
-            if (amount > getMaxCharge(stack) - charge)
-            {
-                amount = getMaxCharge(stack) - charge;
-            }
+    public boolean pierceArmor ()
+    {
+        return false;
+    }
 
-            charge += amount;
+    public void registerAlternatePartPaths (int index, String[] location)
+    {
 
-            if (!simulate)
-            {
-                tags.setInteger("charge", charge);
-                stack.setItemDamage(1 + (getMaxCharge(stack) - charge) * (stack.getMaxDamage() - 2) / getMaxCharge(stack));
-            }
+    }
 
-            return amount;
+
+	public void registerEffectPath (int index, String location)
+    {
+        effectStrings.put(index, location);
+    }
+
+	@Override
+    public void registerIcons (IconRegister iconRegister)
+    {
+        headIcons.clear();
+        brokenIcons.clear();
+        handleIcons.clear();
+        accessoryIcons.clear();
+        extraIcons.clear();
+        effectIcons.clear();
+        Iterator iter = headStrings.entrySet().iterator();
+        while (iter.hasNext())
+        {
+            Map.Entry pairs = (Map.Entry) iter.next();
+            headIcons.put((Integer) pairs.getKey(), iconRegister.registerIcon((String) pairs.getValue()));
         }
 
-        else
-            return 0;
-    }
-
-    @Override
-    public int discharge (ItemStack stack, int amount, int tier, boolean ignoreTransferLimit, boolean simulate)
-    {
-        NBTTagCompound tags = stack.getTagCompound();
-        if (tags == null || !tags.hasKey("charge"))
-            return 0;
-
-        if (amount > 0)
+        iter = brokenPartStrings.entrySet().iterator();
+        while (iter.hasNext())
         {
-            if (amount > getTransferLimit(stack) && !ignoreTransferLimit)
-            {
-                amount = getTransferLimit(stack);
-            }
-
-            int charge = tags.getInteger("charge");
-
-            if (amount > charge)
-            {
-                amount = charge;
-            }
-
-            charge -= amount;
-
-            if (!simulate)
-            {
-                tags.setInteger("charge", charge);
-                stack.setItemDamage(1 + (getMaxCharge(stack) - charge) * (stack.getMaxDamage() - 1) / getMaxCharge(stack));
-            }
-
-            return amount;
+            Map.Entry pairs = (Map.Entry) iter.next();
+            brokenIcons.put((Integer) pairs.getKey(), iconRegister.registerIcon((String) pairs.getValue()));
         }
 
-        else
-            return 0;
+        iter = handleStrings.entrySet().iterator();
+        while (iter.hasNext())
+        {
+            Map.Entry pairs = (Map.Entry) iter.next();
+            handleIcons.put((Integer) pairs.getKey(), iconRegister.registerIcon((String) pairs.getValue()));
+        }
+
+        if (getPartAmount() > 2)
+        {
+            iter = accessoryStrings.entrySet().iterator();
+            while (iter.hasNext())
+            {
+                Map.Entry pairs = (Map.Entry) iter.next();
+                accessoryIcons.put((Integer) pairs.getKey(), iconRegister.registerIcon((String) pairs.getValue()));
+            }
+        }
+
+        if (getPartAmount() > 3)
+        {
+            iter = extraStrings.entrySet().iterator();
+            while (iter.hasNext())
+            {
+                Map.Entry pairs = (Map.Entry) iter.next();
+                extraIcons.put((Integer) pairs.getKey(), iconRegister.registerIcon((String) pairs.getValue()));
+            }
+        }
+
+        iter = effectStrings.entrySet().iterator();
+        while (iter.hasNext())
+        {
+            Map.Entry pairs = (Map.Entry) iter.next();
+            effectIcons.put((Integer) pairs.getKey(), iconRegister.registerIcon((String) pairs.getValue()));
+        }
+
+        emptyIcon = iconRegister.registerIcon("tinker:blankface");
     }
 
-    @Override
-    public boolean canShowChargeToolTip (ItemStack itemStack)
+	public void registerPartPaths (int index, String[] location)
     {
-        return false;
+        headStrings.put(index, location[0]);
+        brokenPartStrings.put(index, location[1]);
+        handleStrings.put(index, location[2]);
+        if (location.length > 3)
+            accessoryStrings.put(index, location[3]);
+        if (location.length > 4)
+            extraStrings.put(index, location[4]);
     }
 
-    @Override
-    public boolean canUse (ItemStack itemStack, int amount)
-    {
-        return false;
-    }
-
-    //Vanilla overrides
-    @Override
-	public boolean isItemTool (ItemStack par1ItemStack)
-    {
-        return false;
-    }
-
-    @Override
-    public boolean getIsRepairable (ItemStack par1ItemStack, ItemStack par2ItemStack)
-    {
-        return false;
-    }
-
-    @Override
-	public boolean isRepairable ()
-    {
-        return false;
-    }
-
-    @Override
-	public int getItemEnchantability ()
-    {
-        return 0;
-    }
-
-    @Override
-	public boolean isFull3D ()
-    {
-        return true;
-    }
-
-    @Override
 	@SideOnly(Side.CLIENT)
-    public boolean hasEffect (ItemStack par1ItemStack, int pass)
+    @Override
+    public boolean requiresMultipleRenderPasses ()
     {
-        return false;
+        return true;
     }
 
-    /* Proper stack damage */
-    public int getItemMaxDamageFromStack (ItemStack stack)
-    {
-        NBTTagCompound tags = stack.getTagCompound();
-        if (tags == null)
-        {
-            return 0;
-        }
+	@Override
+	public boolean sheatheOnBack() {
+		return false;
+	}
 
-        if (tags.hasKey("charge"))
-        {
-            int charge = tags.getInteger("charge");
-            if (charge > 0)
-                return this.getMaxCharge(stack);
-        }
-        return tags.getCompoundTag("InfiTool").getInteger("TotalDurability");
-    }
-
-    public int getItemDamageFromStackForDisplay (ItemStack stack)
-    {
-        NBTTagCompound tags = stack.getTagCompound();
-        if (tags == null)
-        {
-            return 0;
-        }
-
-        if (tags.hasKey("charge"))
-        {
-            int charge = tags.getInteger("charge");
-            if (charge > 0)
-                return getMaxCharge(stack) - charge;
-        }
-        return tags.getCompoundTag("InfiTool").getInteger("Damage");
-    }
-
+	//Types
+    public abstract String[] toolCategories ();
 
 	@Override
 	public boolean willAllowOffhandWeapon() {
@@ -956,38 +988,5 @@ public abstract class ToolCore extends Item implements ICustomElectricItem, IBox
 	@Override
 	public boolean willAllowShield() {
 		return true;
-	}
-
-	@Override
-	public boolean isOffhandHandDualWeapon() {
-		return true;
-	}
-
-	@Override
-	public boolean sheatheOnBack() {
-		return false;
-	}
-
-	@Override
-	public boolean offhandAttackEntity(OffhandAttackEvent event,
-			ItemStack mainhandItem, ItemStack offhandItem) {
-		return true;
-	}
-
-	@Override
-	public boolean offhandClickAir(PlayerInteractEvent event,
-			ItemStack mainhandItem, ItemStack offhandItem) {
-		return true;
-	}
-
-	@Override
-	public boolean offhandClickBlock(PlayerInteractEvent event,
-			ItemStack mainhandItem, ItemStack offhandItem) {
-		return true;
-	}
-
-	@Override
-	public void performPassiveEffects(Side effectiveSide,
-			ItemStack mainhandItem, ItemStack offhandItem) {		
 	}
 }

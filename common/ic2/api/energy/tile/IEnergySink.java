@@ -20,18 +20,6 @@ public interface IEnergySink extends IEnergyAcceptor {
 	double demandedEnergyUnits();
 
 	/**
-	 * Transfer energy to the sink.
-	 * 
-	 * It's highly recommended to accept all energy by letting the internal buffer overflow to
-	 * increase the performance and accuracy of the distribution simulation.
-	 *
-	 * @param directionFrom direction from which the energy comes from
-	 * @param amount energy to be transferred
-	 * @return Energy not consumed (leftover)
-	 */
-	double injectEnergyUnits(ForgeDirection directionFrom, double amount);
-
-	/**
 	 * Determine the amount of eu which can be safely injected into the specific energy sink without exploding.
 	 *
 	 * Typical values are 32 for LV, 128 for MV, 512 for HV and 2048 for EV. A value of Integer.MAX_VALUE indicates no
@@ -42,5 +30,17 @@ public interface IEnergySink extends IEnergyAcceptor {
 	 * @return max safe input in eu
 	 */
 	int getMaxSafeInput();
+
+	/**
+	 * Transfer energy to the sink.
+	 * 
+	 * It's highly recommended to accept all energy by letting the internal buffer overflow to
+	 * increase the performance and accuracy of the distribution simulation.
+	 *
+	 * @param directionFrom direction from which the energy comes from
+	 * @param amount energy to be transferred
+	 * @return Energy not consumed (leftover)
+	 */
+	double injectEnergyUnits(ForgeDirection directionFrom, double amount);
 }
 

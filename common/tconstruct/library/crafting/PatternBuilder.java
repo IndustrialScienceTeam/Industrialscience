@@ -5,49 +5,130 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import tconstruct.library.TConstructRegistry;
-import tconstruct.library.event.PartBuilderEvent;
-import tconstruct.library.tools.CustomMaterial;
-import tconstruct.library.util.IPattern;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.Event.Result;
+import tconstruct.library.TConstructRegistry;
+import tconstruct.library.event.PartBuilderEvent;
+import tconstruct.library.tools.CustomMaterial;
+import tconstruct.library.util.IPattern;
 
 public class PatternBuilder
 {
+    //Small data classes. I would prefer the struct from C#, but we do what we can.
+    public class ItemKey
+    {
+        public final int damage;
+        public final Item item;
+        public final String key;
+        public final int value;
+
+        public ItemKey(Item i, int d, int v, String s)
+        {
+            item = i;
+            damage = d;
+            value = v;
+            key = s;
+        }
+    }
+    public class MaterialSet
+    {
+        public final int materialID;
+        public final ItemStack rod;
+        public final ItemStack shard;
+
+        public MaterialSet(ItemStack s, ItemStack r, int id)
+        {
+            shard = s;
+            rod = r;
+            materialID = id;
+        }
+    }
     public static PatternBuilder instance = new PatternBuilder();
+
     //Map items to their parts with a hashmap
     public List<ItemKey> materials = new ArrayList<ItemKey>();
+
     public HashMap materialSets = new HashMap<String, MaterialSet>();
 
     //We could use IRecipe if it wasn't tied to InventoryCrafting
     public List<IPattern> toolPatterns = new ArrayList<IPattern>();
 
-    /* Register methods */
-    public void registerMaterial (ItemStack material, int value, String key)
-    {
-        materials.add(new ItemKey(material.getItem(), material.getItemDamage(), value, key));
-    }
-
-    public void registerMaterialSet (String key, ItemStack shard, ItemStack rod, int materialID)
-    {
-        materialSets.put(key, new MaterialSet(shard, rod, materialID));
-        materials.add(new ItemKey(shard.getItem(), shard.getItemDamage(), 1, key));
-    }
-
-    public void registerFullMaterial (ItemStack material, int value, String key, ItemStack shard, ItemStack rod, int materialID)
-    {
-        materials.add(new ItemKey(material.getItem(), material.getItemDamage(), value, key));
-        materials.add(new ItemKey(shard.getItem(), shard.getItemDamage(), 1, key));
-        materialSets.put(key, new MaterialSet(shard, rod, materialID));
-    }
-
     public void addToolPattern (IPattern item)
     {
         toolPatterns.add(item);
+    }
+
+    public ItemKey getItemKey (ItemStack material)
+    {
+        Item mat = material.getItem();
+        int damage = material.getItemDamage();
+        for (ItemKey ik : materials)
+        {
+            if (mat == ik.item && (ik.damage == Short.MAX_VALUE || damage == ik.damage))
+                return ik;
+        }
+        return null;
+    }
+
+    public ItemStack getMatchingPattern (ItemStack stack, ItemStack input, MaterialSet set)
+    {
+        Item item = stack.getItem();
+        for (IPattern pattern : toolPatterns)
+        {
+            if (pattern == item)
+                return pattern.getPatternOutput(stack, input, set);
+        }
+        return null;
+    }
+
+    public int getPartID (ItemStack material)
+    {
+        if (material != null)
+        {
+            ItemKey key = getItemKey(material);
+            if (key != null)
+            {
+                MaterialSet set = (MaterialSet) materialSets.get(key.key);
+                return set.materialID;
+            }
+        }
+        return Short.MAX_VALUE;
+    }
+
+    public int getPartValue (ItemStack material)
+    {
+        if (material != null)
+        {
+            ItemKey key = getItemKey(material);
+            if (key != null)
+                return key.value;
+
+            for (CustomMaterial mat : TConstructRegistry.customMaterials)
+            {
+                if (material.isItemEqual(mat.input))
+                    return mat.value;
+            }
+        }
+        return 0;
+    }
+
+    public ItemStack getRodFromSet (String materialset)
+    {
+        MaterialSet set = (MaterialSet) materialSets.get(materialset);
+        if (set != null)
+            return set.rod.copy();
+        return null;
+    }
+
+    public ItemStack getShardFromSet (String materialset)
+    {
+        MaterialSet set = (MaterialSet) materialSets.get(materialset);
+        if (set != null)
+            return set.shard.copy();
+        return null;
     }
 
     /* Build tool parts from patterns */
@@ -117,105 +198,21 @@ public class PatternBuilder
         return null;
     }
 
-    public int getPartID (ItemStack material)
+    public void registerFullMaterial (Block material, int value, String key, ItemStack shard, ItemStack rod, int materialID)
     {
-        if (material != null)
-        {
-            ItemKey key = getItemKey(material);
-            if (key != null)
-            {
-                MaterialSet set = (MaterialSet) materialSets.get(key.key);
-                return set.materialID;
-            }
-        }
-        return Short.MAX_VALUE;
+        registerFullMaterial(new ItemStack(material, 1, Short.MAX_VALUE), value, key, shard, rod, materialID);
     }
 
-    public int getPartValue (ItemStack material)
+    public void registerFullMaterial (Item material, int value, String key, ItemStack shard, ItemStack rod, int materialID)
     {
-        if (material != null)
-        {
-            ItemKey key = getItemKey(material);
-            if (key != null)
-                return key.value;
-
-            for (CustomMaterial mat : TConstructRegistry.customMaterials)
-            {
-                if (material.isItemEqual(mat.input))
-                    return mat.value;
-            }
-        }
-        return 0;
+        registerFullMaterial(new ItemStack(material, 1, Short.MAX_VALUE), value, key, shard, rod, materialID);
     }
 
-    public ItemKey getItemKey (ItemStack material)
+    public void registerFullMaterial (ItemStack material, int value, String key, ItemStack shard, ItemStack rod, int materialID)
     {
-        Item mat = material.getItem();
-        int damage = material.getItemDamage();
-        for (ItemKey ik : materials)
-        {
-            if (mat == ik.item && (ik.damage == Short.MAX_VALUE || damage == ik.damage))
-                return ik;
-        }
-        return null;
-    }
-
-    public ItemStack getMatchingPattern (ItemStack stack, ItemStack input, MaterialSet set)
-    {
-        Item item = stack.getItem();
-        for (IPattern pattern : toolPatterns)
-        {
-            if (pattern == item)
-                return pattern.getPatternOutput(stack, input, set);
-        }
-        return null;
-    }
-
-    public ItemStack getShardFromSet (String materialset)
-    {
-        MaterialSet set = (MaterialSet) materialSets.get(materialset);
-        if (set != null)
-            return set.shard.copy();
-        return null;
-    }
-
-    public ItemStack getRodFromSet (String materialset)
-    {
-        MaterialSet set = (MaterialSet) materialSets.get(materialset);
-        if (set != null)
-            return set.rod.copy();
-        return null;
-    }
-
-    //Small data classes. I would prefer the struct from C#, but we do what we can.
-    public class ItemKey
-    {
-        public final Item item;
-        public final int damage;
-        public final int value;
-        public final String key;
-
-        public ItemKey(Item i, int d, int v, String s)
-        {
-            item = i;
-            damage = d;
-            value = v;
-            key = s;
-        }
-    }
-
-    public class MaterialSet
-    {
-        public final ItemStack shard;
-        public final ItemStack rod;
-        public final int materialID;
-
-        public MaterialSet(ItemStack s, ItemStack r, int id)
-        {
-            shard = s;
-            rod = r;
-            materialID = id;
-        }
+        materials.add(new ItemKey(material.getItem(), material.getItemDamage(), value, key));
+        materials.add(new ItemKey(shard.getItem(), shard.getItemDamage(), 1, key));
+        materialSets.put(key, new MaterialSet(shard, rod, materialID));
     }
 
     //Helper Methods
@@ -229,14 +226,16 @@ public class PatternBuilder
         registerMaterial(new ItemStack(material, 1, Short.MAX_VALUE), value, key);
     }
 
-    public void registerFullMaterial (Block material, int value, String key, ItemStack shard, ItemStack rod, int materialID)
+    /* Register methods */
+    public void registerMaterial (ItemStack material, int value, String key)
     {
-        registerFullMaterial(new ItemStack(material, 1, Short.MAX_VALUE), value, key, shard, rod, materialID);
+        materials.add(new ItemKey(material.getItem(), material.getItemDamage(), value, key));
     }
 
-    public void registerFullMaterial (Item material, int value, String key, ItemStack shard, ItemStack rod, int materialID)
+    public void registerMaterialSet (String key, ItemStack shard, ItemStack rod, int materialID)
     {
-        registerFullMaterial(new ItemStack(material, 1, Short.MAX_VALUE), value, key, shard, rod, materialID);
+        materialSets.put(key, new MaterialSet(shard, rod, materialID));
+        materials.add(new ItemKey(shard.getItem(), shard.getItemDamage(), 1, key));
     }
 
     /*public void registerFullMaterial (Block material, int value, String key, int materialID)

@@ -8,6 +8,30 @@ import net.minecraft.item.ItemStack;
 
 public class DryingRackRecipes
 {
+    static class DryingRecipe
+    {
+        public final ItemStack input;
+        public final ItemStack result;
+        public final int time;
+
+        DryingRecipe(ItemStack input, int time, ItemStack result)
+        {
+            this.time = time;
+            this.input = input;
+            this.result = result;
+        }
+
+        public ItemStack getResult ()
+        {
+            return result.copy();
+        }
+
+        public boolean matches (ItemStack input)
+        {
+            return ItemStack.areItemStacksEqual(this.input, input);
+        }
+    }
+
     public static ArrayList<DryingRecipe> recipes = new ArrayList<DryingRecipe>();
 
     public static void addDryingRecipe (Object input, int time, Object output)
@@ -36,17 +60,6 @@ public class DryingRackRecipes
         recipes.add(new DryingRecipe(inputItem, time, outputItem));
     }
 
-    public static int getDryingTime (ItemStack input)
-    {
-        for (DryingRecipe r : recipes)
-        {
-            if (r.matches(input))
-                return r.time;
-        }
-
-        return -1;
-    }
-
     public static ItemStack getDryingResult (ItemStack input)
     {
         for (DryingRecipe r : recipes)
@@ -58,27 +71,14 @@ public class DryingRackRecipes
         return null;
     }
 
-    static class DryingRecipe
+    public static int getDryingTime (ItemStack input)
     {
-        public final int time;
-        public final ItemStack input;
-        public final ItemStack result;
-
-        DryingRecipe(ItemStack input, int time, ItemStack result)
+        for (DryingRecipe r : recipes)
         {
-            this.time = time;
-            this.input = input;
-            this.result = result;
+            if (r.matches(input))
+                return r.time;
         }
 
-        public boolean matches (ItemStack input)
-        {
-            return ItemStack.areItemStacksEqual(this.input, input);
-        }
-
-        public ItemStack getResult ()
-        {
-            return result.copy();
-        }
+        return -1;
     }
 }

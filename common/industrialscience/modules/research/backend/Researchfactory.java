@@ -5,10 +5,13 @@ import industrialscience.ResearchManager;
 import java.util.Hashtable;
 
 public class Researchfactory {
-    private boolean defaultvalues = false;
     private String Category;
-    private RecipeLocker Locker;
     private Researchchecker Checker;
+    private boolean defaultvalues = false;
+    private RecipeLocker Locker;
+
+    public Researchfactory() {
+    }
 
     public Researchfactory(String category, RecipeLocker locker,
             Researchchecker checker) {
@@ -18,14 +21,11 @@ public class Researchfactory {
         defaultvalues = true;
     }
 
-    public Researchfactory() {
-    }
-
-    public Research getResearch(String Name, String[] NeededResearches,
-            String Category, Object Data, Researchstep[] Steps,
-            RecipeLocker Locker, Researchchecker Checker) {
-        return new Research(Name, NeededResearches, Category, Data, Steps,
-                Locker, Checker);
+    public Research getResearch(String name, Hashtable<Integer, Boolean> steps) {
+        Research research = ResearchManager.getInstance().getAllResearches()
+                .get(name);
+        research.enableSteps(steps);
+        return research;
     }
 
     public Research getResearch(String Name, String[] NeededResearches,
@@ -44,10 +44,10 @@ public class Researchfactory {
         return null;
     }
 
-    public Research getResearch(String name, Hashtable<Integer, Boolean> steps) {
-        Research research = ResearchManager.getInstance().getAllResearches()
-                .get(name);
-        research.enableSteps(steps);
-        return research;
+    public Research getResearch(String Name, String[] NeededResearches,
+            String Category, Object Data, Researchstep[] Steps,
+            RecipeLocker Locker, Researchchecker Checker) {
+        return new Research(Name, NeededResearches, Category, Data, Steps,
+                Locker, Checker);
     }
 }

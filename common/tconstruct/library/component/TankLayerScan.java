@@ -14,22 +14,22 @@ import tconstruct.library.util.IServantLogic;
 
 public class TankLayerScan extends LogicComponent
 {
-    TileEntity master;
-    IMasterLogic imaster;
-    World world;
-    Block[] scanBlocks;
+    int airBlocks = 0;
+    public HashSet<CoordTuple> airCoords = new HashSet<CoordTuple>();
+    public HashSet<CoordTuple> blockCoords = new HashSet<CoordTuple>();
+    int bricks = 0;
 
     public boolean completeStructure;
 
-    int bricks = 0;
-    int airBlocks = 0;
-    HashSet<CoordTuple> tempBlockCoords = new HashSet<CoordTuple>();
-    HashSet<CoordTuple> tempAirCoords = new HashSet<CoordTuple>();
-
-    public HashSet<CoordTuple> blockCoords = new HashSet<CoordTuple>();
-    public HashSet<CoordTuple> airCoords = new HashSet<CoordTuple>();
-    ArrayList<int[]> validAirCoords = new ArrayList<int[]>();
+    IMasterLogic imaster;
+    TileEntity master;
     CoordTuple returnStone;
+    Block[] scanBlocks;
+
+    HashSet<CoordTuple> tempAirCoords = new HashSet<CoordTuple>();
+    HashSet<CoordTuple> tempBlockCoords = new HashSet<CoordTuple>();
+    ArrayList<int[]> validAirCoords = new ArrayList<int[]>();
+    World world;
 
     public TankLayerScan(TileEntity te, Block... id)
     {
@@ -41,6 +41,37 @@ public class TankLayerScan extends LogicComponent
         validAirCoords.add(new int[] { -1, 0 });
         validAirCoords.add(new int[] { 0, 1 });
         validAirCoords.add(new int[] { 0, -1 });
+    }
+
+    protected void addAirBlock (int x, int y, int z)
+    {
+        airBlocks++;
+        //world.setBlock(x + offset[0], y, z + offset[1], Block.leaves.blockID);
+    }
+
+    protected boolean checkAir (int x, int y, int z)
+    {
+        Block block = Block.blocksList[world.getBlockId(x, y, z)];
+        if (block == null || block.isAirBlock(world, x, y, z))
+            return true;
+
+        return false;
+    }
+
+    protected boolean checkServant (int x, int y, int z)
+    {
+        Block block = Block.blocksList[world.getBlockId(x, y, z)];
+        if (block == null || block.isAirBlock(world, x, y, z))
+            return false;
+
+        if (!block.hasTileEntity(world.getBlockMetadata(x, y, z)))
+            return false;
+
+        TileEntity be = world.getBlockTileEntity(x, y, z);
+        if (be instanceof IServantLogic)
+            return ((IServantLogic) be).setPotentialMaster(this.imaster, x, y, z);
+
+        return false;
     }
 
     public void checkValidStructure ()
@@ -133,36 +164,37 @@ public class TankLayerScan extends LogicComponent
 
     }
 
+    protected boolean floodTest (int x, int y, int z)
+    {
+        if (airBlocks >= 4095)
+            return false;
+
+        for (int[] offset : validAirCoords)
+        {
+            CoordTuple coord = new CoordTuple(x + offset[0], y, z + offset[1]);
+            if (!airCoords.contains(coord))
+            {
+                if (checkAir(x + offset[0], y, z + offset[1]))
+                {
+                    airCoords.add(coord);
+                    addAirBlock(coord.x, y, coord.z);
+                    floodTest(x + offset[0], y, z + offset[1]);
+                }
+                else if (!blockCoords.contains(coord) && checkServant(x + offset[0], y, z + offset[1]))
+                {
+                    bricks++;
+                    blockCoords.add(coord);
+                }
+            }
+        }
+        return true;
+    }
+
     private byte getDirection ()
     {
         if (master instanceof IFacingLogic)
             return ((IFacingLogic) master).getRenderDirection();
         return 0;
-    }
-
-    protected boolean checkAir (int x, int y, int z)
-    {
-        Block block = Block.blocksList[world.getBlockId(x, y, z)];
-        if (block == null || block.isAirBlock(world, x, y, z))
-            return true;
-
-        return false;
-    }
-
-    protected boolean checkServant (int x, int y, int z)
-    {
-        Block block = Block.blocksList[world.getBlockId(x, y, z)];
-        if (block == null || block.isAirBlock(world, x, y, z))
-            return false;
-
-        if (!block.hasTileEntity(world.getBlockMetadata(x, y, z)))
-            return false;
-
-        TileEntity be = world.getBlockTileEntity(x, y, z);
-        if (be instanceof IServantLogic)
-            return ((IServantLogic) be).setPotentialMaster(this.imaster, x, y, z);
-
-        return false;
     }
 
     protected boolean initialRecurseLayer (int x, int y, int z)
@@ -206,32 +238,6 @@ public class TankLayerScan extends LogicComponent
             }
         }
         return false;
-    }
-
-    protected boolean floodTest (int x, int y, int z)
-    {
-        if (airBlocks >= 4095)
-            return false;
-
-        for (int[] offset : validAirCoords)
-        {
-            CoordTuple coord = new CoordTuple(x + offset[0], y, z + offset[1]);
-            if (!airCoords.contains(coord))
-            {
-                if (checkAir(x + offset[0], y, z + offset[1]))
-                {
-                    airCoords.add(coord);
-                    addAirBlock(coord.x, y, coord.z);
-                    floodTest(x + offset[0], y, z + offset[1]);
-                }
-                else if (!blockCoords.contains(coord) && checkServant(x + offset[0], y, z + offset[1]))
-                {
-                    bricks++;
-                    blockCoords.add(coord);
-                }
-            }
-        }
-        return true;
     }
 
     public boolean recurseStructureDown (int y)
@@ -344,11 +350,5 @@ public class TankLayerScan extends LogicComponent
             if (valid)
                 recurseStructureUp(y + 1);
         }
-    }
-
-    protected void addAirBlock (int x, int y, int z)
-    {
-        airBlocks++;
-        //world.setBlock(x + offset[0], y, z + offset[1], Block.leaves.blockID);
     }
 }

@@ -8,6 +8,9 @@ import net.minecraftforge.common.ForgeDirection;
  */
 public interface IOrientableTile {
 	
+	// acts like a wrench was used on it, if a wrench does nothing, this does nothing.
+	void cycleOrientation();
+	
 	// returns the main direction for rotation.
 	ForgeDirection getPrimaryOrientation();
 	
@@ -19,8 +22,5 @@ public interface IOrientableTile {
 	
 	// used for up or down orientation.
 	void setSpin( int spin );
-	
-	// acts like a wrench was used on it, if a wrench does nothing, this does nothing.
-	void cycleOrientation();
 	
 }

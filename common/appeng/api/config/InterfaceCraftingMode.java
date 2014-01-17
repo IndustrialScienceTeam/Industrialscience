@@ -5,13 +5,13 @@ public enum InterfaceCraftingMode implements IConfigEnum {
 	DontCraft;
 	
 	@Override
-	public IConfigEnum[] getValues() {
-		return values();
+	public String getName() {
+		return "InterfaceCraftingMode";
 	}
 
 	@Override
-	public String getName() {
-		return "InterfaceCraftingMode";
+	public IConfigEnum[] getValues() {
+		return values();
 	}
 	
 }

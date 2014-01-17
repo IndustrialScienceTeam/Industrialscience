@@ -21,6 +21,27 @@ import net.minecraft.item.ItemStack;
 @Deprecated
 public interface ICustomElectricItem extends IElectricItem {
 	/**
+	 * Determine whether to show the charge tool tip with NEI or other means.
+	 *
+	 * Return false if IC2's handler is incompatible, you want to implement your own or you don't
+	 * want to display the charge at all.
+	 *
+	 * @return true to show the tool tip (x/y EU)
+	 */
+	public boolean canShowChargeToolTip(ItemStack itemStack);
+
+	/**
+	 * Determine if the specified electric item has at least a specific amount of EU.
+	 * This is supposed to be used in the item code during operation, for example if you want to implement your own electric item.
+	 * BatPacks are not taken into account.
+	 *
+	 * @param itemStack electric item's stack
+	 * @param amount minimum amount of energy required
+	 * @return true if there's enough energy
+	 */
+	public boolean canUse(ItemStack itemStack, int amount);
+
+	/**
 	 * Charge an item with a specified amount of energy
 	 *
 	 * @param itemStack electric item's stack
@@ -43,25 +64,4 @@ public interface ICustomElectricItem extends IElectricItem {
 	 * @return Energy retrieved from the electric item
 	 */
 	public int discharge(ItemStack itemStack, int amount, int tier, boolean ignoreTransferLimit, boolean simulate);
-
-	/**
-	 * Determine if the specified electric item has at least a specific amount of EU.
-	 * This is supposed to be used in the item code during operation, for example if you want to implement your own electric item.
-	 * BatPacks are not taken into account.
-	 *
-	 * @param itemStack electric item's stack
-	 * @param amount minimum amount of energy required
-	 * @return true if there's enough energy
-	 */
-	public boolean canUse(ItemStack itemStack, int amount);
-
-	/**
-	 * Determine whether to show the charge tool tip with NEI or other means.
-	 *
-	 * Return false if IC2's handler is incompatible, you want to implement your own or you don't
-	 * want to display the charge at all.
-	 *
-	 * @return true to show the tool tip (x/y EU)
-	 */
-	public boolean canShowChargeToolTip(ItemStack itemStack);
 }

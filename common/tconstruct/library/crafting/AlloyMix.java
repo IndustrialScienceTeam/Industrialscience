@@ -8,8 +8,8 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class AlloyMix
 {
-    public final FluidStack result;
     public final List<FluidStack> mixers;
+    public final FluidStack result;
 
     public AlloyMix(FluidStack output, List<FluidStack> inputs)
     {
@@ -22,6 +22,18 @@ public class AlloyMix
     	ArrayList list = new ArrayList(mixers);
     	return false;
     }*/
+
+    int getLowestAmount (ArrayList list)
+    {
+        int frist = (Integer) list.get(0); //FRIST!!!
+        for (int i = 1; i < list.size(); i++)
+        {
+            int compare = (Integer) list.get(i);
+            if (frist > compare)
+                frist = compare;
+        }
+        return frist;
+    }
 
     public FluidStack mix (ArrayList<FluidStack> liquids)
     {
@@ -81,17 +93,5 @@ public class AlloyMix
         FluidStack ret = result.copy();
         ret.amount *= low;
         return ret;
-    }
-
-    int getLowestAmount (ArrayList list)
-    {
-        int frist = (Integer) list.get(0); //FRIST!!!
-        for (int i = 1; i < list.size(); i++)
-        {
-            int compare = (Integer) list.get(i);
-            if (frist > compare)
-                frist = compare;
-        }
-        return frist;
     }
 }

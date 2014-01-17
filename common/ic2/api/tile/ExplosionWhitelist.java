@@ -14,6 +14,8 @@ import net.minecraft.block.Block;
  * destroyed.
  */
 public final class ExplosionWhitelist {
+	private static Set<Block> whitelist = new HashSet<Block>();
+	
 	/**
 	 * Add a block to the whitelist.
 	 * 
@@ -21,15 +23,6 @@ public final class ExplosionWhitelist {
 	 */
 	public static void addWhitelistedBlock(Block block) {
 		whitelist.add(block);
-	}
-	
-	/**
-	 * Remove a block from the whitelist.
-	 * 
-	 * @param block block to remove
-	 */
-	public static void removeWhitelistedBlock(Block block) {
-		whitelist.remove(block);
 	}
 	
 	/**
@@ -42,6 +35,13 @@ public final class ExplosionWhitelist {
 		return whitelist.contains(block);
 	}
 
-	private static Set<Block> whitelist = new HashSet<Block>();
+	/**
+	 * Remove a block from the whitelist.
+	 * 
+	 * @param block block to remove
+	 */
+	public static void removeWhitelistedBlock(Block block) {
+		whitelist.remove(block);
+	}
 }
 

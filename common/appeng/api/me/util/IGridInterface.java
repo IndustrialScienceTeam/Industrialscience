@@ -19,22 +19,16 @@ import appeng.api.me.tiles.IPushable;
 public interface IGridInterface
 {
 	/**
-	 * Issue a new crafting request.
-	 * @param whatToCraft
-	 * @param showInMonitor
-	 * @param enableRecursion
-	 * @return the ICraftRequest
-	 * @throws AppEngTileMissingException
+	 *  add which users should be notified of crafting queue updates.
+	 * @param p
 	 */
-	public ICraftRequest craftingRequest( ItemStack whatToCraft, boolean showInMonitor, boolean enableRecursion ) throws AppEngTileMissingException;
+	void addCraftingPlayer(EntityPlayer p);
 	
 	/**
-	 * deprecated version of creaftingRequest.
-	 * @param what
-	 * @return
-	 * @throws AppEngTileMissingException
+	 *  add which users should be notified of terminal updates.
+	 * @param p
 	 */
-	public ICraftRequest craftingRequest( ItemStack what ) throws AppEngTileMissingException;
+	void addViewingPlayer(EntityPlayer p);
 	
 	/**
 	 * opens the crafting gui.
@@ -46,145 +40,25 @@ public interface IGridInterface
 	public void craftGui( EntityPlayerMP pmp, IGridTileEntity gte, ItemStack s ) throws AppEngTileMissingException;
 	
     /**
-     * Updates the interface requested, used internally
-     * @param te
-     */
-    public void requestUpdate( IGridTileEntity te );
-    
-    /**
-     * returns a list of all machines on the grid.
-     * @return
-     */
-    List< TileRef<IGridMachine> > getMachines();
-    
-    /**
-     * Labeled version for debugging...
-     */
-	boolean useMEEnergy(float use, String for_what);
-	
-	/**
-	 * returns energy to the system to prevent endless energy sinks.
-	 */
-	void refundMEEnergy( float use, String for_what );
-	
-	/**
-	 *  Reports previous 20 ticks avg of energy usage.
-	 * @return
-	 */
-	public float getPowerUsageAvg();
-	
-    /**
-     *  this is used for standard items, anything else just use useMEEnergy.
-     * @param items
-     * @param multipler
-     * @return
-     */
-	int usePowerForAddition(int items, int multipler);
-    
-    /**
-     *  returns a single IMEInventory that represents the entire networks.
-     * @return
-     */
-    public IMEInventoryHandler getCellArray();
-    
-    /**
-     *  returns a single IMEInventory that represents the entire network, and all crafting available.
-     * @return
-     */
-    public IMEInventoryHandler getFullCellArray();
-    
-	/**
-	 *  add which users should be notified of terminal updates.
-	 * @param p
-	 */
-	void addViewingPlayer(EntityPlayer p);
-	
-	/**
-	 *  remove which users should be notified of terminal updates.
-	 * @param p
-	 */
-	void rmvViewingPlayer(EntityPlayer p);
-	
-	/**
-	 *  add which users should be notified of crafting queue updates.
-	 * @param p
-	 */
-	void addCraftingPlayer(EntityPlayer p);
-	
-	/**
-	 *  remove which users should be notified of crafting queue updates.
-	 * @param p
-	 */
-	void rmvCraftingPlayer(EntityPlayer p);
-	
-	/**
-	 * aquire the controller tile entity.
-	 * @return
-	 */
-	public TileEntity getController();
-	
-	/**
-	 * create a waiting job.
+	 * deprecated version of creaftingRequest.
 	 * @param what
 	 * @return
+	 * @throws AppEngTileMissingException
 	 */
-	ICraftRequest waitingRequest(ItemStack what);
-	
-	/**
-	 * creates a crafting job to push the item out of IPushable, and to enable crafting to acocomplish this goal.
-	 * @param willAdd
-	 * @param out
-	 * @param allowCrafting
-	 * @return
+	public ICraftRequest craftingRequest( ItemStack what ) throws AppEngTileMissingException;
+    
+    /**
+	 * Issue a new crafting request.
+	 * @param whatToCraft
+	 * @param showInMonitor
+	 * @param enableRecursion
+	 * @return the ICraftRequest
+	 * @throws AppEngTileMissingException
 	 */
-	ICraftRequest pushRequest( ItemStack willAdd, IPushable out, boolean allowCrafting );
-	
-	/**
-	 * is the grid valid?
-	 * @return
-	 */
-	public boolean isValid();
-	
-	/**
-	 * tell AE to re-examin items in the waiting list.
-	 */
-	void resetWaitingQueue();
-
-	/**
-	 * craftable items
-	 * @return
-	 */
-	IMEInventoryHandler getCraftableArray();
-
-	/**
-	 * get a numeric id for this grid, used internally for cable animations, and not much else.
-	 * @return
-	 */
-	public int getGridIndex();
-
-	/**
-	 * Try to find the pattern for the item in question.
-	 * @param req
-	 * @return
-	 */
-	public IAssemblerPattern getPatternFor(ItemStack req);
-
-	/**
-	 * Inform the network that power costs have changed.
-	 */
-	public void triggerPowerUpdate();
-	
-	/**
-	 * Inform the netowrk that these items were removed from storage ( don't do this for items remove though the grid, it already knows about those. )
-	 * @param removed
-	 */
-	public void notifyExtractItems(IAEItemStack removed);
-
-	/**
-	 * Inform the network that these items were added to storage ( don't do this for items added via the grid, it already knows about those. )
-	 * @param vo
-	 */
-	public void notifyAddItems(IAEItemStack vo);
+	public ICraftRequest craftingRequest( ItemStack whatToCraft, boolean showInMonitor, boolean enableRecursion ) throws AppEngTileMissingException;
+    
+    @Override
+	public boolean equals(Object obj);
 	
 	/**
 	 * return a cache by its identifier ( the number you get when you register your cache with AE )
@@ -194,11 +68,115 @@ public interface IGridInterface
 	public IGridCache getCacheByID( int id );
 	
 	/**
+     *  returns a single IMEInventory that represents the entire networks.
+     * @return
+     */
+    public IMEInventoryHandler getCellArray();
+	
+    /**
+	 * aquire the controller tile entity.
+	 * @return
+	 */
+	public TileEntity getController();
+    
+    /**
+	 * craftable items
+	 * @return
+	 */
+	IMEInventoryHandler getCraftableArray();
+    
+    /**
+     *  returns a single IMEInventory that represents the entire network, and all crafting available.
+     * @return
+     */
+    public IMEInventoryHandler getFullCellArray();
+    
+	/**
+	 * get a numeric id for this grid, used internally for cable animations, and not much else.
+	 * @return
+	 */
+	public int getGridIndex();
+	
+	/**
+     * returns a list of all machines on the grid.
+     * @return
+     */
+    List< TileRef<IGridMachine> > getMachines();
+	
+	/**
 	 * Potential future use, for now just returns the network encryption key.
 	 * @return
 	 */
 	public String getName();
 	
+	/**
+	 * Try to find the pattern for the item in question.
+	 * @param req
+	 * @return
+	 */
+	public IAssemblerPattern getPatternFor(ItemStack req);
+	
+	/**
+	 *  Reports previous 20 ticks avg of energy usage.
+	 * @return
+	 */
+	public float getPowerUsageAvg();
+	
+	/**
+	 * is the grid valid?
+	 * @return
+	 */
+	public boolean isValid();
+	
+	/**
+	 * Inform the network that these items were added to storage ( don't do this for items added via the grid, it already knows about those. )
+	 * @param vo
+	 */
+	public void notifyAddItems(IAEItemStack vo);
+	
+	/**
+	 * Inform the netowrk that these items were removed from storage ( don't do this for items remove though the grid, it already knows about those. )
+	 * @param removed
+	 */
+	public void notifyExtractItems(IAEItemStack removed);
+	
+	/**
+	 * creates a crafting job to push the item out of IPushable, and to enable crafting to acocomplish this goal.
+	 * @param willAdd
+	 * @param out
+	 * @param allowCrafting
+	 * @return
+	 */
+	ICraftRequest pushRequest( ItemStack willAdd, IPushable out, boolean allowCrafting );
+
+	/**
+	 * returns energy to the system to prevent endless energy sinks.
+	 */
+	void refundMEEnergy( float use, String for_what );
+
+	/**
+     * Updates the interface requested, used internally
+     * @param te
+     */
+    public void requestUpdate( IGridTileEntity te );
+
+	/**
+	 * tell AE to re-examin items in the waiting list.
+	 */
+	void resetWaitingQueue();
+
+	/**
+	 *  remove which users should be notified of crafting queue updates.
+	 * @param p
+	 */
+	void rmvCraftingPlayer(EntityPlayer p);
+	
+	/**
+	 *  remove which users should be notified of terminal updates.
+	 * @param p
+	 */
+	void rmvViewingPlayer(EntityPlayer p);
+
 	/**
 	 * inform the network that energy was transfered between two nodes on the network,
 	 * this will be used to calculates future information, but also causes the network
@@ -212,8 +190,30 @@ public interface IGridInterface
 	 * @param amt
 	 */
 	void signalEnergyTransfer(IGridTileEntity a, IGridTileEntity b, float amt);
+	
+	/**
+	 * Inform the network that power costs have changed.
+	 */
+	public void triggerPowerUpdate();
+	
+	/**
+     * Labeled version for debugging...
+     */
+	boolean useMEEnergy(float use, String for_what);
+	
+	/**
+     *  this is used for standard items, anything else just use useMEEnergy.
+     * @param items
+     * @param multipler
+     * @return
+     */
+	int usePowerForAddition(int items, int multipler);
 
-	@Override
-	public boolean equals(Object obj);
+	/**
+	 * create a waiting job.
+	 * @param what
+	 * @return
+	 */
+	ICraftRequest waitingRequest(ItemStack what);
 
 }

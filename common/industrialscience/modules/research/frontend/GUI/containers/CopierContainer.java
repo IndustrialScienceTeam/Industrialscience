@@ -11,20 +11,6 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 public class CopierContainer extends ISContainer {
-    public CopierContainer(CopierTile ct, InventoryPlayer ip) {
-        super(ip, ct);
-        addSlotToContainer(new ResearchCopierSlot(ct, CopierTile.PAGEINPUT, 53,
-                34, false));
-        addSlotToContainer(new ResearchCopierSlot(ct, CopierTile.PAGEOUTPUT,
-                107, 34, true));
-        addSlotToContainer(new UpgradeSlot(ct, CopierTile.UPGRADESLOT, 177, 4));
-    }
-
-    @Override
-    public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
-        return null;
-    }
-
     private class ResearchCopierSlot extends Slot {
         private boolean isOutput;
 
@@ -43,6 +29,20 @@ public class CopierContainer extends ISContainer {
             return false;
         }
 
+    }
+
+    public CopierContainer(CopierTile ct, InventoryPlayer ip) {
+        super(ip, ct);
+        addSlotToContainer(new ResearchCopierSlot(ct, CopierTile.PAGEINPUT, 53,
+                34, false));
+        addSlotToContainer(new ResearchCopierSlot(ct, CopierTile.PAGEOUTPUT,
+                107, 34, true));
+        addSlotToContainer(new UpgradeSlot(ct, CopierTile.UPGRADESLOT, 177, 4));
+    }
+
+    @Override
+    public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
+        return null;
     }
 
 }

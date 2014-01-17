@@ -15,13 +15,6 @@ public class CopierTile extends ISIInventory {
     }
 
     @Override
-    public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-        return worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) == this
-                && entityplayer.getDistanceSq(xCoord + 0.5, yCoord + 0.5,
-                        zCoord + 0.5) < 64;
-    }
-
-    @Override
     public boolean isItemValidForSlot(int i, ItemStack itemstack) {
         if ((i == PAGEINPUT)
                 && itemstack.itemID == ResearchModule.researchNoteID)
@@ -29,6 +22,13 @@ public class CopierTile extends ISIInventory {
         if (itemstack.itemID == ResearchModule.researchbookID)
             return true;
         return false;
+    }
+
+    @Override
+    public boolean isUseableByPlayer(EntityPlayer entityplayer) {
+        return worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) == this
+                && entityplayer.getDistanceSq(xCoord + 0.5, yCoord + 0.5,
+                        zCoord + 0.5) < 64;
     }
 
 }

@@ -11,13 +11,13 @@ public class PlayerEventChild extends PlayerEvent{
 		this.parent = parent;
 	}
 
-    public void setCancelParentEvent(boolean cancel) {
-        parent.setCanceled(cancel);
-    }
-
     @Override
     public void setCanceled(boolean cancel) {
         super.setCanceled(cancel);
+        parent.setCanceled(cancel);
+    }
+
+    public void setCancelParentEvent(boolean cancel) {
         parent.setCanceled(cancel);
     }
 

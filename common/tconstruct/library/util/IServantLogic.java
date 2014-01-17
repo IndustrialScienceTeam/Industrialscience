@@ -7,6 +7,10 @@ public interface IServantLogic
     /** The block should already have a valid master */
     public void notifyMasterOfChange ();
     
+    /* Deprecated in favor of setPotentialMaster and verifyMaster */
+    @Deprecated
+    public boolean setMaster (int x, int y, int z);
+    
     /** Checks if this block can be tied to this master
      * 
      * @param master
@@ -17,7 +21,7 @@ public interface IServantLogic
      */
     
     public boolean setPotentialMaster(IMasterLogic master, int x, int y, int z);
-    
+
     /** Used to set and verify that this is the block's master
      * 
      * @param master
@@ -28,8 +32,4 @@ public interface IServantLogic
      */
 
     public boolean verifyMaster (IMasterLogic master, int x, int y, int z);
-
-    /* Deprecated in favor of setPotentialMaster and verifyMaster */
-    @Deprecated
-    public boolean setMaster (int x, int y, int z);
 }

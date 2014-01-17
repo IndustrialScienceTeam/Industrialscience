@@ -14,10 +14,16 @@ import net.minecraft.nbt.NBTTagCompound;
 public interface IGridCache {
 	
 	/**
-	 * Called each time a network is reset ( changed ), the grid will persist your classes instance, but call this method.
-	 * @param grid
+	 * used to uniquely identify your cache when saving/loading
+	 * @return
 	 */
-	void reset( IGridInterface grid );
+	String getCacheName();
+	
+	/**
+	 * Load save cache data, this is called when a controller is loaded with previously saved data if there was no data, data will be an empty tag.
+	 * @param data
+	 */
+	void loadfromNBTData( NBTTagCompound data );
 	
 	/**
 	 * Called each tick for the controller, allows you to have active network wide behaviors.
@@ -26,21 +32,15 @@ public interface IGridCache {
 	void onUpdateTick( IGridInterface grid );
 	
 	/**
-	 * used to uniquely identify your cache when saving/loading
-	 * @return
+	 * Called each time a network is reset ( changed ), the grid will persist your classes instance, but call this method.
+	 * @param grid
 	 */
-	String getCacheName();
+	void reset( IGridInterface grid );
 	
 	/**
 	 * Save your caches state if necessary, if no saving is required, return null.
 	 * @return
 	 */
 	NBTTagCompound savetoNBTData();
-	
-	/**
-	 * Load save cache data, this is called when a controller is loaded with previously saved data if there was no data, data will be an empty tag.
-	 * @param data
-	 */
-	void loadfromNBTData( NBTTagCompound data );
 	
 }

@@ -5,16 +5,16 @@ import appeng.api.me.util.IAssemblerCluster;
 
 public interface IAssemblerMB {
 
+    void calculateMultiblock( long instanceCalc );
+    public IAssemblerCluster getCluster();
     /**
      *  Do this:
      *  	return new WorldCoord( TileEntity.xCoord, TileEntity.yCoord, TileEntity.zCoord );
      */
     public WorldCoord getLocation();
-    public IAssemblerCluster getCluster();
-    public void updateStatus( IAssemblerCluster ac );
 	public boolean isComplete();
 	
-	void calculateMultiblock( long instanceCalc );
 	public long markViewed(long inst);
+	public void updateStatus( IAssemblerCluster ac );
     
 }
