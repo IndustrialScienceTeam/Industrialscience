@@ -1,0 +1,24 @@
+BASE CONCEPT
+
+-The addition of a tiered and balanced automining system
+
+
+Ideas for the distinct game Phases:
+
+ERLY GAME
+
+-The addition of a Block allowing the player to convert useless things to valuable ores
+	-A sluice would suit this Idea
+
+MIDDLE AND LATE GAME
+
+-The addition of several tiered Blocks which work as a virtual Miner
+	-The Blocks would consume Energy and convert this to ores
+	-These would only mine the biome-specific ores of the biome it is standing in
+	-A balancefeature could be the addition of a probability for the miner to mine cobblestone/dirt/gravel instead of ores
+	-A dungeon-exclusive item could be needed in order to craft this, while the item would be consumed in the crafting process, limiting the number of these blocks
+	-Another balanchefeature would be a probability of these blocks to break, so they void the inputted energy and do not produce ores until they are fixed MANUALLY
+	-This problem would be able to be partially fixed by adding certain upgrades which would be unlocked as the game progresses
+	-later these would be made multiblocks by us
+	-We will add a multiblock construction table for these blocks later
+	-machines should be partially self-explanatory
