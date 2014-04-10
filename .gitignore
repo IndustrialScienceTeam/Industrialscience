@@ -1,2 +1,21 @@
+#eclipse
+.project
+.classpath
+.metadata
+bin
+eclipse
 
-.DS_Store
+#idea
+*.iml
+*.ipr
+*.iws
+.idea
+out
+
+#gradle
+build
+.gradle
+
+#runtime
+run
+.settings/org.eclipse.jdt.core.prefs
