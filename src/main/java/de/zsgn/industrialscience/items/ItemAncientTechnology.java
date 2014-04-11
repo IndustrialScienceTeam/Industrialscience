@@ -8,7 +8,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
+import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ChestGenHooks;
 
 public class ItemAncientTechnology extends Item {
 	protected final static int descriptionamount=3;
@@ -16,6 +18,9 @@ public class ItemAncientTechnology extends Item {
 		setCreativeTab(IndustrialScience.creativetab);
 		setUnlocalizedName("ancient-technology");
 		setMaxStackSize(1);
+		ChestGenHooks.addItem(ChestGenHooks.PYRAMID_DESERT_CHEST, new WeightedRandomChestContent(new ItemStack(this, 1), 1, 1, 7));
+		ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_CHEST, new WeightedRandomChestContent(new ItemStack(this, 1), 1, 1, 7));
+		ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(this, 1), 1, 1, 7));
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
