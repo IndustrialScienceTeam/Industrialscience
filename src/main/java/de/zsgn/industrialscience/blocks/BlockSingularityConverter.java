@@ -3,9 +3,9 @@ package de.zsgn.industrialscience.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
-public class SingularityConverter extends Block {
+public class BlockSingularityConverter extends Block {
 
-	protected SingularityConverter() {
+	protected BlockSingularityConverter() {
 		super(Material.iron);
 	}
 

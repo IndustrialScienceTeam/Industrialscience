@@ -12,7 +12,7 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
-import de.zsgn.industrialscience.blocks.SingularityBlock;
+import de.zsgn.industrialscience.blocks.BlockSingularity;
 
 @Mod(modid = IndustrialScience.MODID, version = IndustrialScience.VERSION)
 public class IndustrialScience
@@ -20,7 +20,7 @@ public class IndustrialScience
     public static final String MODID = "industrialscience";
     public static final String VERSION = "@VERSION@";
     
-    public Block singularityblock= new SingularityBlock(Material.rock);
+    public Block singularityblock= new BlockSingularity(Material.rock);
     public static CreativeTabs creativetab = new IndustrialScienceCreativeTab();
     
     
