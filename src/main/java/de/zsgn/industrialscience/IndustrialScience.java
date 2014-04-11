@@ -22,7 +22,7 @@ public class IndustrialScience
     public static final String MODID = "industrialscience";
     public static final String VERSION = "@VERSION@";
     
-    public Block singularityblock= new BlockSingularity(Material.rock);
+    public Block blocksingularity= new BlockSingularity(Material.rock);
     
     public Item itemAncientTechnology = new  ItemAncientTechnology();
     
@@ -34,9 +34,9 @@ public class IndustrialScience
     {
 		FMLLog.log(Level.INFO, "This is IndustrialScience version: "+IndustrialScience.VERSION);
 		
-        GameRegistry.registerBlock(singularityblock, "SingularityBlock");
+        GameRegistry.registerBlock(blocksingularity, blocksingularity.getUnlocalizedName());
         
-        GameRegistry.registerItem(itemAncientTechnology, itemAncientTechnology.getUnlocalizedName());
+        GameRegistry.registerItem(itemAncientTechnology, itemAncientTechnology.getUnlocalizedName());        
         
         addRecipes();
         
@@ -46,7 +46,7 @@ public class IndustrialScience
 
 
 	private void addRecipes() {
-		GameRegistry.addSmelting(Items.diamond, new ItemStack(singularityblock), 9001);
-		GameRegistry.addRecipe(new ItemStack(singularityblock), " X ", " X ","BBB",'X',Items.apple,'B', Items.book);
+		GameRegistry.addSmelting(Items.diamond, new ItemStack(blocksingularity), 9001);
+		GameRegistry.addRecipe(new ItemStack(blocksingularity), " X ", " X ","BBB",'X',Items.apple,'B', Items.book);
 	}
 }

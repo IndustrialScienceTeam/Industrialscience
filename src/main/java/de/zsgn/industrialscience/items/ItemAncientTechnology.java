@@ -8,7 +8,6 @@ public class ItemAncientTechnology extends Item {
 	public ItemAncientTechnology() {
 		setCreativeTab(IndustrialScience.creativetab);
 		setUnlocalizedName("ancient-technology");
-		
 	}
 
 }
