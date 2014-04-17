@@ -19,3 +19,4 @@ build
 #runtime
 run
 .settings/org.eclipse.jdt.core.prefs
+.DS_Store
