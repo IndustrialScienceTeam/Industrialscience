@@ -30,7 +30,7 @@ public class IndustrialScience
     
     public Item itemAncientTechnology = new  ItemAncientTechnology();
     
-    public Item itemCrack = new itemCrack();
+    public Item itemCrack = new ItemCrack();
     
     public static CreativeTabs creativetab = new IndustrialScienceCreativeTab();
     

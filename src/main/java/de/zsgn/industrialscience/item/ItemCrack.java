@@ -4,9 +4,9 @@ import de.zsgn.industrialscience.IndustrialScience;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 
-public class itemCrack extends ItemFood {
+public class ItemCrack extends ItemFood {
 
-	public itemCrack() {
+	public ItemCrack() {
 		super(1, true);
 		
 		setCreativeTab(IndustrialScience.creativetab);
