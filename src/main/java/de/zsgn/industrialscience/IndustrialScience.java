@@ -30,6 +30,8 @@ public class IndustrialScience
     
     public Item itemAncientTechnology = new  ItemAncientTechnology();
     
+    public Item itemCrack = new de.zsgn.industrialscience.items.itemCrack();
+    
     public static CreativeTabs creativetab = new IndustrialScienceCreativeTab();
     
     public final IndustrialScienceMainCommand industrialScienceMainCommand=new IndustrialScienceMainCommand();
@@ -40,7 +42,10 @@ public class IndustrialScience
 		
         GameRegistry.registerBlock(blocksingularity, blocksingularity.getUnlocalizedName());
         
-        GameRegistry.registerItem(itemAncientTechnology, itemAncientTechnology.getUnlocalizedName());        
+        GameRegistry.registerItem(itemAncientTechnology, itemAncientTechnology.getUnlocalizedName());
+        
+        //registers the item so the game can actually use it while playing
+        GameRegistry.registerItem(itemCrack, itemCrack.getUnlocalizedName());
         
         addRecipes();
         
