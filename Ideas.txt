@@ -5,7 +5,7 @@ BASE CONCEPT
 
 Ideas for the distinct game Phases:
 
-ERLY GAME
+EARLY GAME
 
 -The addition of a Block allowing the player to convert useless things to valuable ores
 	-A sluice would suit this Idea
@@ -22,3 +22,13 @@ MIDDLE AND LATE GAME
 	-later these would be made multiblocks by us
 	-We will add a multiblock construction table for these blocks later
 	-machines should be partially self-explanatory
+
+Tier which hasn't got anything to do with the rest of the mod
+-possible stuff
+        -implement scaffolds for testing
+-impossible stuff
+        -to belay someone
+        -knots
+        -(foot)holds
+        -skills
+ 
