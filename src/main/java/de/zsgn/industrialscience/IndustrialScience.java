@@ -16,9 +16,9 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
-import de.zsgn.industrialscience.blocks.BlockSingularity;
-import de.zsgn.industrialscience.commands.IndustrialScienceMainCommand;
-import de.zsgn.industrialscience.items.ItemAncientTechnology;
+import de.zsgn.industrialscience.block.BlockSingularity;
+import de.zsgn.industrialscience.command.IndustrialScienceMainCommand;
+import de.zsgn.industrialscience.item.ItemAncientTechnology;
 
 @Mod(modid = IndustrialScience.MODID, version = IndustrialScience.VERSION)
 public class IndustrialScience
@@ -30,7 +30,7 @@ public class IndustrialScience
     
     public Item itemAncientTechnology = new  ItemAncientTechnology();
     
-    public Item itemCrack = new de.zsgn.industrialscience.items.itemCrack();
+    public Item itemCrack = new de.zsgn.industrialscience.item.itemCrack();
     
     public static CreativeTabs creativetab = new IndustrialScienceCreativeTab();
     

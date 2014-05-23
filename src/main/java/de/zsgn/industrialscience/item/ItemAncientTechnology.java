@@ -1,4 +1,4 @@
-package de.zsgn.industrialscience.items;
+package de.zsgn.industrialscience.item;
 
 import java.util.List;
 

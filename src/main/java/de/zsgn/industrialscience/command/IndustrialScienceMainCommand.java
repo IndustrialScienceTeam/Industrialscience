@@ -1,4 +1,4 @@
-package de.zsgn.industrialscience.commands;
+package de.zsgn.industrialscience.command;
 
 import de.zsgn.industrialscience.IndustrialScience;
 import net.minecraft.command.CommandBase;

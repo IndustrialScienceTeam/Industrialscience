@@ -1,4 +1,4 @@
-package de.zsgn.industrialscience.blocks;
+package de.zsgn.industrialscience.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

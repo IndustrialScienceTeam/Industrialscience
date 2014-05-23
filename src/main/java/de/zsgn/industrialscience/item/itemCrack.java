@@ -1,4 +1,4 @@
-package de.zsgn.industrialscience.items;
+package de.zsgn.industrialscience.item;
 
 import de.zsgn.industrialscience.IndustrialScience;
 import net.minecraft.item.Item;

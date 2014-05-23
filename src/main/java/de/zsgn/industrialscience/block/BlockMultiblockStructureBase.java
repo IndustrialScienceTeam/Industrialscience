@@ -1,4 +1,4 @@
-package de.zsgn.industrialscience.blocks;
+package de.zsgn.industrialscience.block;
 
 import de.zsgn.industrialscience.IndustrialScience;
 import de.zsgn.industrialscience.tileentity.TileEntityMultiblockStructureBase;
