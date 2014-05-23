@@ -12,7 +12,6 @@ public class ItemCrack extends ItemFood {
 		setCreativeTab(IndustrialScience.creativetab);
 		
 		setUnlocalizedName("Crack!");
-		// TODO Auto-generated constructor stub
 	}
 
 }
