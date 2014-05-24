@@ -14,7 +14,7 @@ public class ItemCrack extends ItemFood {
 		setCreativeTab(IndustrialScience.creativetab);
 		
 		//required for the naming stuff (this is not the display name)
-		setUnlocalizedName("Crack!");
+		setUnlocalizedName("Crack");
 	}
 
 }
