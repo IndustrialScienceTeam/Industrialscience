@@ -8,5 +8,5 @@ item.ancient-technology.descr3=It looks like it could fall apart, if you continu
 item.Crack.name=Crack!!
 item.climbingboots.name=Climbing Boots
 
-mysteriousportal_activated=*Insert creative msg here.
+mysteriousportal_activated=You inserted the part into the machine. You can hear a quiet purr. 
 mysteriousportal_nothing=Nothing happens...
