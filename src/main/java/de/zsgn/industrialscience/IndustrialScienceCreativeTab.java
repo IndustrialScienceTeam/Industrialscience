@@ -6,14 +6,14 @@ import net.minecraft.item.Item;
 
 public class IndustrialScienceCreativeTab extends CreativeTabs {
 
-	public IndustrialScienceCreativeTab() {
-		super("IndustrialScience");
-		// TODO Auto-generated constructor stub
-	}
+    public IndustrialScienceCreativeTab() {
+        super("IndustrialScience");
+        // TODO Auto-generated constructor stub
+    }
 
-	@Override
-	public Item getTabIconItem() {
-		return Items.blaze_rod;
-	}
+    @Override
+    public Item getTabIconItem() {
+        return Items.blaze_rod;
+    }
 
 }

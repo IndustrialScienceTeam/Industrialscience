@@ -5,8 +5,8 @@ import net.minecraft.block.material.Material;
 
 public class BlockSingularityConverter extends Block {
 
-	protected BlockSingularityConverter() {
-		super(Material.iron);
-	}
+    protected BlockSingularityConverter() {
+        super(Material.iron);
+    }
 
 }
