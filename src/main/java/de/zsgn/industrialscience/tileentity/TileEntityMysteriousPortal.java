@@ -4,6 +4,8 @@ import de.zsgn.industrialscience.IndustrialScience;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 public class TileEntityMysteriousPortal extends TileEntity {
@@ -15,6 +17,8 @@ public class TileEntityMysteriousPortal extends TileEntity {
 			if(player.inventory.getStackInSlot(player.inventory.currentItem).getItem()==IndustrialScience.instance.itemAncientTechnology){
 				--player.inventory.getStackInSlot(player.inventory.currentItem).stackSize;
 				activated=true;
+				player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("mysteriousportal_activated")));
+				return true;
 			}
 					
 		}
