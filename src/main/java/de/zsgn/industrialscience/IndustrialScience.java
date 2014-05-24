@@ -32,6 +32,8 @@ public class IndustrialScience
     
     public Item itemCrack = new ItemCrack();
     
+    public Item itemclimbingboots = new ItemClimbingBoots();
+    
     public static CreativeTabs creativetab = new IndustrialScienceCreativeTab();
     
     public final IndustrialScienceMainCommand industrialScienceMainCommand=new IndustrialScienceMainCommand();
@@ -46,6 +48,7 @@ public class IndustrialScience
         
         //registers the item so the game can actually use it while playing
         GameRegistry.registerItem(itemCrack, itemCrack.getUnlocalizedName());
+        GameRegistry.registerItem(itemclimbingboots , itemclimbingboots.getUnlocalizedName());
         
         addRecipes();
         
