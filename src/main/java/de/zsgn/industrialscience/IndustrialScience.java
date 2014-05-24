@@ -30,6 +30,7 @@ public class IndustrialScience
     public static IndustrialScience instance;
     
     public Block blocksingularity= new BlockSingularity(Material.rock);
+    public Block blockmysteriousportal = new BlockMysteriousPortal();
     
     public Item itemAncientTechnology = new  ItemAncientTechnology();
     
@@ -46,6 +47,7 @@ public class IndustrialScience
 		FMLLog.log(Level.INFO, "This is IndustrialScience version: "+IndustrialScience.VERSION);
 		instance=this;
         GameRegistry.registerBlock(blocksingularity, blocksingularity.getUnlocalizedName());
+        GameRegistry.registerBlock(blockmysteriousportal, blockmysteriousportal.getUnlocalizedName());
         
         GameRegistry.registerItem(itemAncientTechnology, itemAncientTechnology.getUnlocalizedName());
         
