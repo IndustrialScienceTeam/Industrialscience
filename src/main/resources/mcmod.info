@@ -1,0 +1,16 @@
+[
+{
+  "modid": "industrialscience",
+  "name": "IndustrialScience",
+  "description": "Adds a bunch of new tech based features to Minecraft.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authors": ["finesim", "Singularius"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": ["Forge"]
+}
+]
