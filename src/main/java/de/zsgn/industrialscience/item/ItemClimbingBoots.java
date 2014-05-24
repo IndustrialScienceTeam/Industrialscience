@@ -18,6 +18,7 @@ public class ItemClimbingBoots extends ItemArmor{
 	
 	iconString =IndustrialScience.MODID + ":" + this.getUnlocalizedName().substring(5);
 	}
+	
 }
 
 
