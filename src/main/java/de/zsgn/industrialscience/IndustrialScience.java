@@ -58,6 +58,7 @@ public class IndustrialScience
 
 	private void addRecipes() {
 		GameRegistry.addSmelting(Items.diamond, new ItemStack(blocksingularity), 9001);
+		GameRegistry.addShapelessRecipe(new ItemStack(itemCrack), new ItemStack(Items.potionitem, 1, 0), Items.reeds);
 		GameRegistry.addRecipe(new ItemStack(blocksingularity), " X ", " X ","BBB",'X',Items.apple,'B', Items.book);
 	}
 	
