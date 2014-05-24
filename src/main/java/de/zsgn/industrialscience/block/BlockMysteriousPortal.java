@@ -12,7 +12,7 @@ public class BlockMysteriousPortal extends BlockContainer {
 
 	public BlockMysteriousPortal() {
 		super(Material.iron);
-		setCreativeTab(IndustrialScience.creativetab);
+		setCreativeTab(IndustrialScience.getInstance().getCreativetab());
 		setBlockName("mysteriousportal");
         setHardness(3.0F);
 	}

@@ -8,7 +8,7 @@ public class BlockSingularity extends Block {
 
 	public BlockSingularity(Material material) {
 		super(material);
-		this.setCreativeTab(IndustrialScience.creativetab);
+		this.setCreativeTab(IndustrialScience.getInstance().getCreativetab());
 		setBlockName("singularityblock");
         setHardness(3.0F);
 	}

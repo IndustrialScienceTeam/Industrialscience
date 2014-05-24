@@ -15,7 +15,7 @@ import net.minecraftforge.common.ChestGenHooks;
 public class ItemAncientTechnology extends Item {
 	protected final static int descriptionamount=3;
 	public ItemAncientTechnology() {
-		setCreativeTab(IndustrialScience.creativetab);
+		setCreativeTab(IndustrialScience.getInstance().getCreativetab());
 		setUnlocalizedName("ancient-technology");
 		setMaxStackSize(1);
 		ChestGenHooks.addItem(ChestGenHooks.PYRAMID_DESERT_CHEST, new WeightedRandomChestContent(new ItemStack(this, 1), 1, 1, 7));

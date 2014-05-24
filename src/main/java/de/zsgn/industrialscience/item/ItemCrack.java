@@ -14,7 +14,7 @@ public class ItemCrack extends ItemFood {
 		super(1, true);
 		
 		//sets the creative tab to our creative tab so one can actually find the item ingame
-		setCreativeTab(IndustrialScience.creativetab);
+		setCreativeTab(IndustrialScience.getInstance().getCreativetab());
 		
 		//required for the naming stuff (this is not the display name)
 		setUnlocalizedName("Crack");

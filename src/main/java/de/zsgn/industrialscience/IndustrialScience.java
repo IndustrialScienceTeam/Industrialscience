@@ -22,26 +22,24 @@ import de.zsgn.industrialscience.command.*;
 import de.zsgn.industrialscience.item.*;
 
 @Mod(modid = IndustrialScience.MODID, version = IndustrialScience.VERSION)
-public class IndustrialScience
-{
+public class IndustrialScience{
     public static final String MODID = "industrialscience";
     public static final String VERSION = "@VERSION@";
     @Instance
-    public static IndustrialScience instance;
+    private static IndustrialScience instance;
     
-    public Block blocksingularity= new BlockSingularity(Material.rock);
-    public Block blockmysteriousportal = new BlockMysteriousPortal();
+    private Block blocksingularity= new BlockSingularity(Material.rock);
+    private Block blockmysteriousportal = new BlockMysteriousPortal();
     
-    public Item itemancienttechnology = new  ItemAncientTechnology();
-    public Item itemcrack = new ItemCrack();
-    public Item itemclimbingboots = new ItemClimbingBoots();
+    private Item itemancienttechnology = new  ItemAncientTechnology();
+    private Item itemcrack = new ItemCrack();
+    private Item itemclimbingboots = new ItemClimbingBoots();
     
-    public static CreativeTabs creativetab = new IndustrialScienceCreativeTab();
+    private CreativeTabs creativetab = new IndustrialScienceCreativeTab();
     
-    public final IndustrialScienceMainCommand industrialScienceMainCommand=new IndustrialScienceMainCommand();
+    private IndustrialScienceMainCommand industrialScienceMainCommand=new IndustrialScienceMainCommand();
     @EventHandler
-    public void init(FMLInitializationEvent event)
-    {
+    public void init(FMLInitializationEvent event){
 		FMLLog.log(Level.INFO, "This is IndustrialScience version: "+IndustrialScience.VERSION);
 		instance=this;
         GameRegistry.registerBlock(blocksingularity, blocksingularity.getUnlocalizedName());
@@ -68,11 +66,42 @@ public class IndustrialScience
 	}
 	
 	@EventHandler
-	public void serverStart(FMLServerStartingEvent event)
-	{
+	public void serverStart(FMLServerStartingEvent event){
 	         MinecraftServer server = MinecraftServer.getServer();
 	         ServerCommandManager manager = (ServerCommandManager) server.getCommandManager();
 	         manager.registerCommand(industrialScienceMainCommand);
 	         
+	}
+
+	public static IndustrialScience getInstance() {
+		return instance;
+	}
+
+	public Block getBlocksingularity() {
+		return blocksingularity;
+	}
+
+	public Block getBlockmysteriousportal() {
+		return blockmysteriousportal;
+	}
+
+	public Item getItemancienttechnology() {
+		return itemancienttechnology;
+	}
+
+	public Item getItemcrack() {
+		return itemcrack;
+	}
+
+	public Item getItemclimbingboots() {
+		return itemclimbingboots;
+	}
+
+	public CreativeTabs getCreativetab() {
+		return creativetab;
+	}
+
+	public IndustrialScienceMainCommand getIndustrialScienceMainCommand() {
+		return industrialScienceMainCommand;
 	}
 }
