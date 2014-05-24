@@ -1,6 +1,7 @@
 package de.zsgn.industrialscience.item;
 
 import de.zsgn.industrialscience.IndustrialScience;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
@@ -35,6 +36,11 @@ public class ItemCrack extends ItemFood {
 			//Adds Jump Boost (8) for 10 seconds (200 ticks) and increases its level by 1 (1): Jump boost 2 for 10 seconds
 			par3EntityPlayer.addPotionEffect(new PotionEffect(8, 200, 1));
 		}
+	}
+
+	@Override
+	public void registerIcons(IIconRegister par1IconRegister) {
+		itemIcon = par1IconRegister.registerIcon(IndustrialScience.MODID + ":" + this.getUnlocalizedName());
 	}
 
 }
