@@ -32,10 +32,8 @@ public class IndustrialScience
     public Block blocksingularity= new BlockSingularity(Material.rock);
     public Block blockmysteriousportal = new BlockMysteriousPortal();
     
-    public Item itemAncientTechnology = new  ItemAncientTechnology();
-    
-    public Item itemCrack = new ItemCrack();
-    
+    public Item itemancienttechnology = new  ItemAncientTechnology();
+    public Item itemcrack = new ItemCrack();
     public Item itemclimbingboots = new ItemClimbingBoots();
     
     public static CreativeTabs creativetab = new IndustrialScienceCreativeTab();
@@ -49,10 +47,10 @@ public class IndustrialScience
         GameRegistry.registerBlock(blocksingularity, blocksingularity.getUnlocalizedName());
         GameRegistry.registerBlock(blockmysteriousportal, blockmysteriousportal.getUnlocalizedName());
         
-        GameRegistry.registerItem(itemAncientTechnology, itemAncientTechnology.getUnlocalizedName());
+        GameRegistry.registerItem(itemancienttechnology, itemancienttechnology.getUnlocalizedName());
         
         //registers the item so the game can actually use it while playing
-        GameRegistry.registerItem(itemCrack, itemCrack.getUnlocalizedName());
+        GameRegistry.registerItem(itemcrack, itemcrack.getUnlocalizedName());
         GameRegistry.registerItem(itemclimbingboots , itemclimbingboots.getUnlocalizedName());
         
         addRecipes();
@@ -63,7 +61,7 @@ public class IndustrialScience
 
 	private void addRecipes() {
 		GameRegistry.addSmelting(Items.diamond, new ItemStack(blocksingularity), 9001);
-		GameRegistry.addShapelessRecipe(new ItemStack(itemCrack), new ItemStack(Items.potionitem, 1, 0), Items.reeds);
+		GameRegistry.addShapelessRecipe(new ItemStack(itemcrack), new ItemStack(Items.potionitem, 1, 0), Items.reeds);
 		GameRegistry.addRecipe(new ItemStack(blocksingularity), " X ", " X ","BBB",'X',Items.apple,'B', Items.book);
 		GameRegistry.addRecipe(new ItemStack(itemclimbingboots),"   "," XY"," Z ",'X',Items.leather_boots,'Y',Items.iron_ingot,'Z',Items.gold_ingot);
 		//GameRegistry.addRecipe(new ItemStack(itemclimbingboots), " X ", " X ","BBB",'X',Items.apple,'B', Items.book);
