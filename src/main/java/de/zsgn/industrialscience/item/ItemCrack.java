@@ -7,10 +7,13 @@ import net.minecraft.item.ItemFood;
 public class ItemCrack extends ItemFood {
 
 	public ItemCrack() {
-		super(1, true);
+		//refers to the superclass and gives it arguments. The first argument is the food filling value and the second argument determines, whether dogs will eat the food.
+		super(6, true);
 		
+		//sets the creative tab to our creative tab so one can actually find the item ingame
 		setCreativeTab(IndustrialScience.creativetab);
 		
+		//required for the naming stuff (this is not the display name)
 		setUnlocalizedName("Crack!");
 	}
 
