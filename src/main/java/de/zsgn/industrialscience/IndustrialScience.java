@@ -13,6 +13,7 @@ import net.minecraft.server.MinecraftServer;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -25,6 +26,8 @@ public class IndustrialScience
 {
     public static final String MODID = "industrialscience";
     public static final String VERSION = "@VERSION@";
+    @Instance
+    public static IndustrialScience instance;
     
     public Block blocksingularity= new BlockSingularity(Material.rock);
     
@@ -41,7 +44,7 @@ public class IndustrialScience
     public void init(FMLInitializationEvent event)
     {
 		FMLLog.log(Level.INFO, "This is IndustrialScience version: "+IndustrialScience.VERSION);
-		
+		instance=this;
         GameRegistry.registerBlock(blocksingularity, blocksingularity.getUnlocalizedName());
         
         GameRegistry.registerItem(itemAncientTechnology, itemAncientTechnology.getUnlocalizedName());
