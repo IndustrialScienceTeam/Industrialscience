@@ -19,7 +19,7 @@ public class BlockMysteriousPortal extends BlockContainer {
 
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2) {
-		return new TileEntityMysteriousPortal();
+		return new TdileEntityMysteriousPortal();
 	}
 
 	@Override
