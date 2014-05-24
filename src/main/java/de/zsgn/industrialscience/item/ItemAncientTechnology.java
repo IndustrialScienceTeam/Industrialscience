@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ChestGenHooks;
 
 public class ItemAncientTechnology extends Item {
-	protected final static int descriptionamount=3;
+	protected final static int DESCRIPTIONAMOUNT=3;
 	public ItemAncientTechnology() {
 		setCreativeTab(IndustrialScience.getInstance().getCreativetab());
 		setUnlocalizedName("ancient-technology");
@@ -31,11 +31,12 @@ public class ItemAncientTechnology extends Item {
 	}
 
 	private int getDescriptionNumber(ItemStack par1ItemStack) {
-		if(par1ItemStack.stackTagCompound==null)
+		if(par1ItemStack.stackTagCompound==null){
 			par1ItemStack.stackTagCompound=new NBTTagCompound();
+		}
 		int descriptionnumber=par1ItemStack.stackTagCompound.getInteger(IndustrialScience.MODID+"_descriptionnumber");
 		if(descriptionnumber==0){
-			descriptionnumber=itemRand.nextInt(descriptionamount)+1;
+			descriptionnumber=itemRand.nextInt(DESCRIPTIONAMOUNT)+1;
 			par1ItemStack.stackTagCompound.setInteger(IndustrialScience.MODID+"_descriptionnumber", descriptionnumber);
 		}
 		return descriptionnumber;

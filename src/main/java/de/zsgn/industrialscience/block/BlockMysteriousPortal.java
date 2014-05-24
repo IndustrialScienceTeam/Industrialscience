@@ -27,14 +27,12 @@ public class BlockMysteriousPortal extends BlockContainer {
 			int y, int z, EntityPlayer player,
 			int side, float xOffset, float yOffset,
 			float zOffset) {
-		if(!world.isRemote){
-			if(world.getTileEntity(x, y, z) instanceof TileEntityMysteriousPortal){
+		if(!world.isRemote&&world.getTileEntity(x, y, z) instanceof TileEntityMysteriousPortal){
 				TileEntityMysteriousPortal tileentity=(TileEntityMysteriousPortal)world.getTileEntity(x, y, z);
 				return tileentity.onBlockActivated(world, x,
 						y, z, player,
 						side, xOffset, yOffset,
 						zOffset);
-			}
 		}
 		return false;
 	}
