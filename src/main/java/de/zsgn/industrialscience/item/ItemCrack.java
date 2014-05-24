@@ -40,7 +40,7 @@ public class ItemCrack extends ItemFood {
 
 	@Override
 	public void registerIcons(IIconRegister par1IconRegister) {
-		itemIcon = par1IconRegister.registerIcon(IndustrialScience.MODID + ":" + this.getUnlocalizedName());
+		itemIcon = par1IconRegister.registerIcon(IndustrialScience.MODID + ":" + this.getUnlocalizedName().substring(5));
 	}
 
 }
