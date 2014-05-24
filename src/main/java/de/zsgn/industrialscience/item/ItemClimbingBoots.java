@@ -1,6 +1,7 @@
 package de.zsgn.industrialscience.item;
 
 import de.zsgn.industrialscience.IndustrialScience;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 
@@ -17,6 +18,13 @@ public class ItemClimbingBoots extends ItemArmor{
 	
 	
 	}
+	
+	/*
+	@Override
+	public void registerIcons(IIconRegister par1IconRegister) {
+		itemIcon = par1IconRegister.registerIcon(IndustrialScience.MODID + ":" + this.getUnlocalizedName().substring(5));
+	}
+	*/
 }
 
 
