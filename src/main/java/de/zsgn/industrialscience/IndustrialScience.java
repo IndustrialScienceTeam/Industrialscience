@@ -19,6 +19,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import de.zsgn.industrialscience.block.BlockMysteriousPortal;
+import de.zsgn.industrialscience.block.BlockReinforcedBricks;
 import de.zsgn.industrialscience.block.BlockSingularity;
 import de.zsgn.industrialscience.command.IndustrialScienceMainCommand;
 import de.zsgn.industrialscience.item.ItemAncientTechnology;
@@ -34,6 +35,7 @@ public class IndustrialScience{
 
     private Block blocksingularity;
     private Block blockmysteriousportal;
+    private Block blockreinforcedbricks;
 
     private Item itemancienttechnology;
     private Item itemcrack;
@@ -49,7 +51,8 @@ public class IndustrialScience{
         initFields();
         GameRegistry.registerBlock(blocksingularity, blocksingularity.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(blockmysteriousportal, blockmysteriousportal.getUnlocalizedName().substring(5));
-
+        GameRegistry.registerBlock(blockreinforcedbricks, blockreinforcedbricks.getUnlocalizedName().substring(5));
+        
         GameRegistry.registerItem(itemancienttechnology, itemancienttechnology.getUnlocalizedName().substring(5));
 
         //registers the item so the game can actually use it while playing
@@ -66,6 +69,7 @@ public class IndustrialScience{
         creativetab = new IndustrialScienceCreativeTab();
         blockmysteriousportal= new BlockMysteriousPortal();
         blocksingularity= new BlockSingularity(Material.rock);
+        blockreinforcedbricks=new BlockReinforcedBricks();
         itemancienttechnology=new  ItemAncientTechnology();
         itemcrack=new ItemCrack();
         itemclimbingboots= new ItemClimbingBoots();
