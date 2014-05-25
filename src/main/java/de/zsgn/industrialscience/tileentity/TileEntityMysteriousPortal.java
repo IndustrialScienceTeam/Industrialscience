@@ -30,5 +30,8 @@ public class TileEntityMysteriousPortal extends TileEntity {
     public void writeToNBT(NBTTagCompound tagCompound) {
         tagCompound.setBoolean("activated", activated);
     }
+    public boolean isActivated() {
+        return activated;
+    }
 
 }

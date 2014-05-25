@@ -2,10 +2,13 @@ package de.zsgn.industrialscience.block;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
@@ -65,6 +68,22 @@ public class BlockMysteriousPortal extends BlockContainer {
         bottomtexture=iconRegister.registerIcon(IndustrialScience.MODID + ":" + this.getUnlocalizedName().substring(5)+"_bottom");
         toptexture=iconRegister.registerIcon(IndustrialScience.MODID + ":" + this.getUnlocalizedName().substring(5)+"_top");
         sidetexture=iconRegister.registerIcon(IndustrialScience.MODID + ":" + this.getUnlocalizedName().substring(5)+"_side");
+    }
+
+    @Override
+    public void breakBlock(World world, int x, int y,
+            int z, Block block, int metadata) {
+        boolean spawntechnology=false;
+        if(!world.isRemote&&world.getTileEntity(x, y, z) instanceof TileEntityMysteriousPortal){
+            TileEntityMysteriousPortal tileentity=(TileEntityMysteriousPortal)world.getTileEntity(x, y, z);
+            spawntechnology=tileentity.isActivated();
+        }
+        super.breakBlock(world, x, y, z,
+                block, metadata);
+        if(spawntechnology){
+        EntityItem entityItem =new EntityItem(world, x, y+1, z, new ItemStack(IndustrialScience.getInstance().getItemancienttechnology()));
+        world.spawnEntityInWorld(entityItem);
+        }
     }
 
 
