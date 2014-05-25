@@ -7,9 +7,9 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import de.zsgn.industrialscience.IndustrialScience;
 
-public class ItemCrack extends ItemFood {
+public class ItemCrystalReed extends ItemFood {
 
-    public ItemCrack() {
+    public ItemCrystalReed() {
         //refers to the superclass and gives it arguments. The first argument is the food filling value and the second argument determines, whether dogs will eat the food.
         super(1, true);
 
@@ -17,7 +17,7 @@ public class ItemCrack extends ItemFood {
         setCreativeTab(IndustrialScience.getInstance().getCreativetab());
 
         //required for the naming stuff (this is not the display name)
-        setUnlocalizedName("Crack");
+        setUnlocalizedName("CrystalReed");
 
         //sets the texture path
         iconString =IndustrialScience.MODID + ":" + this.getUnlocalizedName().substring(5);

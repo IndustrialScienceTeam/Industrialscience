@@ -24,7 +24,7 @@ import de.zsgn.industrialscience.block.BlockSingularity;
 import de.zsgn.industrialscience.command.IndustrialScienceMainCommand;
 import de.zsgn.industrialscience.item.ItemAncientTechnology;
 import de.zsgn.industrialscience.item.ItemClimbingBoots;
-import de.zsgn.industrialscience.item.ItemCrack;
+import de.zsgn.industrialscience.item.ItemCrystalReed;
 
 @Mod(modid = IndustrialScience.MODID, version = IndustrialScience.VERSION)
 public class IndustrialScience{
@@ -38,7 +38,7 @@ public class IndustrialScience{
     private Block blockreinforcedbricks;
 
     private Item itemancienttechnology;
-    private Item itemcrack;
+    private Item itemcrystalreed;
     private Item itemclimbingboots;
 
     private CreativeTabs creativetab;
@@ -56,7 +56,7 @@ public class IndustrialScience{
         GameRegistry.registerItem(itemancienttechnology, itemancienttechnology.getUnlocalizedName().substring(5));
 
         //registers the item so the game can actually use it while playing
-        GameRegistry.registerItem(itemcrack, itemcrack.getUnlocalizedName().substring(5));
+        GameRegistry.registerItem(itemcrystalreed, itemcrystalreed.getUnlocalizedName().substring(5));
         GameRegistry.registerItem(itemclimbingboots , itemclimbingboots.getUnlocalizedName().substring(5));
 
         addRecipes();
@@ -71,13 +71,13 @@ public class IndustrialScience{
         blocksingularity= new BlockSingularity(Material.rock);
         blockreinforcedbricks=new BlockReinforcedBricks();
         itemancienttechnology=new  ItemAncientTechnology();
-        itemcrack=new ItemCrack();
+        itemcrystalreed= new ItemCrystalReed();
         itemclimbingboots= new ItemClimbingBoots();
     }
 
     private void addRecipes() {
         GameRegistry.addSmelting(Items.diamond, new ItemStack(blocksingularity), 9001);
-        GameRegistry.addShapelessRecipe(new ItemStack(itemcrack), new ItemStack(Items.potionitem, 1, 0), Items.reeds);
+        GameRegistry.addShapelessRecipe(new ItemStack(itemcrystalreed), new ItemStack(Items.potionitem, 1, 0), Items.reeds);
         GameRegistry.addRecipe(new ItemStack(blocksingularity), " X ", " X ","BBB",'X',Items.apple,'B', Items.book);
         GameRegistry.addRecipe(new ItemStack(itemclimbingboots),"   "," XY"," Z ",'X',Items.leather_boots,'Y',Items.iron_ingot,'Z',Items.gold_ingot);
     }
@@ -107,7 +107,7 @@ public class IndustrialScience{
     }
 
     public Item getItemcrack() {
-        return itemcrack;
+        return itemcrystalreed;
     }
 
     public Item getItemclimbingboots() {
