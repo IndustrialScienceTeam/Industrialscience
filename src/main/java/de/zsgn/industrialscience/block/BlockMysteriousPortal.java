@@ -73,17 +73,19 @@ public class BlockMysteriousPortal extends BlockContainer {
     @Override
     public void breakBlock(World world, int x, int y,
             int z, Block block, int metadata) {
-        boolean spawntechnology=false;
         if(!world.isRemote&&world.getTileEntity(x, y, z) instanceof TileEntityMysteriousPortal){
             TileEntityMysteriousPortal tileentity=(TileEntityMysteriousPortal)world.getTileEntity(x, y, z);
-            spawntechnology=tileentity.isActivated();
+            if(tileentity.isActivated()){
+            ItemStack technologyItemStack=new ItemStack(IndustrialScience.getInstance().getItemancienttechnology());
+            if(tileentity.getTechnologycompund()!=null){
+                technologyItemStack.stackTagCompound=tileentity.getTechnologycompund();
+            }
+            EntityItem entityItem =new EntityItem(world, x, y+1, z, technologyItemStack);
+            world.spawnEntityInWorld(entityItem);
+            }
         }
         super.breakBlock(world, x, y, z,
                 block, metadata);
-        if(spawntechnology){
-        EntityItem entityItem =new EntityItem(world, x, y+1, z, new ItemStack(IndustrialScience.getInstance().getItemancienttechnology()));
-        world.spawnEntityInWorld(entityItem);
-        }
     }
 
 
