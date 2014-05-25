@@ -32,20 +32,21 @@ public class IndustrialScience{
     @Instance
     private static IndustrialScience instance;
 
-    private Block blocksingularity= new BlockSingularity(Material.rock);
-    private Block blockmysteriousportal = new BlockMysteriousPortal();
+    private Block blocksingularity;
+    private Block blockmysteriousportal;
 
-    private Item itemancienttechnology = new  ItemAncientTechnology();
-    private Item itemcrack = new ItemCrack();
-    private Item itemclimbingboots = new ItemClimbingBoots();
+    private Item itemancienttechnology;
+    private Item itemcrack;
+    private Item itemclimbingboots;
 
-    private CreativeTabs creativetab = new IndustrialScienceCreativeTab();
+    private CreativeTabs creativetab;
 
     private IndustrialScienceMainCommand industrialScienceMainCommand=new IndustrialScienceMainCommand();
     @EventHandler
     public void init(FMLInitializationEvent event){
         FMLLog.log(Level.INFO, "This is IndustrialScience version: "+IndustrialScience.VERSION);
         instance=this;
+        initFields();
         GameRegistry.registerBlock(blocksingularity, blocksingularity.getUnlocalizedName());
         GameRegistry.registerBlock(blockmysteriousportal, blockmysteriousportal.getUnlocalizedName());
 
@@ -59,6 +60,15 @@ public class IndustrialScience{
 
 
 
+    }
+
+    private void initFields() {
+        creativetab = new IndustrialScienceCreativeTab();
+        blockmysteriousportal= new BlockMysteriousPortal();
+        blocksingularity= new BlockSingularity(Material.rock);
+        itemancienttechnology=new  ItemAncientTechnology();
+        itemcrack=new ItemCrack();
+        itemclimbingboots= new ItemClimbingBoots();
     }
 
     private void addRecipes() {
