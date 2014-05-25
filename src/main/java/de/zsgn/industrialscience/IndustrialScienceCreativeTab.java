@@ -1,7 +1,6 @@
 package de.zsgn.industrialscience;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 
 public class IndustrialScienceCreativeTab extends CreativeTabs {
@@ -13,7 +12,7 @@ public class IndustrialScienceCreativeTab extends CreativeTabs {
 
     @Override
     public Item getTabIconItem() {
-        return Items.blaze_rod;
+        return IndustrialScience.getInstance().getItemancienttechnology();
     }
 
 }
