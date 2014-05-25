@@ -47,14 +47,14 @@ public class IndustrialScience{
         FMLLog.log(Level.INFO, "This is IndustrialScience version: "+IndustrialScience.VERSION);
         instance=this;
         initFields();
-        GameRegistry.registerBlock(blocksingularity, blocksingularity.getUnlocalizedName());
-        GameRegistry.registerBlock(blockmysteriousportal, blockmysteriousportal.getUnlocalizedName());
+        GameRegistry.registerBlock(blocksingularity, blocksingularity.getUnlocalizedName().substring(5));
+        GameRegistry.registerBlock(blockmysteriousportal, blockmysteriousportal.getUnlocalizedName().substring(5));
 
-        GameRegistry.registerItem(itemancienttechnology, itemancienttechnology.getUnlocalizedName());
+        GameRegistry.registerItem(itemancienttechnology, itemancienttechnology.getUnlocalizedName().substring(5));
 
         //registers the item so the game can actually use it while playing
-        GameRegistry.registerItem(itemcrack, itemcrack.getUnlocalizedName());
-        GameRegistry.registerItem(itemclimbingboots , itemclimbingboots.getUnlocalizedName());
+        GameRegistry.registerItem(itemcrack, itemcrack.getUnlocalizedName().substring(5));
+        GameRegistry.registerItem(itemclimbingboots , itemclimbingboots.getUnlocalizedName().substring(5));
 
         addRecipes();
 
