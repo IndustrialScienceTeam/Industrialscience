@@ -17,6 +17,7 @@ public class ItemAncientTechnology extends Item {
     public ItemAncientTechnology() {
         setCreativeTab(IndustrialScience.getInstance().getCreativetab());
         setUnlocalizedName("ancient-technology");
+        iconString = IndustrialScience.MODID + ":" + this.getUnlocalizedName().substring(5);
         setMaxStackSize(1);
         ChestGenHooks.addItem(ChestGenHooks.PYRAMID_DESERT_CHEST, new WeightedRandomChestContent(new ItemStack(this, 1), 1, 1, 7));
         ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_CHEST, new WeightedRandomChestContent(new ItemStack(this, 1), 1, 1, 7));
