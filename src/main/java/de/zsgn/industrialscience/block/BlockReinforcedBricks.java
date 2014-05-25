@@ -10,7 +10,7 @@ public class BlockReinforcedBricks extends Block {
         super(Material.rock);
         setCreativeTab(IndustrialScience.getInstance().getCreativetab());
         setBlockName("reinforcedbricks");
-        setBlockTextureName(getUnlocalizedName().substring(5));
+        setBlockTextureName(IndustrialScience.MODID+":"+getUnlocalizedName().substring(5));
     }
 
 }
