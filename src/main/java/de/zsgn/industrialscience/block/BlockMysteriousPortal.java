@@ -1,15 +1,24 @@
 package de.zsgn.industrialscience.block;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import de.zsgn.industrialscience.IndustrialScience;
 import de.zsgn.industrialscience.tileentity.TileEntityMysteriousPortal;
 
 public class BlockMysteriousPortal extends BlockContainer {
-
+    @SideOnly(Side.CLIENT)
+    private IIcon bottomtexture=null;
+    @SideOnly(Side.CLIENT)
+    private IIcon toptexture=null;
+    @SideOnly(Side.CLIENT)
+    private IIcon sidetexture=null;
     public BlockMysteriousPortal() {
         super(Material.iron);
         setCreativeTab(IndustrialScience.getInstance().getCreativetab());
@@ -35,6 +44,27 @@ public class BlockMysteriousPortal extends BlockContainer {
                     zOffset);
         }
         return false;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public IIcon getIcon(int side, int metadata) {
+        switch (side) {
+        case 0:
+            return bottomtexture;
+        case 1:
+            return toptexture;
+        default:
+            return sidetexture;
+        }
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerBlockIcons(IIconRegister iconRegister) {
+        bottomtexture=iconRegister.registerIcon(IndustrialScience.MODID + ":" + this.getUnlocalizedName().substring(5)+"_bottom");
+        toptexture=iconRegister.registerIcon(IndustrialScience.MODID + ":" + this.getUnlocalizedName().substring(5)+"_top");
+        sidetexture=iconRegister.registerIcon(IndustrialScience.MODID + ":" + this.getUnlocalizedName().substring(5)+"_side");
     }
 
 
