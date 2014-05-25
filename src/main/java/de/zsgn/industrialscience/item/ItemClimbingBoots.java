@@ -1,6 +1,8 @@
 package de.zsgn.industrialscience.item;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemStack;
 import de.zsgn.industrialscience.IndustrialScience;
 
 public class ItemClimbingBoots extends ItemArmor{
@@ -16,5 +18,14 @@ public class ItemClimbingBoots extends ItemArmor{
         
         iconString =IndustrialScience.MODID + ":" + this.getUnlocalizedName().substring(5);
     }
+    
+    @Override
+    public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
+        System.out.print(IndustrialScience.MODID + ":" + "armor");
+        
+            return IndustrialScience.MODID + ":" + "armor";
+        
+    }
+    
     
 }
