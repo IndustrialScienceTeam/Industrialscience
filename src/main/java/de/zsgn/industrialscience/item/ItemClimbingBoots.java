@@ -21,10 +21,7 @@ public class ItemClimbingBoots extends ItemArmor{
     
     @Override
     public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-        System.out.print(IndustrialScience.MODID + ":" + "armor");
-        
-            return IndustrialScience.MODID + ":" + "textures/items/armor.png";
-        
+            return IndustrialScience.MODID + ":" + "textures/items/" + this.getUnlocalizedName().substring(5)+"_model.png";
     }
     
     
