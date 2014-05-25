@@ -13,7 +13,7 @@ public class TileEntityMysteriousPortal extends TileEntity {
     public boolean onBlockActivated(World world, int x, int y, int z,
             EntityPlayer player, int side, float xOffset, float yOffset,
             float zOffset) {
-        if(!activated&&(player.inventory.getStackInSlot(player.inventory.currentItem)!=null&&player.inventory.getStackInSlot(player.inventory.currentItem).getItem()==IndustrialScience.getInstance().getItemancienttechnology())){
+        if(!activated&&(player.inventory.getStackInSlot(player.inventory.currentItem)!=null&&player.inventory.getStackInSlot(player.inventory.currentItem).getItem()==IndustrialScience.getInstance().getItemancienttechnology())&&side==1){
             --player.inventory.getStackInSlot(player.inventory.currentItem).stackSize;
             activated=true;
             player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("mysteriousportal_activated")));
