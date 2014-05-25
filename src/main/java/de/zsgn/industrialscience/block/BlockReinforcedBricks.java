@@ -11,6 +11,8 @@ public class BlockReinforcedBricks extends Block {
         setCreativeTab(IndustrialScience.getInstance().getCreativetab());
         setBlockName("reinforcedbricks");
         setBlockTextureName(IndustrialScience.MODID+":"+getUnlocalizedName().substring(5));
+        setHardness(2.0F);
+        setResistance(1500.0F);
     }
 
 }
