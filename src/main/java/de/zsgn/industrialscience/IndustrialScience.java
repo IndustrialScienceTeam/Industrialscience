@@ -13,6 +13,7 @@ import net.minecraft.server.MinecraftServer;
 import org.apache.logging.log4j.Level;
 
 import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.common.IWorldGenerator;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -27,6 +28,7 @@ import de.zsgn.industrialscience.item.ItemAncientTechnology;
 import de.zsgn.industrialscience.item.ItemClimbingBoots;
 import de.zsgn.industrialscience.item.ItemCrystalReed;
 import de.zsgn.industrialscience.tileentity.TileEntityMysteriousPortal;
+import de.zsgn.industrialscience.world.WorldGeneratorPortalRoom;
 
 @Mod(modid = IndustrialScience.MODID, version = IndustrialScience.VERSION)
 public class IndustrialScience{
@@ -44,6 +46,8 @@ public class IndustrialScience{
     private Item itemclimbingboots;
 
     private CreativeTabs creativetab;
+    
+    private IWorldGenerator worldgeneratorportalroom;
 
     private IndustrialScienceMainCommand industrialScienceMainCommand=new IndustrialScienceMainCommand();
     @EventHandler
@@ -63,10 +67,9 @@ public class IndustrialScience{
         
         GameRegistry.registerTileEntity(TileEntityMysteriousPortal.class, blockmysteriousportal.getUnlocalizedName());
 
+        GameRegistry.registerWorldGenerator(worldgeneratorportalroom, 5);
+        
         addRecipes();
-
-
-
     }
 
     private void initFields() {
@@ -77,6 +80,7 @@ public class IndustrialScience{
         itemancienttechnology=new  ItemAncientTechnology();
         itemcrystalreed= new ItemCrystalReed();
         itemclimbingboots= new ItemClimbingBoots();
+        worldgeneratorportalroom=new WorldGeneratorPortalRoom();
     }
 
     private void addRecipes() {
