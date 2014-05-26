@@ -16,7 +16,7 @@ public class WorldGeneratorPortalRoom implements IWorldGenerator {
             IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
         int chunkStartX=chunkX*16;
         int chunkStartZ=chunkZ*16;
-        if(random.nextInt(4)==0&&world.provider.dimensionId==0){
+        if(random.nextInt(24)==0&&world.provider.dimensionId==0){
             int portaly=random.nextInt(maxheight-minheight+1)+minheight;
             int portalx= chunkStartX+7;
             int portalz= chunkStartZ+7;
@@ -50,7 +50,7 @@ public class WorldGeneratorPortalRoom implements IWorldGenerator {
                     }
                 }
             }
-            world.setBlock(portalx, portaly, portalz, Blocks.furnace);
+            world.setBlock(portalx, portaly, portalz, IndustrialScience.getInstance().getBlockmysteriousportal());
             }
         
     }
