@@ -65,7 +65,9 @@ public class TileEntityMysteriousPortal extends TileEntity {
         super.writeToNBT(tagCompound);
         tagCompound.setBoolean("active", active);
         tagCompound.setBoolean("useable", useable);
+        if(technologycompund!=null){
         tagCompound.setTag("technologycompund", technologycompund);
+        }
     }
     public boolean isUseable() {
         return useable;
