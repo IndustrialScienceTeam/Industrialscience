@@ -56,7 +56,6 @@ public class ItemClimbingBoots extends ItemArmor{
             armorModel.isSneak = entityLiving.isSneaking();
             armorModel.isRiding = entityLiving.isRiding();
             armorModel.isChild = entityLiving.isChild();
-            //armorModel.heldItemRight = entityLiving.getCurrentItemOrArmor(0) != null ? 1 :0;
             if(entityLiving instanceof EntityPlayer){
             armorModel.aimedBow =((EntityPlayer)entityLiving).getItemInUseDuration() > 2;
             }
