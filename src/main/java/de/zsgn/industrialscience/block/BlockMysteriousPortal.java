@@ -1,5 +1,6 @@
 package de.zsgn.industrialscience.block;
 
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -75,7 +76,7 @@ public class BlockMysteriousPortal extends BlockContainer {
             int z, Block block, int metadata) {
         if(!world.isRemote&&world.getTileEntity(x, y, z) instanceof TileEntityMysteriousPortal){
             TileEntityMysteriousPortal tileentity=(TileEntityMysteriousPortal)world.getTileEntity(x, y, z);
-            if(tileentity.isActivated()){
+            if(tileentity.isUseable()){
             ItemStack technologyItemStack=new ItemStack(IndustrialScience.getInstance().getItemancienttechnology());
             if(tileentity.getTechnologycompund()!=null){
                 technologyItemStack.stackTagCompound=tileentity.getTechnologycompund();
@@ -87,6 +88,5 @@ public class BlockMysteriousPortal extends BlockContainer {
         super.breakBlock(world, x, y, z,
                 block, metadata);
     }
-
 
 }

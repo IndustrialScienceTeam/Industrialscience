@@ -9,38 +9,56 @@ import net.minecraft.world.World;
 import de.zsgn.industrialscience.IndustrialScience;
 
 public class TileEntityMysteriousPortal extends TileEntity {
-    private boolean activated=false;
+    private boolean useable=false;
+    private boolean active=false;
     private NBTTagCompound technologycompund=null;
     public boolean onBlockActivated(World world, int x, int y, int z,
             EntityPlayer player, int side, float xOffset, float yOffset,
             float zOffset) {
-        if(!activated&&(player.inventory.getStackInSlot(player.inventory.currentItem)!=null&&player.inventory.getStackInSlot(player.inventory.currentItem).getItem()==IndustrialScience.getInstance().getItemancienttechnology())&&side==1){
+        if(!useable&&(player.inventory.getStackInSlot(player.inventory.currentItem)!=null&&player.inventory.getStackInSlot(player.inventory.currentItem).getItem()==IndustrialScience.getInstance().getItemancienttechnology())&&side==1){
             technologycompund=player.inventory.getStackInSlot(player.inventory.currentItem).getTagCompound();
             --player.inventory.getStackInSlot(player.inventory.currentItem).stackSize;
-            activated=true;
+            useable=true;
             player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("mysteriousportal_activated")));
             return true;
-
         }
         return false;
     }
+    
+    @Override
+    public void updateEntity() {
+        if(isUseable()){
+                    setActive(worldObj.getIndirectPowerLevelTo(xCoord, yCoord, zCoord, 0)>0);
+        }
+    }
+
     @Override
     public void readFromNBT(NBTTagCompound tagCompound) {
-        activated=tagCompound.getBoolean("activated");
+        super.readFromNBT(tagCompound);
+        useable=tagCompound.getBoolean("useable");
+        active=tagCompound.getBoolean("active");
         if(tagCompound.getTag("technologycompund") instanceof NBTTagCompound){
         technologycompund=(NBTTagCompound) tagCompound.getTag("technologycompund");
         }
     }
     @Override
     public void writeToNBT(NBTTagCompound tagCompound) {
-        tagCompound.setBoolean("activated", activated);
+        super.writeToNBT(tagCompound);
+        tagCompound.setBoolean("active", active);
+        tagCompound.setBoolean("useable", useable);
         tagCompound.setTag("technologycompund", technologycompund);
     }
-    public boolean isActivated() {
-        return activated;
+    public boolean isUseable() {
+        return useable;
     }
     public NBTTagCompound getTechnologycompund() {
         return technologycompund;
+    }
+    public boolean isActive() {
+        return active;
+    }
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
 }
