@@ -130,4 +130,16 @@ public class IndustrialScience{
     public IndustrialScienceMainCommand getIndustrialScienceMainCommand() {
         return industrialScienceMainCommand;
     }
+
+    public Block getBlockreinforcedbricks() {
+        return blockreinforcedbricks;
+    }
+
+    public Item getItemcrystalreed() {
+        return itemcrystalreed;
+    }
+
+    public IWorldGenerator getWorldgeneratorportalroom() {
+        return worldgeneratorportalroom;
+    }
 }
