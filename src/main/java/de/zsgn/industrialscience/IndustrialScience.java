@@ -17,6 +17,7 @@ import cpw.mods.fml.common.IWorldGenerator;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -36,6 +37,8 @@ public class IndustrialScience{
     public static final String VERSION = "@VERSION@";
     @Instance
     private static IndustrialScience instance;
+    @SidedProxy(serverSide="de.zsgn.industrialscience.CommonProxy", clientSide="de.zsgn.industrialscience.ClientProxy")
+    public static CommonProxy proxy;
 
     private Block blocksingularity;
     private Block blockmysteriousportal;
