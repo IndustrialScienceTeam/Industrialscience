@@ -15,14 +15,14 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class climbingboots_model extends ModelBiped
+public class ModelClimbingBoots extends ModelBiped
 {
   //fields
     ModelRenderer Shape1;
     ModelRenderer Shape2;
 
   
-  public climbingboots_model(float f)
+  public ModelClimbingBoots(float f)
   {
       super(f);
     textureWidth = 64;

@@ -1,12 +1,12 @@
 package de.zsgn.industrialscience;
 
-import de.zsgn.industrialscience.item.climbingboots_model;
+import de.zsgn.industrialscience.item.ModelClimbingBoots;
 import net.minecraft.client.model.ModelBiped;
 
 public class ClientProxy extends CommonProxy {
 
-    private static final climbingboots_model normal = new climbingboots_model(1.0f);
-    private static final climbingboots_model smaller = new climbingboots_model(0.5f);
+    private static final ModelClimbingBoots normal = new ModelClimbingBoots(1.0f);
+    private static final ModelClimbingBoots smaller = new ModelClimbingBoots(0.5f);
     
     public ModelBiped getArmorModel(int id){
         switch (id) {
