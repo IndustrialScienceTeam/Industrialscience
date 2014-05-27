@@ -37,7 +37,6 @@ public class ItemClimbingBoots extends ItemArmor{
         ModelBiped armorModel = null;
         if(itemStack != null){
             if(itemStack.getItem() instanceof ItemClimbingBoots){
-                 climbingboots_model climbingboots = new climbingboots_model(1.0f);
                 armorModel = IndustrialScience.proxy.getArmorModel(0);
             }
             
