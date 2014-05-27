@@ -43,7 +43,9 @@ public class TileEntityMysteriousPortal extends TileEntity {
                             Object object = iterator.next();
                             if(object instanceof Entity){
                                 Entity entity =(Entity) object;
-                                entity.setDead();
+                                if(entity instanceof EntityLivingBase){
+                                    ((EntityLivingBase)entity).setHealth(0);
+                                }
                             }
                             
                         }
