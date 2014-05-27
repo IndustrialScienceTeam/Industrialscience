@@ -4,7 +4,9 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -16,20 +18,7 @@ import de.zsgn.industrialscience.IndustrialScience;
 public class TileEntityMysteriousPortal extends TileEntity {
     private boolean useable=false;
     private boolean active=false;
-    private NBTTagCompound technologycompund=null;
-    public boolean onBlockActivated(World world, int x, int y, int z,
-            EntityPlayer player, int side, float xOffset, float yOffset,
-            float zOffset) {
-        if(!useable&&(player.inventory.getStackInSlot(player.inventory.currentItem)!=null&&player.inventory.getStackInSlot(player.inventory.currentItem).getItem()==IndustrialScience.getInstance().getItemancienttechnology())&&side==1){
-            technologycompund=player.inventory.getStackInSlot(player.inventory.currentItem).getTagCompound();
-            --player.inventory.getStackInSlot(player.inventory.currentItem).stackSize;
-            useable=true;
-            player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("mysteriousportal_activated")));
-            return true;
-        }
-        return false;
-    }
-    
+    private NBTTagCompound technologycompund=null;    
     @SuppressWarnings("rawtypes")
     @Override
     public void updateEntity() {
@@ -82,6 +71,16 @@ public class TileEntityMysteriousPortal extends TileEntity {
     }
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public void setUseable(boolean useable) {
+        this.useable = useable;
+    }
+
+    public void setTechnologycompund(NBTBase nbtBase) {
+        if(nbtBase instanceof NBTTagCompound){
+        this.technologycompund = (NBTTagCompound)nbtBase;
+        }
     }
 
 }

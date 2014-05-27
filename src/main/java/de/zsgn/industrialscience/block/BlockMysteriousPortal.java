@@ -11,7 +11,9 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import de.zsgn.industrialscience.IndustrialScience;
 import de.zsgn.industrialscience.tileentity.TileEntityMysteriousPortal;
@@ -42,10 +44,14 @@ public class BlockMysteriousPortal extends BlockContainer {
             float zOffset) {
         if(!world.isRemote&&world.getTileEntity(x, y, z) instanceof TileEntityMysteriousPortal){
             TileEntityMysteriousPortal tileentity=(TileEntityMysteriousPortal)world.getTileEntity(x, y, z);
-            return tileentity.onBlockActivated(world, x,
-                    y, z, player,
-                    side, xOffset, yOffset,
-                    zOffset);
+            if(!tileentity.isUseable()&&(player.inventory.getStackInSlot(player.inventory.currentItem)!=null&&player.inventory.getStackInSlot(player.inventory.currentItem).getItem()==IndustrialScience.getInstance().getItemancienttechnology())&&side==1){
+                tileentity.setTechnologycompund(player.inventory.getStackInSlot(player.inventory.currentItem).getTagCompound().copy());
+                --player.inventory.getStackInSlot(player.inventory.currentItem).stackSize;
+                tileentity.setUseable(true);
+                player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("mysteriousportal_activated")));
+                return true;
+            }
+            return false;
         }
         return false;
     }
