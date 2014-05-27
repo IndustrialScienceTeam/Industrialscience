@@ -38,7 +38,7 @@ public class ItemClimbingBoots extends ItemArmor{
         if(itemStack != null){
             if(itemStack.getItem() instanceof ItemClimbingBoots){
                  climbingboots_model climbingboots = new climbingboots_model(1.0f);
-                armorModel = climbingboots;
+                armorModel = IndustrialScience.proxy.getArmorModel(0);
             }
             
             
@@ -56,6 +56,7 @@ public class ItemClimbingBoots extends ItemArmor{
             armorModel.isSneak = entityLiving.isSneaking();
             armorModel.isRiding = entityLiving.isRiding();
             armorModel.isChild = entityLiving.isChild();
+            armorModel.heldItemRight = entityLiving.getEquipmentInSlot(0) != null ? 1 :0;
             if(entityLiving instanceof EntityPlayer){
             armorModel.aimedBow =((EntityPlayer)entityLiving).getItemInUseDuration() > 2;
             }
