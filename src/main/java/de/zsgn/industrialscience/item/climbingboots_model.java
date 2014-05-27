@@ -41,6 +41,8 @@ public class climbingboots_model extends ModelBiped
       Shape2.mirror = true;
       setRotation(Shape2, 0F, 0F, 0F);
       
+      this.bipedLeftLeg.addChild(Shape1);
+      this.bipedRightLeg.addChild(Shape2);
   }
   
   public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
