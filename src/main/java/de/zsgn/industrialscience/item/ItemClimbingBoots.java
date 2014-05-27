@@ -35,14 +35,12 @@ public class ItemClimbingBoots extends ItemArmor{
     ItemStack itemStack, int armorSlot) {
         
         ModelBiped armorModel = null;
-        if(itemStack != null){
-            if(itemStack.getItem() instanceof ItemClimbingBoots){
+        
+        if(itemStack != null && itemStack.getItem() instanceof ItemClimbingBoots){           
                 armorModel = IndustrialScience.proxy.getArmorModel(0);
             }
-            
-            
-            
-        }
+   
+        
         if(armorModel != null){
             armorModel.bipedHead.showModel = armorSlot == 0;
             armorModel.bipedHeadwear.showModel = armorSlot == 0;
