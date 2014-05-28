@@ -2,12 +2,14 @@ package de.zsgn.industrialscience.tileentity;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChatComponentText;
@@ -16,8 +18,11 @@ import net.minecraft.world.World;
 import de.zsgn.industrialscience.IndustrialScience;
 
 public class TileEntityMysteriousPortal extends TileEntity {
+    public static Integer[] effectlist={};
     private boolean useable=false;
     private boolean active=false;
+    private int badeffectchance=1;
+    private Random random= new Random();
     private NBTTagCompound technologycompund=null;    
     @SuppressWarnings("rawtypes")
     @Override
@@ -32,14 +37,30 @@ public class TileEntityMysteriousPortal extends TileEntity {
                             Object object = iterator.next();
                             if(object instanceof Entity){
                                 Entity entity =(Entity) object;
-                                if(entity instanceof EntityLivingBase){
-                                    ((EntityLivingBase)entity).setHealth(0);
-                                }
+                                teleport(entity);
                             }
                             
                         }
                     }
         }
+    }
+
+    private void teleport(Entity entity) {
+        if(entity instanceof EntityLivingBase){
+            ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(9,100,1));
+            if(random.nextInt(badeffectchance)==0){
+                applyBadEffect((EntityLivingBase)entity);
+            }
+        }
+        entity.travelToDimension(-1);
+    }
+
+    private void applyBadEffect(EntityLivingBase entity) {
+        int effectamount = random.nextInt(effectlist.length);
+        for (int i = 0; i < effectamount; i++) {
+            entity.addPotionEffect(new PotionEffect(effectlist[random.nextInt(effectlist.length)], (int) (random.nextDouble()*500), 1));
+        }
+        
     }
 
     @Override
@@ -81,6 +102,18 @@ public class TileEntityMysteriousPortal extends TileEntity {
         if(nbtBase instanceof NBTTagCompound){
         this.technologycompund = (NBTTagCompound)nbtBase;
         }
+    }
+
+    public int getBadeffectchance() {
+        return badeffectchance;
+    }
+
+    public void setBadeffectchance(int badeffectchance) {
+        this.badeffectchance = badeffectchance;
+    }
+
+    public static void setEffectlist(Integer[] integers) {
+        TileEntityMysteriousPortal.effectlist = integers;
     }
 
 }

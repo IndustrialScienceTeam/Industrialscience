@@ -1,5 +1,8 @@
 package de.zsgn.industrialscience;
 
+import java.util.ArrayList;
+import java.util.Properties;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.command.ServerCommandManager;
@@ -51,12 +54,16 @@ public class IndustrialScience{
     private CreativeTabs creativetab;
     
     private IWorldGenerator worldgeneratorportalroom;
+    
+    private Properties props= new Properties();
 
     private IndustrialScienceMainCommand industrialScienceMainCommand=new IndustrialScienceMainCommand();
     @EventHandler
     public void init(FMLInitializationEvent event){
         FMLLog.log(Level.INFO, "This is IndustrialScience version: "+IndustrialScience.VERSION);
         instance=this;
+        loadProps();
+        ApplyProps();
         initFields();
         GameRegistry.registerBlock(blocksingularity, blocksingularity.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(blockmysteriousportal, blockmysteriousportal.getUnlocalizedName().substring(5));
@@ -73,6 +80,31 @@ public class IndustrialScience{
         GameRegistry.registerWorldGenerator(worldgeneratorportalroom, 5);
         
         addRecipes();
+    }
+
+    private void ApplyProps() {
+        String[] ids = props.getProperty("BadEffectsIDs").split(",");
+        ArrayList<Integer> idList= new ArrayList<Integer>();
+        for (String string : ids) {
+            Integer id=0;
+            try {
+                id=Integer.decode(string);
+            } catch (NumberFormatException e) {
+                
+            }finally{
+                if(id!=0){
+                    idList.add(id);
+                }
+            }
+        }
+        TileEntityMysteriousPortal.setEffectlist(idList.toArray(new Integer[1]));
+        
+        
+    }
+
+    private void loadProps() {
+        props.setProperty("BadEffectsIDs", "2,4,15,18,19");
+        
     }
 
     private void initFields() {
