@@ -13,7 +13,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 
 public class TileEntityMysteriousPortal extends TileEntity {
-    public static Integer[] effectlist={};
+    private static Integer[] effectlist={};
     private boolean useable=false;
     private boolean active=false;
     private int badeffectchance=1;

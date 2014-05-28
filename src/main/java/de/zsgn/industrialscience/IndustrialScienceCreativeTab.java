@@ -7,7 +7,6 @@ public class IndustrialScienceCreativeTab extends CreativeTabs {
 
     public IndustrialScienceCreativeTab() {
         super("IndustrialScience");
-        // TODO Auto-generated constructor stub
     }
 
     @Override

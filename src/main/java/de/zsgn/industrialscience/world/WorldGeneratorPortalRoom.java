@@ -8,15 +8,15 @@ import cpw.mods.fml.common.IWorldGenerator;
 import de.zsgn.industrialscience.IndustrialScience;
 
 public class WorldGeneratorPortalRoom implements IWorldGenerator {
-    public final static int maxheight=45;
-    public final static int minheight=3;
+    public static final int MAXHEIGHT=45;
+    public static final int MINHEIGHT=3;
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world,
             IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
         int chunkStartX=chunkX*16;
         int chunkStartZ=chunkZ*16;
         if(random.nextInt(24)==0&&world.provider.dimensionId==0){
-            int portaly=random.nextInt(maxheight-minheight+1)+minheight;
+            int portaly=random.nextInt(MAXHEIGHT-MINHEIGHT+1)+MINHEIGHT;
             int portalx= chunkStartX+7;
             int portalz= chunkStartZ+7;
             int x = portalx-2;

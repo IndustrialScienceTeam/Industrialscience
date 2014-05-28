@@ -63,7 +63,7 @@ public class IndustrialScience{
         FMLLog.log(Level.INFO, "This is IndustrialScience version: "+IndustrialScience.VERSION);
         instance=this;
         loadProps();
-        ApplyProps();
+        applyProps();
         initFields();
         GameRegistry.registerBlock(blocksingularity, blocksingularity.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(blockmysteriousportal, blockmysteriousportal.getUnlocalizedName().substring(5));
@@ -82,7 +82,7 @@ public class IndustrialScience{
         addRecipes();
     }
 
-    private void ApplyProps() {
+    private void applyProps() {
         String[] ids = props.getProperty("BadEffectsIDs").split(",");
         ArrayList<Integer> idList= new ArrayList<Integer>();
         for (String string : ids) {
@@ -90,7 +90,7 @@ public class IndustrialScience{
             try {
                 id=Integer.decode(string);
             } catch (NumberFormatException e) {
-                
+                FMLLog.log(Level.INFO, "Invalid potion ID number! :"+string);
             }finally{
                 if(id!=0){
                     idList.add(id);
