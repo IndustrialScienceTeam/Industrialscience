@@ -18,6 +18,9 @@ public static void generateRoom(int x, int y, int z, World worldobj, ForgeDirect
 public String[][][] getContent() {
     return content;
 }
+public static String[][][] getEmptyContent() {
+    return new String[ROOMSIZE-2][ROOMHEIGHT-2][ROOMSIZE-2];
+}
 public RouteType getRoutetype() {
     return routetype;
 }
