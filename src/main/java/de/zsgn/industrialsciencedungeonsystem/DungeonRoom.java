@@ -6,7 +6,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class DungeonRoom {
 public final static int ROOMSIZE=16;
 public final static int ROOMHEIGHT=10;
-private String[][][] content=new String[ROOMSIZE-2][ROOMHEIGHT-2][ROOMSIZE-2];
+private String[][][] content=new String[ROOMSIZE][ROOMHEIGHT][ROOMSIZE];
 private RouteType routetype;
 public DungeonRoom(RouteType routetype, String[][][] content) {
     super();
@@ -19,7 +19,7 @@ public String[][][] getContent() {
     return content;
 }
 public static String[][][] getEmptyContent() {
-    return new String[ROOMSIZE-2][ROOMHEIGHT-2][ROOMSIZE-2];
+    return new String[ROOMSIZE][ROOMHEIGHT][ROOMSIZE];
 }
 public RouteType getRoutetype() {
     return routetype;
