@@ -1,6 +1,7 @@
 package de.zsgn.industrialscience;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Properties;
 
 import net.minecraft.block.Block;
@@ -27,6 +28,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import de.zsgn.industrialscience.block.BlockMysteriousPortal;
 import de.zsgn.industrialscience.block.BlockReinforcedBricks;
 import de.zsgn.industrialscience.block.BlockSingularity;
+import de.zsgn.industrialscience.command.CommandGenerateRoom;
 import de.zsgn.industrialscience.command.IndustrialScienceMainCommand;
 import de.zsgn.industrialscience.item.ItemAncientTechnology;
 import de.zsgn.industrialscience.item.ItemClimbingBoots;
@@ -34,6 +36,7 @@ import de.zsgn.industrialscience.item.ItemCrystalReed;
 import de.zsgn.industrialscience.tileentity.TileEntityMysteriousPortal;
 import de.zsgn.industrialscience.world.WorldGeneratorPortalRoom;
 import de.zsgn.industrialsciencedungeonsystem.DungeonRoom;
+import de.zsgn.industrialsciencedungeonsystem.RouteType;
 
 @Mod(modid = IndustrialScience.MODID, version = IndustrialScience.VERSION)
 public class IndustrialScience{
@@ -61,6 +64,7 @@ public class IndustrialScience{
     private Properties props= new Properties();
 
     private IndustrialScienceMainCommand industrialScienceMainCommand=new IndustrialScienceMainCommand();
+    private CommandGenerateRoom industrialScienceGenerateRoom= new CommandGenerateRoom();
     @EventHandler
     public void init(FMLInitializationEvent event){
         FMLLog.log(Level.INFO, "This is IndustrialScience version: "+IndustrialScience.VERSION);
@@ -140,6 +144,8 @@ public class IndustrialScience{
         MinecraftServer server = MinecraftServer.getServer();
         ServerCommandManager manager = (ServerCommandManager) server.getCommandManager();
         manager.registerCommand(industrialScienceMainCommand);
+        manager.registerCommand(industrialScienceGenerateRoom);
+        
 
     }
 
