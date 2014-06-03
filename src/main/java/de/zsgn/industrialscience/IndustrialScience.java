@@ -33,6 +33,7 @@ import de.zsgn.industrialscience.item.ItemClimbingBoots;
 import de.zsgn.industrialscience.item.ItemCrystalReed;
 import de.zsgn.industrialscience.tileentity.TileEntityMysteriousPortal;
 import de.zsgn.industrialscience.world.WorldGeneratorPortalRoom;
+import de.zsgn.industrialsciencedungeonsystem.DungeonRoom;
 
 @Mod(modid = IndustrialScience.MODID, version = IndustrialScience.VERSION)
 public class IndustrialScience{
@@ -42,6 +43,8 @@ public class IndustrialScience{
     private static IndustrialScience instance;
     @SidedProxy(serverSide="de.zsgn.industrialscience.CommonProxy", clientSide="de.zsgn.industrialscience.ClientProxy")
     public static CommonProxy proxy;
+
+    private Hashtable<String, DungeonRoom> dungeonroomlist = new Hashtable<String, DungeonRoom>();
 
     private Block blocksingularity;
     private Block blockmysteriousportal;
@@ -104,6 +107,12 @@ public class IndustrialScience{
 
     private void loadProps() {
         props.setProperty("BadEffectsIDs", "2,4,15,18,19");
+        loadDungeonRooms();
+    }
+
+    private void loadDungeonRooms() {
+        DungeonRoom def = new DungeonRoom(RouteType.STRAIGHT, DungeonRoom.getEmptyContent(), "DefaultStraight");
+        dungeonroomlist.put(def.getName(), def);
         
     }
 
@@ -176,5 +185,8 @@ public class IndustrialScience{
 
     public IWorldGenerator getWorldgeneratorportalroom() {
         return worldgeneratorportalroom;
+    }
+    public DungeonRoom getDungeonRoom(String key) {
+        return dungeonroomlist.get(key);
     }
 }
