@@ -8,10 +8,12 @@ public final static int ROOMSIZE=16;
 public final static int ROOMHEIGHT=10;
 private String[][][] content=new String[ROOMSIZE][ROOMHEIGHT][ROOMSIZE];
 private RouteType routetype;
-public DungeonRoom(RouteType routetype, String[][][] content) {
+private String name;
+public DungeonRoom(RouteType routetype, String[][][] content, String name) {
     super();
     this.routetype = routetype;
     this.content = content;
+    this.name = name;
 }
 public static void generateRoom(int x, int y, int z, World worldobj, ForgeDirection direction){
 }
@@ -26,5 +28,8 @@ public RouteType getRoutetype() {
 }
 public void setRoutetype(RouteType routetype) {
     this.routetype = routetype;
+}
+public String getName() {
+    return name;
 }
 }
