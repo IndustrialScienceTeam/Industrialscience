@@ -1,5 +1,6 @@
 package de.zsgn.industrialsciencedungeonsystem;
 
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -15,7 +16,14 @@ public DungeonRoom(RouteType routetype, String[][][] content, String name) {
     this.content = content;
     this.name = name;
 }
-public static void generateRoom(int x, int y, int z, World worldobj, ForgeDirection direction){
+public void generateRoom(int x, int y, int z, World worldobj, ForgeDirection direction){
+    for (int i = 0; i < ROOMSIZE; i++) {
+        for (int j = 0; j < ROOMHEIGHT; j++) {
+            for (int j2 = 0; j2 < ROOMSIZE; j2++) {
+                worldobj.setBlock(x+i, y+j, z+j2, Blocks.coal_block);
+            }
+        }
+    }
 }
 public String[][][] getContent() {
     return content;
