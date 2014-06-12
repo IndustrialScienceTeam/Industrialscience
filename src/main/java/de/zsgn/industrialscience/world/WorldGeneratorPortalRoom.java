@@ -19,6 +19,9 @@ public class WorldGeneratorPortalRoom implements IWorldGenerator {
             int portaly=random.nextInt(MAXHEIGHT-MINHEIGHT+1)+MINHEIGHT;
             int portalx= chunkStartX+7;
             int portalz= chunkStartZ+7;
+            if(world.isAirBlock(portalx, portaly, portalz)){
+                return;
+            }
             int x = portalx-2;
             int y = portaly;
             int z = portalz-2;
