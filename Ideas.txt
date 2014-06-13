@@ -24,6 +24,9 @@ MIDDLE AND LATE GAME
 	-machines should be partially self-explanatory
 
 Tier which hasn't got anything to do with the rest of the mod
+
+-The addition of mod-own conveyor belts as well as worldgen-liquids and tiered multiblocks
+
 -possible stuff
         -implement scaffolds for testing
 -impossible stuff
