@@ -13,6 +13,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import org.apache.logging.log4j.Level;
 
@@ -68,6 +69,7 @@ public class IndustrialScience{
     @EventHandler
     public void init(FMLInitializationEvent event){
         FMLLog.log(Level.INFO, "This is IndustrialScience version: "+IndustrialScience.VERSION);
+        new MultiBlockStructure(1, 1, 1, 1, 2, 0).structureTest(null, 0, 0, 0, ForgeDirection.SOUTH);
         instance=this;
         loadProps();
         applyProps();
