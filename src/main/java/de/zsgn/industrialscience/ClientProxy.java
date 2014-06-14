@@ -7,7 +7,7 @@ public class ClientProxy extends CommonProxy {
     
     @Override
     public ModelBiped getArmorModel(int id) {
-        return new ModelClimbingBoots(1.0f);
+        return new ModelClimbingBoots(2.0f);
     }
     
 }

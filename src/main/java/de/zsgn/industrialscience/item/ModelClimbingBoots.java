@@ -42,7 +42,7 @@ public class ModelClimbingBoots extends ModelBiped {
             float f4, float f5) {
         super.render(entity, f, f1, f2, f3, f4, f5);
         super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-        shoe.render(f5);
+        //shoe.render(f5);
         spike.render(f5);
         
     }
