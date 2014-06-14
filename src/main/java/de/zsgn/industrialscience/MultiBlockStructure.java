@@ -6,35 +6,36 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class MultiBlockStructure {
-protected final int SizeToRight;
-protected final int SizeToLeft;
-protected final int SizeToBottom;
-protected final int SizeToTop;
-protected final int SizeToBack;
-protected final int SizeToFront;
+protected final int sizeToRight;
+protected final int sizeToLeft;
+protected final int sizeToBottom;
+protected final int sizeToTop;
+protected final int sizeToBack;
+protected final int sizeToFront;
+
 public MultiBlockStructure(int sizeToRight, int sizeToLeft, int sizeToBottom,
         int sizeToTop, int sizeToBack, int sizeToFront) {
     super();
-    SizeToRight = sizeToRight;
-    SizeToLeft = sizeToLeft;
-    SizeToBottom = sizeToBottom;
-    SizeToTop = sizeToTop;
-    SizeToBack = sizeToBack;
-    SizeToFront = sizeToFront;
+    this.sizeToRight = sizeToRight;
+    this.sizeToLeft = sizeToLeft;
+    this.sizeToBottom = sizeToBottom;
+    this.sizeToTop = sizeToTop;
+    this.sizeToBack = sizeToBack;
+    this.sizeToFront = sizeToFront;
 }
 
 public boolean structureTest(World world, int x, int y, int z, ForgeDirection dir){
     ForgeDirection dirRIGHT =dir.getRotation(ForgeDirection.DOWN);
     ForgeDirection dirLEFT=dirRIGHT.getOpposite();
     ForgeDirection dirDEPTH=dir.getOpposite();
-    int startX=x+SizeToRight*dirRIGHT.offsetX+SizeToFront*dir.offsetX;
-    int startY=y+SizeToTop;
-    int startZ=z+SizeToRight*dirRIGHT.offsetZ+SizeToFront*dir.offsetZ;
+    int startX=x+sizeToRight*dirRIGHT.offsetX+sizeToFront*dir.offsetX;
+    int startY=y+sizeToTop;
+    int startZ=z+sizeToRight*dirRIGHT.offsetZ+sizeToFront*dir.offsetZ;
     System.out.println("Start Cord.:");
     System.out.println("X: "+Integer.toString(startX)+"  Y:"+Integer.toString(startY)+"  Z:"+Integer.toString(startZ));
-    int endX=x+SizeToLeft*dirLEFT.offsetX+SizeToBack*dirDEPTH.offsetX;
-    int endY=y-SizeToBottom;
-    int endZ=z+SizeToLeft*dirLEFT.offsetZ+SizeToBack*dirDEPTH.offsetZ;
+    int endX=x+sizeToLeft*dirLEFT.offsetX+sizeToBack*dirDEPTH.offsetX;
+    int endY=y-sizeToBottom;
+    int endZ=z+sizeToLeft*dirLEFT.offsetZ+sizeToBack*dirDEPTH.offsetZ;
     System.out.println("End Cord.:");
     System.out.println("X: "+Integer.toString(endX)+"  Y:"+Integer.toString(endY)+"  Z:"+Integer.toString(endZ));
     System.out.println("---------------------------");
