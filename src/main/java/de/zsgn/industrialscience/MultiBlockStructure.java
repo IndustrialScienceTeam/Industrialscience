@@ -5,7 +5,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class MultiBlockStructure {
+public enum MultiBlockStructure {
+    FURNACE_TIER1(1,1,1,1,2,0);
 protected final int sizeToRight;
 protected final int sizeToLeft;
 protected final int sizeToBottom;
@@ -13,9 +14,8 @@ protected final int sizeToTop;
 protected final int sizeToBack;
 protected final int sizeToFront;
 
-public MultiBlockStructure(int sizeToRight, int sizeToLeft, int sizeToBottom,
+MultiBlockStructure(int sizeToRight, int sizeToLeft, int sizeToBottom,
         int sizeToTop, int sizeToBack, int sizeToFront) {
-    super();
     this.sizeToRight = sizeToRight;
     this.sizeToLeft = sizeToLeft;
     this.sizeToBottom = sizeToBottom;
