@@ -29,12 +29,14 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import de.zsgn.industrialscience.block.BlockMysteriousPortal;
 import de.zsgn.industrialscience.block.BlockReinforcedBricks;
 import de.zsgn.industrialscience.block.BlockSingularity;
+import de.zsgn.industrialscience.block.multiblock.MultiBlockControllerTier1Furnace;
 import de.zsgn.industrialscience.command.CommandGenerateRoom;
 import de.zsgn.industrialscience.command.IndustrialScienceMainCommand;
 import de.zsgn.industrialscience.item.ItemAncientTechnology;
 import de.zsgn.industrialscience.item.ItemClimbingBoots;
 import de.zsgn.industrialscience.item.ItemCrystalReed;
 import de.zsgn.industrialscience.tileentity.TileEntityMysteriousPortal;
+import de.zsgn.industrialscience.tileentity.multiblock.TileEntityTier1Furnace;
 import de.zsgn.industrialscience.world.WorldGeneratorPortalRoom;
 import de.zsgn.industrialsciencedungeonsystem.DungeonRoom;
 import de.zsgn.industrialsciencedungeonsystem.RouteType;
@@ -53,6 +55,7 @@ public class IndustrialScience{
     private Block blocksingularity;
     private Block blockmysteriousportal;
     private Block blockreinforcedbricks;
+    private Block multiblockcontrollertier1furnace;
 
     private Item itemancienttechnology;
     private Item itemcrystalreed;
@@ -76,6 +79,7 @@ public class IndustrialScience{
         GameRegistry.registerBlock(blocksingularity, blocksingularity.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(blockmysteriousportal, blockmysteriousportal.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(blockreinforcedbricks, blockreinforcedbricks.getUnlocalizedName().substring(5));
+        GameRegistry.registerBlock(multiblockcontrollertier1furnace, multiblockcontrollertier1furnace.getUnlocalizedName().substring(5));
         
         GameRegistry.registerItem(itemancienttechnology, itemancienttechnology.getUnlocalizedName().substring(5));
 
@@ -84,6 +88,7 @@ public class IndustrialScience{
         GameRegistry.registerItem(itemclimbingboots , itemclimbingboots.getUnlocalizedName().substring(5));
         
         GameRegistry.registerTileEntity(TileEntityMysteriousPortal.class, blockmysteriousportal.getUnlocalizedName());
+        GameRegistry.registerTileEntity(TileEntityTier1Furnace.class, multiblockcontrollertier1furnace.getUnlocalizedName());
 
         GameRegistry.registerWorldGenerator(worldgeneratorportalroom, 5);
         
@@ -126,6 +131,7 @@ public class IndustrialScience{
         blockmysteriousportal= new BlockMysteriousPortal();
         blocksingularity= new BlockSingularity(Material.rock);
         blockreinforcedbricks=new BlockReinforcedBricks();
+        multiblockcontrollertier1furnace=new MultiBlockControllerTier1Furnace();
         itemancienttechnology=new  ItemAncientTechnology();
         itemcrystalreed= new ItemCrystalReed();
         itemclimbingboots= new ItemClimbingBoots();
