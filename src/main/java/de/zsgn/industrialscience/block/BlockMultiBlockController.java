@@ -30,7 +30,7 @@ public abstract class BlockMultiBlockController extends BlockContainer {
             float zOffset) {
         if(!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityMultiBlockController){
             TileEntityMultiBlockController masterTileEntity = (TileEntityMultiBlockController) world.getTileEntity(x, y, z);
-            Vec3[] blocks = structure.structureTest(world, x, y, z, ForgeDirection.getOrientation(world.getBlockMetadata(x, y, z)), ValidBlocks);
+            Vec3[] blocks = structure.structureTest(world, x, y, z, ForgeDirection.getOrientation(side), ValidBlocks);
             if(blocks == null){
                 return false;
             }
