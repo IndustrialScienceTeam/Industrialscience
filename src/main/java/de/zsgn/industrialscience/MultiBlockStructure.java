@@ -1,5 +1,6 @@
 package de.zsgn.industrialscience;
 
+import de.zsgn.industrialscience.tileentity.TileEntityMultiBlock;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.Vec3;
@@ -49,6 +50,9 @@ public Vec3[] structureTest(World world, int x, int y, int z, ForgeDirection dir
         for (int movey = 0; movey+Math.min(startY, endY)<=Math.max(startY,endY); movey++) {
             for (int movez = 0; movez+Math.min(startZ, endZ)<=Math.max(startZ, endZ); movez++) {
                 System.out.println("X: "+Integer.toString(movex+Math.min(startX, endX))+"  Y:"+Integer.toString(movey+Math.min(startY, endY))+"  Z:"+Integer.toString(movez+Math.min(startZ, endZ)));
+                if(!isValidBlock(ValidBlocks, world, movex+Math.min(startX, endX), movey+Math.min(startY, endY), movez+Math.min(startZ, endZ))){
+                    return null;
+                }
                 result[i]=Vec3.fakePool.getVecFromPool(movex+Math.min(startX, endX), movey+Math.min(startY, endY), movez+Math.min(startZ, endZ));
             }
         }
@@ -56,8 +60,16 @@ public Vec3[] structureTest(World world, int x, int y, int z, ForgeDirection dir
     return result;
 }
 
-protected boolean isValidBlock(Block block) {
-    return block.equals(Blocks.cobblestone);
+protected boolean isValidBlock(Block[] ValidBlocks, World world, int x, int y, int z) {
+    if(world.getTileEntity(x, y, z) instanceof TileEntityMultiBlock&&((TileEntityMultiBlock)world.getTileEntity(x, y, z))).isActivePart()){
+        
+    }
+    for (int i = 0; i < ValidBlocks.length; i++) {
+       if(block == ValidBlocks[i]){
+           return true;
+       }
+    }
+    return false;
 }
 
 }
