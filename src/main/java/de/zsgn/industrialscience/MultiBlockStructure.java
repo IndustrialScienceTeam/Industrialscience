@@ -61,11 +61,11 @@ public Vec3[] structureTest(World world, int x, int y, int z, ForgeDirection dir
 }
 
 protected boolean isValidBlock(Block[] ValidBlocks, World world, int x, int y, int z) {
-    if(world.getTileEntity(x, y, z) instanceof TileEntityMultiBlock&&((TileEntityMultiBlock)world.getTileEntity(x, y, z))).isActivePart()){
-        
+    if(world.getTileEntity(x, y, z) instanceof TileEntityMultiBlock&&((TileEntityMultiBlock)world.getTileEntity(x, y, z)).isActivePart()){
+        return false;
     }
     for (int i = 0; i < ValidBlocks.length; i++) {
-       if(block == ValidBlocks[i]){
+       if(world.getBlock(x, y, z) == ValidBlocks[i]){
            return true;
        }
     }
