@@ -8,4 +8,9 @@ public class TileEntityMultiBlock extends TileEntity {
         return false;
     }
 
+    public void setController(int x, int y, int z) {
+        // TODO Auto-generated method stub
+        
+    }
+
 }
