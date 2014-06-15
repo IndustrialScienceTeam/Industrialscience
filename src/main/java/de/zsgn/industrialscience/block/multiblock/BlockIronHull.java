@@ -29,7 +29,7 @@ public class BlockIronHull extends BlockContainer {
             int y, int z, EntityPlayer player,
             int side, float xOffset, float yOffset,
             float zOffset) {
-        if(!world.isRemote&&world.getTileEntity(x, y, z)instanceof TileEntityMultiBlock){
+        if(!world.isRemote&&world.getTileEntity(x, y, z)instanceof TileEntityMultiBlock && (((TileEntityMultiBlock)world.getTileEntity(x, y, z)).isActivePart())){
            player.addChatComponentMessage(new ChatComponentText(Integer.toString(((TileEntityMultiBlock)world.getTileEntity(x, y, z)).getMasterx())));
            return true;
         }
