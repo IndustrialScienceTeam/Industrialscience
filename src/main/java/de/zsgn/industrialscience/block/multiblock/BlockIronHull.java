@@ -1,5 +1,7 @@
 package de.zsgn.industrialscience.block.multiblock;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -8,7 +10,7 @@ import net.minecraft.world.World;
 import de.zsgn.industrialscience.IndustrialScience;
 import de.zsgn.industrialscience.tileentity.multiblock.TileEntityMultiBlock;
 
-public class BlockIronHull extends IMultiBlockHull {
+public class BlockIronHull extends BlockContainer {
 
     public BlockIronHull() {
         super(Material.iron);
@@ -18,7 +20,7 @@ public class BlockIronHull extends IMultiBlockHull {
     }
 
     @Override
-    public TileEntityMultiBlock createNewTileEntity(World world,
+    public TileEntity createNewTileEntity(World world,
             int blockMetadata) {
         return new TileEntityMultiBlock(){};
     }
@@ -28,7 +30,6 @@ public class BlockIronHull extends IMultiBlockHull {
             int side, float xOffset, float yOffset,
             float zOffset) {
         if(!world.isRemote&&world.getTileEntity(x, y, z)instanceof TileEntityMultiBlock){
-           System.out.println("LOL");
            player.addChatComponentMessage(new ChatComponentText(Integer.toString(((TileEntityMultiBlock)world.getTileEntity(x, y, z)).getMasterx())));
            return true;
         }

@@ -1,7 +1,6 @@
 package de.zsgn.industrialscience.block;
 
 import de.zsgn.industrialscience.MultiBlockStructure;
-import de.zsgn.industrialscience.block.multiblock.IMultiBlockHull;
 import de.zsgn.industrialscience.tileentity.multiblock.TileEntityMultiBlock;
 import de.zsgn.industrialscience.tileentity.multiblock.TileEntityMultiBlockController;
 import net.minecraft.block.Block;
@@ -37,14 +36,12 @@ public abstract class BlockMultiBlockController extends BlockContainer {
             for (int i = 0; i < blocks.length; i++) {
                 Vec3 blockcord = blocks[i];
                 Block block = world.getBlock((int)blockcord.xCoord, (int)blockcord.yCoord, (int)blockcord.zCoord);
-                if(block instanceof IMultiBlockHull){
-                    IMultiBlockHull tileEntityProvider = (IMultiBlockHull) block;
-                    TileEntityMultiBlock tileentity = tileEntityProvider.createNewTileEntity(world, world.getBlockMetadata((int)blockcord.xCoord, (int)blockcord.yCoord, (int)blockcord.zCoord));
-                    tileentity.setController(x,y,z);
-                    tileentity.setActivepart(true);
-                    world.setTileEntity((int)blockcord.xCoord, (int)blockcord.yCoord, (int)blockcord.zCoord, tileentity);
+                if(world.getTileEntity((int)blockcord.xCoord, (int)blockcord.yCoord, (int)blockcord.zCoord) instanceof TileEntityMultiBlock){
+                TileEntityMultiBlock tileentity = (TileEntityMultiBlock) world.getTileEntity((int)blockcord.xCoord, (int)blockcord.yCoord, (int)blockcord.zCoord);
+                tileentity.setController(x,y,z);
+                tileentity.setActivepart(true);
                 }
-            }
+           }
             masterTileEntity.setStructure(blocks);
             return true;
         }
