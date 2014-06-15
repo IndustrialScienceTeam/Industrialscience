@@ -54,6 +54,7 @@ public Vec3[] structureTest(World world, int x, int y, int z, ForgeDirection dir
                     return null;
                 }
                 result[i]=Vec3.fakePool.getVecFromPool(movex+Math.min(startX, endX), movey+Math.min(startY, endY), movez+Math.min(startZ, endZ));
+                i++;
             }
         }
     }
