@@ -1,9 +1,8 @@
-package de.zsgn.industrialscience.tileentity;
+package de.zsgn.industrialscience.tileentity.multiblock;
 
-import de.zsgn.industrialscience.tileentity.multiblock.TileEntityMultiBlockController;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityMultiBlock extends TileEntity {
+public abstract class TileEntityMultiBlock extends TileEntity {
     protected boolean activepart=false;
     protected int masterx,mastery,masterz;
 

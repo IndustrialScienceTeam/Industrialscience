@@ -2,7 +2,7 @@ package de.zsgn.industrialscience.block;
 
 import de.zsgn.industrialscience.MultiBlockStructure;
 import de.zsgn.industrialscience.block.multiblock.IMultiBlockHull;
-import de.zsgn.industrialscience.tileentity.TileEntityMultiBlock;
+import de.zsgn.industrialscience.tileentity.multiblock.TileEntityMultiBlock;
 import de.zsgn.industrialscience.tileentity.multiblock.TileEntityMultiBlockController;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;

@@ -1,6 +1,6 @@
 package de.zsgn.industrialscience;
 
-import de.zsgn.industrialscience.tileentity.TileEntityMultiBlock;
+import de.zsgn.industrialscience.tileentity.multiblock.TileEntityMultiBlock;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.Vec3;

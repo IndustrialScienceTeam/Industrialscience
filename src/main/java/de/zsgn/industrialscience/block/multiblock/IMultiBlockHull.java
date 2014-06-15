@@ -1,6 +1,6 @@
 package de.zsgn.industrialscience.block.multiblock;
 
-import de.zsgn.industrialscience.tileentity.TileEntityMultiBlock;
+import de.zsgn.industrialscience.tileentity.multiblock.TileEntityMultiBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;

@@ -1,7 +1,6 @@
 package de.zsgn.industrialscience.tileentity.multiblock;
 
 import net.minecraft.util.Vec3;
-import de.zsgn.industrialscience.tileentity.TileEntityMultiBlock;
 
 public abstract class TileEntityMultiBlockController extends TileEntityMultiBlock {
     private Vec3[] structure; 
