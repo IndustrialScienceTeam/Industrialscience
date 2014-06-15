@@ -10,6 +10,7 @@ item.ancient-technology.descr2=It seems to emit tiny clouds of smoke.
 item.ancient-technology.descr3=You are fascinated by its sparkle.
 item.CrystalReed.name=Crystal Reed
 item.climbingboots.name=Climbing Boots
+tile.ironbricks.name=Iron Bricks
 
 mysteriousportal_activated=You inserted the part into the machine. You can hear a quiet purr. 
 mysteriousportal_nothing=Nothing happens...

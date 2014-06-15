@@ -41,6 +41,7 @@ import de.zsgn.industrialscience.tileentity.multiblock.TileEntityTier1Furnace;
 import de.zsgn.industrialscience.world.WorldGeneratorPortalRoom;
 import de.zsgn.industrialsciencedungeonsystem.DungeonRoom;
 import de.zsgn.industrialsciencedungeonsystem.RouteType;
+import de.zsgn.industrialscience.block.BlockIronBricks;
 
 @Mod(modid = IndustrialScience.MODID, version = IndustrialScience.VERSION)
 public class IndustrialScience{
@@ -58,7 +59,8 @@ public class IndustrialScience{
     private Block blockreinforcedbricks;
     private Block multiblockcontrollertier1furnace;
     private Block blockironhull;
-
+    private Block blockironbricks;
+    
     private Item itemancienttechnology;
     private Item itemcrystalreed;
     private Item itemclimbingboots;
@@ -83,6 +85,7 @@ public class IndustrialScience{
         GameRegistry.registerBlock(blockreinforcedbricks, blockreinforcedbricks.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(multiblockcontrollertier1furnace, multiblockcontrollertier1furnace.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(blockironhull, blockironhull.getUnlocalizedName().substring(5));
+        GameRegistry.registerBlock(blockironbricks, blockironbricks.getUnlocalizedName().substring(5));
         
         GameRegistry.registerItem(itemancienttechnology, itemancienttechnology.getUnlocalizedName().substring(5));
 
@@ -140,6 +143,7 @@ public class IndustrialScience{
         itemcrystalreed= new ItemCrystalReed();
         itemclimbingboots= new ItemClimbingBoots();
         worldgeneratorportalroom=new WorldGeneratorPortalRoom();
+        blockironbricks= new BlockIronBricks(Material.iron);
     }
 
     private void addRecipes() {
@@ -210,4 +214,9 @@ public class IndustrialScience{
     public Block getBlockironhull() {
         return blockironhull;
     }
+    public Block getBlockironbricks() {
+    	return blockironbricks;
+    	
+    }
+
 }
