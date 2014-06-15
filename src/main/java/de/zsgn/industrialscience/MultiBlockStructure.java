@@ -2,6 +2,8 @@ package de.zsgn.industrialscience;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.Vec3;
+import net.minecraft.util.Vec3Pool;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -13,6 +15,7 @@ protected final int sizeToBottom;
 protected final int sizeToTop;
 protected final int sizeToBack;
 protected final int sizeToFront;
+protected final int resultsize;
 
 MultiBlockStructure(int sizeToRight, int sizeToLeft, int sizeToBottom,
         int sizeToTop, int sizeToBack, int sizeToFront) {
@@ -22,9 +25,10 @@ MultiBlockStructure(int sizeToRight, int sizeToLeft, int sizeToBottom,
     this.sizeToTop = sizeToTop;
     this.sizeToBack = sizeToBack;
     this.sizeToFront = sizeToFront;
+    resultsize=(sizeToRight+1+sizeToLeft)*(sizeToTop+1+sizeToBottom)*(sizeToBack+1+sizeToFront);
 }
 
-public boolean structureTest(World world, int x, int y, int z, ForgeDirection dir){
+public Vec3[] structureTest(World world, int x, int y, int z, ForgeDirection dir, Block[] ValidBlocks){
     ForgeDirection dirRIGHT =dir.getRotation(ForgeDirection.DOWN);
     ForgeDirection dirLEFT=dirRIGHT.getOpposite();
     ForgeDirection dirDEPTH=dir.getOpposite();
@@ -39,14 +43,17 @@ public boolean structureTest(World world, int x, int y, int z, ForgeDirection di
     System.out.println("End Cord.:");
     System.out.println("X: "+Integer.toString(endX)+"  Y:"+Integer.toString(endY)+"  Z:"+Integer.toString(endZ));
     System.out.println("---------------------------");
+    Vec3[] result = new Vec3[resultsize];
+    int i =0;
     for (int movex = 0; movex+Math.min(startX, endX)<=Math.max(startX, endX); movex++) {
         for (int movey = 0; movey+Math.min(startY, endY)<=Math.max(startY,endY); movey++) {
             for (int movez = 0; movez+Math.min(startZ, endZ)<=Math.max(startZ, endZ); movez++) {
                 System.out.println("X: "+Integer.toString(movex+Math.min(startX, endX))+"  Y:"+Integer.toString(movey+Math.min(startY, endY))+"  Z:"+Integer.toString(movez+Math.min(startZ, endZ)));
+                result[i]=Vec3.fakePool.getVecFromPool(movex+Math.min(startX, endX), movey+Math.min(startY, endY), movez+Math.min(startZ, endZ));
             }
         }
     }
-    return false;
+    return result;
 }
 
 protected boolean isValidBlock(Block block) {
