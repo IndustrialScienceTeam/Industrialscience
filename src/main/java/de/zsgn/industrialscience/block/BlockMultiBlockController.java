@@ -34,7 +34,6 @@ public abstract class BlockMultiBlockController extends BlockContainer {
             if(blocks == null){
                 return false;
             }
-            System.out.println("LOLOL");
             for (int i = 0; i < blocks.length; i++) {
                 Vec3 blockcord = blocks[i];
                 Block block = world.getBlock((int)blockcord.xCoord, (int)blockcord.yCoord, (int)blockcord.zCoord);
@@ -42,10 +41,11 @@ public abstract class BlockMultiBlockController extends BlockContainer {
                     IMultiBlockHull tileEntityProvider = (IMultiBlockHull) block;
                     TileEntityMultiBlock tileentity = tileEntityProvider.createNewTileEntity(world, world.getBlockMetadata((int)blockcord.xCoord, (int)blockcord.yCoord, (int)blockcord.zCoord));
                     tileentity.setController(x,y,z);
+                    tileentity.setActivepart(true);
                     world.setTileEntity((int)blockcord.xCoord, (int)blockcord.yCoord, (int)blockcord.zCoord, tileentity);
                 }
             }
-            masterTileEntity.setStructureIntact(true);
+            masterTileEntity.setStructure(blocks);
         }
         return false;
     }

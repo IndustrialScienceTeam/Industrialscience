@@ -1,12 +1,12 @@
 package de.zsgn.industrialscience.tileentity.multiblock;
 
+import net.minecraft.util.Vec3;
 import de.zsgn.industrialscience.tileentity.TileEntityMultiBlock;
 
 public abstract class TileEntityMultiBlockController extends TileEntityMultiBlock {
-
-    public void setStructureIntact(boolean b) {
-        // TODO Auto-generated method stub
-        
+    private Vec3[] structure; 
+    public void setStructure(Vec3[] blocks) {
+        structure=blocks;
     }
 
 }
