@@ -46,6 +46,7 @@ public abstract class BlockMultiBlockController extends BlockContainer {
                 }
             }
             masterTileEntity.setStructure(blocks);
+            return true;
         }
         return false;
     }
