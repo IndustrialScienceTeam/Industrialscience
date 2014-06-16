@@ -1,16 +1,17 @@
 package de.zsgn.industrialscience.tileentity.multiblock;
 
+import de.zsgn.industrialscience.AbsoluteCoordinate;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Vec3;
 
 public abstract class TileEntityMultiBlockController extends TileEntityMultiBlock {
-    protected Vec3[] structure={}; 
+    protected AbsoluteCoordinate[] structure={}; 
     @Override
     public void destroyStructure() {
         for (int i = 0; i < structure.length; i++) {
-            Vec3 Coord = structure[i];
-            TileEntity tileEntity= worldObj.getTileEntity((int)Coord.xCoord, (int)Coord.yCoord, (int)Coord.zCoord);
+            AbsoluteCoordinate Coord = structure[i];
+            TileEntity tileEntity= worldObj.getTileEntity(Coord.xCoord, Coord.yCoord, Coord.zCoord);
             if(tileEntity instanceof TileEntityMultiBlock){
                 ((TileEntityMultiBlock)tileEntity).setActivepart(false);
             }   
@@ -22,15 +23,13 @@ public abstract class TileEntityMultiBlockController extends TileEntityMultiBloc
         super.readFromNBT(tagCompound);
         NBTTagCompound structurecompound = tagCompound.getCompoundTag("structuretag");
         if(structurecompound!=null){
-            structure = new Vec3[structurecompound.getInteger("length")];
+            structure = new AbsoluteCoordinate[structurecompound.getInteger("length")];
             for (int i = 0; i < structure.length; i++) {
-                structure[i].xCoord=structurecompound.getInteger("x"+i);
-                structure[i].yCoord=structurecompound.getInteger("y"+i);
-                structure[i].zCoord=structurecompound.getInteger("z"+i);
+                structure[i]=new AbsoluteCoordinate(structurecompound.getInteger("x"+i),structurecompound.getInteger("y"+i),structurecompound.getInteger("z"+i));
             }
         }
         else {
-            structure = new Vec3[]{};
+            structure = new AbsoluteCoordinate[]{};
         }
     }
     @Override
@@ -40,10 +39,10 @@ public abstract class TileEntityMultiBlockController extends TileEntityMultiBloc
             NBTTagCompound structurecompound = new NBTTagCompound();
             structurecompound.setInteger("length", structure.length);
             for (int i = 0; i < structure.length; i++) {
-                Vec3 vec3 = structure[i];
-                structurecompound.setInteger("x"+i, (int)vec3.xCoord);
-                structurecompound.setInteger("y"+i, (int)vec3.yCoord);
-                structurecompound.setInteger("z"+i, (int)vec3.zCoord);
+                AbsoluteCoordinate coord = structure[i];
+                structurecompound.setInteger("x"+i, coord.xCoord);
+                structurecompound.setInteger("y"+i, coord.yCoord);
+                structurecompound.setInteger("z"+i, coord.zCoord);
             }
             tagCompound.setTag("structuretag", structurecompound);
         }
@@ -51,7 +50,7 @@ public abstract class TileEntityMultiBlockController extends TileEntityMultiBloc
             tagCompound.setTag("structuretag", null);
         }
     }
-    public void setStructure(Vec3[] blocks) {
+    public void setStructure(AbsoluteCoordinate[] blocks) {
         structure=blocks;
     }
     @Override

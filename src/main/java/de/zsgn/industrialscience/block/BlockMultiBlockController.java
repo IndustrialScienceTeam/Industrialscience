@@ -10,6 +10,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+import de.zsgn.industrialscience.AbsoluteCoordinate;
 import de.zsgn.industrialscience.MultiBlockStructure;
 import de.zsgn.industrialscience.tileentity.multiblock.TileEntityMultiBlock;
 import de.zsgn.industrialscience.tileentity.multiblock.TileEntityMultiBlockController;
@@ -28,15 +29,15 @@ public abstract class BlockMultiBlockController extends BlockContainer {
             float zOffset) {
         if(!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityMultiBlockController){
             TileEntityMultiBlockController masterTileEntity = (TileEntityMultiBlockController) world.getTileEntity(x, y, z);
-            Vec3[] blocks = structure.structureTest(world, x, y, z, ForgeDirection.getOrientation(side), ValidBlocks);
+            AbsoluteCoordinate[] blocks = structure.structureTest(world, x, y, z, ForgeDirection.getOrientation(side), ValidBlocks);
             if(blocks == null){
                 return false;
             }
             for (int i = 0; i < blocks.length; i++) {
-                Vec3 blockcord = blocks[i];
-                Block block = world.getBlock((int)blockcord.xCoord, (int)blockcord.yCoord, (int)blockcord.zCoord);
-                if(world.getTileEntity((int)blockcord.xCoord, (int)blockcord.yCoord, (int)blockcord.zCoord) instanceof TileEntityMultiBlock){
-                    TileEntityMultiBlock tileentity = (TileEntityMultiBlock) world.getTileEntity((int)blockcord.xCoord, (int)blockcord.yCoord, (int)blockcord.zCoord);
+                AbsoluteCoordinate blockcord = blocks[i];
+                Block block = world.getBlock(blockcord.xCoord,blockcord.yCoord, blockcord.zCoord);
+                if(world.getTileEntity(blockcord.xCoord, blockcord.yCoord, blockcord.zCoord) instanceof TileEntityMultiBlock){
+                    TileEntityMultiBlock tileentity = (TileEntityMultiBlock) world.getTileEntity(blockcord.xCoord, blockcord.yCoord, blockcord.zCoord);
                     tileentity.setController(x,y,z);
                     tileentity.setActivepart(true);
                 }

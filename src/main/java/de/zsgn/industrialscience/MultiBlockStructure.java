@@ -27,7 +27,7 @@ public enum MultiBlockStructure {
         resultsize=(sizeToRight+1+sizeToLeft)*(sizeToTop+1+sizeToBottom)*(sizeToBack+1+sizeToFront);
     }
 
-    public Vec3[] structureTest(World world, int x, int y, int z, ForgeDirection dir, Block[] ValidBlocks){
+    public AbsoluteCoordinate[] structureTest(World world, int x, int y, int z, ForgeDirection dir, Block[] ValidBlocks){
         ForgeDirection dirRIGHT =dir.getRotation(ForgeDirection.DOWN);
         ForgeDirection dirLEFT=dirRIGHT.getOpposite();
         ForgeDirection dirDEPTH=dir.getOpposite();
@@ -42,7 +42,7 @@ public enum MultiBlockStructure {
         System.out.println("End Cord.:");
         System.out.println("X: "+Integer.toString(endX)+"  Y:"+Integer.toString(endY)+"  Z:"+Integer.toString(endZ));
         System.out.println("---------------------------");
-        Vec3[] result = new Vec3[resultsize];
+        AbsoluteCoordinate[] result = new AbsoluteCoordinate[resultsize];
         int i =0;
         for (int movex = 0; movex+Math.min(startX, endX)<=Math.max(startX, endX); movex++) {
             for (int movey = 0; movey+Math.min(startY, endY)<=Math.max(startY,endY); movey++) {
@@ -51,7 +51,7 @@ public enum MultiBlockStructure {
                     if(!isValidBlock(ValidBlocks, world, movex+Math.min(startX, endX), movey+Math.min(startY, endY), movez+Math.min(startZ, endZ))){
                         return null;
                     }
-                    result[i]=Vec3.fakePool.getVecFromPool(movex+Math.min(startX, endX), movey+Math.min(startY, endY), movez+Math.min(startZ, endZ));
+                    result[i]=new AbsoluteCoordinate(movex+Math.min(startX, endX), movey+Math.min(startY, endY), movez+Math.min(startZ, endZ));
                     i++;
                 }
             }
