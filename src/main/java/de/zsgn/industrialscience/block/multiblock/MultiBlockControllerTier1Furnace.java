@@ -14,7 +14,7 @@ public class MultiBlockControllerTier1Furnace extends BlockMultiBlockController 
 
     public MultiBlockControllerTier1Furnace() {
         super(Material.iron, MultiBlockStructure.FURNACE_TIER1);
-        ValidBlocks=new Block[]{this};
+        ValidBlocks=new Block[]{this,IndustrialScience.getInstance().getBlockstonehull()};
         this.setCreativeTab(IndustrialScience.getInstance().getCreativetab());
         setBlockName("multiblockcontrollertier1furnace");
         setHardness(3.0F);
