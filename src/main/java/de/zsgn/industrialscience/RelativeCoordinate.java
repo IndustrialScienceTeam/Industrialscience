@@ -16,6 +16,6 @@ public class RelativeCoordinate {
         this.DepthCoord = depthCoord;
     }
     public AbsoluteCoordinate convertToAbsolute(int x, int y, int z, ForgeDirection dirRIGHT, ForgeDirection dirDEPTH) {
-        return new AbsoluteCoordinate(x+(dirRIGHT.offsetX*sideCoord)+(dirDEPTH.offsetX*sideCoord), y+heightCoord, z+(dirRIGHT.offsetZ*DepthCoord)+(dirDEPTH.offsetZ*DepthCoord));
+        return new AbsoluteCoordinate(x+dirRIGHT.offsetX*sideCoord+dirDEPTH.offsetX*DepthCoord, y+heightCoord, z+dirRIGHT.offsetZ*sideCoord+(dirDEPTH.offsetZ*DepthCoord));
     }
 }
