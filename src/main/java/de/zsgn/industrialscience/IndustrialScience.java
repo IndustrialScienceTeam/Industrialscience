@@ -29,15 +29,9 @@ import de.zsgn.industrialscience.block.BlockIronBricks;
 import de.zsgn.industrialscience.block.BlockMysteriousPortal;
 import de.zsgn.industrialscience.block.BlockReinforcedBricks;
 import de.zsgn.industrialscience.block.BlockSingularity;
-<<<<<<< HEAD
-import de.zsgn.industrialscience.block.multiblock.BlockChimney;
-import de.zsgn.industrialscience.block.multiblock.BlockIronHull;
-import de.zsgn.industrialscience.block.multiblock.MultiBlockControllerTier1Furnace;
-=======
 import de.zsgn.industrialscience.block.MultiBlockHullStoneHull;
 import de.zsgn.industrialscience.block.multiblock.MultiBlockControllerTier1StoneFurnace;
 import de.zsgn.industrialscience.block.multiblock.MultiBlockHullIronHull;
->>>>>>> origin/1.7
 import de.zsgn.industrialscience.command.CommandGenerateRoom;
 import de.zsgn.industrialscience.command.IndustrialScienceMainCommand;
 import de.zsgn.industrialscience.item.ItemAncientTechnology;
@@ -63,13 +57,8 @@ public class IndustrialScience{
     private Block blocksingularity;
     private Block blockmysteriousportal;
     private Block blockreinforcedbricks;
-<<<<<<< HEAD
-    private Block multiblockcontrollertier1furnace;
-    private Block blockironhull;
     private Block blockchimney;
-=======
     private Block blockcontrollertier1stonefurnace;
->>>>>>> origin/1.7
     private Block blockironbricks;
     private Block blockstonehull;
     private Block blockironhull;
@@ -96,13 +85,7 @@ public class IndustrialScience{
         GameRegistry.registerBlock(blocksingularity, blocksingularity.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(blockmysteriousportal, blockmysteriousportal.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(blockreinforcedbricks, blockreinforcedbricks.getUnlocalizedName().substring(5));
-<<<<<<< HEAD
-        GameRegistry.registerBlock(multiblockcontrollertier1furnace, multiblockcontrollertier1furnace.getUnlocalizedName().substring(5));
-        GameRegistry.registerBlock(blockironhull, blockironhull.getUnlocalizedName().substring(5));
-        GameRegistry.registerBlock(blockchimney, blockchimney.getUnlocalizedName().substring(5));
-=======
         GameRegistry.registerBlock(blockcontrollertier1stonefurnace, blockcontrollertier1stonefurnace.getUnlocalizedName().substring(5));
->>>>>>> origin/1.7
         GameRegistry.registerBlock(blockironbricks, blockironbricks.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(blockstonehull, blockstonehull.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(blockironhull, blockironhull.getUnlocalizedName().substring(5));
@@ -157,24 +140,14 @@ public class IndustrialScience{
         blockmysteriousportal= new BlockMysteriousPortal();
         blocksingularity= new BlockSingularity(Material.rock);
         blockreinforcedbricks=new BlockReinforcedBricks();
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-        blockironhull=new BlockIronHull();
-        blockchimney = new BlockChimney();
-        multiblockcontrollertier1furnace=new MultiBlockControllerTier1Furnace();
-=======
         blockcontrollertier1stonefurnace=new MultiBlockControllerTier1StoneFurnace();
->>>>>>> origin/1.7
->>>>>>> FETCH_HEAD
         itemancienttechnology=new  ItemAncientTechnology();
         itemcrystalreed= new ItemCrystalReed();
         itemclimbingboots= new ItemClimbingBoots();
         worldgeneratorportalroom=new WorldGeneratorPortalRoom();
         blockironbricks= new BlockIronBricks(Material.iron);
-        blockstonehull=new MultiBlockHullStoneHull();
         blockironhull=new MultiBlockHullIronHull();
-        blockcontrollertier1stonefurnace=new MultiBlockControllerTier1StoneFurnace();
+        blockstonehull=new MultiBlockHullStoneHull();
     }
 
     private void addRecipes() {
@@ -245,18 +218,8 @@ public class IndustrialScience{
         return blockironbricks;
 
     }
-<<<<<<< HEAD
-    public Block getBlockChimney() {
-        return blockchimney;
-    }
-    public Block getBlockironbricks() {
-    	return blockironbricks;
-    	
-=======
-
     public Block getBlockstonehull() {
         return blockstonehull;
->>>>>>> origin/1.7
     }
 
 }
