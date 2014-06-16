@@ -139,7 +139,6 @@ public class IndustrialScience{
         blockmysteriousportal= new BlockMysteriousPortal();
         blocksingularity= new BlockSingularity(Material.rock);
         blockreinforcedbricks=new BlockReinforcedBricks();
-        blockcontrollertier1stonefurnace=new MultiBlockControllerTier1StoneFurnace();
         itemancienttechnology=new  ItemAncientTechnology();
         itemcrystalreed= new ItemCrystalReed();
         itemclimbingboots= new ItemClimbingBoots();
@@ -147,6 +146,7 @@ public class IndustrialScience{
         blockironbricks= new BlockIronBricks(Material.iron);
         blockstonehull=new MultiBlockHullStoneHull();
         blockironhull=new MultiBlockHullIronHull();
+        blockcontrollertier1stonefurnace=new MultiBlockControllerTier1StoneFurnace();
     }
 
     private void addRecipes() {
