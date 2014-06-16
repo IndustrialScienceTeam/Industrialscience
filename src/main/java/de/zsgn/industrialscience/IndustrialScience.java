@@ -29,6 +29,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import de.zsgn.industrialscience.block.BlockMysteriousPortal;
 import de.zsgn.industrialscience.block.BlockReinforcedBricks;
 import de.zsgn.industrialscience.block.BlockSingularity;
+import de.zsgn.industrialscience.block.multiblock.BlockChimney;
 import de.zsgn.industrialscience.block.multiblock.BlockIronHull;
 import de.zsgn.industrialscience.block.multiblock.MultiBlockControllerTier1Furnace;
 import de.zsgn.industrialscience.command.CommandGenerateRoom;
@@ -59,6 +60,7 @@ public class IndustrialScience{
     private Block blockreinforcedbricks;
     private Block multiblockcontrollertier1furnace;
     private Block blockironhull;
+    private Block blockchimney;
     private Block blockironbricks;
     
     private Item itemancienttechnology;
@@ -85,6 +87,7 @@ public class IndustrialScience{
         GameRegistry.registerBlock(blockreinforcedbricks, blockreinforcedbricks.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(multiblockcontrollertier1furnace, multiblockcontrollertier1furnace.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(blockironhull, blockironhull.getUnlocalizedName().substring(5));
+        GameRegistry.registerBlock(blockchimney, blockchimney.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(blockironbricks, blockironbricks.getUnlocalizedName().substring(5));
         
         GameRegistry.registerItem(itemancienttechnology, itemancienttechnology.getUnlocalizedName().substring(5));
@@ -138,6 +141,7 @@ public class IndustrialScience{
         blocksingularity= new BlockSingularity(Material.rock);
         blockreinforcedbricks=new BlockReinforcedBricks();
         blockironhull=new BlockIronHull();
+        blockchimney = new BlockChimney();
         multiblockcontrollertier1furnace=new MultiBlockControllerTier1Furnace();
         itemancienttechnology=new  ItemAncientTechnology();
         itemcrystalreed= new ItemCrystalReed();
@@ -213,6 +217,9 @@ public class IndustrialScience{
 
     public Block getBlockironhull() {
         return blockironhull;
+    }
+    public Block getBlockChimney() {
+        return blockchimney;
     }
     public Block getBlockironbricks() {
     	return blockironbricks;
