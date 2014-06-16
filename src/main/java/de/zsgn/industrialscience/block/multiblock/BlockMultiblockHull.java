@@ -7,12 +7,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
+import de.zsgn.industrialscience.IndustrialScience;
 import de.zsgn.industrialscience.tileentity.multiblock.TileEntityMultiBlock;
 
 public abstract class BlockMultiblockHull extends BlockContainer {
 
     public BlockMultiblockHull(Material material) {
         super(material);
+        setCreativeTab(IndustrialScience.getInstance().getCreativetab());
     }
 
     @Override
