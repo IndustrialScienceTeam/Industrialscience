@@ -41,16 +41,13 @@ public enum MultiBlockStructure {
         int endZ=z+sizeToLeft*dirLEFT.offsetZ+sizeToBack*dirDEPTH.offsetZ;
         AbsoluteCoordinate[] absholes=new AbsoluteCoordinate[holes.length];
         AbsoluteCoordinate[] result = new AbsoluteCoordinate[resultsize];
-        System.out.println(x+" "+y+" "+z);
         for (int i = 0; i < holes.length; i++) {
             absholes[i]=holes[i].convertToAbsolute(x,y, z, dirRIGHT, dirDEPTH);
-            System.out.println(absholes[i].xCoord +" "+absholes[i].yCoord+" "+absholes[i].zCoord);
         }
         int i =0;
         for (int movex = 0; movex+Math.min(startX, endX)<=Math.max(startX, endX); movex++) {
             for (int movey = 0; movey+Math.min(startY, endY)<=Math.max(startY,endY); movey++) {
                 for (int movez = 0; movez+Math.min(startZ, endZ)<=Math.max(startZ, endZ); movez++) {
-                    System.out.println("X: "+Integer.toString(movex+Math.min(startX, endX))+"  Y:"+Integer.toString(movey+Math.min(startY, endY))+"  Z:"+Integer.toString(movez+Math.min(startZ, endZ)));
                     if(!isValidBlock(ValidBlocks,absholes, world, movex+Math.min(startX, endX), movey+Math.min(startY, endY), movez+Math.min(startZ, endZ))){
                         return null;
                     }
