@@ -1,5 +1,6 @@
 package de.zsgn.industrialscience.tileentity.multiblock;
 
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
 public abstract class TileEntityMultiBlock extends TileEntity {
@@ -14,9 +15,9 @@ public abstract class TileEntityMultiBlock extends TileEntity {
 
     public void destroyStructure() {
         if(worldObj.getTileEntity(masterx,mastery,masterz) instanceof TileEntityMultiBlockController){
-        ((TileEntityMultiBlockController)worldObj.getTileEntity(masterx,mastery,masterz)).destroyStructure();;
+            ((TileEntityMultiBlockController)worldObj.getTileEntity(masterx,mastery,masterz)).destroyStructure();;
         }
-        
+
     }
 
     public void setActivepart(boolean activepart) {
@@ -36,6 +37,22 @@ public abstract class TileEntityMultiBlock extends TileEntity {
 
     public int getMasterz() {
         return masterz;
+    }
+    @Override
+    public void readFromNBT(NBTTagCompound tagCompound) {
+        super.readFromNBT(tagCompound);
+        masterx=tagCompound.getInteger("masterx");
+        mastery=tagCompound.getInteger("mastery");
+        masterz=tagCompound.getInteger("masterz");
+        activepart=tagCompound.getBoolean("activepart");
+    }
+    @Override
+    public void writeToNBT(NBTTagCompound tagCompound) {
+        super.writeToNBT(tagCompound);
+        tagCompound.setInteger("masterx", masterx);
+        tagCompound.setInteger("mastery", mastery);
+        tagCompound.setInteger("masterz", masterz);
+        tagCompound.setBoolean("activepart", activepart);
     }
 
 }

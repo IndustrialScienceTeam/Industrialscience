@@ -1,11 +1,56 @@
 package de.zsgn.industrialscience.tileentity.multiblock;
 
+import de.zsgn.industrialscience.AbsoluteCoordinate;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Vec3;
 
 public abstract class TileEntityMultiBlockController extends TileEntityMultiBlock {
-    protected Vec3[] structure={}; 
-    public void setStructure(Vec3[] blocks) {
+    protected AbsoluteCoordinate[] structure={}; 
+    @Override
+    public void destroyStructure() {
+        for (int i = 0; i < structure.length; i++) {
+            AbsoluteCoordinate Coord = structure[i];
+            TileEntity tileEntity= worldObj.getTileEntity(Coord.xCoord, Coord.yCoord, Coord.zCoord);
+            if(tileEntity instanceof TileEntityMultiBlock){
+                ((TileEntityMultiBlock)tileEntity).setActivepart(false);
+            }   
+        }
+        structure=null;
+    }
+    @Override
+    public void readFromNBT(NBTTagCompound tagCompound) {
+        super.readFromNBT(tagCompound);
+        NBTTagCompound structurecompound = tagCompound.getCompoundTag("structuretag");
+        if(structurecompound!=null){
+            structure = new AbsoluteCoordinate[structurecompound.getInteger("length")];
+            for (int i = 0; i < structure.length; i++) {
+                structure[i]=new AbsoluteCoordinate(structurecompound.getInteger("x"+i),structurecompound.getInteger("y"+i),structurecompound.getInteger("z"+i));
+            }
+        }
+        else {
+            structure = new AbsoluteCoordinate[]{};
+        }
+    }
+    @Override
+    public void writeToNBT(NBTTagCompound tagCompound) {
+        super.writeToNBT(tagCompound);
+        if(structure!=null){
+            NBTTagCompound structurecompound = new NBTTagCompound();
+            structurecompound.setInteger("length", structure.length);
+            for (int i = 0; i < structure.length; i++) {
+                AbsoluteCoordinate coord = structure[i];
+                structurecompound.setInteger("x"+i, coord.xCoord);
+                structurecompound.setInteger("y"+i, coord.yCoord);
+                structurecompound.setInteger("z"+i, coord.zCoord);
+            }
+            tagCompound.setTag("structuretag", structurecompound);
+        }
+        else {
+            tagCompound.setTag("structuretag", null);
+        }
+    }
+    public void setStructure(AbsoluteCoordinate[] blocks) {
         structure=blocks;
     }
     @Override
@@ -13,17 +58,6 @@ public abstract class TileEntityMultiBlockController extends TileEntityMultiBloc
         masterx=x;
         mastery=y;
         masterz=z;
-    }
-    @Override
-    public void destroyStructure() {
-       for (int i = 0; i < structure.length; i++) {
-        Vec3 Coord = structure[i];
-        TileEntity tileEntity= worldObj.getTileEntity((int)Coord.xCoord, (int)Coord.yCoord, (int)Coord.zCoord);
-        if(tileEntity instanceof TileEntityMultiBlock){
-            ((TileEntityMultiBlock)tileEntity).setActivepart(false);
-        }
-            
-       }
     }
 
 }

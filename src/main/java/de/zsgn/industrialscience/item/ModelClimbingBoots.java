@@ -14,12 +14,12 @@ public class ModelClimbingBoots extends ModelBiped {
     // fields
     ModelRenderer shoe;
     ModelRenderer spike;
-    
+
     public ModelClimbingBoots(float f) {
         super(f);
         textureWidth = 64;
         textureHeight = 64;
-        
+
         shoe = new ModelRenderer(this, 0, 0);
         shoe.addBox(0F, 0F, 0F, 10, 3, 6);
         shoe.setRotationPoint(-5F, 21F, -3F);
@@ -32,11 +32,11 @@ public class ModelClimbingBoots extends ModelBiped {
         spike.setTextureSize(64, 32);
         spike.mirror = true;
         setRotation(spike, 0F, 0F, 0F);
-        
+
         this.bipedLeftLeg.addChild(shoe);
         this.bipedRightLeg.addChild(spike);
     }
-    
+
     @Override
     public void render(Entity entity, float f, float f1, float f2, float f3,
             float f4, float f5) {
@@ -44,9 +44,9 @@ public class ModelClimbingBoots extends ModelBiped {
         super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
         //shoe.render(f5);
         spike.render(f5);
-        
+
     }
-    
+
     private void setRotation(ModelRenderer model, float x, float y, float z) {
         model.rotateAngleX = x;
         model.rotateAngleY = y;

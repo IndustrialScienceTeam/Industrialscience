@@ -1,8 +1,6 @@
 package de.zsgn.industrialscience.block;
 
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -15,6 +13,8 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import de.zsgn.industrialscience.IndustrialScience;
 import de.zsgn.industrialscience.tileentity.TileEntityMysteriousPortal;
 
@@ -83,12 +83,12 @@ public class BlockMysteriousPortal extends BlockContainer {
         if(!world.isRemote&&world.getTileEntity(x, y, z) instanceof TileEntityMysteriousPortal){
             TileEntityMysteriousPortal tileentity=(TileEntityMysteriousPortal)world.getTileEntity(x, y, z);
             if(tileentity.isUseable()){
-            ItemStack technologyItemStack=new ItemStack(IndustrialScience.getInstance().getItemancienttechnology());
-            if(tileentity.getTechnologycompund()!=null){
-                technologyItemStack.stackTagCompound=tileentity.getTechnologycompund();
-            }
-            EntityItem entityItem =new EntityItem(world, x, y+1, z, technologyItemStack);
-            world.spawnEntityInWorld(entityItem);
+                ItemStack technologyItemStack=new ItemStack(IndustrialScience.getInstance().getItemancienttechnology());
+                if(tileentity.getTechnologycompund()!=null){
+                    technologyItemStack.stackTagCompound=tileentity.getTechnologycompund();
+                }
+                EntityItem entityItem =new EntityItem(world, x, y+1, z, technologyItemStack);
+                world.spawnEntityInWorld(entityItem);
             }
         }
         super.breakBlock(world, x, y, z,

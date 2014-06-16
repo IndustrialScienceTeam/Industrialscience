@@ -10,13 +10,11 @@ import net.minecraft.world.World;
 import de.zsgn.industrialscience.IndustrialScience;
 import de.zsgn.industrialscience.tileentity.multiblock.TileEntityMultiBlock;
 
-public class BlockIronHull extends BlockContainer {
+public abstract class BlockMultiblockHull extends BlockContainer {
 
-    public BlockIronHull() {
-        super(Material.iron);
-        this.setCreativeTab(IndustrialScience.getInstance().getCreativetab());
-        setBlockName("ironhull");
-        setHardness(3.0F);
+    public BlockMultiblockHull(Material material) {
+        super(material);
+        setCreativeTab(IndustrialScience.getInstance().getCreativetab());
     }
 
     @Override
@@ -25,23 +23,12 @@ public class BlockIronHull extends BlockContainer {
         return new TileEntityMultiBlock(){};
     }
 
-    public boolean onBlockActivated(World world, int x,
-            int y, int z, EntityPlayer player,
-            int side, float xOffset, float yOffset,
-            float zOffset) {
-        if(!world.isRemote&&world.getTileEntity(x, y, z)instanceof TileEntityMultiBlock && (((TileEntityMultiBlock)world.getTileEntity(x, y, z)).isActivePart())){
-           player.addChatComponentMessage(new ChatComponentText(Integer.toString(((TileEntityMultiBlock)world.getTileEntity(x, y, z)).getMasterx())));
-           return true;
-        }
-        return false;
-    }
-
     @Override
     public void breakBlock(World world, int x, int y,
             int z, Block block, int meta) {
         if(!world.isRemote&&world.getTileEntity(x, y, z)instanceof TileEntityMultiBlock && (((TileEntityMultiBlock)world.getTileEntity(x, y, z)).isActivePart())){
             ((TileEntityMultiBlock)world.getTileEntity(x, y, z)).destroyStructure();
-         }
+        }
     }
 
 }
