@@ -15,9 +15,9 @@ public abstract class TileEntityMultiBlock extends TileEntity {
 
     public void destroyStructure() {
         if(worldObj.getTileEntity(masterx,mastery,masterz) instanceof TileEntityMultiBlockController){
-        ((TileEntityMultiBlockController)worldObj.getTileEntity(masterx,mastery,masterz)).destroyStructure();;
+            ((TileEntityMultiBlockController)worldObj.getTileEntity(masterx,mastery,masterz)).destroyStructure();;
         }
-        
+
     }
 
     public void setActivepart(boolean activepart) {

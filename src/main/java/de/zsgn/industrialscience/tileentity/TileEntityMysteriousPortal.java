@@ -23,20 +23,20 @@ public class TileEntityMysteriousPortal extends TileEntity {
     @Override
     public void updateEntity() {
         if(isUseable()){
-                    setActive(worldObj.getIndirectPowerLevelTo(xCoord, yCoord, zCoord, 0)>0);
-                    if(isActive()){
-                        AxisAlignedBB axisalignedbb =  AxisAlignedBB.getAABBPool().getAABB((double)(this.xCoord - 1), (double)(this.yCoord+1), (double)(this.zCoord - 1), (double)(this.xCoord + 1), (double)(this.yCoord + 3), (double)(this.zCoord + 1));
-                        List list=  this.worldObj.getEntitiesWithinAABB(Entity.class, axisalignedbb);
-                        Iterator iterator = list.iterator();
-                        while (iterator.hasNext()) {
-                            Object object = iterator.next();
-                            if(object instanceof Entity){
-                                Entity entity =(Entity) object;
-                                teleport(entity);
-                            }
-                            
-                        }
+            setActive(worldObj.getIndirectPowerLevelTo(xCoord, yCoord, zCoord, 0)>0);
+            if(isActive()){
+                AxisAlignedBB axisalignedbb =  AxisAlignedBB.getAABBPool().getAABB(this.xCoord - 1, this.yCoord+1, this.zCoord - 1, this.xCoord + 1, this.yCoord + 3, this.zCoord + 1);
+                List list=  this.worldObj.getEntitiesWithinAABB(Entity.class, axisalignedbb);
+                Iterator iterator = list.iterator();
+                while (iterator.hasNext()) {
+                    Object object = iterator.next();
+                    if(object instanceof Entity){
+                        Entity entity =(Entity) object;
+                        teleport(entity);
                     }
+
+                }
+            }
         }
     }
 
@@ -55,7 +55,7 @@ public class TileEntityMysteriousPortal extends TileEntity {
         for (int i = 0; i < effectamount; i++) {
             entity.addPotionEffect(new PotionEffect(effectlist[random.nextInt(effectlist.length)], (int) (random.nextDouble()*500), 1));
         }
-        
+
     }
 
     @Override
@@ -64,7 +64,7 @@ public class TileEntityMysteriousPortal extends TileEntity {
         useable=tagCompound.getBoolean("useable");
         active=tagCompound.getBoolean("active");
         if(tagCompound.getTag("technologycompund") instanceof NBTTagCompound){
-        technologycompund=(NBTTagCompound) tagCompound.getTag("technologycompund");
+            technologycompund=(NBTTagCompound) tagCompound.getTag("technologycompund");
         }
     }
     @Override
@@ -73,7 +73,7 @@ public class TileEntityMysteriousPortal extends TileEntity {
         tagCompound.setBoolean("active", active);
         tagCompound.setBoolean("useable", useable);
         if(technologycompund!=null){
-        tagCompound.setTag("technologycompund", technologycompund);
+            tagCompound.setTag("technologycompund", technologycompund);
         }
     }
     public boolean isUseable() {
@@ -95,7 +95,7 @@ public class TileEntityMysteriousPortal extends TileEntity {
 
     public void setTechnologycompund(NBTBase nbtBase) {
         if(nbtBase instanceof NBTTagCompound){
-        this.technologycompund = (NBTTagCompound)nbtBase;
+            this.technologycompund = (NBTTagCompound)nbtBase;
         }
     }
 

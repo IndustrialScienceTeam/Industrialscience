@@ -13,7 +13,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
-import net.minecraftforge.common.util.ForgeDirection;
 
 import org.apache.logging.log4j.Level;
 
@@ -26,6 +25,7 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import de.zsgn.industrialscience.block.BlockIronBricks;
 import de.zsgn.industrialscience.block.BlockMysteriousPortal;
 import de.zsgn.industrialscience.block.BlockReinforcedBricks;
 import de.zsgn.industrialscience.block.BlockSingularity;
@@ -41,7 +41,6 @@ import de.zsgn.industrialscience.tileentity.multiblock.TileEntityTier1Furnace;
 import de.zsgn.industrialscience.world.WorldGeneratorPortalRoom;
 import de.zsgn.industrialsciencedungeonsystem.DungeonRoom;
 import de.zsgn.industrialsciencedungeonsystem.RouteType;
-import de.zsgn.industrialscience.block.BlockIronBricks;
 
 @Mod(modid = IndustrialScience.MODID, version = IndustrialScience.VERSION)
 public class IndustrialScience{
@@ -60,15 +59,15 @@ public class IndustrialScience{
     private Block multiblockcontrollertier1furnace;
     private Block blockironhull;
     private Block blockironbricks;
-    
+
     private Item itemancienttechnology;
     private Item itemcrystalreed;
     private Item itemclimbingboots;
 
     private CreativeTabs creativetab;
-    
+
     private IWorldGenerator worldgeneratorportalroom;
-    
+
     private Properties props= new Properties();
 
     private IndustrialScienceMainCommand industrialScienceMainCommand=new IndustrialScienceMainCommand();
@@ -86,18 +85,18 @@ public class IndustrialScience{
         GameRegistry.registerBlock(multiblockcontrollertier1furnace, multiblockcontrollertier1furnace.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(blockironhull, blockironhull.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(blockironbricks, blockironbricks.getUnlocalizedName().substring(5));
-        
+
         GameRegistry.registerItem(itemancienttechnology, itemancienttechnology.getUnlocalizedName().substring(5));
 
         //registers the item so the game can actually use it while playing
         GameRegistry.registerItem(itemcrystalreed, itemcrystalreed.getUnlocalizedName().substring(5));
         GameRegistry.registerItem(itemclimbingboots , itemclimbingboots.getUnlocalizedName().substring(5));
-        
+
         GameRegistry.registerTileEntity(TileEntityMysteriousPortal.class, blockmysteriousportal.getUnlocalizedName());
         GameRegistry.registerTileEntity(TileEntityTier1Furnace.class, multiblockcontrollertier1furnace.getUnlocalizedName());
 
         GameRegistry.registerWorldGenerator(worldgeneratorportalroom, 5);
-        
+
         addRecipes();
     }
 
@@ -117,8 +116,8 @@ public class IndustrialScience{
             }
         }
         TileEntityMysteriousPortal.setEffectlist(idList.toArray(new Integer[1]));
-        
-        
+
+
     }
 
     private void loadProps() {
@@ -129,7 +128,7 @@ public class IndustrialScience{
     private void loadDungeonRooms() {
         DungeonRoom def = new DungeonRoom(RouteType.STRAIGHT, DungeonRoom.getEmptyContent(), "DefaultStraight");
         dungeonroomlist.put(def.getName(), def);
-        
+
     }
 
     private void initFields() {
@@ -160,7 +159,7 @@ public class IndustrialScience{
         ServerCommandManager manager = (ServerCommandManager) server.getCommandManager();
         manager.registerCommand(industrialScienceMainCommand);
         manager.registerCommand(industrialScienceGenerateRoom);
-        
+
 
     }
 
@@ -215,8 +214,8 @@ public class IndustrialScience{
         return blockironhull;
     }
     public Block getBlockironbricks() {
-    	return blockironbricks;
-    	
+        return blockironbricks;
+
     }
 
 }

@@ -1,8 +1,8 @@
 package de.zsgn.industrialscience.block;
 
-import de.zsgn.industrialscience.IndustrialScience;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import de.zsgn.industrialscience.IndustrialScience;
 
 public class BlockReinforcedBricks extends Block {
 

@@ -1,16 +1,16 @@
 package de.zsgn.industrialscience.command;
 
-import de.zsgn.industrialscience.IndustrialScience;
-import de.zsgn.industrialsciencedungeonsystem.DungeonRoom;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.ChatComponentText;
+import de.zsgn.industrialscience.IndustrialScience;
+import de.zsgn.industrialsciencedungeonsystem.DungeonRoom;
 
 public class CommandGenerateRoom extends CommandBase {
 
     @Override
     public String getCommandName() {
-       return "is-generate";
+        return "is-generate";
     }
 
     @Override

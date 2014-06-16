@@ -2,13 +2,11 @@ package de.zsgn.industrialscience.block.multiblock;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import de.zsgn.industrialscience.IndustrialScience;
 import de.zsgn.industrialscience.MultiBlockStructure;
 import de.zsgn.industrialscience.block.BlockMultiBlockController;
-import de.zsgn.industrialscience.tileentity.multiblock.TileEntityMultiBlockController;
 import de.zsgn.industrialscience.tileentity.multiblock.TileEntityTier1Furnace;
 
 

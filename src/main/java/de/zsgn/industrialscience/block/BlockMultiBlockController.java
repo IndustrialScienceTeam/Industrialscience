@@ -1,19 +1,18 @@
 package de.zsgn.industrialscience.block;
 
-import de.zsgn.industrialscience.MultiBlockStructure;
-import de.zsgn.industrialscience.tileentity.multiblock.TileEntityMultiBlock;
-import de.zsgn.industrialscience.tileentity.multiblock.TileEntityMultiBlockController;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+import de.zsgn.industrialscience.MultiBlockStructure;
+import de.zsgn.industrialscience.tileentity.multiblock.TileEntityMultiBlock;
+import de.zsgn.industrialscience.tileentity.multiblock.TileEntityMultiBlockController;
 
 public abstract class BlockMultiBlockController extends BlockContainer {
     protected MultiBlockStructure structure;
@@ -37,11 +36,11 @@ public abstract class BlockMultiBlockController extends BlockContainer {
                 Vec3 blockcord = blocks[i];
                 Block block = world.getBlock((int)blockcord.xCoord, (int)blockcord.yCoord, (int)blockcord.zCoord);
                 if(world.getTileEntity((int)blockcord.xCoord, (int)blockcord.yCoord, (int)blockcord.zCoord) instanceof TileEntityMultiBlock){
-                TileEntityMultiBlock tileentity = (TileEntityMultiBlock) world.getTileEntity((int)blockcord.xCoord, (int)blockcord.yCoord, (int)blockcord.zCoord);
-                tileentity.setController(x,y,z);
-                tileentity.setActivepart(true);
+                    TileEntityMultiBlock tileentity = (TileEntityMultiBlock) world.getTileEntity((int)blockcord.xCoord, (int)blockcord.yCoord, (int)blockcord.zCoord);
+                    tileentity.setController(x,y,z);
+                    tileentity.setActivepart(true);
                 }
-           }
+            }
             masterTileEntity.setStructure(blocks);
             return true;
         }
@@ -49,10 +48,10 @@ public abstract class BlockMultiBlockController extends BlockContainer {
     }
     public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving, ItemStack par6ItemStack)
     {
-            int l = MathHelper.floor_double((double)(par5EntityLiving.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
-            par1World.setBlockMetadataWithNotify(par2, par3, par4, l, 2);
+        int l = MathHelper.floor_double(par5EntityLiving.rotationYaw * 4.0F / 360.0F + 2.5D) & 3;
+        par1World.setBlockMetadataWithNotify(par2, par3, par4, l, 2);
     }
-    
+
 
 
 }

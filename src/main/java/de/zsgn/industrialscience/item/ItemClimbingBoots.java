@@ -11,42 +11,42 @@ import cpw.mods.fml.relauncher.SideOnly;
 import de.zsgn.industrialscience.IndustrialScience;
 
 public class ItemClimbingBoots extends ItemArmor {
-    
+
     public ItemClimbingBoots() {
-        
+
         // first argument is the material of this armor , the second one is
         // unknown , according to ItemArmor.class it is the renderIndex , I
         // recommend using 0 , because it is working, the last one is the slot
         // (0 = helmet , 1 = chestplate , 2 = leggings , 3 = boots)
         super(ArmorMaterial.IRON, 0, 3);
-        
+
         setCreativeTab(IndustrialScience.getInstance().getCreativetab());
-        
+
         setUnlocalizedName("climbingboots");
-        
+
         iconString = IndustrialScience.MODID + ":"
                 + this.getUnlocalizedName().substring(5);
     }
-    
+
     @Override
     public String getArmorTexture(ItemStack stack, Entity entity, int slot,
             String type) {
         return IndustrialScience.MODID + ":" + "textures/items/"
                 + this.getUnlocalizedName().substring(5) + "_model.png";
     }
-    
+
     @Override
     @SideOnly(Side.CLIENT)
     public ModelBiped getArmorModel(EntityLivingBase entityLiving,
             ItemStack itemStack, int armorSlot) {
-        
+
         ModelBiped armorModel = null;
-        
+
         if (itemStack != null
                 && itemStack.getItem() instanceof ItemClimbingBoots) {
             armorModel = IndustrialScience.proxy.getArmorModel(0);
         }
-        
+
         if (armorModel != null) {
             armorModel.bipedHead.showModel = armorSlot == 0;
             armorModel.bipedHeadwear.showModel = armorSlot == 0;
@@ -57,7 +57,7 @@ public class ItemClimbingBoots extends ItemArmor {
                     || armorSlot == 3;
             armorModel.bipedLeftLeg.showModel = armorSlot == 2
                     || armorSlot == 3;
-            
+
             armorModel.isSneak = entityLiving.isSneaking();
             armorModel.isRiding = entityLiving.isRiding();
             armorModel.isChild = entityLiving.isChild();
@@ -69,8 +69,8 @@ public class ItemClimbingBoots extends ItemArmor {
             }
             return armorModel;
         }
-        
+
         return null;
     }
-    
+
 }

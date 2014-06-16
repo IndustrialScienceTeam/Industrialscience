@@ -53,8 +53,8 @@ public class WorldGeneratorPortalRoom implements IWorldGenerator {
                 }
             }
             world.setBlock(portalx, portaly, portalz, IndustrialScience.getInstance().getBlockmysteriousportal());
-            }
-        
+        }
+
     }
 
 }
