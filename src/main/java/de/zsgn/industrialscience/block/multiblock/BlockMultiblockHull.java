@@ -7,34 +7,18 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
-import de.zsgn.industrialscience.IndustrialScience;
 import de.zsgn.industrialscience.tileentity.multiblock.TileEntityMultiBlock;
 
-public class BlockIronHull extends BlockContainer {
+public abstract class BlockMultiblockHull extends BlockContainer {
 
-    public BlockIronHull() {
-        super(Material.iron);
-        this.setCreativeTab(IndustrialScience.getInstance().getCreativetab());
-        setBlockName("ironhull");
-        setHardness(3.0F);
+    public BlockMultiblockHull(Material material) {
+        super(material);
     }
 
     @Override
     public TileEntity createNewTileEntity(World world,
             int blockMetadata) {
         return new TileEntityMultiBlock(){};
-    }
-
-    @Override
-    public boolean onBlockActivated(World world, int x,
-            int y, int z, EntityPlayer player,
-            int side, float xOffset, float yOffset,
-            float zOffset) {
-        if(!world.isRemote&&world.getTileEntity(x, y, z)instanceof TileEntityMultiBlock && (((TileEntityMultiBlock)world.getTileEntity(x, y, z)).isActivePart())){
-            player.addChatComponentMessage(new ChatComponentText(Integer.toString(((TileEntityMultiBlock)world.getTileEntity(x, y, z)).getMasterx())));
-            return true;
-        }
-        return false;
     }
 
     @Override

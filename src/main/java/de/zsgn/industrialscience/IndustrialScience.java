@@ -29,7 +29,6 @@ import de.zsgn.industrialscience.block.BlockIronBricks;
 import de.zsgn.industrialscience.block.BlockMysteriousPortal;
 import de.zsgn.industrialscience.block.BlockReinforcedBricks;
 import de.zsgn.industrialscience.block.BlockSingularity;
-import de.zsgn.industrialscience.block.multiblock.BlockIronHull;
 import de.zsgn.industrialscience.block.multiblock.MultiBlockControllerTier1Furnace;
 import de.zsgn.industrialscience.command.CommandGenerateRoom;
 import de.zsgn.industrialscience.command.IndustrialScienceMainCommand;
@@ -57,7 +56,6 @@ public class IndustrialScience{
     private Block blockmysteriousportal;
     private Block blockreinforcedbricks;
     private Block multiblockcontrollertier1furnace;
-    private Block blockironhull;
     private Block blockironbricks;
 
     private Item itemancienttechnology;
@@ -83,7 +81,6 @@ public class IndustrialScience{
         GameRegistry.registerBlock(blockmysteriousportal, blockmysteriousportal.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(blockreinforcedbricks, blockreinforcedbricks.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(multiblockcontrollertier1furnace, multiblockcontrollertier1furnace.getUnlocalizedName().substring(5));
-        GameRegistry.registerBlock(blockironhull, blockironhull.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(blockironbricks, blockironbricks.getUnlocalizedName().substring(5));
 
         GameRegistry.registerItem(itemancienttechnology, itemancienttechnology.getUnlocalizedName().substring(5));
@@ -136,7 +133,6 @@ public class IndustrialScience{
         blockmysteriousportal= new BlockMysteriousPortal();
         blocksingularity= new BlockSingularity(Material.rock);
         blockreinforcedbricks=new BlockReinforcedBricks();
-        blockironhull=new BlockIronHull();
         multiblockcontrollertier1furnace=new MultiBlockControllerTier1Furnace();
         itemancienttechnology=new  ItemAncientTechnology();
         itemcrystalreed= new ItemCrystalReed();
@@ -208,10 +204,6 @@ public class IndustrialScience{
     }
     public DungeonRoom getDungeonRoom(String key) {
         return dungeonroomlist.get(key);
-    }
-
-    public Block getBlockironhull() {
-        return blockironhull;
     }
     public Block getBlockironbricks() {
         return blockironbricks;
