@@ -6,6 +6,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
@@ -43,6 +44,7 @@ public abstract class BlockMultiBlockController extends BlockContainer {
                 }
             }
             masterTileEntity.setStructure(blocks);
+            player.addChatMessage(new ChatComponentText("Active"));
             return true;
         }
         return false;
