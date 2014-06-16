@@ -5,7 +5,6 @@ tile.tier1stonefurnace.name=Stone Furnace Controller
 tile.cobblestonehull.name=Cobblestone Hull
 tile.ironbricks.name=Iron Bricks
 tile.ironhull.name=Iron Hull
-tile.chimney.name = Chimney
 item.ancient-technology.name=Ancient Technology
 item.ancient-technology.descr1=It rattles and ticks as you shake it...
 item.ancient-technology.descr2=It seems to emit tiny clouds of smoke.

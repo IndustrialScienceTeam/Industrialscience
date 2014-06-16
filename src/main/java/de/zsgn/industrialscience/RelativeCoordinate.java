@@ -1,7 +1,5 @@
 package de.zsgn.industrialscience;
 
-import net.minecraftforge.common.util.ForgeDirection;
-
 public class RelativeCoordinate {
     //Right is +
     public final int sideCoord;
@@ -13,9 +11,6 @@ public class RelativeCoordinate {
         super();
         this.sideCoord = sideCoord;
         this.heightCoord = heightCoord;
-        this.DepthCoord = depthCoord;
-    }
-    public AbsoluteCoordinate convertToAbsolute(int x, int y, int z, ForgeDirection dirRIGHT, ForgeDirection dirDEPTH) {
-        return new AbsoluteCoordinate(x+(dirRIGHT.offsetX*sideCoord)+(dirDEPTH.offsetX*sideCoord), y+heightCoord, z+(dirRIGHT.offsetZ*DepthCoord)+(dirDEPTH.offsetZ*DepthCoord));
+        DepthCoord = depthCoord;
     }
 }
