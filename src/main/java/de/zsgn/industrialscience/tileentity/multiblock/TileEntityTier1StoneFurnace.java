@@ -105,17 +105,17 @@ TileEntityMultiBlockController implements IHatchSupport{
 
     @Override
     public RelativeCoordinate[] getRelativeOutputHatchCoords() {
-        return new RelativeCoordinate[]{new RelativeCoordinate(1, 0, 1)};
+        return new RelativeCoordinate[]{new RelativeCoordinate(0, -1, 1)};
     }
 
     @Override
     public RelativeCoordinate[] getRelativeInputHatchCoords() {
-        return new RelativeCoordinate[]{new RelativeCoordinate(-1, 0, 1)};
+        return new RelativeCoordinate[]{new RelativeCoordinate(0, 1, 1)};
     }
 
     @Override
     public RelativeCoordinate[] getRelativeInterfaceHatchCoords() {
-        return new RelativeCoordinate[]{new RelativeCoordinate(0, 1, 1)};
+        return new RelativeCoordinate[]{new RelativeCoordinate(-1, 1, 0)};
     }
 
     @Override

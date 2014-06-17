@@ -73,7 +73,7 @@ public enum MultiBlockStructure {
             }
         }
         for (int j = 0; j < ValidBlocks.length; j++) {
-            if(world.getBlock(x, y, z) == ValidBlocks[j]){
+            if(ValidBlocks[j].getClass().isInstance(world.getBlock(x, y, z))){
                 return true;
             }
         }

@@ -29,6 +29,7 @@ import de.zsgn.industrialscience.block.BlockIronBricks;
 import de.zsgn.industrialscience.block.BlockMysteriousPortal;
 import de.zsgn.industrialscience.block.BlockReinforcedBricks;
 import de.zsgn.industrialscience.block.BlockSingularity;
+import de.zsgn.industrialscience.block.multiblock.BlockStoneHatch;
 import de.zsgn.industrialscience.block.multiblock.MultiBlockControllerTier1StoneFurnace;
 import de.zsgn.industrialscience.block.multiblock.MultiBlockHullIronHull;
 import de.zsgn.industrialscience.block.multiblock.MultiBlockHullStoneHull;
@@ -64,6 +65,7 @@ public class IndustrialScience{
     private Block blockironbricks;
     private Block blockstonehull;
     private Block blockironhull;
+    private Block blockstonehatch;
 
     private Item itemancienttechnology;
     private Item itemcrystalreed;
@@ -91,6 +93,8 @@ public class IndustrialScience{
         GameRegistry.registerBlock(blockironbricks, blockironbricks.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(blockstonehull, blockstonehull.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(blockironhull, blockironhull.getUnlocalizedName().substring(5));
+        GameRegistry.registerBlock(blockstonehatch, blockstonehatch.getUnlocalizedName().substring(5));
+        System.out.println(blockstonehull.getUnlocalizedName().substring(5));
 
         GameRegistry.registerItem(itemancienttechnology, itemancienttechnology.getUnlocalizedName().substring(5));
 
@@ -147,6 +151,7 @@ public class IndustrialScience{
         blockreinforcedbricks=new BlockReinforcedBricks();
         blockironhull=new MultiBlockHullIronHull();
         blockstonehull=new MultiBlockHullStoneHull();
+        blockstonehatch=new BlockStoneHatch();
         blockcontrollertier1stonefurnace=new MultiBlockControllerTier1StoneFurnace();
         itemancienttechnology=new  ItemAncientTechnology();
         itemcrystalreed= new ItemCrystalReed();
