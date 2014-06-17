@@ -43,7 +43,7 @@ public abstract class BlockMultiBlockController extends BlockContainer {
             int y, int z, EntityPlayer player,
             int side, float xOffset, float yOffset,
             float zOffset) {
-        if(!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityMultiBlockController){
+        if(!world.isRemote){
            return testStructure(world,x,y,z,player);
         }
         return false;
@@ -51,6 +51,7 @@ public abstract class BlockMultiBlockController extends BlockContainer {
     
     private boolean testStructure(World world, int x, int y, int z,
             EntityPlayer player) {
+        if(world.getTileEntity(x, y, z) instanceof TileEntityMultiBlockController){
         TileEntityMultiBlockController masterTileEntity = (TileEntityMultiBlockController) world.getTileEntity(x, y, z);
         if(!masterTileEntity.isActivePart()){
         AbsoluteCoordinate[] blocks = structure.structureTest(world, x, y, z, ForgeDirection.getOrientation(world.getBlockMetadata(x, y, z)), ValidBlocks);
@@ -70,6 +71,7 @@ public abstract class BlockMultiBlockController extends BlockContainer {
         player.addChatMessage(new ChatComponentText("Active"));
         return true;
         }
+        }
         return false;
         
     }
@@ -78,7 +80,11 @@ public abstract class BlockMultiBlockController extends BlockContainer {
     public IIcon getIcon(IBlockAccess blockAccess, int x, int y, int z, int side)
     {
         if(side==blockAccess.getBlockMetadata(x, y, z)){
-            return front;
+            if(blockAccess.getTileEntity(x, y, z) instanceof TileEntityMultiBlockController &&((TileEntityMultiBlockController) blockAccess.getTileEntity(x, y, z)).isProcessing()){
+                return frontActive;
+            }else{
+                return front;
+            }
         }else{
             return sides;
         }

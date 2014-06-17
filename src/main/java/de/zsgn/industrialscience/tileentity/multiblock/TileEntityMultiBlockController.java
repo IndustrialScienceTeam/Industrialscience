@@ -59,5 +59,8 @@ public abstract class TileEntityMultiBlockController extends TileEntityMultiBloc
         mastery=y;
         masterz=z;
     }
+    public boolean isProcessing() {
+        return isActivePart();
+    }
 
 }
