@@ -129,6 +129,13 @@ public abstract class BlockMultiBlockController extends BlockContainer {
         }
         }
     }
+    @Override
+    public void breakBlock(World world, int x, int y,
+            int z, Block block, int meta) {
+        if(!world.isRemote&&world.getTileEntity(x, y, z)instanceof TileEntityMultiBlock && (((TileEntityMultiBlock)world.getTileEntity(x, y, z)).isActivePart())){
+            ((TileEntityMultiBlock)world.getTileEntity(x, y, z)).destroyStructure();
+        }
+    }
 
 
 
