@@ -38,6 +38,7 @@ import de.zsgn.industrialscience.item.ItemAncientTechnology;
 import de.zsgn.industrialscience.item.ItemClimbingBoots;
 import de.zsgn.industrialscience.item.ItemCrystalReed;
 import de.zsgn.industrialscience.tileentity.TileEntityMysteriousPortal;
+import de.zsgn.industrialscience.tileentity.multiblock.TileEntityHatch;
 import de.zsgn.industrialscience.tileentity.multiblock.TileEntityMultiBlock;
 import de.zsgn.industrialscience.tileentity.multiblock.TileEntityMultiBlockController;
 import de.zsgn.industrialscience.tileentity.multiblock.TileEntityTier1StoneFurnace;
@@ -101,6 +102,7 @@ public class IndustrialScience{
         GameRegistry.registerTileEntity(TileEntityTier1StoneFurnace.class, blockcontrollertier1stonefurnace.getUnlocalizedName().substring(5));
         GameRegistry.registerTileEntity(TileEntityMultiBlock.class, "tile.multiblock");
         GameRegistry.registerTileEntity(TileEntityMultiBlockController.class, "tile.multiblockcontroller");
+        GameRegistry.registerTileEntity(TileEntityHatch.class, "tile.hatch");
 
         GameRegistry.registerWorldGenerator(worldgeneratorportalroom, 5);
 
