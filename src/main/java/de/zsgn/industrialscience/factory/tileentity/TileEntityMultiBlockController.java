@@ -1,4 +1,4 @@
-package de.zsgn.industrialscience.tileentity.multiblock;
+package de.zsgn.industrialscience.factory.tileentity;
 
 import de.zsgn.industrialscience.AbsoluteCoordinate;
 import net.minecraft.nbt.NBTTagCompound;

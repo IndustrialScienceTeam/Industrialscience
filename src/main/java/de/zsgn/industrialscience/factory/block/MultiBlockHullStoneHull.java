@@ -1,4 +1,4 @@
-package de.zsgn.industrialscience.block.multiblock;
+package de.zsgn.industrialscience.factory.block;
 
 import net.minecraft.block.material.Material;
 import de.zsgn.industrialscience.IndustrialScience;

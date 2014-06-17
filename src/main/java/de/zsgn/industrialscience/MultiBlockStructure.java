@@ -4,7 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import de.zsgn.industrialscience.tileentity.multiblock.TileEntityMultiBlock;
+import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlock;
 
 public enum MultiBlockStructure {
     FURNACE_TIER1(1,1,1,1,2,0, new RelativeCoordinate[]{new RelativeCoordinate(0,0,1)});

@@ -1,10 +1,10 @@
-package de.zsgn.industrialscience.tileentity.multiblock;
+package de.zsgn.industrialscience.factory.tileentity;
 
 import org.apache.commons.lang3.ArrayUtils;
 
 import de.zsgn.industrialscience.AbsoluteCoordinate;
 import de.zsgn.industrialscience.RelativeCoordinate;
-import de.zsgn.industrialscience.block.multiblock.BlockMultiBlockController;
+import de.zsgn.industrialscience.factory.block.BlockMultiBlockController;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;

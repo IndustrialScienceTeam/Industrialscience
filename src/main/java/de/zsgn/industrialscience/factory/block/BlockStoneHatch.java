@@ -1,7 +1,7 @@
-package de.zsgn.industrialscience.block.multiblock;
+package de.zsgn.industrialscience.factory.block;
 
 import de.zsgn.industrialscience.IndustrialScience;
-import de.zsgn.industrialscience.tileentity.multiblock.TileEntityHatch;
+import de.zsgn.industrialscience.factory.tileentity.TileEntityHatch;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 

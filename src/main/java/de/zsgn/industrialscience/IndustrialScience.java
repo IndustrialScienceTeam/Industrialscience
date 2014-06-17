@@ -29,20 +29,21 @@ import de.zsgn.industrialscience.block.BlockIronBricks;
 import de.zsgn.industrialscience.block.BlockMysteriousPortal;
 import de.zsgn.industrialscience.block.BlockReinforcedBricks;
 import de.zsgn.industrialscience.block.BlockSingularity;
-import de.zsgn.industrialscience.block.multiblock.BlockStoneHatch;
-import de.zsgn.industrialscience.block.multiblock.MultiBlockControllerTier1StoneFurnace;
-import de.zsgn.industrialscience.block.multiblock.MultiBlockHullIronHull;
-import de.zsgn.industrialscience.block.multiblock.MultiBlockHullStoneHull;
 import de.zsgn.industrialscience.command.CommandGenerateRoom;
 import de.zsgn.industrialscience.command.IndustrialScienceMainCommand;
+import de.zsgn.industrialscience.factory.FactoryModule;
+import de.zsgn.industrialscience.factory.block.BlockStoneHatch;
+import de.zsgn.industrialscience.factory.block.MultiBlockControllerTier1StoneFurnace;
+import de.zsgn.industrialscience.factory.block.MultiBlockHullIronHull;
+import de.zsgn.industrialscience.factory.block.MultiBlockHullStoneHull;
+import de.zsgn.industrialscience.factory.tileentity.TileEntityHatch;
+import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlock;
+import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlockController;
+import de.zsgn.industrialscience.factory.tileentity.TileEntityTier1StoneFurnace;
 import de.zsgn.industrialscience.item.ItemAncientTechnology;
 import de.zsgn.industrialscience.item.ItemClimbingBoots;
 import de.zsgn.industrialscience.item.ItemCrystalReed;
 import de.zsgn.industrialscience.tileentity.TileEntityMysteriousPortal;
-import de.zsgn.industrialscience.tileentity.multiblock.TileEntityHatch;
-import de.zsgn.industrialscience.tileentity.multiblock.TileEntityMultiBlock;
-import de.zsgn.industrialscience.tileentity.multiblock.TileEntityMultiBlockController;
-import de.zsgn.industrialscience.tileentity.multiblock.TileEntityTier1StoneFurnace;
 import de.zsgn.industrialscience.world.WorldGeneratorPortalRoom;
 import de.zsgn.industrialsciencedungeonsystem.DungeonRoom;
 import de.zsgn.industrialsciencedungeonsystem.RouteType;
@@ -55,17 +56,15 @@ public class IndustrialScience{
     private static IndustrialScience instance;
     @SidedProxy(serverSide="de.zsgn.industrialscience.CommonProxy", clientSide="de.zsgn.industrialscience.ClientProxy")
     public static CommonProxy proxy;
+    
+    protected FactoryModule factoryModule=new FactoryModule();
 
     private Hashtable<String, DungeonRoom> dungeonroomlist = new Hashtable<String, DungeonRoom>();
 
     private Block blocksingularity;
     private Block blockmysteriousportal;
     private Block blockreinforcedbricks;
-    private Block blockcontrollertier1stonefurnace;
     private Block blockironbricks;
-    private Block blockstonehull;
-    private Block blockironhull;
-    private Block blockstonehatch;
 
     private Item itemancienttechnology;
     private Item itemcrystalreed;
@@ -89,12 +88,7 @@ public class IndustrialScience{
         GameRegistry.registerBlock(blocksingularity, blocksingularity.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(blockmysteriousportal, blockmysteriousportal.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(blockreinforcedbricks, blockreinforcedbricks.getUnlocalizedName().substring(5));
-        GameRegistry.registerBlock(blockcontrollertier1stonefurnace, blockcontrollertier1stonefurnace.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(blockironbricks, blockironbricks.getUnlocalizedName().substring(5));
-        GameRegistry.registerBlock(blockstonehull, blockstonehull.getUnlocalizedName().substring(5));
-        GameRegistry.registerBlock(blockironhull, blockironhull.getUnlocalizedName().substring(5));
-        GameRegistry.registerBlock(blockstonehatch, blockstonehatch.getUnlocalizedName().substring(5));
-        System.out.println(blockstonehull.getUnlocalizedName().substring(5));
 
         GameRegistry.registerItem(itemancienttechnology, itemancienttechnology.getUnlocalizedName().substring(5));
 
@@ -103,14 +97,15 @@ public class IndustrialScience{
         GameRegistry.registerItem(itemclimbingboots , itemclimbingboots.getUnlocalizedName().substring(5));
 
         GameRegistry.registerTileEntity(TileEntityMysteriousPortal.class, blockmysteriousportal.getUnlocalizedName().substring(5));
-        GameRegistry.registerTileEntity(TileEntityTier1StoneFurnace.class, blockcontrollertier1stonefurnace.getUnlocalizedName().substring(5));
-        GameRegistry.registerTileEntity(TileEntityMultiBlock.class, "tile.multiblock");
-        GameRegistry.registerTileEntity(TileEntityMultiBlockController.class, "tile.multiblockcontroller");
-        GameRegistry.registerTileEntity(TileEntityHatch.class, "tile.hatch");
 
         GameRegistry.registerWorldGenerator(worldgeneratorportalroom, 5);
 
         addRecipes();
+        factoryModule.init(event);
+    }
+
+    public FactoryModule getFactoryModule() {
+        return factoryModule;
     }
 
     private void applyProps() {
@@ -149,10 +144,6 @@ public class IndustrialScience{
         blockmysteriousportal= new BlockMysteriousPortal();
         blocksingularity= new BlockSingularity(Material.rock);
         blockreinforcedbricks=new BlockReinforcedBricks();
-        blockironhull=new MultiBlockHullIronHull();
-        blockstonehull=new MultiBlockHullStoneHull();
-        blockstonehatch=new BlockStoneHatch();
-        blockcontrollertier1stonefurnace=new MultiBlockControllerTier1StoneFurnace();
         itemancienttechnology=new  ItemAncientTechnology();
         itemcrystalreed= new ItemCrystalReed();
         itemclimbingboots= new ItemClimbingBoots();
@@ -227,9 +218,6 @@ public class IndustrialScience{
     public Block getBlockironbricks() {
         return blockironbricks;
 
-    }
-    public Block getBlockstonehull() {
-        return blockstonehull;
     }
 
 }

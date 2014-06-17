@@ -1,4 +1,4 @@
-package de.zsgn.industrialscience.block.multiblock;
+package de.zsgn.industrialscience.factory.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -8,7 +8,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import de.zsgn.industrialscience.IndustrialScience;
-import de.zsgn.industrialscience.tileentity.multiblock.TileEntityMultiBlock;
+import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlock;
 
 public abstract class BlockMultiblockHull extends BlockContainer {
 

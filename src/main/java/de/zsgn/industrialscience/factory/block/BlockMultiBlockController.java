@@ -1,4 +1,4 @@
-package de.zsgn.industrialscience.block.multiblock;
+package de.zsgn.industrialscience.factory.block;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -20,8 +20,8 @@ import net.minecraftforge.common.util.ForgeDirection;
 import de.zsgn.industrialscience.AbsoluteCoordinate;
 import de.zsgn.industrialscience.IndustrialScience;
 import de.zsgn.industrialscience.MultiBlockStructure;
-import de.zsgn.industrialscience.tileentity.multiblock.TileEntityMultiBlock;
-import de.zsgn.industrialscience.tileentity.multiblock.TileEntityMultiBlockController;
+import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlock;
+import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlockController;
 
 public abstract class BlockMultiBlockController extends BlockContainer {
     protected MultiBlockStructure structure;

@@ -1,4 +1,4 @@
-package de.zsgn.industrialscience.tileentity.multiblock;
+package de.zsgn.industrialscience.factory.tileentity;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
