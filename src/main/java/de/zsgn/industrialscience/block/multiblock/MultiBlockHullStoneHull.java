@@ -1,8 +1,7 @@
-package de.zsgn.industrialscience.block;
+package de.zsgn.industrialscience.block.multiblock;
 
 import net.minecraft.block.material.Material;
 import de.zsgn.industrialscience.IndustrialScience;
-import de.zsgn.industrialscience.block.multiblock.BlockMultiblockHull;
 
 public class MultiBlockHullStoneHull extends BlockMultiblockHull {
 

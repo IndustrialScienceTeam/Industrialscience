@@ -1,4 +1,4 @@
-package de.zsgn.industrialscience.block;
+package de.zsgn.industrialscience.block.multiblock;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

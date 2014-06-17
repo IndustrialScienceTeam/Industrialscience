@@ -11,7 +11,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import de.zsgn.industrialscience.IndustrialScience;
 import de.zsgn.industrialscience.MultiBlockStructure;
-import de.zsgn.industrialscience.block.BlockMultiBlockController;
 import de.zsgn.industrialscience.tileentity.multiblock.TileEntityTier1StoneFurnace;
 
 
