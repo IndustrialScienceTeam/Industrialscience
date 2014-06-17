@@ -4,8 +4,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import de.zsgn.industrialscience.RelativeCoordinate;
 
-public class TileEntityTier1StoneFurnace extends
-TileEntityMultiBlockController implements IHatchSupport{
+public class TileEntityStoneFurnace extends
+ITileEntityMultiBlockController implements IHatchSupport{
     protected ItemStack[] testslots=new ItemStack[2];
     protected int waitingticks=0;
     

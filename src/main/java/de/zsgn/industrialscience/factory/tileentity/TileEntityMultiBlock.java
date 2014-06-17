@@ -3,7 +3,7 @@ package de.zsgn.industrialscience.factory.tileentity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-public abstract class TileEntityMultiBlock extends TileEntity {
+public class TileEntityMultiBlock extends TileEntity {
     protected boolean activepart=false;
     protected int masterx,mastery,masterz;
 
@@ -14,8 +14,8 @@ public abstract class TileEntityMultiBlock extends TileEntity {
     }
 
     public void destroyStructure() {
-        if(worldObj.getTileEntity(masterx,mastery,masterz) instanceof TileEntityMultiBlockController){
-            ((TileEntityMultiBlockController)worldObj.getTileEntity(masterx,mastery,masterz)).destroyStructure();;
+        if(worldObj.getTileEntity(masterx,mastery,masterz) instanceof ITileEntityMultiBlockController){
+            ((ITileEntityMultiBlockController)worldObj.getTileEntity(masterx,mastery,masterz)).destroyStructure();;
         }
 
     }

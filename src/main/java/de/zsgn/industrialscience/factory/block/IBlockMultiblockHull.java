@@ -10,9 +10,9 @@ import net.minecraft.world.World;
 import de.zsgn.industrialscience.IndustrialScience;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlock;
 
-public abstract class BlockMultiblockHull extends BlockContainer {
+public abstract class IBlockMultiblockHull extends BlockContainer {
 
-    public BlockMultiblockHull(Material material) {
+    public IBlockMultiblockHull(Material material) {
         super(material);
         setCreativeTab(IndustrialScience.getInstance().getCreativetab());
     }
@@ -20,7 +20,7 @@ public abstract class BlockMultiblockHull extends BlockContainer {
     @Override
     public TileEntity createNewTileEntity(World world,
             int blockMetadata) {
-        return new TileEntityMultiBlock(){};
+        return new TileEntityMultiBlock();
     }
 
     @Override

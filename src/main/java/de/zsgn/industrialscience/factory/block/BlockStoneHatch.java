@@ -5,7 +5,7 @@ import de.zsgn.industrialscience.factory.tileentity.TileEntityHatch;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class BlockStoneHatch extends MultiBlockHullStoneHull {
+public class BlockStoneHatch extends BlockStoneHull {
 
     public BlockStoneHatch() {
         super();

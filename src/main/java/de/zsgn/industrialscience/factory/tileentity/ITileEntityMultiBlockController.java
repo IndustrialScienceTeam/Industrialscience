@@ -5,7 +5,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Vec3;
 
-public abstract class TileEntityMultiBlockController extends TileEntityMultiBlock {
+public abstract class ITileEntityMultiBlockController extends TileEntityMultiBlock {
     protected AbsoluteCoordinate[] structure={}; 
     @Override
     public void destroyStructure() {

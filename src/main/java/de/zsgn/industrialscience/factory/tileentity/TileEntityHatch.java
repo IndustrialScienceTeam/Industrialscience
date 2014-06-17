@@ -4,7 +4,7 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import de.zsgn.industrialscience.AbsoluteCoordinate;
 import de.zsgn.industrialscience.RelativeCoordinate;
-import de.zsgn.industrialscience.factory.block.BlockMultiBlockController;
+import de.zsgn.industrialscience.factory.block.IBlockMultiBlockController;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -134,7 +134,7 @@ public class TileEntityHatch extends TileEntityMultiBlock implements
     @Override
     public void setActivepart(boolean activepart) {
         super.setActivepart(activepart);
-        if(worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport&&worldObj.getBlock(masterx, mastery, masterz)instanceof BlockMultiBlockController){
+        if(worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport&&worldObj.getBlock(masterx, mastery, masterz)instanceof IBlockMultiBlockController){
             IHatchSupport master =(IHatchSupport)worldObj.getTileEntity(masterx, mastery, masterz);
             ForgeDirection right=ForgeDirection.getOrientation(worldObj.getBlockMetadata(masterx, mastery, masterz)).getRotation(ForgeDirection.DOWN);
             ForgeDirection depth=ForgeDirection.getOrientation(worldObj.getBlockMetadata(masterx, mastery, masterz)).getOpposite();

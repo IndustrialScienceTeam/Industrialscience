@@ -11,11 +11,11 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import de.zsgn.industrialscience.IndustrialScience;
 import de.zsgn.industrialscience.MultiBlockStructure;
-import de.zsgn.industrialscience.factory.tileentity.TileEntityTier1StoneFurnace;
+import de.zsgn.industrialscience.factory.tileentity.TileEntityStoneFurnace;
 
 
-public class MultiBlockControllerTier1StoneFurnace extends BlockMultiBlockController {
-    public MultiBlockControllerTier1StoneFurnace() {
+public class BlockStoneFurnaceController extends IBlockMultiBlockController {
+    public BlockStoneFurnaceController() {
         super(Material.rock, MultiBlockStructure.FURNACE_TIER1,IndustrialScience.MODID + ":" + IndustrialScience.getInstance().getFactoryModule().getBlockStonehull().getUnlocalizedName().substring(5));
         ValidBlocks=new Block[]{this,IndustrialScience.getInstance().getFactoryModule().getBlockStonehull()};
         this.setCreativeTab(IndustrialScience.getInstance().getCreativetab());
@@ -25,7 +25,7 @@ public class MultiBlockControllerTier1StoneFurnace extends BlockMultiBlockContro
 
     @Override
     public TileEntity createNewTileEntity(World var1, int var2) {
-        return new TileEntityTier1StoneFurnace();
+        return new TileEntityStoneFurnace();
     }
 
 }

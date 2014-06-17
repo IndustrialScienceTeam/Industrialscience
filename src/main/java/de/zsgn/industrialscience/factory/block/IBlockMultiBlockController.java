@@ -21,9 +21,9 @@ import de.zsgn.industrialscience.AbsoluteCoordinate;
 import de.zsgn.industrialscience.IndustrialScience;
 import de.zsgn.industrialscience.MultiBlockStructure;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlock;
-import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlockController;
+import de.zsgn.industrialscience.factory.tileentity.ITileEntityMultiBlockController;
 
-public abstract class BlockMultiBlockController extends BlockContainer {
+public abstract class IBlockMultiBlockController extends BlockContainer {
     protected MultiBlockStructure structure;
     protected String sidetexturestring;
     protected Block[] ValidBlocks={};
@@ -33,7 +33,7 @@ public abstract class BlockMultiBlockController extends BlockContainer {
     protected IIcon frontActive;
     @SideOnly(Side.CLIENT)
     protected IIcon sides;
-    protected BlockMultiBlockController(Material p_i45386_1_, MultiBlockStructure structure, String sidetexturestring) {
+    protected IBlockMultiBlockController(Material p_i45386_1_, MultiBlockStructure structure, String sidetexturestring) {
         super(p_i45386_1_);
         this.structure=structure;
         this.sidetexturestring=sidetexturestring;
@@ -51,8 +51,8 @@ public abstract class BlockMultiBlockController extends BlockContainer {
     
     private boolean testStructure(World world, int x, int y, int z,
             EntityPlayer player) {
-        if(world.getTileEntity(x, y, z) instanceof TileEntityMultiBlockController){
-        TileEntityMultiBlockController masterTileEntity = (TileEntityMultiBlockController) world.getTileEntity(x, y, z);
+        if(world.getTileEntity(x, y, z) instanceof ITileEntityMultiBlockController){
+        ITileEntityMultiBlockController masterTileEntity = (ITileEntityMultiBlockController) world.getTileEntity(x, y, z);
         if(!masterTileEntity.isActivePart()){
         AbsoluteCoordinate[] blocks = structure.structureTest(world, x, y, z, ForgeDirection.getOrientation(world.getBlockMetadata(x, y, z)), ValidBlocks);
         if(blocks == null){
@@ -80,7 +80,7 @@ public abstract class BlockMultiBlockController extends BlockContainer {
     public IIcon getIcon(IBlockAccess blockAccess, int x, int y, int z, int side)
     {
         if(side==blockAccess.getBlockMetadata(x, y, z)){
-            if(blockAccess.getTileEntity(x, y, z) instanceof TileEntityMultiBlockController &&((TileEntityMultiBlockController) blockAccess.getTileEntity(x, y, z)).isProcessing()){
+            if(blockAccess.getTileEntity(x, y, z) instanceof ITileEntityMultiBlockController &&((ITileEntityMultiBlockController) blockAccess.getTileEntity(x, y, z)).isProcessing()){
                 return frontActive;
             }else{
                 return front;
