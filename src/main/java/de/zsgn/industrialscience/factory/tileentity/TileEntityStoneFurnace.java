@@ -130,7 +130,7 @@ ITileEntityMultiBlockController implements IHatchSupport{
 
     @Override
     public boolean canExtractItem(int var1, ItemStack var2) {
-        return var1==0;
+        return var1==1;
     }
 
 }
