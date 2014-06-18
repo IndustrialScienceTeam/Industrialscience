@@ -1,5 +1,9 @@
 package de.zsgn.industrialscience.factory.block;
 
+import java.util.Random;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -33,10 +37,16 @@ public class BlockChimney extends BlockContainer {
             if(!world.isRemote&&world.getTileEntity(x, y, z)instanceof TileEntityChimney){
                
              }
+             super.breakBlock(world, x, y, z, block, meta);
         }
         protected AbsoluteCoordinate getMultiBlockInterface(World world, int x, int y,
                 int z) {
 
             return new AbsoluteCoordinate(x, y-1, z);
+        }
+        @SideOnly(Side.CLIENT)
+        @Override
+        public void randomDisplayTick(World world, int x, int y, int z, Random random) {
+            world.spawnParticle("smoke", x, y, z, 0, 0, 0);
         }
 }
