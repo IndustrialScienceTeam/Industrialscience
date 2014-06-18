@@ -49,4 +49,15 @@ public class BlockChimney extends BlockContainer {
         public void randomDisplayTick(World world, int x, int y, int z, Random random) {
             world.spawnParticle("smoke", x, y, z, 0, 0, 0);
         }
+        public boolean renderAsNormalBlock() {
+            return false;
+        }
+        @Override
+        public int getRenderType() {
+                return -1;
+        }
+        @Override
+        public boolean isOpaqueCube() {
+                return false;
+        }
 }
