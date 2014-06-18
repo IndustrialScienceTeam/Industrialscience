@@ -85,6 +85,7 @@ public class IndustrialScience{
         loadProps();
         applyProps();
         initFields();
+        proxy.registerRenderThings();
         GameRegistry.registerBlock(blocksingularity, blocksingularity.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(blockmysteriousportal, blockmysteriousportal.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(blockreinforcedbricks, blockreinforcedbricks.getUnlocalizedName().substring(5));
@@ -101,6 +102,7 @@ public class IndustrialScience{
         GameRegistry.registerWorldGenerator(worldgeneratorportalroom, 5);
 
         addRecipes();
+        
         factoryModule.init(event);
     }
 

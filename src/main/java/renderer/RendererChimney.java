@@ -12,18 +12,18 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
-import de.zsgn.industrialscience.models.ModelBlockChimney;
+import de.zsgn.industrialscience.models.ModelChimney;
 
 
 
 
-public class RendererBlockChimney extends TileEntitySpecialRenderer {
+public class RendererChimney extends TileEntitySpecialRenderer {
         
         //The model of your block
-        private final ModelBlockChimney model;
+        private final ModelChimney model;
         
-        public RendererBlockChimney() {
-                this.model = new ModelBlockChimney();
+        public RendererChimney() {
+                this.model = new ModelChimney();
         }
         
         private void adjustRotatePivotViaMeta(World world, int x, int y, int z) {
@@ -35,6 +35,7 @@ public class RendererBlockChimney extends TileEntitySpecialRenderer {
         
         @Override
         public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale) {
+
         //The PushMatrix tells the renderer to "start" doing something.
                 GL11.glPushMatrix();
         //This is setting the initial location.
@@ -42,8 +43,9 @@ public class RendererBlockChimney extends TileEntitySpecialRenderer {
         //This is the texture of your block. It's pathed to be the same place as your other blocks here.
                 //Outdated bindTextureByName("/mods/roads/textures/blocks/TrafficLightPoleRed.png");
        //Use in 1.6.2  this
-                ResourceLocation textures = (new ResourceLocation("[yourmodidhere]:textures/blocks/TrafficLightPoleRed.png")); 
-        //the ':' is very important
+                ResourceLocation textures = (new ResourceLocation("industrialscience:textures/blocks/ModelChimney.png")); 
+
+                //the ':' is very important
         //binding the textures
                 Minecraft.getMinecraft().renderEngine.bindTexture(textures);
 
@@ -60,8 +62,6 @@ public class RendererBlockChimney extends TileEntitySpecialRenderer {
         //Set the lighting stuff, so it changes it's brightness properly.       
         private void adjustLightFixture(World world, int i, int j, int k, Block block) {
                 Tessellator tess = Tessellator.instance;
-                //float brightness = block.getBlockBrightness(world, i, j, k);
-                //As of MC 1.7+ block.getBlockBrightness() has become block.getLightValue():
                 float brightness = block.getLightValue(world, i, j, k);
                 int skyLight = world.getLightBrightnessForSkyBlocks(i, j, k, 0);
                 int modulousModifier = skyLight % 65536;

@@ -15,12 +15,12 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelBlockChimney extends ModelBase
+public class ModelChimney extends ModelBase
 {
   //fields
     ModelRenderer Shape1;
   
-  public ModelBlockChimney()
+  public ModelChimney()
   {
     textureWidth = 64;
     textureHeight = 32;
