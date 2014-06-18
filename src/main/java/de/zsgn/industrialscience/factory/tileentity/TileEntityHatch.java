@@ -12,9 +12,14 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityHatch extends TileEntityMultiBlock implements
         ISidedInventory {
-    protected boolean isoutput;
-    protected boolean isinput;
-    protected boolean isinterface;
+    protected boolean output;
+    protected boolean input;
+    protected boolean blockinterface;
+    protected final boolean automated;
+    public TileEntityHatch(boolean automated) {
+        this.automated=automated;
+    }
+
     @Override
     public int getSizeInventory() {
         if(worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport){
@@ -100,13 +105,13 @@ public class TileEntityHatch extends TileEntityMultiBlock implements
 
     @Override
     public int[] getAccessibleSlotsFromSide(int var1) {
-        if(worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport){
+        if(worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport&&automated){
         IHatchSupport master =(IHatchSupport)worldObj.getTileEntity(masterx, mastery, masterz);
         int[] slots=new int[]{};
-        if(isinput){
+        if(input){
             slots=master.getInputSlots();
         }
-        if(isoutput){
+        if(output){
             slots=ArrayUtils.addAll(slots, master.getOutputSlots());
         }
         return slots;
@@ -116,9 +121,8 @@ public class TileEntityHatch extends TileEntityMultiBlock implements
 
     @Override
     public boolean canInsertItem(int var1, ItemStack var2, int var3) {
-        if(worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport){
+        if(worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport&&automated){
         IHatchSupport master =(IHatchSupport)worldObj.getTileEntity(masterx, mastery, masterz);
-        System.out.println(master.isItemValidForSlot(var1, var2));
         return master.isItemValidForSlot(var1, var2);
         }
         return false;
@@ -126,7 +130,7 @@ public class TileEntityHatch extends TileEntityMultiBlock implements
 
     @Override
     public boolean canExtractItem(int var1, ItemStack var2, int var3) {
-        if(worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport){
+        if(worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport&&automated){
         IHatchSupport master =(IHatchSupport)worldObj.getTileEntity(masterx, mastery, masterz);
         return master.canExtractItem(var1, var2);
         }
@@ -142,27 +146,55 @@ public class TileEntityHatch extends TileEntityMultiBlock implements
             ForgeDirection depth=ForgeDirection.getOrientation(worldObj.getBlockMetadata(masterx, mastery, masterz)).getOpposite();
             for (RelativeCoordinate outputcoord : master.getRelativeOutputHatchCoords()) {
                 if(outputcoord.convertToAbsolute(masterx, mastery, masterz, right, depth).equals(new AbsoluteCoordinate(xCoord, yCoord, zCoord))){
-                   isoutput=true;
-                   isinterface=true;
+                   output=true;
+                   blockinterface=true;
                    break;
                 }
             }
             for (RelativeCoordinate inputcoord : master.getRelativeInputHatchCoords()) {
                 if(inputcoord.convertToAbsolute(masterx, mastery, masterz, right, depth).equals(new AbsoluteCoordinate(xCoord, yCoord, zCoord))){
-                   isinput=true;
-                   isinterface=true;
+                   input=true;
+                   blockinterface=true;
                    break;
                 }
             }
-            if(!isinput||!isoutput){
+            if(!input||!output){
                 for (RelativeCoordinate interfacecoord : master.getRelativeInterfaceHatchCoords()) {
                     if(interfacecoord.convertToAbsolute(masterx, mastery, masterz, right, depth).equals(new AbsoluteCoordinate(xCoord, yCoord, zCoord))){
-                       isinterface=true;
+                       blockinterface=true;
                        break;
                     }
                 }
             }
         }
+    }
+    public int getManualSlot(){
+        if(worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport&&automated){
+        IHatchSupport master =(IHatchSupport)worldObj.getTileEntity(masterx, mastery, masterz);
+        if(input){
+            return master.getInputSlots()[0];
+        }
+        if(output){
+            return master.getOutputSlots()[0];
+        }
+        }
+        return -1;
+    }
+
+    public boolean isOutput() {
+        return output;
+    }
+
+    public boolean isInput() {
+        return input;
+    }
+
+    public boolean isBlockinterface() {
+        return blockinterface;
+    }
+
+    public boolean isAutomated() {
+        return automated;
     }
 
 }
