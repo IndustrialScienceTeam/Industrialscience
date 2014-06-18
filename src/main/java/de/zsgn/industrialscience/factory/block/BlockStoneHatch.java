@@ -11,6 +11,7 @@ public class BlockStoneHatch extends BlockStoneHull {
         super();
         this.setBlockName("cobblestonehatch");
         this.textureName=IndustrialScience.MODID + ":" + this.getUnlocalizedName().substring(5);
+        System.err.println(IndustrialScience.MODID + ":" + this.getUnlocalizedName().substring(5));
     }
 
     @Override
