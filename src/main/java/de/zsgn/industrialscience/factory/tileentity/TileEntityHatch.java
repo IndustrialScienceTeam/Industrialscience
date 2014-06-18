@@ -109,6 +109,7 @@ public class TileEntityHatch extends TileEntityMultiBlock implements
         if(isoutput){
             slots=ArrayUtils.addAll(slots, master.getOutputSlots());
         }
+        return slots;
         }
         return new int[]{};
     }
@@ -117,6 +118,7 @@ public class TileEntityHatch extends TileEntityMultiBlock implements
     public boolean canInsertItem(int var1, ItemStack var2, int var3) {
         if(worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport){
         IHatchSupport master =(IHatchSupport)worldObj.getTileEntity(masterx, mastery, masterz);
+        System.out.println(master.isItemValidForSlot(var1, var2));
         return master.isItemValidForSlot(var1, var2);
         }
         return false;
@@ -152,7 +154,7 @@ public class TileEntityHatch extends TileEntityMultiBlock implements
                    break;
                 }
             }
-            if(isinput||isoutput){
+            if(!isinput||!isoutput){
                 for (RelativeCoordinate interfacecoord : master.getRelativeInterfaceHatchCoords()) {
                     if(interfacecoord.convertToAbsolute(masterx, mastery, masterz, right, depth).equals(new AbsoluteCoordinate(xCoord, yCoord, zCoord))){
                        isinterface=true;
