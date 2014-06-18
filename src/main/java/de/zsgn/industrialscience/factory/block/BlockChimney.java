@@ -7,7 +7,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
+import de.zsgn.industrialscience.AbsoluteCoordinate;
 import de.zsgn.industrialscience.IndustrialScience;
+import de.zsgn.industrialscience.factory.tileentity.TileEntityChimney;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlock;
 
 public class BlockChimney extends BlockContainer {
@@ -22,23 +24,19 @@ public class BlockChimney extends BlockContainer {
         @Override
         public TileEntity createNewTileEntity(World world,
                 int blockMetadata) {
-            return new TileEntityMultiBlock(){};
+            return new TileEntityChimney();
         }
-        public boolean onBlockActivated(World world, int x,
-                int y, int z, EntityPlayer player,
-                int side, float xOffset, float yOffset,
-                float zOffset) {
-            if(!world.isRemote&&world.getTileEntity(x, y, z)instanceof TileEntityMultiBlock && (((TileEntityMultiBlock)world.getTileEntity(x, y, z)).isActivePart())){
-               player.addChatComponentMessage(new ChatComponentText(Integer.toString(((TileEntityMultiBlock)world.getTileEntity(x, y, z)).getMasterx())));
-               return true;
-            }
-            return false;
-        }
+       
         @Override
         public void breakBlock(World world, int x, int y,
                 int z, Block block, int meta) {
-            if(!world.isRemote&&world.getTileEntity(x, y, z)instanceof TileEntityMultiBlock && (((TileEntityMultiBlock)world.getTileEntity(x, y, z)).isActivePart())){
-                ((TileEntityMultiBlock)world.getTileEntity(x, y, z)).destroyStructure();
+            if(!world.isRemote&&world.getTileEntity(x, y, z)instanceof TileEntityChimney){
+               
              }
+        }
+        protected AbsoluteCoordinate getMultiBlockInterface(World world, int x, int y,
+                int z) {
+
+            return new AbsoluteCoordinate(x, y-1, z);
         }
 }
