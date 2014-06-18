@@ -29,6 +29,7 @@ public abstract class IBlockMultiblockHull extends BlockContainer {
         if(!world.isRemote&&world.getTileEntity(x, y, z)instanceof TileEntityMultiBlock && (((TileEntityMultiBlock)world.getTileEntity(x, y, z)).isActivePart())){
             ((TileEntityMultiBlock)world.getTileEntity(x, y, z)).destroyStructure();
         }
+        super.breakBlock(world, x, y, z, block, meta);
     }
 
 }
