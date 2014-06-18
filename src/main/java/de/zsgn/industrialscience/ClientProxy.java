@@ -1,10 +1,10 @@
 package de.zsgn.industrialscience;
 
-import renderer.RendererChimney;
-import cpw.mods.fml.client.registry.ClientRegistry;
 import net.minecraft.client.model.ModelBiped;
+import cpw.mods.fml.client.registry.ClientRegistry;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityChimney;
 import de.zsgn.industrialscience.item.ModelClimbingBoots;
+import de.zsgn.industrialscience.renderer.RendererChimney;
 
 public class ClientProxy extends CommonProxy {
 
