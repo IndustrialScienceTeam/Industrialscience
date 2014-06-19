@@ -104,33 +104,24 @@ ITileEntityMultiBlockController implements IHatchSupport{
     }
 
     @Override
-    public RelativeCoordinate[] getRelativeOutputHatchCoords() {
-        return new RelativeCoordinate[]{new RelativeCoordinate(0, -1, 1)};
-    }
-
-    @Override
-    public RelativeCoordinate[] getRelativeInputHatchCoords() {
-        return new RelativeCoordinate[]{new RelativeCoordinate(0, 1, 1)};
-    }
-
-    @Override
     public RelativeCoordinate[] getRelativeInterfaceHatchCoords() {
-        return new RelativeCoordinate[]{new RelativeCoordinate(-1, 1, 0)};
+        return new RelativeCoordinate[]{};
     }
 
-    @Override
-    public int[] getOutputSlots() {
-        return new int[]{1};
-    }
-
-    @Override
-    public int[] getInputSlots() {
-        return new int[]{0};
-    }
 
     @Override
     public boolean canExtractItem(int var1, ItemStack var2) {
         return var1==1;
+    }
+
+    @Override
+    public RelativeCoordinate[] getRelativeItemHatchCoords() {
+        return new RelativeCoordinate[]{new RelativeCoordinate(1, 0, 1),new RelativeCoordinate(-1, 0, 1),new RelativeCoordinate(0, 0, 2),new RelativeCoordinate(0, 1, 1),new RelativeCoordinate(0, -1, 1)};
+    }
+
+    @Override
+    public int[] getSlots() {
+       return new int[]{0,1};
     }
 
 }

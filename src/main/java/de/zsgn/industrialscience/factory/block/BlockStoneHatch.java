@@ -16,7 +16,7 @@ public class BlockStoneHatch extends BlockStoneHull {
 
     @Override
     public TileEntity createNewTileEntity(World world, int blockMetadata) {
-        return new TileEntityHatch(false);
+        return new TileEntityHatch(true);
     }
     @Override
     public boolean onBlockActivated(World world, int x,
@@ -25,17 +25,15 @@ public class BlockStoneHatch extends BlockStoneHull {
             float zOffset) {
         if(world.getTileEntity(x, y, z) instanceof TileEntityHatch){
             TileEntityHatch hatch=(TileEntityHatch)world.getTileEntity(x, y, z);
-            if(hatch.isInput()){
-                if(player.inventory.getCurrentItem()!=null&&hatch.getManualSlot()>=0&&hatch.isItemValidForSlot(hatch.getManualSlot(), player.inventory.getCurrentItem())){
+            if(hatch.isItemInterface()){
+                if(player.inventory.getCurrentItem() != null){
                     if(!world.isRemote){
                         
                     }
                     return true;
+                }else {
+                    return false;
                 }
-            }else if (hatch.isOutput()) {
-                
-            }else {
-                return false;
             }
         }
         return false;
