@@ -124,4 +124,43 @@ ITileEntityMultiBlockController implements IHatchSupport{
        return new int[]{0,1};
     }
 
+    @Override
+    public void readFromNBT(NBTTagCompound tagCompound) {
+        super.readFromNBT(tagCompound);
+        NBTTagList nbttaglist = tagCompound.getTagList("Items", 10);
+        this.testslots = new ItemStack[this.getSizeInventory()];
+
+        for (int i = 0; i < nbttaglist.tagCount(); ++i)
+        {
+            NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
+            byte b0 = nbttagcompound1.getByte("Slot");
+
+            if (b0 >= 0 && b0 < this.testslots.length)
+            {
+                this.testslots[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+            }
+        }
+        waitingticks=tagCompound.getInteger("waitingticks");
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound tagCompound) {
+        super.writeToNBT(tagCompound);
+        tagCompound.setInteger("waitingticks", (short)this.waitingticks);
+        NBTTagList nbttaglist = new NBTTagList();
+
+        for (int i = 0; i < this.testslots.length; ++i)
+        {
+            if (this.testslots[i] != null)
+            {
+                NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+                nbttagcompound1.setByte("Slot", (byte)i);
+                this.testslots[i].writeToNBT(nbttagcompound1);
+                nbttaglist.appendTag(nbttagcompound1);
+            }
+        }
+
+        tagCompound.setTag("Items", nbttaglist);
+    }
+
 }
