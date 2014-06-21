@@ -2,6 +2,8 @@ package de.zsgn.industrialscience.factory.tileentity;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import de.zsgn.industrialscience.RelativeCoordinate;
 
 public class TileEntityStoneFurnace extends
