@@ -25,7 +25,7 @@ public class BlockStoneFurnaceController extends IBlockMultiBlockController {
 
     @Override
     public TileEntity createNewTileEntity(World var1, int var2) {
-        return new TileEntityStoneFurnace();
+        return new TileEntityStoneFurnace(20);
     }
 
 }

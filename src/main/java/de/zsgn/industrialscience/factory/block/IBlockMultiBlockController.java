@@ -22,6 +22,7 @@ import de.zsgn.industrialscience.IndustrialScience;
 import de.zsgn.industrialscience.MultiBlockStructure;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlock;
 import de.zsgn.industrialscience.factory.tileentity.ITileEntityMultiBlockController;
+import de.zsgn.industrialscience.factory.tileentity.TileEntityStoneFurnace;
 
 public abstract class IBlockMultiBlockController extends BlockContainer {
     protected MultiBlockStructure structure;
@@ -43,7 +44,15 @@ public abstract class IBlockMultiBlockController extends BlockContainer {
             int y, int z, EntityPlayer player,
             int side, float xOffset, float yOffset,
             float zOffset) {
-        if(!world.isRemote){
+        if(!world.isRemote&&world.getTileEntity(x, y, z) instanceof TileEntityStoneFurnace){
+            TileEntityStoneFurnace masterTileEntity = (TileEntityStoneFurnace) world.getTileEntity(x, y, z);
+           player.addChatMessage(new ChatComponentText("Temperature: "+masterTileEntity.getTemperature()));
+           if(masterTileEntity.furnaceslots[0]!=null)
+           player.addChatMessage(new ChatComponentText("Slot0: "+masterTileEntity.furnaceslots[0].getDisplayName()+" x "+masterTileEntity.furnaceslots[0].stackSize));
+           if(masterTileEntity.furnaceslots[1]!=null)
+           player.addChatMessage(new ChatComponentText("Slot1: "+masterTileEntity.furnaceslots[1].getDisplayName()+" x "+masterTileEntity.furnaceslots[1].stackSize));
+           if(masterTileEntity.furnaceslots[2]!=null)
+           player.addChatMessage(new ChatComponentText("Slot2: "+masterTileEntity.furnaceslots[2].getDisplayName()+" x "+masterTileEntity.furnaceslots[2].stackSize));
            return testStructure(world,x,y,z,player);
         }
         return false;

@@ -1,50 +1,77 @@
 package de.zsgn.industrialscience.factory.tileentity;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntityFurnace;
 import de.zsgn.industrialscience.RelativeCoordinate;
 
 public class TileEntityStoneFurnace extends
 ITileEntityMultiBlockController implements IHatchSupport{
-    protected ItemStack[] testslots=new ItemStack[2];
-    protected int waitingticks=0;
+    public static final int INPUTSLOT=0;
+    public static final int FUELSLOT=1;
+    public static final int OUTPUTSLOT=2;
+    public ItemStack[] furnaceslots=new ItemStack[3];
+    protected int deftemperature=20;
+    protected float temperature=20;
+    protected int currenfuelburntime=0;
     
+    public TileEntityStoneFurnace(int deftemperature) {
+        super();
+        this.deftemperature=deftemperature;
+        temperature=deftemperature;
+    }
+
     @Override
     public int getSizeInventory() {
-        return testslots.length;
+        return furnaceslots.length;
     }
 
     @Override
     public void updateEntity() {
-        waitingticks++;
-        if(waitingticks==20){
-            waitingticks=0;
-            if(testslots[0]!=null &&testslots[1]==null){
-                testslots[1]=testslots[0];
-                testslots[0]=null;
+        if(currenfuelburntime>0){
+            currenfuelburntime--;
+            temperature=temperature+0.5F;
+        }else if(temperature>deftemperature){
+            temperature=temperature-(activepart? 0.05F : 0.1F);
+        }
+        if(currenfuelburntime==0&&furnaceslots[FUELSLOT]!=null){
+            currenfuelburntime=getItemBurnTime(furnaceslots[FUELSLOT]);
+            furnaceslots[FUELSLOT].stackSize--;
+            if(furnaceslots[FUELSLOT].stackSize==0){
+                furnaceslots[FUELSLOT]=null;
             }
+        }
+        
+    }
+
+    protected int getItemBurnTime(ItemStack itemStack) {
+        if(itemStack!=null&&itemStack.getItem()!=Items.lava_bucket){
+            return TileEntityFurnace.getItemBurnTime(itemStack);
+        }else{
+            return 0;
         }
     }
 
     @Override
     public ItemStack getStackInSlot(int var1) {
-        return testslots[var1];
+        return furnaceslots[var1];
     }
 
     @Override
     public ItemStack decrStackSize(int var1, int var2) {
-        if(testslots[var1]!=null){
+        if(furnaceslots[var1]!=null){
             ItemStack result;
-            if(testslots[var1].stackSize<=var2){
-                result=testslots[var1];
-                testslots[var1]=null;
+            if(furnaceslots[var1].stackSize<=var2){
+                result=furnaceslots[var1];
+                furnaceslots[var1]=null;
                 return result;
             }else {
-                result=testslots[var1].splitStack(var2);
-                if(testslots[var1].stackSize==0){
-                    testslots[var1]=null;
+                result=furnaceslots[var1].splitStack(var2);
+                if(furnaceslots[var1].stackSize==0){
+                    furnaceslots[var1]=null;
                 }
                 return null;
             }
@@ -55,9 +82,9 @@ ITileEntityMultiBlockController implements IHatchSupport{
 
     @Override
     public ItemStack getStackInSlotOnClosing(int var1) {
-        if(testslots[var1]!=null){
-            ItemStack result=testslots[var1];
-            testslots[var1]=null;
+        if(furnaceslots[var1]!=null){
+            ItemStack result=furnaceslots[var1];
+            furnaceslots[var1]=null;
             return result;
         }
         return null;
@@ -65,7 +92,7 @@ ITileEntityMultiBlockController implements IHatchSupport{
 
     @Override
     public void setInventorySlotContents(int var1, ItemStack var2) {
-        testslots[var1]=var2;
+        furnaceslots[var1]=var2;
         if (var2!= null && var2.stackSize > this.getInventoryStackLimit()){
             var2.stackSize = this.getInventoryStackLimit();
         }
@@ -102,7 +129,13 @@ ITileEntityMultiBlockController implements IHatchSupport{
 
     @Override
     public boolean isItemValidForSlot(int var1, ItemStack var2) {
-        return var1==0;
+        if(var1==INPUTSLOT){
+            return true;
+        }else if (var1==FUELSLOT&&getItemBurnTime(var2)>0) {
+            return true;
+        }else {
+            return true;
+        }
     }
 
     @Override
@@ -113,7 +146,7 @@ ITileEntityMultiBlockController implements IHatchSupport{
 
     @Override
     public boolean canExtractItem(int var1, ItemStack var2) {
-        return var1==1;
+        return var1==OUTPUTSLOT;
     }
 
     @Override
@@ -123,46 +156,53 @@ ITileEntityMultiBlockController implements IHatchSupport{
 
     @Override
     public int[] getSlots() {
-       return new int[]{0,1};
+       return new int[]{FUELSLOT,INPUTSLOT,OUTPUTSLOT};
     }
 
     @Override
     public void readFromNBT(NBTTagCompound tagCompound) {
         super.readFromNBT(tagCompound);
         NBTTagList nbttaglist = tagCompound.getTagList("Items", 10);
-        this.testslots = new ItemStack[this.getSizeInventory()];
+        this.furnaceslots = new ItemStack[this.getSizeInventory()];
 
         for (int i = 0; i < nbttaglist.tagCount(); ++i)
         {
             NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
             byte b0 = nbttagcompound1.getByte("Slot");
 
-            if (b0 >= 0 && b0 < this.testslots.length)
+            if (b0 >= 0 && b0 < this.furnaceslots.length)
             {
-                this.testslots[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+                this.furnaceslots[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
             }
         }
-        waitingticks=tagCompound.getInteger("waitingticks");
+        temperature=tagCompound.getFloat("temperature");
+        currenfuelburntime=tagCompound.getInteger("currenfuelburntime");
     }
 
     @Override
     public void writeToNBT(NBTTagCompound tagCompound) {
         super.writeToNBT(tagCompound);
-        tagCompound.setInteger("waitingticks", (short)this.waitingticks);
+        tagCompound.setFloat("temperature", temperature);
+        tagCompound.setInteger("currenfuelburntime", currenfuelburntime);
         NBTTagList nbttaglist = new NBTTagList();
 
-        for (int i = 0; i < this.testslots.length; ++i)
+        for (int i = 0; i < this.furnaceslots.length; ++i)
         {
-            if (this.testslots[i] != null)
+            if (this.furnaceslots[i] != null)
             {
                 NBTTagCompound nbttagcompound1 = new NBTTagCompound();
                 nbttagcompound1.setByte("Slot", (byte)i);
-                this.testslots[i].writeToNBT(nbttagcompound1);
+                this.furnaceslots[i].writeToNBT(nbttagcompound1);
                 nbttaglist.appendTag(nbttagcompound1);
             }
         }
 
         tagCompound.setTag("Items", nbttaglist);
     }
+
+    public float getTemperature() {
+        return temperature;
+    }
+
 
 }
