@@ -8,13 +8,14 @@ import de.zsgn.industrialscience.factory.block.IBlockMultiBlockController;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityHatch extends TileEntityMultiBlock implements
         ISidedInventory {
-    protected boolean iteminterface;
-    protected boolean blockinterface;
-    protected final boolean automated;
+    protected boolean iteminterface=false;
+    protected boolean blockinterface=false;
+    protected boolean automated=true;
     public TileEntityHatch(boolean automated) {
         this.automated=automated;
     }
@@ -183,6 +184,22 @@ public class TileEntityHatch extends TileEntityMultiBlock implements
 
     public boolean isAutomated() {
         return automated;
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound tagCompound) {
+        super.readFromNBT(tagCompound);
+        automated=tagCompound.getBoolean("automated");
+        iteminterface=tagCompound.getBoolean("iteminterface");
+        blockinterface=tagCompound.getBoolean("blockinterface");
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound tagCompound) {
+        super.writeToNBT(tagCompound);
+        tagCompound.setBoolean("automated", automated);
+        tagCompound.setBoolean("iteminterface", iteminterface);
+        tagCompound.setBoolean("blockinterface", blockinterface);
     }
 
 }
