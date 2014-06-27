@@ -25,7 +25,7 @@ public class TileEntityMysteriousPortal extends TileEntity {
         if(isUseable()){
             setActive(worldObj.getIndirectPowerLevelTo(xCoord, yCoord, zCoord, 0)>0);
             if(isActive()){
-                AxisAlignedBB axisalignedbb =  AxisAlignedBB.getAABBPool().getAABB(this.xCoord - 1, this.yCoord+1, this.zCoord - 1, this.xCoord + 1, this.yCoord + 3, this.zCoord + 1);
+                AxisAlignedBB axisalignedbb =  AxisAlignedBB.getBoundingBox(this.xCoord - 1, this.yCoord+1, this.zCoord - 1, this.xCoord + 1, this.yCoord + 3, this.zCoord + 1);
                 List list=  this.worldObj.getEntitiesWithinAABB(Entity.class, axisalignedbb);
                 Iterator iterator = list.iterator();
                 while (iterator.hasNext()) {
