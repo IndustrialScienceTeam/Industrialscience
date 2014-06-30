@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import de.zsgn.industrialscience.factory.block.BlockChimney;
+import de.zsgn.industrialscience.factory.block.BlockIronFurnaceController;
 import de.zsgn.industrialscience.factory.block.BlockIronHull;
 import de.zsgn.industrialscience.factory.block.BlockStoneFurnaceController;
 import de.zsgn.industrialscience.factory.block.BlockStoneHatch;
@@ -20,18 +21,23 @@ public class FactoryModule{
     private Block blockStonehatch;
     private Block blockChimney;
     private Block blockControllerStonefurnace;
+    private Block blockControllerIronfurnace;
+    private Block blockironhatch;
     public void init(FMLInitializationEvent event) {
         blockIronhull=new BlockIronHull();
         blockStonehull=new BlockStoneHull();
         blockStonehatch=new BlockStoneHatch();
         blockChimney = new BlockChimney();
         blockControllerStonefurnace=new BlockStoneFurnaceController();
+        blockControllerIronfurnace=new BlockIronFurnaceController();
         
         GameRegistry.registerBlock(blockControllerStonefurnace, blockControllerStonefurnace.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(blockStonehull, blockStonehull.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(blockIronhull, blockIronhull.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(blockChimney, blockChimney.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(blockStonehatch, blockStonehatch.getUnlocalizedName().substring(5));
+        GameRegistry.registerBlock(blockControllerIronfurnace, blockControllerIronfurnace.getUnlocalizedName().substring(5));
+        GameRegistry.registerBlock(blockironhatch, blockironhatch.getUnlocalizedName().substring(5));
         
         GameRegistry.registerTileEntity(TileEntityMultiBlockFurnace.class, "tile.multiblockfurnace");
         GameRegistry.registerTileEntity(TileEntityMultiBlock.class, "tile.multiblock");
