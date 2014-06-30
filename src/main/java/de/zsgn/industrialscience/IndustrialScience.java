@@ -39,7 +39,6 @@ import de.zsgn.industrialscience.factory.block.BlockStoneHull;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityHatch;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlock;
 import de.zsgn.industrialscience.factory.tileentity.ITileEntityMultiBlockController;
-import de.zsgn.industrialscience.factory.tileentity.TileEntityStoneFurnace;
 import de.zsgn.industrialscience.item.ItemAncientTechnology;
 import de.zsgn.industrialscience.item.ItemClimbingBoots;
 import de.zsgn.industrialscience.item.ItemCrystalReed;

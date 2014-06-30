@@ -8,20 +8,24 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityFurnace;
 import de.zsgn.industrialscience.RelativeCoordinate;
 
-public class TileEntityStoneFurnace extends
+public class TileEntityMultiBlockFurnace extends
 ITileEntityMultiBlockController implements IHatchSupport{
     public static final int INPUTSLOT=0;
     public static final int FUELSLOT=1;
     public static final int OUTPUTSLOT=2;
     public ItemStack[] furnaceslots=new ItemStack[3];
+    protected final RelativeCoordinate[] itemhatchcoords;
+    protected final RelativeCoordinate[] interfacehatchcoords;
     protected int deftemperature=20;
     protected float temperature=20;
     protected int currenfuelburntime=0;
     
-    public TileEntityStoneFurnace(int deftemperature) {
+    public TileEntityMultiBlockFurnace(int deftemperature, RelativeCoordinate[] itemhatchcoords, RelativeCoordinate[] interfacehatchcoords) {
         super();
         this.deftemperature=deftemperature;
         temperature=deftemperature;
+        this.itemhatchcoords=itemhatchcoords;
+        this.interfacehatchcoords=interfacehatchcoords;
     }
 
     @Override
@@ -141,7 +145,7 @@ ITileEntityMultiBlockController implements IHatchSupport{
 
     @Override
     public RelativeCoordinate[] getRelativeInterfaceHatchCoords() {
-        return new RelativeCoordinate[]{};
+        return interfacehatchcoords;
     }
 
 
@@ -152,7 +156,7 @@ ITileEntityMultiBlockController implements IHatchSupport{
 
     @Override
     public RelativeCoordinate[] getRelativeItemHatchCoords() {
-        return new RelativeCoordinate[]{new RelativeCoordinate(1, 0, 1),new RelativeCoordinate(-1, 0, 1),new RelativeCoordinate(0, 0, 2),new RelativeCoordinate(0, 1, 1),new RelativeCoordinate(0, -1, 1)};
+    return itemhatchcoords;  
     }
 
     @Override

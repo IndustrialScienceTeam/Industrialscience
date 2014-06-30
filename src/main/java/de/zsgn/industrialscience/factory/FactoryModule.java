@@ -8,11 +8,11 @@ import de.zsgn.industrialscience.factory.block.BlockStoneHatch;
 import de.zsgn.industrialscience.factory.block.BlockStoneFurnaceController;
 import de.zsgn.industrialscience.factory.block.BlockIronHull;
 import de.zsgn.industrialscience.factory.block.BlockStoneHull;
+import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlockFurnace;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityChimney;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityHatch;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlock;
 import de.zsgn.industrialscience.factory.tileentity.ITileEntityMultiBlockController;
-import de.zsgn.industrialscience.factory.tileentity.TileEntityStoneFurnace;
 
 public class FactoryModule{
     private Block blockStonehull;
@@ -33,7 +33,7 @@ public class FactoryModule{
         GameRegistry.registerBlock(blockChimney, blockChimney.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(blockStonehatch, blockStonehatch.getUnlocalizedName().substring(5));
         
-        GameRegistry.registerTileEntity(TileEntityStoneFurnace.class, blockControllerStonefurnace.getUnlocalizedName().substring(5));
+        GameRegistry.registerTileEntity(TileEntityMultiBlockFurnace.class, "tile.multiblockfurnace");
         GameRegistry.registerTileEntity(TileEntityMultiBlock.class, "tile.multiblock");
         GameRegistry.registerTileEntity(ITileEntityMultiBlockController.class, "tile.multiblockcontroller");
         GameRegistry.registerTileEntity(TileEntityHatch.class, "tile.hatch");

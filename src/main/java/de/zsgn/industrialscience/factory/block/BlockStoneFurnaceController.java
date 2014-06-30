@@ -11,7 +11,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import de.zsgn.industrialscience.IndustrialScience;
 import de.zsgn.industrialscience.MultiBlockStructure;
-import de.zsgn.industrialscience.factory.tileentity.TileEntityStoneFurnace;
+import de.zsgn.industrialscience.RelativeCoordinate;
+import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlockFurnace;
 
 
 public class BlockStoneFurnaceController extends IBlockMultiBlockController {
@@ -25,7 +26,7 @@ public class BlockStoneFurnaceController extends IBlockMultiBlockController {
 
     @Override
     public TileEntity createNewTileEntity(World var1, int var2) {
-        return new TileEntityStoneFurnace(20);
+        return new TileEntityMultiBlockFurnace(20, new RelativeCoordinate[]{new RelativeCoordinate(1, 0, 1),new RelativeCoordinate(-1, 0, 1),new RelativeCoordinate(0, 0, 2),new RelativeCoordinate(0, 1, 1),new RelativeCoordinate(0, -1, 1)}, new RelativeCoordinate[]{});
     }
 
 }
