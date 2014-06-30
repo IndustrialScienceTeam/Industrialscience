@@ -1,0 +1,6 @@
+int active =0;
+int side=7;
+int meta=(side<<1)|active;
+System.out.println("Meta: "+Integer.toBinaryString(meta));
+System.out.println("Side: "+Integer.toBinaryString(meta>>1));
+System.out.println("Active: "+Integer.toBinaryString(meta&1));

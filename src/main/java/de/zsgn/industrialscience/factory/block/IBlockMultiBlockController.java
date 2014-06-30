@@ -45,6 +45,7 @@ public abstract class IBlockMultiBlockController extends BlockContainer {
             int side, float xOffset, float yOffset,
             float zOffset) {
         if(!world.isRemote&&world.getTileEntity(x, y, z) instanceof TileEntityStoneFurnace){
+           player.addChatMessage(new ChatComponentText(Integer.toBinaryString(world.getBlockMetadata(x, y, z))));
             TileEntityStoneFurnace masterTileEntity = (TileEntityStoneFurnace) world.getTileEntity(x, y, z);
            player.addChatMessage(new ChatComponentText("Temperature: "+masterTileEntity.getTemperature()));
            if(masterTileEntity.furnaceslots[0]!=null)
@@ -63,7 +64,7 @@ public abstract class IBlockMultiBlockController extends BlockContainer {
         if(world.getTileEntity(x, y, z) instanceof ITileEntityMultiBlockController){
         ITileEntityMultiBlockController masterTileEntity = (ITileEntityMultiBlockController) world.getTileEntity(x, y, z);
         if(!masterTileEntity.isActivePart()){
-        AbsoluteCoordinate[] blocks = structure.structureTest(world, x, y, z, ForgeDirection.getOrientation(world.getBlockMetadata(x, y, z)), ValidBlocks);
+        AbsoluteCoordinate[] blocks = structure.structureTest(world, x, y, z, ForgeDirection.getOrientation(world.getBlockMetadata(x, y, z)>>1), ValidBlocks);
         if(blocks == null){
             return false;
         }
@@ -88,8 +89,8 @@ public abstract class IBlockMultiBlockController extends BlockContainer {
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(IBlockAccess blockAccess, int x, int y, int z, int side)
     {
-        if(side==blockAccess.getBlockMetadata(x, y, z)){
-            if(blockAccess.getTileEntity(x, y, z) instanceof ITileEntityMultiBlockController &&((ITileEntityMultiBlockController) blockAccess.getTileEntity(x, y, z)).isProcessing()){
+        if(side==blockAccess.getBlockMetadata(x, y, z)>>1){
+            if((blockAccess.getBlockMetadata(x, y, z)&1)==1){
                 return frontActive;
             }else{
                 return front;
@@ -125,19 +126,18 @@ public abstract class IBlockMultiBlockController extends BlockContainer {
             ItemStack itemStack) {
         if(!world.isRemote){
         int l = MathHelper.floor_double(entityLivingBase.rotationYaw * 4.0F / 360.0F + 2.5D) & 3;
-        //The last number is the update flag(1 Blockupdate, 2 CLientupdate)
         switch (l) {
         case 0:
-            world.setBlockMetadataWithNotify(x, y, z, ForgeDirection.getOrientation(2).getOpposite().ordinal(), 2);
+            world.setBlockMetadataWithNotify(x, y, z, ForgeDirection.getOrientation(2).getOpposite().ordinal()<<1, 2);
             break;
         case 1:
-            world.setBlockMetadataWithNotify(x, y, z, ForgeDirection.getOrientation(5).getOpposite().ordinal(), 2);
+            world.setBlockMetadataWithNotify(x, y, z, ForgeDirection.getOrientation(5).getOpposite().ordinal()<<1, 2);
             break;
         case 2:
-            world.setBlockMetadataWithNotify(x, y, z, ForgeDirection.getOrientation(3).getOpposite().ordinal(), 2);
+            world.setBlockMetadataWithNotify(x, y, z, ForgeDirection.getOrientation(3).getOpposite().ordinal()<<1, 2);
             break;
         case 3:
-            world.setBlockMetadataWithNotify(x, y, z, ForgeDirection.getOrientation(4).getOpposite().ordinal(), 2);
+            world.setBlockMetadataWithNotify(x, y, z, ForgeDirection.getOrientation(4).getOpposite().ordinal()<<1, 2);
             break;
         default:
             break;

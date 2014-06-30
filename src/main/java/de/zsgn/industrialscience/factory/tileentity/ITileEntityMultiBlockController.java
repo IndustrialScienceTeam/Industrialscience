@@ -8,6 +8,15 @@ import net.minecraft.util.Vec3;
 public abstract class ITileEntityMultiBlockController extends TileEntityMultiBlock {
     protected AbsoluteCoordinate[] structure={}; 
     @Override
+    public void updateEntity() {
+        if((worldObj.getBlockMetadata(xCoord, yCoord, zCoord)&1)!=(isProcessing()?1:0)){
+            System.out.println(Integer.toBinaryString(worldObj.getBlockMetadata(xCoord, yCoord, zCoord)|((isProcessing())?1:0)));
+            int newmeta= ((worldObj.getBlockMetadata(xCoord, yCoord, zCoord)>>1)<<1)|((isProcessing())?1:0);;
+            worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, newmeta, 3);
+            worldObj.scheduleBlockUpdate(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord, yCoord, zCoord), 20);
+        }
+    }
+    @Override
     public void destroyStructure() {
         for (int i = 0; i < structure.length; i++) {
             AbsoluteCoordinate Coord = structure[i];

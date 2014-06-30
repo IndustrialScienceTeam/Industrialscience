@@ -31,6 +31,7 @@ ITileEntityMultiBlockController implements IHatchSupport{
 
     @Override
     public void updateEntity() {
+        super.updateEntity();
         if(currenfuelburntime>0){
             currenfuelburntime--;
             temperature=temperature+0.5F;
