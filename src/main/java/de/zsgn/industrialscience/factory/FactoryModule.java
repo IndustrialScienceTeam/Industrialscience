@@ -4,15 +4,15 @@ import net.minecraft.block.Block;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import de.zsgn.industrialscience.factory.block.BlockChimney;
-import de.zsgn.industrialscience.factory.block.BlockStoneHatch;
-import de.zsgn.industrialscience.factory.block.BlockStoneFurnaceController;
 import de.zsgn.industrialscience.factory.block.BlockIronHull;
+import de.zsgn.industrialscience.factory.block.BlockStoneFurnaceController;
+import de.zsgn.industrialscience.factory.block.BlockStoneHatch;
 import de.zsgn.industrialscience.factory.block.BlockStoneHull;
-import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlockFurnace;
+import de.zsgn.industrialscience.factory.tileentity.ITileEntityMultiBlockController;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityChimney;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityHatch;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlock;
-import de.zsgn.industrialscience.factory.tileentity.ITileEntityMultiBlockController;
+import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlockFurnace;
 
 public class FactoryModule{
     private Block blockStonehull;

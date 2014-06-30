@@ -1,27 +1,25 @@
 package de.zsgn.industrialscience.factory.block;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import de.zsgn.industrialscience.AbsoluteCoordinate;
 import de.zsgn.industrialscience.IndustrialScience;
 import de.zsgn.industrialscience.MultiBlockStructure;
-import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlock;
 import de.zsgn.industrialscience.factory.tileentity.ITileEntityMultiBlockController;
+import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlock;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlockFurnace;
 
 public abstract class IBlockMultiBlockController extends BlockContainer {

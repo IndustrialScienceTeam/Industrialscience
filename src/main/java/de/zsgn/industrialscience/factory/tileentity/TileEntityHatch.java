@@ -1,15 +1,13 @@
 package de.zsgn.industrialscience.factory.tileentity;
 
-import org.apache.commons.lang3.ArrayUtils;
-
-import de.zsgn.industrialscience.AbsoluteCoordinate;
-import de.zsgn.industrialscience.RelativeCoordinate;
-import de.zsgn.industrialscience.factory.block.IBlockMultiBlockController;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
+import de.zsgn.industrialscience.AbsoluteCoordinate;
+import de.zsgn.industrialscience.RelativeCoordinate;
+import de.zsgn.industrialscience.factory.block.IBlockMultiBlockController;
 
 public class TileEntityHatch extends TileEntityMultiBlock implements
         ISidedInventory {

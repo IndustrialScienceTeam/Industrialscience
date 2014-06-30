@@ -2,19 +2,16 @@ package de.zsgn.industrialscience.factory.block;
 
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import de.zsgn.industrialscience.AbsoluteCoordinate;
 import de.zsgn.industrialscience.IndustrialScience;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityChimney;
-import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlock;
 
 public class BlockChimney extends BlockContainer {
        

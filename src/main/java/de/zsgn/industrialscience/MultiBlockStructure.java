@@ -1,7 +1,6 @@
 package de.zsgn.industrialscience;
 
 import net.minecraft.block.Block;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlock;

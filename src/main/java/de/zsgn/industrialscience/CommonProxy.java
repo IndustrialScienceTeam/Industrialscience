@@ -1,8 +1,6 @@
 package de.zsgn.industrialscience;
 
 
-import cpw.mods.fml.client.registry.ClientRegistry;
-import de.zsgn.industrialscience.factory.tileentity.TileEntityChimney;
 import net.minecraft.client.model.ModelBiped;
 
 public class CommonProxy{

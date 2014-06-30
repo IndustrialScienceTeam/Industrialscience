@@ -2,7 +2,6 @@ package de.zsgn.industrialscience.factory.block;
 
 import net.minecraft.block.material.Material;
 import de.zsgn.industrialscience.IndustrialScience;
-import de.zsgn.industrialscience.factory.block.IBlockMultiblockHull;
 
 public class BlockIronHull extends IBlockMultiblockHull {
 

@@ -1,10 +1,10 @@
 package de.zsgn.industrialscience.factory.block;
 
-import de.zsgn.industrialscience.IndustrialScience;
-import de.zsgn.industrialscience.factory.tileentity.TileEntityHatch;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import de.zsgn.industrialscience.IndustrialScience;
+import de.zsgn.industrialscience.factory.tileentity.TileEntityHatch;
 
 public class BlockStoneHatch extends BlockStoneHull {
 

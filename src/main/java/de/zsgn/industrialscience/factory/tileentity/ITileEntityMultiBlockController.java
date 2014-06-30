@@ -1,9 +1,8 @@
 package de.zsgn.industrialscience.factory.tileentity;
 
-import de.zsgn.industrialscience.AbsoluteCoordinate;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Vec3;
+import de.zsgn.industrialscience.AbsoluteCoordinate;
 
 public abstract class ITileEntityMultiBlockController extends TileEntityMultiBlock {
     protected AbsoluteCoordinate[] structure={}; 
