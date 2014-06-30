@@ -48,7 +48,7 @@ public class IndustrialScience{
     private static IndustrialScience instance;
     @SidedProxy(serverSide="de.zsgn.industrialscience.CommonProxy", clientSide="de.zsgn.industrialscience.ClientProxy")
     public static CommonProxy proxy;
-    
+
     protected FactoryModule factoryModule=new FactoryModule();
 
     private Hashtable<String, DungeonRoom> dungeonroomlist = new Hashtable<String, DungeonRoom>();
@@ -94,7 +94,7 @@ public class IndustrialScience{
         GameRegistry.registerWorldGenerator(worldgeneratorportalroom, 5);
 
         addRecipes();
-        
+
         factoryModule.init(event);
     }
 

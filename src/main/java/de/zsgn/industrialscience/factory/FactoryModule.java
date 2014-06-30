@@ -30,7 +30,7 @@ public class FactoryModule{
         blockChimney = new BlockChimney();
         blockControllerStonefurnace=new BlockStoneFurnaceController();
         blockControllerIronfurnace=new BlockIronFurnaceController();
-        
+
         GameRegistry.registerBlock(blockControllerStonefurnace, blockControllerStonefurnace.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(blockStonehull, blockStonehull.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(blockIronhull, blockIronhull.getUnlocalizedName().substring(5));
@@ -38,7 +38,7 @@ public class FactoryModule{
         GameRegistry.registerBlock(blockStonehatch, blockStonehatch.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(blockControllerIronfurnace, blockControllerIronfurnace.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(blockironhatch, blockironhatch.getUnlocalizedName().substring(5));
-        
+
         GameRegistry.registerTileEntity(TileEntityMultiBlockFurnace.class, "tile.multiblockfurnace");
         GameRegistry.registerTileEntity(TileEntityMultiBlock.class, "tile.multiblock");
         GameRegistry.registerTileEntity(ITileEntityMultiBlockController.class, "tile.multiblockcontroller");

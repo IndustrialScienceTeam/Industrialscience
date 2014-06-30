@@ -64,11 +64,11 @@ public enum MultiBlockStructure {
         }
         for (int i = 0; i < absholes.length; i++) {
             if(x==absholes[i].xCoord&&y==absholes[i].yCoord&&z==absholes[i].zCoord){
-               if(world.isAirBlock(x, y, z)){
-                   return true;
-               }else {
-                return false;
-            }
+                if(world.isAirBlock(x, y, z)){
+                    return true;
+                }else {
+                    return false;
+                }
             }
         }
         for (int j = 0; j < ValidBlocks.length; j++) {

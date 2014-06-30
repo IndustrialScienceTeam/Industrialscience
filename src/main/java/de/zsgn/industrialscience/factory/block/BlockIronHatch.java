@@ -28,7 +28,7 @@ public class BlockIronHatch extends BlockStoneHull {
             if(hatch.isItemInterface()){
                 if(player.inventory.getCurrentItem() != null){
                     if(!world.isRemote){
-                        
+
                     }
                     return true;
                 }else {

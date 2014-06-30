@@ -43,45 +43,48 @@ public abstract class IBlockMultiBlockController extends BlockContainer {
             int side, float xOffset, float yOffset,
             float zOffset) {
         if(!world.isRemote&&world.getTileEntity(x, y, z) instanceof TileEntityMultiBlockFurnace){
-           player.addChatMessage(new ChatComponentText(Integer.toBinaryString(world.getBlockMetadata(x, y, z))));
-           TileEntityMultiBlockFurnace masterTileEntity = (TileEntityMultiBlockFurnace) world.getTileEntity(x, y, z);
-           player.addChatMessage(new ChatComponentText("Temperature: "+masterTileEntity.getTemperature()));
-           if(masterTileEntity.furnaceslots[0]!=null)
-           player.addChatMessage(new ChatComponentText("Slot0: "+masterTileEntity.furnaceslots[0].getDisplayName()+" x "+masterTileEntity.furnaceslots[0].stackSize));
-           if(masterTileEntity.furnaceslots[1]!=null)
-           player.addChatMessage(new ChatComponentText("Slot1: "+masterTileEntity.furnaceslots[1].getDisplayName()+" x "+masterTileEntity.furnaceslots[1].stackSize));
-           if(masterTileEntity.furnaceslots[2]!=null)
-           player.addChatMessage(new ChatComponentText("Slot2: "+masterTileEntity.furnaceslots[2].getDisplayName()+" x "+masterTileEntity.furnaceslots[2].stackSize));
-           return testStructure(world,x,y,z,player);
+            player.addChatMessage(new ChatComponentText(Integer.toBinaryString(world.getBlockMetadata(x, y, z))));
+            TileEntityMultiBlockFurnace masterTileEntity = (TileEntityMultiBlockFurnace) world.getTileEntity(x, y, z);
+            player.addChatMessage(new ChatComponentText("Temperature: "+masterTileEntity.getTemperature()));
+            if(masterTileEntity.furnaceslots[0]!=null) {
+                player.addChatMessage(new ChatComponentText("Slot0: "+masterTileEntity.furnaceslots[0].getDisplayName()+" x "+masterTileEntity.furnaceslots[0].stackSize));
+            }
+            if(masterTileEntity.furnaceslots[1]!=null) {
+                player.addChatMessage(new ChatComponentText("Slot1: "+masterTileEntity.furnaceslots[1].getDisplayName()+" x "+masterTileEntity.furnaceslots[1].stackSize));
+            }
+            if(masterTileEntity.furnaceslots[2]!=null) {
+                player.addChatMessage(new ChatComponentText("Slot2: "+masterTileEntity.furnaceslots[2].getDisplayName()+" x "+masterTileEntity.furnaceslots[2].stackSize));
+            }
+            return testStructure(world,x,y,z,player);
         }
         return false;
     }
-    
+
     private boolean testStructure(World world, int x, int y, int z,
             EntityPlayer player) {
         if(world.getTileEntity(x, y, z) instanceof ITileEntityMultiBlockController){
-        ITileEntityMultiBlockController masterTileEntity = (ITileEntityMultiBlockController) world.getTileEntity(x, y, z);
-        if(!masterTileEntity.isActivePart()){
-        AbsoluteCoordinate[] blocks = structure.structureTest(world, x, y, z, ForgeDirection.getOrientation(world.getBlockMetadata(x, y, z)>>1), ValidBlocks);
-        if(blocks == null){
-            return false;
-        }
-        for (int i = 0; i < blocks.length; i++) {
-            AbsoluteCoordinate blockcord = blocks[i];
-            Block block = world.getBlock(blockcord.xCoord,blockcord.yCoord, blockcord.zCoord);
-            if(world.getTileEntity(blockcord.xCoord, blockcord.yCoord, blockcord.zCoord) instanceof TileEntityMultiBlock){
-                TileEntityMultiBlock tileentity = (TileEntityMultiBlock) world.getTileEntity(blockcord.xCoord, blockcord.yCoord, blockcord.zCoord);
-                tileentity.setController(x,y,z);
-                tileentity.setActivepart(true);
+            ITileEntityMultiBlockController masterTileEntity = (ITileEntityMultiBlockController) world.getTileEntity(x, y, z);
+            if(!masterTileEntity.isActivePart()){
+                AbsoluteCoordinate[] blocks = structure.structureTest(world, x, y, z, ForgeDirection.getOrientation(world.getBlockMetadata(x, y, z)>>1), ValidBlocks);
+                if(blocks == null){
+                    return false;
+                }
+                for (int i = 0; i < blocks.length; i++) {
+                    AbsoluteCoordinate blockcord = blocks[i];
+                    Block block = world.getBlock(blockcord.xCoord,blockcord.yCoord, blockcord.zCoord);
+                    if(world.getTileEntity(blockcord.xCoord, blockcord.yCoord, blockcord.zCoord) instanceof TileEntityMultiBlock){
+                        TileEntityMultiBlock tileentity = (TileEntityMultiBlock) world.getTileEntity(blockcord.xCoord, blockcord.yCoord, blockcord.zCoord);
+                        tileentity.setController(x,y,z);
+                        tileentity.setActivepart(true);
+                    }
+                }
+                masterTileEntity.setStructure(blocks);
+                player.addChatMessage(new ChatComponentText("Active"));
+                return true;
             }
         }
-        masterTileEntity.setStructure(blocks);
-        player.addChatMessage(new ChatComponentText("Active"));
-        return true;
-        }
-        }
         return false;
-        
+
     }
     @Override
     @SideOnly(Side.CLIENT)
@@ -108,7 +111,7 @@ public abstract class IBlockMultiBlockController extends BlockContainer {
         else{
             return sides;
         }
-        
+
     }
 
     @Override
@@ -123,23 +126,23 @@ public abstract class IBlockMultiBlockController extends BlockContainer {
             int y, int z, EntityLivingBase entityLivingBase,
             ItemStack itemStack) {
         if(!world.isRemote){
-        int l = MathHelper.floor_double(entityLivingBase.rotationYaw * 4.0F / 360.0F + 2.5D) & 3;
-        switch (l) {
-        case 0:
-            world.setBlockMetadataWithNotify(x, y, z, ForgeDirection.getOrientation(2).getOpposite().ordinal()<<1, 2);
-            break;
-        case 1:
-            world.setBlockMetadataWithNotify(x, y, z, ForgeDirection.getOrientation(5).getOpposite().ordinal()<<1, 2);
-            break;
-        case 2:
-            world.setBlockMetadataWithNotify(x, y, z, ForgeDirection.getOrientation(3).getOpposite().ordinal()<<1, 2);
-            break;
-        case 3:
-            world.setBlockMetadataWithNotify(x, y, z, ForgeDirection.getOrientation(4).getOpposite().ordinal()<<1, 2);
-            break;
-        default:
-            break;
-        }
+            int l = MathHelper.floor_double(entityLivingBase.rotationYaw * 4.0F / 360.0F + 2.5D) & 3;
+            switch (l) {
+            case 0:
+                world.setBlockMetadataWithNotify(x, y, z, ForgeDirection.getOrientation(2).getOpposite().ordinal()<<1, 2);
+                break;
+            case 1:
+                world.setBlockMetadataWithNotify(x, y, z, ForgeDirection.getOrientation(5).getOpposite().ordinal()<<1, 2);
+                break;
+            case 2:
+                world.setBlockMetadataWithNotify(x, y, z, ForgeDirection.getOrientation(3).getOpposite().ordinal()<<1, 2);
+                break;
+            case 3:
+                world.setBlockMetadataWithNotify(x, y, z, ForgeDirection.getOrientation(4).getOpposite().ordinal()<<1, 2);
+                break;
+            default:
+                break;
+            }
         }
     }
     @Override

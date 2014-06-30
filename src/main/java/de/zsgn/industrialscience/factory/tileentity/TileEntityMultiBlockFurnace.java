@@ -19,7 +19,7 @@ ITileEntityMultiBlockController implements IHatchSupport{
     protected int deftemperature=20;
     protected float temperature=20;
     protected int currenfuelburntime=0;
-    
+
     public TileEntityMultiBlockFurnace(int deftemperature, RelativeCoordinate[] itemhatchcoords, RelativeCoordinate[] interfacehatchcoords) {
         super();
         this.deftemperature=deftemperature;
@@ -49,7 +49,7 @@ ITileEntityMultiBlockController implements IHatchSupport{
                 furnaceslots[FUELSLOT]=null;
             }
         }
-        
+
     }
 
     protected int getItemBurnTime(ItemStack itemStack) {
@@ -101,7 +101,7 @@ ITileEntityMultiBlockController implements IHatchSupport{
         if (var2!= null && var2.stackSize > this.getInventoryStackLimit()){
             var2.stackSize = this.getInventoryStackLimit();
         }
-        
+
     }
 
     @Override
@@ -121,7 +121,7 @@ ITileEntityMultiBlockController implements IHatchSupport{
 
     @Override
     public boolean isUseableByPlayer(EntityPlayer var1) {
-        return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : var1.getDistanceSq((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D) <= 64.0D;
+        return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : var1.getDistanceSq(this.xCoord + 0.5D, this.yCoord + 0.5D, this.zCoord + 0.5D) <= 64.0D;
     }
 
     @Override
@@ -156,12 +156,12 @@ ITileEntityMultiBlockController implements IHatchSupport{
 
     @Override
     public RelativeCoordinate[] getRelativeItemHatchCoords() {
-    return itemhatchcoords;  
+        return itemhatchcoords;  
     }
 
     @Override
     public int[] getSlots() {
-       return new int[]{FUELSLOT,INPUTSLOT,OUTPUTSLOT};
+        return new int[]{FUELSLOT,INPUTSLOT,OUTPUTSLOT};
     }
 
     @Override

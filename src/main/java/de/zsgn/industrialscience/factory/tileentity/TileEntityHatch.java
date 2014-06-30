@@ -10,7 +10,7 @@ import de.zsgn.industrialscience.RelativeCoordinate;
 import de.zsgn.industrialscience.factory.block.IBlockMultiBlockController;
 
 public class TileEntityHatch extends TileEntityMultiBlock implements
-        ISidedInventory {
+ISidedInventory {
     protected boolean iteminterface=false;
     protected boolean blockinterface=false;
     protected boolean automated=true;
@@ -80,7 +80,7 @@ public class TileEntityHatch extends TileEntityMultiBlock implements
 
     @Override
     public boolean isUseableByPlayer(EntityPlayer var1) {
-        return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : var1.getDistanceSq((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D) <= 64.0D;
+        return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : var1.getDistanceSq(this.xCoord + 0.5D, this.yCoord + 0.5D, this.zCoord + 0.5D) <= 64.0D;
     }
 
     @Override
@@ -104,8 +104,8 @@ public class TileEntityHatch extends TileEntityMultiBlock implements
     @Override
     public int[] getAccessibleSlotsFromSide(int var1) {
         if(worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport&&automated){
-        IHatchSupport master =(IHatchSupport)worldObj.getTileEntity(masterx, mastery, masterz);
-        return master.getSlots();
+            IHatchSupport master =(IHatchSupport)worldObj.getTileEntity(masterx, mastery, masterz);
+            return master.getSlots();
         }
         return new int[]{};
     }
@@ -113,8 +113,8 @@ public class TileEntityHatch extends TileEntityMultiBlock implements
     @Override
     public boolean canInsertItem(int var1, ItemStack var2, int var3) {
         if(worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport&&automated){
-        IHatchSupport master =(IHatchSupport)worldObj.getTileEntity(masterx, mastery, masterz);
-        return canManuallyInsertItem(var1, var2);
+            IHatchSupport master =(IHatchSupport)worldObj.getTileEntity(masterx, mastery, masterz);
+            return canManuallyInsertItem(var1, var2);
         }
         return false;
     }
@@ -122,21 +122,21 @@ public class TileEntityHatch extends TileEntityMultiBlock implements
     @Override
     public boolean canExtractItem(int var1, ItemStack var2, int var3) {
         if(worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport&&automated){
-        return canManuallyExtractItem(var1, var2);
+            return canManuallyExtractItem(var1, var2);
         }
         return false;
     }
     public boolean canManuallyInsertItem(int slot, ItemStack itemStack){
         if(worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport){
-        IHatchSupport master =(IHatchSupport)worldObj.getTileEntity(masterx, mastery, masterz);
-        return master.isItemValidForSlot(slot, itemStack);
+            IHatchSupport master =(IHatchSupport)worldObj.getTileEntity(masterx, mastery, masterz);
+            return master.isItemValidForSlot(slot, itemStack);
         }
         return false;
     }
     public boolean canManuallyExtractItem(int var1, ItemStack var2) {
         if(worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport&&automated){
-        IHatchSupport master =(IHatchSupport)worldObj.getTileEntity(masterx, mastery, masterz);
-        return master.canExtractItem(var1, var2);
+            IHatchSupport master =(IHatchSupport)worldObj.getTileEntity(masterx, mastery, masterz);
+            return master.canExtractItem(var1, var2);
         }
         return false;
     }
@@ -149,16 +149,16 @@ public class TileEntityHatch extends TileEntityMultiBlock implements
             ForgeDirection depth=ForgeDirection.getOrientation(worldObj.getBlockMetadata(masterx, mastery, masterz)).getOpposite();
             for (RelativeCoordinate iteminterfacecoord : master.getRelativeInterfaceHatchCoords()) {
                 if(iteminterfacecoord.convertToAbsolute(masterx, mastery, masterz, right, depth).equals(new AbsoluteCoordinate(xCoord, yCoord, zCoord))){
-                   iteminterface=true;
-                   blockinterface=true;
-                   break;
+                    iteminterface=true;
+                    blockinterface=true;
+                    break;
                 }
             }
             if(!iteminterface){
                 for (RelativeCoordinate interfacecoord : master.getRelativeInterfaceHatchCoords()) {
                     if(interfacecoord.convertToAbsolute(masterx, mastery, masterz, right, depth).equals(new AbsoluteCoordinate(xCoord, yCoord, zCoord))){
-                       blockinterface=true;
-                       break;
+                        blockinterface=true;
+                        break;
                     }
                 }
             }
@@ -166,8 +166,8 @@ public class TileEntityHatch extends TileEntityMultiBlock implements
     }
     public int[] getAccessibleSlots(){
         if(worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport&&automated){
-        IHatchSupport master =(IHatchSupport)worldObj.getTileEntity(masterx, mastery, masterz);
-        return master.getSlots();
+            IHatchSupport master =(IHatchSupport)worldObj.getTileEntity(masterx, mastery, masterz);
+            return master.getSlots();
         }
         return new int[]{};
     }
