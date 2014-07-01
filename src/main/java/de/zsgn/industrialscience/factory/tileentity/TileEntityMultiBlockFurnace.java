@@ -3,10 +3,12 @@ package de.zsgn.industrialscience.factory.tileentity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityFurnace;
 import de.zsgn.industrialscience.RelativeCoordinate;
+import de.zsgn.industrialscience.factory.SmeltingRegristry;
 
 public class TileEntityMultiBlockFurnace extends
 ITileEntityMultiBlockController implements IHatchSupport{
@@ -19,6 +21,7 @@ ITileEntityMultiBlockController implements IHatchSupport{
     protected int deftemperature=20;
     protected float temperature=20;
     protected int currenfuelburntime=0;
+    protected int cookedticks=0;
 
     public TileEntityMultiBlockFurnace(int deftemperature, RelativeCoordinate[] itemhatchcoords, RelativeCoordinate[] interfacehatchcoords) {
         super();
@@ -49,7 +52,28 @@ ITileEntityMultiBlockController implements IHatchSupport{
                 furnaceslots[FUELSLOT]=null;
             }
         }
+        if(canSmelt()){
+            
+        }
 
+    }
+
+    private boolean canSmelt() {
+        if (this.furnaceslots[INPUTSLOT] == null)
+        {
+            return false;
+        }
+        else
+        {
+            ItemStack result = SmeltingRegristry.getSmeltingResult(furnaceslots[INPUTSLOT]);
+            if (result == null) return false;
+            if (temperature<SmeltingRegristry.getSmeltTemp(furnaceslots[INPUTSLOT])) return false;
+            if (furnaceslots[OUTPUTSLOT] == null) return true;
+            if (!furnaceslots[OUTPUTSLOT].isItemEqual(result)) return false;
+            int resultstacksize = furnaceslots[OUTPUTSLOT].stackSize + result.stackSize;
+            return resultstacksize <= getInventoryStackLimit() && resultstacksize <= 
+                    furnaceslots[OUTPUTSLOT].getMaxStackSize(); 
+        }
     }
 
     protected int getItemBurnTime(ItemStack itemStack) {
@@ -182,6 +206,7 @@ ITileEntityMultiBlockController implements IHatchSupport{
         }
         temperature=tagCompound.getFloat("temperature");
         currenfuelburntime=tagCompound.getInteger("currenfuelburntime");
+        cookedticks=tagCompound.getInteger("cookedticks");
     }
 
     @Override
@@ -189,6 +214,7 @@ ITileEntityMultiBlockController implements IHatchSupport{
         super.writeToNBT(tagCompound);
         tagCompound.setFloat("temperature", temperature);
         tagCompound.setInteger("currenfuelburntime", currenfuelburntime);
+        tagCompound.setInteger("cookedticks", cookedticks);
         NBTTagList nbttaglist = new NBTTagList();
 
         for (int i = 0; i < this.furnaceslots.length; ++i)
