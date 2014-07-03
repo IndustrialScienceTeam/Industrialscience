@@ -15,9 +15,12 @@ ISidedInventory {
     protected boolean blockinterface=false;
     protected boolean automated=true;
     public TileEntityHatch(boolean automated) {
+        super();
         this.automated=automated;
     }
-
+    public TileEntityHatch() {
+        super();
+    }
     @Override
     public int getSizeInventory() {
         if(worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport){
