@@ -158,12 +158,12 @@ ITileEntityMultiBlockController implements IHatchSupport{
 
     @Override
     public boolean isItemValidForSlot(int var1, ItemStack var2) {
-        if(var1==INPUTSLOT){
+        if(var1==INPUTSLOT&&SmeltingRegristry.getSmeltingResult(var2)!=null){
             return true;
         }else if (var1==FUELSLOT&&getItemBurnTime(var2)>0) {
             return true;
         }else {
-            return true;
+            return false;
         }
     }
 
