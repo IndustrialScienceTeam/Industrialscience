@@ -5,6 +5,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import de.zsgn.industrialscience.factory.block.BlockChimney;
 import de.zsgn.industrialscience.factory.block.BlockIronFurnaceController;
+import de.zsgn.industrialscience.factory.block.BlockIronHatch;
 import de.zsgn.industrialscience.factory.block.BlockIronHull;
 import de.zsgn.industrialscience.factory.block.BlockStoneFurnaceController;
 import de.zsgn.industrialscience.factory.block.BlockStoneHatch;
@@ -30,6 +31,7 @@ public class FactoryModule{
         blockChimney = new BlockChimney();
         blockControllerStonefurnace=new BlockStoneFurnaceController();
         blockControllerIronfurnace=new BlockIronFurnaceController();
+        blockironhatch=new BlockIronHatch();
 
         GameRegistry.registerBlock(blockControllerStonefurnace, blockControllerStonefurnace.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(blockStonehull, blockStonehull.getUnlocalizedName().substring(5));
