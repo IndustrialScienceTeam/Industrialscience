@@ -53,12 +53,37 @@ ITileEntityMultiBlockController implements IHatchSupport{
             }
         }
         if(canSmelt()){
-            
+            cookedticks++;
+            if(cookedticks==getCookTime()){
+                smeltItem();
+            }
+        }else if (cookedticks>0) {
+            cookedticks=0;
         }
 
     }
 
-    private boolean canSmelt() {
+    protected void smeltItem() {
+       if (canSmelt()) {
+           ItemStack result = SmeltingRegristry.getSmeltingResult(furnaceslots[INPUTSLOT]);
+           if(furnaceslots[OUTPUTSLOT]==null){
+               furnaceslots[OUTPUTSLOT]=result.copy();
+           }else if (furnaceslots[OUTPUTSLOT].getItem()==result.getItem()) {
+            furnaceslots[OUTPUTSLOT].stackSize+=result.stackSize;
+        }
+           furnaceslots[INPUTSLOT].stackSize--;
+           if(furnaceslots[INPUTSLOT].stackSize==0){
+               furnaceslots[INPUTSLOT]=null;
+           }
+    }
+        
+    }
+
+    protected int getCookTime() {
+        return 200;
+    }
+
+    protected boolean canSmelt() {
         if (this.furnaceslots[INPUTSLOT] == null)
         {
             return false;
