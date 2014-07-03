@@ -56,6 +56,7 @@ ITileEntityMultiBlockController implements IHatchSupport{
             cookedticks++;
             if(cookedticks==getCookTime()){
                 smeltItem();
+                cookedticks=0;
             }
         }else if (cookedticks>0) {
             cookedticks=0;
