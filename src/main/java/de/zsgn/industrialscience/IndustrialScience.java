@@ -79,7 +79,6 @@ public class IndustrialScience {
         this.loadProps();
         this.applyProps();
         this.initFields();
-        proxy.registerRenderThings();
         GameRegistry.registerBlock(blocksingularity, blocksingularity
                 .getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(blockmysteriousportal, blockmysteriousportal
@@ -106,6 +105,7 @@ public class IndustrialScience {
         this.addRecipes();
 
         factoryModule.init(event);
+        proxy.registerRenderThings();
     }
 
     public FactoryModule getFactoryModule() {
