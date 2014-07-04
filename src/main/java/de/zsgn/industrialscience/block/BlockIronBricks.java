@@ -9,10 +9,8 @@ public class BlockIronBricks extends Block {
     public BlockIronBricks(Material material) {
         super(material);
         this.setCreativeTab(IndustrialScience.getInstance().getCreativetab());
-        setBlockName("ironbricks");
-        setHardness(3.0F);
+        this.setBlockName("ironbricks");
+        this.setHardness(3.0F);
     }
 
 }
-
-

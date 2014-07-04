@@ -9,7 +9,8 @@ public class BlockIronHull extends IBlockMultiblockHull {
         super(Material.iron);
         this.setBlockName("ironhull");
         this.setHardness(3.0F);
-        this.textureName=IndustrialScience.MODID + ":" + this.getUnlocalizedName().substring(5);
+        textureName = IndustrialScience.MODID + ":"
+                + this.getUnlocalizedName().substring(5);
     }
 
 }

@@ -41,15 +41,15 @@ import de.zsgn.industrialsciencedungeonsystem.DungeonRoom;
 import de.zsgn.industrialsciencedungeonsystem.RouteType;
 
 @Mod(modid = IndustrialScience.MODID, version = IndustrialScience.VERSION)
-public class IndustrialScience{
+public class IndustrialScience {
     public static final String MODID = "industrialscience";
     public static final String VERSION = "@VERSION@";
     @Instance
     private static IndustrialScience instance;
-    @SidedProxy(serverSide="de.zsgn.industrialscience.CommonProxy", clientSide="de.zsgn.industrialscience.ClientProxy")
+    @SidedProxy(serverSide = "de.zsgn.industrialscience.CommonProxy", clientSide = "de.zsgn.industrialscience.ClientProxy")
     public static CommonProxy proxy;
 
-    protected FactoryModule factoryModule=new FactoryModule();
+    protected FactoryModule factoryModule = new FactoryModule();
 
     private Hashtable<String, DungeonRoom> dungeonroomlist = new Hashtable<String, DungeonRoom>();
 
@@ -66,34 +66,44 @@ public class IndustrialScience{
 
     private IWorldGenerator worldgeneratorportalroom;
 
-    private Properties props= new Properties();
+    private Properties props = new Properties();
 
-    private IndustrialScienceMainCommand industrialScienceMainCommand=new IndustrialScienceMainCommand();
-    private CommandGenerateRoom industrialScienceGenerateRoom= new CommandGenerateRoom();
+    private IndustrialScienceMainCommand industrialScienceMainCommand = new IndustrialScienceMainCommand();
+    private CommandGenerateRoom industrialScienceGenerateRoom = new CommandGenerateRoom();
+
     @EventHandler
-    public void init(FMLInitializationEvent event){
-        FMLLog.log(Level.INFO, "This is IndustrialScience version: "+IndustrialScience.VERSION);
-        instance=this;
-        loadProps();
-        applyProps();
-        initFields();
+    public void init(FMLInitializationEvent event) {
+        FMLLog.log(Level.INFO, "This is IndustrialScience version: "
+                + IndustrialScience.VERSION);
+        instance = this;
+        this.loadProps();
+        this.applyProps();
+        this.initFields();
         proxy.registerRenderThings();
-        GameRegistry.registerBlock(blocksingularity, blocksingularity.getUnlocalizedName().substring(5));
-        GameRegistry.registerBlock(blockmysteriousportal, blockmysteriousportal.getUnlocalizedName().substring(5));
-        GameRegistry.registerBlock(blockreinforcedbricks, blockreinforcedbricks.getUnlocalizedName().substring(5));
-        GameRegistry.registerBlock(blockironbricks, blockironbricks.getUnlocalizedName().substring(5));
+        GameRegistry.registerBlock(blocksingularity, blocksingularity
+                .getUnlocalizedName().substring(5));
+        GameRegistry.registerBlock(blockmysteriousportal, blockmysteriousportal
+                .getUnlocalizedName().substring(5));
+        GameRegistry.registerBlock(blockreinforcedbricks, blockreinforcedbricks
+                .getUnlocalizedName().substring(5));
+        GameRegistry.registerBlock(blockironbricks, blockironbricks
+                .getUnlocalizedName().substring(5));
 
-        GameRegistry.registerItem(itemancienttechnology, itemancienttechnology.getUnlocalizedName().substring(5));
+        GameRegistry.registerItem(itemancienttechnology, itemancienttechnology
+                .getUnlocalizedName().substring(5));
 
-        //registers the item so the game can actually use it while playing
-        GameRegistry.registerItem(itemcrystalreed, itemcrystalreed.getUnlocalizedName().substring(5));
-        GameRegistry.registerItem(itemclimbingboots , itemclimbingboots.getUnlocalizedName().substring(5));
+        // registers the item so the game can actually use it while playing
+        GameRegistry.registerItem(itemcrystalreed, itemcrystalreed
+                .getUnlocalizedName().substring(5));
+        GameRegistry.registerItem(itemclimbingboots, itemclimbingboots
+                .getUnlocalizedName().substring(5));
 
-        GameRegistry.registerTileEntity(TileEntityMysteriousPortal.class, blockmysteriousportal.getUnlocalizedName().substring(5));
+        GameRegistry.registerTileEntity(TileEntityMysteriousPortal.class,
+                blockmysteriousportal.getUnlocalizedName().substring(5));
 
         GameRegistry.registerWorldGenerator(worldgeneratorportalroom, 5);
 
-        addRecipes();
+        this.addRecipes();
 
         factoryModule.init(event);
     }
@@ -104,62 +114,69 @@ public class IndustrialScience{
 
     private void applyProps() {
         String[] ids = props.getProperty("BadEffectsIDs").split(",");
-        ArrayList<Integer> idList= new ArrayList<Integer>();
+        ArrayList<Integer> idList = new ArrayList<Integer>();
         for (String string : ids) {
-            Integer id=0;
+            Integer id = 0;
             try {
-                id=Integer.decode(string);
+                id = Integer.decode(string);
             } catch (NumberFormatException e) {
-                FMLLog.log(Level.INFO, "Invalid potion ID number! :"+string);
-            }finally{
-                if(id!=0){
+                FMLLog.log(Level.INFO, "Invalid potion ID number! :" + string);
+            } finally {
+                if (id != 0) {
                     idList.add(id);
                 }
             }
         }
-        TileEntityMysteriousPortal.setEffectlist(idList.toArray(new Integer[1]));
-
+        TileEntityMysteriousPortal
+                .setEffectlist(idList.toArray(new Integer[1]));
 
     }
 
     private void loadProps() {
         props.setProperty("BadEffectsIDs", "2,4,15,18,19");
-        loadDungeonRooms();
+        this.loadDungeonRooms();
     }
 
     private void loadDungeonRooms() {
-        DungeonRoom def = new DungeonRoom(RouteType.STRAIGHT, DungeonRoom.getEmptyContent(), "DefaultStraight");
+        DungeonRoom def = new DungeonRoom(RouteType.STRAIGHT,
+                DungeonRoom.getEmptyContent(), "DefaultStraight");
         dungeonroomlist.put(def.getName(), def);
 
     }
 
     private void initFields() {
         creativetab = new IndustrialScienceCreativeTab();
-        blockmysteriousportal= new BlockMysteriousPortal();
-        blocksingularity= new BlockSingularity(Material.rock);
-        blockreinforcedbricks=new BlockReinforcedBricks();
-        itemancienttechnology=new  ItemAncientTechnology();
-        itemcrystalreed= new ItemCrystalReed();
-        itemclimbingboots= new ItemClimbingBoots();
-        worldgeneratorportalroom=new WorldGeneratorPortalRoom();
-        blockironbricks= new BlockIronBricks(Material.iron);
+        blockmysteriousportal = new BlockMysteriousPortal();
+        blocksingularity = new BlockSingularity(Material.rock);
+        blockreinforcedbricks = new BlockReinforcedBricks();
+        itemancienttechnology = new ItemAncientTechnology();
+        itemcrystalreed = new ItemCrystalReed();
+        itemclimbingboots = new ItemClimbingBoots();
+        worldgeneratorportalroom = new WorldGeneratorPortalRoom();
+        blockironbricks = new BlockIronBricks(Material.iron);
     }
 
     private void addRecipes() {
-        GameRegistry.addSmelting(Items.diamond, new ItemStack(blocksingularity), 9001);
-        GameRegistry.addShapelessRecipe(new ItemStack(itemcrystalreed), new ItemStack(Items.potionitem, 1, 0), Items.reeds);
-        GameRegistry.addRecipe(new ItemStack(blocksingularity), " X ", " X ","BBB",'X',Items.apple,'B', Items.book);
-        GameRegistry.addRecipe(new ItemStack(blockreinforcedbricks, 2), " X ", "XBX"," X ",'X',Items.brick,'B', Blocks.stonebrick);
-        GameRegistry.addRecipe(new ItemStack(itemclimbingboots),"   "," XY"," Z ",'X',Items.leather_boots,'Y',Items.iron_ingot,'Z',Items.gold_ingot);
+        GameRegistry.addSmelting(Items.diamond,
+                new ItemStack(blocksingularity), 9001);
+        GameRegistry.addShapelessRecipe(new ItemStack(itemcrystalreed),
+                new ItemStack(Items.potionitem, 1, 0), Items.reeds);
+        GameRegistry.addRecipe(new ItemStack(blocksingularity), " X ", " X ",
+                "BBB", 'X', Items.apple, 'B', Items.book);
+        GameRegistry.addRecipe(new ItemStack(blockreinforcedbricks, 2), " X ",
+                "XBX", " X ", 'X', Items.brick, 'B', Blocks.stonebrick);
+        GameRegistry.addRecipe(new ItemStack(itemclimbingboots), "   ", " XY",
+                " Z ", 'X', Items.leather_boots, 'Y', Items.iron_ingot, 'Z',
+                Items.gold_ingot);
     }
 
     @EventHandler
-    public void serverStart(FMLServerStartingEvent event){
+    public void serverStart(FMLServerStartingEvent event) {
         MinecraftServer server = MinecraftServer.getServer();
-        ServerCommandManager manager = (ServerCommandManager) server.getCommandManager();
+        ServerCommandManager manager = (ServerCommandManager) server
+                .getCommandManager();
         manager.registerCommand(industrialScienceMainCommand);
         manager.registerCommand(industrialScienceGenerateRoom);
-
 
     }
 
@@ -206,9 +223,11 @@ public class IndustrialScience{
     public IWorldGenerator getWorldgeneratorportalroom() {
         return worldgeneratorportalroom;
     }
+
     public DungeonRoom getDungeonRoom(String key) {
         return dungeonroomlist.get(key);
     }
+
     public Block getBlockironbricks() {
         return blockironbricks;
 

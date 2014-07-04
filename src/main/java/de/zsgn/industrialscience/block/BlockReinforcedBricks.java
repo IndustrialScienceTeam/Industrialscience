@@ -8,11 +8,12 @@ public class BlockReinforcedBricks extends Block {
 
     public BlockReinforcedBricks() {
         super(Material.rock);
-        setCreativeTab(IndustrialScience.getInstance().getCreativetab());
-        setBlockName("reinforcedbricks");
-        setBlockTextureName(IndustrialScience.MODID+":"+getUnlocalizedName().substring(5));
-        setHardness(2.0F);
-        setResistance(1500.0F);
+        this.setCreativeTab(IndustrialScience.getInstance().getCreativetab());
+        this.setBlockName("reinforcedbricks");
+        this.setBlockTextureName(IndustrialScience.MODID + ":"
+                + this.getUnlocalizedName().substring(5));
+        this.setHardness(2.0F);
+        this.setResistance(1500.0F);
     }
 
 }

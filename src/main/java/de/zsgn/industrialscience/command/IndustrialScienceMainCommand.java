@@ -19,12 +19,14 @@ public class IndustrialScienceMainCommand extends CommandBase {
 
     @Override
     public void processCommand(ICommandSender var1, String[] var2) {
-        if(var2.length==0){
-            var1.addChatMessage(new ChatComponentText(getCommandUsage(var1)));
-        }else if ("version".equalsIgnoreCase(var2[0])) {
+        if (var2.length == 0) {
+            var1.addChatMessage(new ChatComponentText(this
+                    .getCommandUsage(var1)));
+        } else if ("version".equalsIgnoreCase(var2[0])) {
             var1.addChatMessage(new ChatComponentText(IndustrialScience.VERSION));
-        }else{
-            var1.addChatMessage(new ChatComponentText(getCommandUsage(var1)));
+        } else {
+            var1.addChatMessage(new ChatComponentText(this
+                    .getCommandUsage(var1)));
         }
     }
 

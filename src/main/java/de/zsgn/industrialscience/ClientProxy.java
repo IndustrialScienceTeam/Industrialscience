@@ -15,7 +15,8 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void registerRenderThings() {
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityChimney.class, new RendererChimney());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityChimney.class,
+                new RendererChimney());
     }
 
 }

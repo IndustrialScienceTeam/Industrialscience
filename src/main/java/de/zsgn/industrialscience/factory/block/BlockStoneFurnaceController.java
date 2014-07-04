@@ -9,19 +9,31 @@ import de.zsgn.industrialscience.MultiBlockStructure;
 import de.zsgn.industrialscience.RelativeCoordinate;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlockFurnace;
 
-
 public class BlockStoneFurnaceController extends IBlockMultiBlockController {
     public BlockStoneFurnaceController() {
-        super(Material.rock, MultiBlockStructure.FURNACE_TIER1,IndustrialScience.MODID + ":" + IndustrialScience.getInstance().getFactoryModule().getBlockStonehull().getUnlocalizedName().substring(5));
-        ValidBlocks=new Block[]{this,IndustrialScience.getInstance().getFactoryModule().getBlockStonehull()};
+        super(Material.rock, MultiBlockStructure.FURNACE_TIER1,
+                IndustrialScience.MODID
+                        + ":"
+                        + IndustrialScience.getInstance().getFactoryModule()
+                                .getBlockStonehull().getUnlocalizedName()
+                                .substring(5));
+        ValidBlocks = new Block[] {
+                this,
+                IndustrialScience.getInstance().getFactoryModule()
+                        .getBlockStonehull() };
         this.setCreativeTab(IndustrialScience.getInstance().getCreativetab());
-        setBlockName("tier1stonefurnace");
-        setHardness(3.0F);
+        this.setBlockName("tier1stonefurnace");
+        this.setHardness(3.0F);
     }
 
     @Override
     public TileEntity createNewTileEntity(World var1, int var2) {
-        return new TileEntityMultiBlockFurnace(20, new RelativeCoordinate[]{new RelativeCoordinate(1, 0, 1),new RelativeCoordinate(-1, 0, 1),new RelativeCoordinate(0, 0, 2),new RelativeCoordinate(0, 1, 1),new RelativeCoordinate(0, -1, 1)}, new RelativeCoordinate[]{});
+        return new TileEntityMultiBlockFurnace(20, new RelativeCoordinate[] {
+                new RelativeCoordinate(1, 0, 1),
+                new RelativeCoordinate(-1, 0, 1),
+                new RelativeCoordinate(0, 0, 2),
+                new RelativeCoordinate(0, 1, 1),
+                new RelativeCoordinate(0, -1, 1) }, new RelativeCoordinate[] {});
     }
 
 }

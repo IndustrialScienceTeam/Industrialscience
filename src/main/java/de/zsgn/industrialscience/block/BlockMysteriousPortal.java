@@ -1,6 +1,5 @@
 package de.zsgn.industrialscience.block;
 
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -20,16 +19,17 @@ import de.zsgn.industrialscience.tileentity.TileEntityMysteriousPortal;
 
 public class BlockMysteriousPortal extends BlockContainer {
     @SideOnly(Side.CLIENT)
-    private IIcon bottomtexture=null;
+    private IIcon bottomtexture = null;
     @SideOnly(Side.CLIENT)
-    private IIcon toptexture=null;
+    private IIcon toptexture = null;
     @SideOnly(Side.CLIENT)
-    private IIcon sidetexture=null;
+    private IIcon sidetexture = null;
+
     public BlockMysteriousPortal() {
         super(Material.iron);
-        setCreativeTab(IndustrialScience.getInstance().getCreativetab());
-        setBlockName("mysteriousportal");
-        setHardness(3.0F);
+        this.setCreativeTab(IndustrialScience.getInstance().getCreativetab());
+        this.setBlockName("mysteriousportal");
+        this.setHardness(3.0F);
     }
 
     @Override
@@ -38,17 +38,27 @@ public class BlockMysteriousPortal extends BlockContainer {
     }
 
     @Override
-    public boolean onBlockActivated(World world, int x,
-            int y, int z, EntityPlayer player,
-            int side, float xOffset, float yOffset,
+    public boolean onBlockActivated(World world, int x, int y, int z,
+            EntityPlayer player, int side, float xOffset, float yOffset,
             float zOffset) {
-        if(!world.isRemote&&world.getTileEntity(x, y, z) instanceof TileEntityMysteriousPortal){
-            TileEntityMysteriousPortal tileentity=(TileEntityMysteriousPortal)world.getTileEntity(x, y, z);
-            if(!tileentity.isUseable()&&(player.inventory.getStackInSlot(player.inventory.currentItem)!=null&&player.inventory.getStackInSlot(player.inventory.currentItem).getItem()==IndustrialScience.getInstance().getItemancienttechnology())&&side==1){
-                tileentity.setTechnologycompund(player.inventory.getStackInSlot(player.inventory.currentItem).getTagCompound().copy());
+        if (!world.isRemote
+                && world.getTileEntity(x, y, z) instanceof TileEntityMysteriousPortal) {
+            TileEntityMysteriousPortal tileentity = (TileEntityMysteriousPortal) world
+                    .getTileEntity(x, y, z);
+            if (!tileentity.isUseable()
+                    && player.inventory
+                            .getStackInSlot(player.inventory.currentItem) != null
+                    && player.inventory.getStackInSlot(
+                            player.inventory.currentItem).getItem() == IndustrialScience
+                            .getInstance().getItemancienttechnology()
+                    && side == 1) {
+                tileentity.setTechnologycompund(player.inventory
+                        .getStackInSlot(player.inventory.currentItem)
+                        .getTagCompound().copy());
                 --player.inventory.getStackInSlot(player.inventory.currentItem).stackSize;
                 tileentity.setUseable(true);
-                player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("mysteriousportal_activated")));
+                player.addChatMessage(new ChatComponentText(StatCollector
+                        .translateToLocal("mysteriousportal_activated")));
                 return true;
             }
             return false;
@@ -72,27 +82,34 @@ public class BlockMysteriousPortal extends BlockContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegister) {
-        bottomtexture=iconRegister.registerIcon(IndustrialScience.MODID + ":" + this.getUnlocalizedName().substring(5)+"_bottom");
-        toptexture=iconRegister.registerIcon(IndustrialScience.MODID + ":" + this.getUnlocalizedName().substring(5)+"_top");
-        sidetexture=iconRegister.registerIcon(IndustrialScience.MODID + ":" + this.getUnlocalizedName().substring(5)+"_side");
+        bottomtexture = iconRegister.registerIcon(IndustrialScience.MODID + ":"
+                + this.getUnlocalizedName().substring(5) + "_bottom");
+        toptexture = iconRegister.registerIcon(IndustrialScience.MODID + ":"
+                + this.getUnlocalizedName().substring(5) + "_top");
+        sidetexture = iconRegister.registerIcon(IndustrialScience.MODID + ":"
+                + this.getUnlocalizedName().substring(5) + "_side");
     }
 
     @Override
-    public void breakBlock(World world, int x, int y,
-            int z, Block block, int metadata) {
-        if(!world.isRemote&&world.getTileEntity(x, y, z) instanceof TileEntityMysteriousPortal){
-            TileEntityMysteriousPortal tileentity=(TileEntityMysteriousPortal)world.getTileEntity(x, y, z);
-            if(tileentity.isUseable()){
-                ItemStack technologyItemStack=new ItemStack(IndustrialScience.getInstance().getItemancienttechnology());
-                if(tileentity.getTechnologycompund()!=null){
-                    technologyItemStack.stackTagCompound=tileentity.getTechnologycompund();
+    public void breakBlock(World world, int x, int y, int z, Block block,
+            int metadata) {
+        if (!world.isRemote
+                && world.getTileEntity(x, y, z) instanceof TileEntityMysteriousPortal) {
+            TileEntityMysteriousPortal tileentity = (TileEntityMysteriousPortal) world
+                    .getTileEntity(x, y, z);
+            if (tileentity.isUseable()) {
+                ItemStack technologyItemStack = new ItemStack(IndustrialScience
+                        .getInstance().getItemancienttechnology());
+                if (tileentity.getTechnologycompund() != null) {
+                    technologyItemStack.stackTagCompound = tileentity
+                            .getTechnologycompund();
                 }
-                EntityItem entityItem =new EntityItem(world, x, y+1, z, technologyItemStack);
+                EntityItem entityItem = new EntityItem(world, x, y + 1, z,
+                        technologyItemStack);
                 world.spawnEntityInWorld(entityItem);
             }
         }
-        super.breakBlock(world, x, y, z,
-                block, metadata);
+        super.breakBlock(world, x, y, z, block, metadata);
     }
 
 }

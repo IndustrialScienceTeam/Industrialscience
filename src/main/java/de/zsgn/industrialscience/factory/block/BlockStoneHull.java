@@ -9,7 +9,8 @@ public class BlockStoneHull extends IBlockMultiblockHull {
         super(Material.rock);
         this.setBlockName("cobblestonehull");
         this.setHardness(3.0F);
-        this.textureName=IndustrialScience.MODID + ":" + this.getUnlocalizedName().substring(5);
+        textureName = IndustrialScience.MODID + ":"
+                + this.getUnlocalizedName().substring(5);
     }
 
 }

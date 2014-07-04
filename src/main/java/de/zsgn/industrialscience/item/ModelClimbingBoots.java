@@ -25,16 +25,16 @@ public class ModelClimbingBoots extends ModelBiped {
         shoe.setRotationPoint(-5F, 21F, -3F);
         shoe.setTextureSize(64, 32);
         shoe.mirror = true;
-        setRotation(shoe, 0F, 0F, 0F);
+        this.setRotation(shoe, 0F, 0F, 0F);
         spike = new ModelRenderer(this, 0, 0);
         spike.addBox(0F, 0F, 0F, 1, 2, 2);
         spike.setRotationPoint(2F, 21F, -5F);
         spike.setTextureSize(64, 32);
         spike.mirror = true;
-        setRotation(spike, 0F, 0F, 0F);
+        this.setRotation(spike, 0F, 0F, 0F);
 
-        this.bipedLeftLeg.addChild(shoe);
-        this.bipedRightLeg.addChild(spike);
+        bipedLeftLeg.addChild(shoe);
+        bipedRightLeg.addChild(spike);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class ModelClimbingBoots extends ModelBiped {
             float f4, float f5) {
         super.render(entity, f, f1, f2, f3, f4, f5);
         super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-        //shoe.render(f5);
+        // shoe.render(f5);
         spike.render(f5);
 
     }

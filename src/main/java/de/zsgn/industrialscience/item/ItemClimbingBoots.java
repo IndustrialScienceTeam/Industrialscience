@@ -20,9 +20,9 @@ public class ItemClimbingBoots extends ItemArmor {
         // (0 = helmet , 1 = chestplate , 2 = leggings , 3 = boots)
         super(ArmorMaterial.IRON, 0, 3);
 
-        setCreativeTab(IndustrialScience.getInstance().getCreativetab());
+        this.setCreativeTab(IndustrialScience.getInstance().getCreativetab());
 
-        setUnlocalizedName("climbingboots");
+        this.setUnlocalizedName("climbingboots");
 
         iconString = IndustrialScience.MODID + ":"
                 + this.getUnlocalizedName().substring(5);

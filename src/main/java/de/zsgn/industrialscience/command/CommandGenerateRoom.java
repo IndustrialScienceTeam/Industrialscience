@@ -20,14 +20,16 @@ public class CommandGenerateRoom extends CommandBase {
 
     @Override
     public void processCommand(ICommandSender var1, String[] var2) {
-        if(var2.length!=4){
-            var1.addChatMessage(new ChatComponentText(getCommandUsage(var1)));
-        }else{
-            int x=Integer.parseInt(var2[0]);
-            int y=Integer.parseInt(var2[1]);
-            int z=Integer.parseInt(var2[2]);
-            DungeonRoom room = IndustrialScience.getInstance().getDungeonRoom(var2[3]);
-            if(room==null){
+        if (var2.length != 4) {
+            var1.addChatMessage(new ChatComponentText(this
+                    .getCommandUsage(var1)));
+        } else {
+            int x = Integer.parseInt(var2[0]);
+            int y = Integer.parseInt(var2[1]);
+            int z = Integer.parseInt(var2[2]);
+            DungeonRoom room = IndustrialScience.getInstance().getDungeonRoom(
+                    var2[3]);
+            if (room == null) {
                 var1.addChatMessage(new ChatComponentText("Room not found"));
                 return;
             }

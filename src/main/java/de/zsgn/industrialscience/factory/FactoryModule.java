@@ -16,7 +16,7 @@ import de.zsgn.industrialscience.factory.tileentity.TileEntityHatch;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlock;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlockFurnace;
 
-public class FactoryModule{
+public class FactoryModule {
     private Block blockStonehull;
     private Block blockIronhull;
     private Block blockStonehatch;
@@ -24,41 +24,58 @@ public class FactoryModule{
     private Block blockControllerStonefurnace;
     private Block blockControllerIronfurnace;
     private Block blockironhatch;
+
     public void init(FMLInitializationEvent event) {
-        blockIronhull=new BlockIronHull();
-        blockStonehull=new BlockStoneHull();
-        blockStonehatch=new BlockStoneHatch();
+        blockIronhull = new BlockIronHull();
+        blockStonehull = new BlockStoneHull();
+        blockStonehatch = new BlockStoneHatch();
         blockChimney = new BlockChimney();
-        blockControllerStonefurnace=new BlockStoneFurnaceController();
-        blockControllerIronfurnace=new BlockIronFurnaceController();
-        blockironhatch=new BlockIronHatch();
+        blockControllerStonefurnace = new BlockStoneFurnaceController();
+        blockControllerIronfurnace = new BlockIronFurnaceController();
+        blockironhatch = new BlockIronHatch();
 
-        GameRegistry.registerBlock(blockControllerStonefurnace, blockControllerStonefurnace.getUnlocalizedName().substring(5));
-        GameRegistry.registerBlock(blockStonehull, blockStonehull.getUnlocalizedName().substring(5));
-        GameRegistry.registerBlock(blockIronhull, blockIronhull.getUnlocalizedName().substring(5));
-        GameRegistry.registerBlock(blockChimney, blockChimney.getUnlocalizedName().substring(5));
-        GameRegistry.registerBlock(blockStonehatch, blockStonehatch.getUnlocalizedName().substring(5));
-        GameRegistry.registerBlock(blockControllerIronfurnace, blockControllerIronfurnace.getUnlocalizedName().substring(5));
-        GameRegistry.registerBlock(blockironhatch, blockironhatch.getUnlocalizedName().substring(5));
+        GameRegistry.registerBlock(blockControllerStonefurnace,
+                blockControllerStonefurnace.getUnlocalizedName().substring(5));
+        GameRegistry.registerBlock(blockStonehull, blockStonehull
+                .getUnlocalizedName().substring(5));
+        GameRegistry.registerBlock(blockIronhull, blockIronhull
+                .getUnlocalizedName().substring(5));
+        GameRegistry.registerBlock(blockChimney, blockChimney
+                .getUnlocalizedName().substring(5));
+        GameRegistry.registerBlock(blockStonehatch, blockStonehatch
+                .getUnlocalizedName().substring(5));
+        GameRegistry.registerBlock(blockControllerIronfurnace,
+                blockControllerIronfurnace.getUnlocalizedName().substring(5));
+        GameRegistry.registerBlock(blockironhatch, blockironhatch
+                .getUnlocalizedName().substring(5));
 
-        GameRegistry.registerTileEntity(TileEntityMultiBlockFurnace.class, "tile.multiblockfurnace");
-        GameRegistry.registerTileEntity(TileEntityMultiBlock.class, "tile.multiblock");
-        GameRegistry.registerTileEntity(ITileEntityMultiBlockController.class, "tile.multiblockcontroller");
+        GameRegistry.registerTileEntity(TileEntityMultiBlockFurnace.class,
+                "tile.multiblockfurnace");
+        GameRegistry.registerTileEntity(TileEntityMultiBlock.class,
+                "tile.multiblock");
+        GameRegistry.registerTileEntity(ITileEntityMultiBlockController.class,
+                "tile.multiblockcontroller");
         GameRegistry.registerTileEntity(TileEntityHatch.class, "tile.hatch");
-        GameRegistry.registerTileEntity(TileEntityChimney.class,"tile.chimney");
+        GameRegistry
+                .registerTileEntity(TileEntityChimney.class, "tile.chimney");
     }
+
     public Block getBlockStonehull() {
         return blockStonehull;
     }
+
     public Block getBlockIronhull() {
         return blockIronhull;
     }
+
     public Block getBlockStonehatch() {
         return blockStonehatch;
     }
+
     public Block getBlockChimney() {
         return blockChimney;
     }
+
     public Block getBlockControllerStonefurnace() {
         return blockControllerStonefurnace;
     }

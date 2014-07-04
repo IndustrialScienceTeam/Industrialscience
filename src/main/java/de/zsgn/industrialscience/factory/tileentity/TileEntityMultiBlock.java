@@ -4,18 +4,20 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityMultiBlock extends TileEntity {
-    protected boolean activepart=false;
-    protected int masterx,mastery,masterz;
+    protected boolean activepart = false;
+    protected int masterx, mastery, masterz;
 
     public void setController(int x, int y, int z) {
-        masterx=x;
-        mastery=y;
-        masterz=z;
+        masterx = x;
+        mastery = y;
+        masterz = z;
     }
 
     public void destroyStructure() {
-        if(worldObj.getTileEntity(masterx,mastery,masterz) instanceof ITileEntityMultiBlockController){
-            ((ITileEntityMultiBlockController)worldObj.getTileEntity(masterx,mastery,masterz)).destroyStructure();;
+        if (worldObj.getTileEntity(masterx, mastery, masterz) instanceof ITileEntityMultiBlockController) {
+            ((ITileEntityMultiBlockController) worldObj.getTileEntity(masterx,
+                    mastery, masterz)).destroyStructure();
+            ;
         }
 
     }
@@ -23,6 +25,7 @@ public class TileEntityMultiBlock extends TileEntity {
     public void setActivepart(boolean activepart) {
         this.activepart = activepart;
     }
+
     public boolean isActivePart() {
         return activepart;
     }
@@ -38,14 +41,16 @@ public class TileEntityMultiBlock extends TileEntity {
     public int getMasterz() {
         return masterz;
     }
+
     @Override
     public void readFromNBT(NBTTagCompound tagCompound) {
         super.readFromNBT(tagCompound);
-        masterx=tagCompound.getInteger("masterx");
-        mastery=tagCompound.getInteger("mastery");
-        masterz=tagCompound.getInteger("masterz");
-        activepart=tagCompound.getBoolean("activepart");
+        masterx = tagCompound.getInteger("masterx");
+        mastery = tagCompound.getInteger("mastery");
+        masterz = tagCompound.getInteger("masterz");
+        activepart = tagCompound.getBoolean("activepart");
     }
+
     @Override
     public void writeToNBT(NBTTagCompound tagCompound) {
         super.writeToNBT(tagCompound);
