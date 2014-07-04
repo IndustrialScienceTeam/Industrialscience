@@ -14,6 +14,7 @@ public class TileEntityMultiBlockFurnace extends
     public static final int INPUTSLOT = 0;
     public static final int FUELSLOT = 1;
     public static final int OUTPUTSLOT = 2;
+    public static final int DEFCOOKTIME=300;
     public ItemStack[] furnaceslots = new ItemStack[3];
     protected RelativeCoordinate[] itemhatchcoords;
     protected RelativeCoordinate[] interfacehatchcoords;
@@ -42,7 +43,7 @@ public class TileEntityMultiBlockFurnace extends
         super.updateEntity();
         if (currenfuelburntime > 0) {
             currenfuelburntime--;
-            temperature = temperature + 0.5F;
+            temperature = temperature + 0.025F;
         } else if (temperature > deftemperature) {
             temperature = temperature - (activepart ? 0.05F : 0.1F);
         }
@@ -83,7 +84,9 @@ public class TileEntityMultiBlockFurnace extends
     }
 
     protected int getCookTime() {
-        return 200;
+        float cooktime= DEFCOOKTIME-(temperature-SmeltingRegristry.getSmeltTemp(furnaceslots[INPUTSLOT]))/10;
+        return (int) (cooktime>20?cooktime:20);
+                
     }
 
     protected boolean canSmelt() {
