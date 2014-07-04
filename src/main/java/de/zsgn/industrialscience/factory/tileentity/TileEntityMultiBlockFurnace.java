@@ -32,6 +32,12 @@ public class TileEntityMultiBlockFurnace extends
         this.itemhatchcoords = itemhatchcoords;
         this.interfacehatchcoords = interfacehatchcoords;
     }
+    
+
+    public TileEntityMultiBlockFurnace() {
+        super();
+    }
+
 
     @Override
     public int getSizeInventory() {
