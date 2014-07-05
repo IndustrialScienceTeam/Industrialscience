@@ -25,7 +25,7 @@ import de.zsgn.industrialscience.util.MultiBlockStructure;
 public abstract class IBlockMultiBlockController extends BlockContainer {
     protected MultiBlockStructure structure;
     protected String sidetexturestring;
-    protected Block[] ValidBlocks = {};
+    protected Block[] validBlocks = {};
     @SideOnly(Side.CLIENT)
     protected IIcon front;
     @SideOnly(Side.CLIENT)
@@ -46,8 +46,6 @@ public abstract class IBlockMultiBlockController extends BlockContainer {
             float zOffset) {
         if (!world.isRemote
                 && world.getTileEntity(x, y, z) instanceof TileEntityMultiBlockFurnace) {
-            player.addChatMessage(new ChatComponentText(Integer
-                    .toBinaryString(world.getBlockMetadata(x, y, z))));
             TileEntityMultiBlockFurnace masterTileEntity = (TileEntityMultiBlockFurnace) world
                     .getTileEntity(x, y, z);
             return this.testStructure(world, x, y, z, player);
@@ -63,7 +61,7 @@ public abstract class IBlockMultiBlockController extends BlockContainer {
             if (!masterTileEntity.isActivePart()) {
                 AbsoluteCoordinate[] blocks = structure.structureTest(world, x,
                         y, z, ForgeDirection.getOrientation(world
-                                .getBlockMetadata(x, y, z) >> 1), ValidBlocks);
+                                .getBlockMetadata(x, y, z) >> 1), validBlocks);
                 if (blocks == null) {
                     return false;
                 }

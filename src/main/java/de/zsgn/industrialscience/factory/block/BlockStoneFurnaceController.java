@@ -17,7 +17,7 @@ public class BlockStoneFurnaceController extends IBlockMultiBlockController {
                         + IndustrialScience.getInstance().getFactoryModule()
                                 .getBlockStonehull().getUnlocalizedName()
                                 .substring(5));
-        ValidBlocks = new Block[] {
+        validBlocks = new Block[] {
                 this,
                 IndustrialScience.getInstance().getFactoryModule()
                         .getBlockStonehull() };

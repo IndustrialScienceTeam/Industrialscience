@@ -10,25 +10,25 @@ public class RelativeCoordinate {
     // Up is +
     public final int heightCoord;
     // Depth is +
-    public final int DepthCoord;
+    public final int depthCoord;
 
     public RelativeCoordinate(int sideCoord, int heightCoord, int depthCoord) {
         this.sideCoord = sideCoord;
         this.heightCoord = heightCoord;
-        DepthCoord = depthCoord;
+        this.depthCoord = depthCoord;
     }
 
     public RelativeCoordinate(NBTTagCompound compound) {
         sideCoord = compound.getInteger("sideCoord");
         heightCoord = compound.getInteger("heightCoord");
-        DepthCoord = compound.getInteger("DepthCoord");
+        depthCoord = compound.getInteger("depthCoord");
     }
 
     public AbsoluteCoordinate convertToAbsolute(int x, int y, int z,
             ForgeDirection dirRIGHT, ForgeDirection dirDEPTH) {
         return new AbsoluteCoordinate(x + dirRIGHT.offsetX * sideCoord
-                + dirDEPTH.offsetX * DepthCoord, y + heightCoord, z
-                + dirRIGHT.offsetZ * sideCoord + dirDEPTH.offsetZ * DepthCoord);
+                + dirDEPTH.offsetX * depthCoord, y + heightCoord, z
+                + dirRIGHT.offsetZ * sideCoord + dirDEPTH.offsetZ * depthCoord);
     }
 
     public static NBTTagList getArrayAsNBTTagList(RelativeCoordinate[] coords) {
@@ -43,7 +43,7 @@ public class RelativeCoordinate {
         NBTTagCompound result = new NBTTagCompound();
         result.setInteger("sideCoord", sideCoord);
         result.setInteger("heightCoord", heightCoord);
-        result.setInteger("DepthCoord", DepthCoord);
+        result.setInteger("depthCoord", depthCoord);
         return result;
     }
 
