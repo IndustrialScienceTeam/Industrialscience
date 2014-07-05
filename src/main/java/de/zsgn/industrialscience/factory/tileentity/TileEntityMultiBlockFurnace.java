@@ -294,4 +294,10 @@ public class TileEntityMultiBlockFurnace extends
         return temperature;
     }
 
+
+    @Override
+    public boolean isProcessing() {
+        return temperature>deftemperature;
+    }
+
 }
