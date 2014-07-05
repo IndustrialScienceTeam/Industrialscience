@@ -1,6 +1,7 @@
 package de.zsgn.industrialscience.factory;
 
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import de.zsgn.industrialscience.factory.block.BlockChimney;
@@ -10,6 +11,7 @@ import de.zsgn.industrialscience.factory.block.BlockIronHull;
 import de.zsgn.industrialscience.factory.block.BlockStoneFurnaceController;
 import de.zsgn.industrialscience.factory.block.BlockStoneHatch;
 import de.zsgn.industrialscience.factory.block.BlockStoneHull;
+import de.zsgn.industrialscience.factory.item.ItemThermometer;
 import de.zsgn.industrialscience.factory.tileentity.ITileEntityMultiBlockController;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityChimney;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityHatch;
@@ -24,6 +26,7 @@ public class FactoryModule {
     private Block blockControllerStonefurnace;
     private Block blockControllerIronfurnace;
     private Block blockironhatch;
+    private Item itemThermometer;
 
     public void init(FMLInitializationEvent event) {
         blockIronhull = new BlockIronHull();
@@ -33,6 +36,7 @@ public class FactoryModule {
         blockControllerStonefurnace = new BlockStoneFurnaceController();
         blockControllerIronfurnace = new BlockIronFurnaceController();
         blockironhatch = new BlockIronHatch();
+        itemThermometer=new ItemThermometer();
 
         GameRegistry.registerBlock(blockControllerStonefurnace,
                 blockControllerStonefurnace.getUnlocalizedName().substring(5));
@@ -47,6 +51,9 @@ public class FactoryModule {
         GameRegistry.registerBlock(blockControllerIronfurnace,
                 blockControllerIronfurnace.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(blockironhatch, blockironhatch
+                .getUnlocalizedName().substring(5));
+        
+        GameRegistry.registerItem(itemThermometer, itemThermometer
                 .getUnlocalizedName().substring(5));
 
         GameRegistry.registerTileEntity(TileEntityMultiBlockFurnace.class,

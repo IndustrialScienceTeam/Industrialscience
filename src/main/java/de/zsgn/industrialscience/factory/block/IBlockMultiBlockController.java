@@ -50,8 +50,6 @@ public abstract class IBlockMultiBlockController extends BlockContainer {
                     .toBinaryString(world.getBlockMetadata(x, y, z))));
             TileEntityMultiBlockFurnace masterTileEntity = (TileEntityMultiBlockFurnace) world
                     .getTileEntity(x, y, z);
-            player.addChatMessage(new ChatComponentText("Temperature: "
-                    + masterTileEntity.getTemperature()));
             if (masterTileEntity.furnaceslots[0] != null) {
                 player.addChatMessage(new ChatComponentText("Slot0: "
                         + masterTileEntity.furnaceslots[0].getDisplayName()

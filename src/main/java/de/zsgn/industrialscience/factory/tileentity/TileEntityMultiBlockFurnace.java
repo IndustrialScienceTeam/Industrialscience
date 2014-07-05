@@ -10,7 +10,7 @@ import de.zsgn.industrialscience.factory.SmeltingRegristry;
 import de.zsgn.industrialscience.util.RelativeCoordinate;
 
 public class TileEntityMultiBlockFurnace extends
-        ITileEntityMultiBlockController implements IHatchSupport {
+        ITileEntityMultiBlockController implements IHatchSupport,IThermometerSupport {
     public static final int INPUTSLOT = 0;
     public static final int FUELSLOT = 1;
     public static final int OUTPUTSLOT = 2;
@@ -47,6 +47,22 @@ public class TileEntityMultiBlockFurnace extends
     @Override
     public void updateEntity() {
         super.updateEntity();
+        if(!worldObj.isRemote){
+        burnFuel();
+        if (this.canSmelt()) {
+            cookedticks++;
+            if (cookedticks == this.getCookTime()) {
+                this.smeltItem();
+                cookedticks = 0;
+            }
+        } else if (cookedticks > 0) {
+            cookedticks = 0;
+        }
+        }
+
+    }
+
+    protected void burnFuel() {
         if (currenfuelburntime > 0) {
             currenfuelburntime--;
             temperature = temperature + 0.025F;
@@ -60,17 +76,8 @@ public class TileEntityMultiBlockFurnace extends
                 furnaceslots[FUELSLOT] = null;
             }
         }
-        if (this.canSmelt()) {
-            cookedticks++;
-            if (cookedticks == this.getCookTime()) {
-                this.smeltItem();
-                cookedticks = 0;
-            }
-        } else if (cookedticks > 0) {
-            cookedticks = 0;
-        }
-
     }
+
 
     protected void smeltItem() {
         if (this.canSmelt()) {

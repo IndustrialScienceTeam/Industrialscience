@@ -9,6 +9,7 @@ tile.cobblestonehatch.name=Cobblestone Hatch
 tile.ironbricks.name=Iron Bricks
 tile.ironhull.name=Iron Hull
 tile.chimney.name = Chimney
+item.thermometer.name=Thermometer
 item.ancient-technology.name=Ancient Technology
 item.ancient-technology.descr1=It rattles and ticks as you shake it...
 item.ancient-technology.descr2=It seems to emit tiny clouds of smoke.
