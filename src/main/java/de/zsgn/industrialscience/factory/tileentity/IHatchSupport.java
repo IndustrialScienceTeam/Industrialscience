@@ -2,7 +2,7 @@ package de.zsgn.industrialscience.factory.tileentity;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import de.zsgn.industrialscience.RelativeCoordinate;
+import de.zsgn.industrialscience.util.RelativeCoordinate;
 
 public interface IHatchSupport extends IInventory {
     public RelativeCoordinate[] getRelativeItemHatchCoords();

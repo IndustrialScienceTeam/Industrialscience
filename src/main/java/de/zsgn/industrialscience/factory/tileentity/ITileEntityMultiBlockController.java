@@ -2,7 +2,7 @@ package de.zsgn.industrialscience.factory.tileentity;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import de.zsgn.industrialscience.AbsoluteCoordinate;
+import de.zsgn.industrialscience.util.AbsoluteCoordinate;
 
 public abstract class ITileEntityMultiBlockController extends
         TileEntityMultiBlock {

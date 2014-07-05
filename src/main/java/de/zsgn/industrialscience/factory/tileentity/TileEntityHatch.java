@@ -5,9 +5,9 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
-import de.zsgn.industrialscience.AbsoluteCoordinate;
-import de.zsgn.industrialscience.RelativeCoordinate;
 import de.zsgn.industrialscience.factory.block.IBlockMultiBlockController;
+import de.zsgn.industrialscience.util.AbsoluteCoordinate;
+import de.zsgn.industrialscience.util.RelativeCoordinate;
 
 public class TileEntityHatch extends TileEntityMultiBlock implements
         ISidedInventory {

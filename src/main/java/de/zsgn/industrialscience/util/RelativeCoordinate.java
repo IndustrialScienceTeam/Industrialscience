@@ -1,4 +1,4 @@
-package de.zsgn.industrialscience;
+package de.zsgn.industrialscience.util;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;

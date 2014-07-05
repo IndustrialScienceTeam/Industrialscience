@@ -15,12 +15,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import de.zsgn.industrialscience.AbsoluteCoordinate;
 import de.zsgn.industrialscience.IndustrialScience;
-import de.zsgn.industrialscience.MultiBlockStructure;
 import de.zsgn.industrialscience.factory.tileentity.ITileEntityMultiBlockController;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlock;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlockFurnace;
+import de.zsgn.industrialscience.util.AbsoluteCoordinate;
+import de.zsgn.industrialscience.util.MultiBlockStructure;
 
 public abstract class IBlockMultiBlockController extends BlockContainer {
     protected MultiBlockStructure structure;

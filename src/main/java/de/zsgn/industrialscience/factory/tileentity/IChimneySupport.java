@@ -1,6 +1,6 @@
 package de.zsgn.industrialscience.factory.tileentity;
 
-import de.zsgn.industrialscience.AbsoluteCoordinate;
+import de.zsgn.industrialscience.util.AbsoluteCoordinate;
 
 public interface IChimneySupport {
     public Boolean addChimney(AbsoluteCoordinate chimneyCoord);

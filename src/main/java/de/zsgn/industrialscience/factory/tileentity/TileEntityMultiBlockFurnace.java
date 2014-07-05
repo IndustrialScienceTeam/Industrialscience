@@ -6,8 +6,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityFurnace;
-import de.zsgn.industrialscience.RelativeCoordinate;
 import de.zsgn.industrialscience.factory.SmeltingRegristry;
+import de.zsgn.industrialscience.util.RelativeCoordinate;
 
 public class TileEntityMultiBlockFurnace extends
         ITileEntityMultiBlockController implements IHatchSupport {

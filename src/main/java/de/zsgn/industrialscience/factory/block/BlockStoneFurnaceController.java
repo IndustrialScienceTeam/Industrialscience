@@ -5,9 +5,9 @@ import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import de.zsgn.industrialscience.IndustrialScience;
-import de.zsgn.industrialscience.MultiBlockStructure;
-import de.zsgn.industrialscience.RelativeCoordinate;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlockFurnace;
+import de.zsgn.industrialscience.util.MultiBlockStructure;
+import de.zsgn.industrialscience.util.RelativeCoordinate;
 
 public class BlockStoneFurnaceController extends IBlockMultiBlockController {
     public BlockStoneFurnaceController() {
