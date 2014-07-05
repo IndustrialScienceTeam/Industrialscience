@@ -50,21 +50,6 @@ public abstract class IBlockMultiBlockController extends BlockContainer {
                     .toBinaryString(world.getBlockMetadata(x, y, z))));
             TileEntityMultiBlockFurnace masterTileEntity = (TileEntityMultiBlockFurnace) world
                     .getTileEntity(x, y, z);
-            if (masterTileEntity.furnaceslots[0] != null) {
-                player.addChatMessage(new ChatComponentText("Slot0: "
-                        + masterTileEntity.furnaceslots[0].getDisplayName()
-                        + " x " + masterTileEntity.furnaceslots[0].stackSize));
-            }
-            if (masterTileEntity.furnaceslots[1] != null) {
-                player.addChatMessage(new ChatComponentText("Slot1: "
-                        + masterTileEntity.furnaceslots[1].getDisplayName()
-                        + " x " + masterTileEntity.furnaceslots[1].stackSize));
-            }
-            if (masterTileEntity.furnaceslots[2] != null) {
-                player.addChatMessage(new ChatComponentText("Slot2: "
-                        + masterTileEntity.furnaceslots[2].getDisplayName()
-                        + " x " + masterTileEntity.furnaceslots[2].stackSize));
-            }
             return this.testStructure(world, x, y, z, player);
         }
         return false;

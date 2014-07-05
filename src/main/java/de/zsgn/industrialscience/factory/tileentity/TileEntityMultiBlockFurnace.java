@@ -15,7 +15,7 @@ public class TileEntityMultiBlockFurnace extends
     public static final int FUELSLOT = 1;
     public static final int OUTPUTSLOT = 2;
     public static final int DEFCOOKTIME=300;
-    public ItemStack[] furnaceslots = new ItemStack[3];
+    protected ItemStack[] furnaceslots = new ItemStack[3];
     protected RelativeCoordinate[] itemhatchcoords;
     protected RelativeCoordinate[] interfacehatchcoords;
     protected int deftemperature = 20;
