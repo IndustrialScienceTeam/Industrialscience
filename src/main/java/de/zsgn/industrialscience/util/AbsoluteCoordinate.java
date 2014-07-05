@@ -1,5 +1,7 @@
 package de.zsgn.industrialscience.util;
 
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
@@ -22,12 +24,20 @@ public class AbsoluteCoordinate {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof AbsoluteCoordinate) {
+        if (!(obj instanceof AbsoluteCoordinate)) {
+            return false;
+        }
+        if (obj == this){
+            return true;
+        }
             AbsoluteCoordinate coord = (AbsoluteCoordinate) obj;
             return xCoord == coord.xCoord && yCoord == coord.yCoord
                     && zCoord == coord.zCoord;
-        }
-        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 31).append(xCoord).append(yCoord).append(zCoord).toHashCode();
     }
 
     @Override
