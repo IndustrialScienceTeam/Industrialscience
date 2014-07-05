@@ -14,6 +14,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import de.zsgn.industrialscience.IndustrialScience;
 import de.zsgn.industrialscience.factory.tileentity.IChimneySupport;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityChimney;
+import de.zsgn.industrialscience.factory.tileentity.TileEntityHatch;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlock;
 import de.zsgn.industrialscience.util.AbsoluteCoordinate;
 
@@ -44,8 +45,8 @@ public class BlockChimney extends BlockContainer {
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z,
             EntityLivingBase entityLivingBase, ItemStack itemStack) {
-        if(!world.isRemote&&world.getTileEntity(x, y-1, z) instanceof TileEntityMultiBlock){
-            TileEntityMultiBlock connector=(TileEntityMultiBlock)world.getTileEntity(x, y-1, z);
+        if(!world.isRemote&&world.getTileEntity(x, y-1, z) instanceof TileEntityHatch){
+            TileEntityHatch connector=(TileEntityHatch)world.getTileEntity(x, y-1, z);
             if(world.getTileEntity(connector.getMasterx(),connector.getMastery(),connector.getMasterz())instanceof IChimneySupport){
                 IChimneySupport master= (IChimneySupport)world.getTileEntity(connector.getMasterx(),connector.getMastery(),connector.getMasterz());
                 master.addChimney(new AbsoluteCoordinate(x, y, z));
