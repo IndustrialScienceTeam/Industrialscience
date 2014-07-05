@@ -161,6 +161,7 @@ public abstract class IBlockMultiBlockController extends BlockContainer {
             ((TileEntityMultiBlock) world.getTileEntity(x, y, z))
                     .destroyStructure();
         }
+        super.breakBlock(world, x, y, z, block, meta);
     }
 
 }

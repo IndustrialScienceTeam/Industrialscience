@@ -21,6 +21,7 @@ public abstract class ITileEntityMultiBlockController extends
 
     @Override
     public void destroyStructure() {
+        if(!worldObj.isRemote){
         for (AbsoluteCoordinate coord : structure) {
             TileEntity tileEntity = worldObj.getTileEntity(coord.xCoord,
                     coord.yCoord, coord.zCoord);
@@ -29,6 +30,7 @@ public abstract class ITileEntityMultiBlockController extends
             }
         }
         structure = null;
+        }
     }
 
     @Override
