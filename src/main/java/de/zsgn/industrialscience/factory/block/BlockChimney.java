@@ -57,9 +57,13 @@ public class BlockChimney extends BlockContainer {
     @Override
     public void randomDisplayTick(World world, int x, int y, int z,
             Random random) {
-        System.err.println(world.getBlockMetadata(x, y, z));
         //if(world.getBlockMetadata(x, y, z)==1){do particle krams}
-        world.spawnParticle("smoke", x, y, z, 0, 0, 0);
+        for (int i = 0 ;  i < 10 ; i ++ ) {
+            System.err.println(random.nextFloat());
+            world.spawnParticle("smoke", x +  0.5+  (random.nextFloat()-0.5)/16*4, y+ (i/10), z +  0.5+  (random.nextFloat()-0.5)/16*4, 0, 0.1, 0);
+            
+        }
+        
     }
 
     @Override
