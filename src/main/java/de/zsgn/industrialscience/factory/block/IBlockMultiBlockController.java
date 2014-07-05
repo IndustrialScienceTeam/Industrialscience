@@ -1,5 +1,7 @@
 package de.zsgn.industrialscience.factory.block;
 
+import javax.swing.text.html.HTMLDocument.HTMLReader.BlockAction;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -46,13 +48,10 @@ public abstract class IBlockMultiBlockController extends BlockContainer {
             float zOffset) {
         if (!world.isRemote
                 && world.getTileEntity(x, y, z) instanceof TileEntityMultiBlockFurnace) {
-            TileEntityMultiBlockFurnace masterTileEntity = (TileEntityMultiBlockFurnace) world
-                    .getTileEntity(x, y, z);
             return this.testStructure(world, x, y, z, player);
         }
         return false;
     }
-
     private boolean testStructure(World world, int x, int y, int z,
             EntityPlayer player) {
         if (world.getTileEntity(x, y, z) instanceof ITileEntityMultiBlockController) {
@@ -60,8 +59,7 @@ public abstract class IBlockMultiBlockController extends BlockContainer {
                     .getTileEntity(x, y, z);
             if (!masterTileEntity.isActivePart()) {
                 AbsoluteCoordinate[] blocks = structure.structureTest(world, x,
-                        y, z, ForgeDirection.getOrientation(world
-                                .getBlockMetadata(x, y, z) >> 1), validBlocks);
+                        y, z, getFacingDir(world, x, y, z), validBlocks);
                 if (blocks == null) {
                     return false;
                 }
@@ -89,8 +87,8 @@ public abstract class IBlockMultiBlockController extends BlockContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(IBlockAccess blockAccess, int x, int y, int z, int side) {
-        if (side == blockAccess.getBlockMetadata(x, y, z) >> 1) {
-            if ((blockAccess.getBlockMetadata(x, y, z) & 1) == 1) {
+        if (side == getFacingDir(blockAccess, x, y, z).ordinal()) {
+            if (isActive(blockAccess, x, y, z)) {
                 return frontActive;
             } else {
                 return front;
@@ -162,6 +160,18 @@ public abstract class IBlockMultiBlockController extends BlockContainer {
                     .destroyStructure();
         }
         super.breakBlock(world, x, y, z, block, meta);
+    }
+    public static boolean isActive(World world, int x, int y, int z){
+        return (world.getBlockMetadata(x, y, z) & 1) == 1;
+    }
+    public static boolean isActive(IBlockAccess world, int x, int y, int z){
+        return (world.getBlockMetadata(x, y, z) & 1) == 1;
+    }
+    public static ForgeDirection getFacingDir(IBlockAccess world, int x, int y, int z){
+        return ForgeDirection.getOrientation(world.getBlockMetadata(x, y, z) >> 1);
+    }
+    public static ForgeDirection getFacingDir(World world, int x, int y, int z){
+        return ForgeDirection.getOrientation(world.getBlockMetadata(x, y, z) >> 1);
     }
 
 }
