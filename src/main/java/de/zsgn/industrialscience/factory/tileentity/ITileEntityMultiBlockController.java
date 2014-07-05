@@ -10,18 +10,12 @@ public abstract class ITileEntityMultiBlockController extends
 
     @Override
     public void updateEntity() {
-        if ((worldObj.getBlockMetadata(xCoord, yCoord, zCoord) & 1) != (this
+        if (!worldObj.isRemote&&(worldObj.getBlockMetadata(xCoord, yCoord, zCoord) & 1) != (this
                 .isProcessing() ? 1 : 0)) {
-            System.out.println(Integer.toBinaryString(worldObj
-                    .getBlockMetadata(xCoord, yCoord, zCoord)
-                    | (this.isProcessing() ? 1 : 0)));
             int newmeta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord) >> 1 << 1
                     | (this.isProcessing() ? 1 : 0);
-            ;
             worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord,
-                    newmeta, 3);
-            worldObj.scheduleBlockUpdate(xCoord, yCoord, zCoord,
-                    worldObj.getBlock(xCoord, yCoord, zCoord), 20);
+                    newmeta, 2);
         }
     }
 
