@@ -41,7 +41,7 @@ public abstract class ITileEntityMultiBlockController extends
     @Override
     public void writeToNBT(NBTTagCompound tagCompound) {
         super.writeToNBT(tagCompound);
-        tagCompound.setTag("stucture",
+        tagCompound.setTag("structure",
                 AbsoluteCoordinate.getArrayAsNBTTagList(structure));
     }
 
