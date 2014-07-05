@@ -1,5 +1,7 @@
 package de.zsgn.industrialscience.factory.tileentity;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -7,10 +9,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityFurnace;
 import de.zsgn.industrialscience.factory.SmeltingRegristry;
+import de.zsgn.industrialscience.util.AbsoluteCoordinate;
 import de.zsgn.industrialscience.util.RelativeCoordinate;
 
 public class TileEntityMultiBlockFurnace extends
-        ITileEntityMultiBlockController implements IHatchSupport,IThermometerSupport {
+        ITileEntityMultiBlockController implements IHatchSupport,IThermometerSupport,IChimneySupport {
     public static final int INPUTSLOT = 0;
     public static final int FUELSLOT = 1;
     public static final int OUTPUTSLOT = 2;
@@ -18,6 +21,7 @@ public class TileEntityMultiBlockFurnace extends
     protected ItemStack[] furnaceslots = new ItemStack[3];
     protected RelativeCoordinate[] itemhatchcoords;
     protected RelativeCoordinate[] interfacehatchcoords;
+    protected AbsoluteCoordinate[] chimneys={};
     protected int deftemperature = 20;
     protected float temperature = 20;
     protected int currenfuelburntime = 0;
@@ -48,6 +52,7 @@ public class TileEntityMultiBlockFurnace extends
     public void updateEntity() {
         super.updateEntity();
         if(!worldObj.isRemote){
+        updateChimneys();
         burnFuel();
         if (this.canSmelt()) {
             cookedticks++;
@@ -61,6 +66,20 @@ public class TileEntityMultiBlockFurnace extends
         }
 
     }
+
+    protected void updateChimneys() {
+        for (AbsoluteCoordinate coordinate : chimneys) {
+            if ((worldObj.getBlockMetadata(coordinate.xCoord, coordinate.yCoord, coordinate.zCoord) & 1) != (this
+                    .isProcessing() ? 1 : 0)) {
+                int newmeta = worldObj.getBlockMetadata(coordinate.xCoord, coordinate.yCoord, coordinate.zCoord) >> 1 << 1
+                        | (this.isProcessing() ? 1 : 0);
+                worldObj.setBlockMetadataWithNotify(coordinate.xCoord, coordinate.yCoord, coordinate.zCoord,
+                        newmeta, 2);
+            }
+        }
+        
+    }
+
 
     protected void burnFuel() {
         if (currenfuelburntime > 0) {
@@ -298,6 +317,19 @@ public class TileEntityMultiBlockFurnace extends
     @Override
     public boolean isProcessing() {
         return temperature>deftemperature;
+    }
+
+
+    @Override
+    public void addChimney(AbsoluteCoordinate chimneyCoord) {
+        chimneys=ArrayUtils.addAll(chimneys, new AbsoluteCoordinate[]{chimneyCoord});
+    }
+
+
+    @Override
+    public void removeChimney(AbsoluteCoordinate chimneyCoord) {
+        chimneys=ArrayUtils.removeElement(chimneys, chimneyCoord);
+        
     }
 
 }

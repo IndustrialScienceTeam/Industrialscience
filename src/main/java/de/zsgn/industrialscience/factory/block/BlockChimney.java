@@ -5,12 +5,16 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import de.zsgn.industrialscience.IndustrialScience;
+import de.zsgn.industrialscience.factory.tileentity.IChimneySupport;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityChimney;
+import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlock;
 import de.zsgn.industrialscience.util.AbsoluteCoordinate;
 
 public class BlockChimney extends BlockContainer {
@@ -37,16 +41,23 @@ public class BlockChimney extends BlockContainer {
         super.breakBlock(world, x, y, z, block, meta);
     }
 
-    protected AbsoluteCoordinate getMultiBlockInterface(World world, int x,
-            int y, int z) {
-
-        return new AbsoluteCoordinate(x, y - 1, z);
+    @Override
+    public void onBlockPlacedBy(World world, int x, int y, int z,
+            EntityLivingBase entityLivingBase, ItemStack itemStack) {
+        if(!world.isRemote&&world.getTileEntity(x, y-1, z) instanceof TileEntityMultiBlock){
+            TileEntityMultiBlock connector=(TileEntityMultiBlock)world.getTileEntity(x, y-1, z);
+            if(world.getTileEntity(connector.getMasterx(),connector.getMastery(),connector.getMasterz())instanceof IChimneySupport){
+                IChimneySupport master= (IChimneySupport)world.getTileEntity(connector.getMasterx(),connector.getMastery(),connector.getMasterz());
+                master.addChimney(new AbsoluteCoordinate(x, y, z));
+            }
+        }
     }
-
     @SideOnly(Side.CLIENT)
     @Override
     public void randomDisplayTick(World world, int x, int y, int z,
             Random random) {
+        System.err.println(world.getBlockMetadata(x, y, z));
+        //if(world.getBlockMetadata(x, y, z)==1){do particle krams}
         world.spawnParticle("smoke", x, y, z, 0, 0, 0);
     }
 
