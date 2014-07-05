@@ -33,9 +33,9 @@ public abstract class IBlockMultiBlockController extends BlockContainer {
     @SideOnly(Side.CLIENT)
     protected IIcon sides;
 
-    protected IBlockMultiBlockController(Material p_i45386_1_,
+    protected IBlockMultiBlockController(Material material,
             MultiBlockStructure structure, String sidetexturestring) {
-        super(p_i45386_1_);
+        super(material);
         this.structure = structure;
         this.sidetexturestring = sidetexturestring;
     }

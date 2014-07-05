@@ -21,9 +21,9 @@ public abstract class ITileEntityMultiBlockController extends
 
     @Override
     public void destroyStructure() {
-        for (AbsoluteCoordinate Coord : structure) {
-            TileEntity tileEntity = worldObj.getTileEntity(Coord.xCoord,
-                    Coord.yCoord, Coord.zCoord);
+        for (AbsoluteCoordinate coord : structure) {
+            TileEntity tileEntity = worldObj.getTileEntity(coord.xCoord,
+                    coord.yCoord, coord.zCoord);
             if (tileEntity instanceof TileEntityMultiBlock) {
                 ((TileEntityMultiBlock) tileEntity).setActivepart(false);
             }

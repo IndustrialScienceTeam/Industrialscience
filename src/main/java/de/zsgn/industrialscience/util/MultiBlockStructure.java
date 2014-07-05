@@ -33,7 +33,7 @@ public enum MultiBlockStructure {
     }
 
     public AbsoluteCoordinate[] structureTest(World world, int x, int y, int z,
-            ForgeDirection dir, Block[] ValidBlocks) {
+            ForgeDirection dir, Block[] validBlocks) {
         ForgeDirection dirRIGHT = dir.getRotation(ForgeDirection.DOWN);
         ForgeDirection dirLEFT = dirRIGHT.getOpposite();
         ForgeDirection dirDEPTH = dir.getOpposite();
@@ -60,7 +60,7 @@ public enum MultiBlockStructure {
                     startY, endY); movey++) {
                 for (int movez = 0; movez + Math.min(startZ, endZ) <= Math.max(
                         startZ, endZ); movez++) {
-                    if (!this.isValidBlock(ValidBlocks, absholes, world, movex
+                    if (!this.isValidBlock(validBlocks, absholes, world, movex
                             + Math.min(startX, endX),
                             movey + Math.min(startY, endY),
                             movez + Math.min(startZ, endZ))) {
@@ -77,7 +77,7 @@ public enum MultiBlockStructure {
         return result;
     }
 
-    protected boolean isValidBlock(Block[] ValidBlocks,
+    protected boolean isValidBlock(Block[] validBlocks,
             AbsoluteCoordinate[] absholes, World world, int x, int y, int z) {
         if (world.getTileEntity(x, y, z) instanceof TileEntityMultiBlock
                 && ((TileEntityMultiBlock) world.getTileEntity(x, y, z))
@@ -94,7 +94,7 @@ public enum MultiBlockStructure {
                 }
             }
         }
-        for (Block validBlock : ValidBlocks) {
+        for (Block validBlock : validBlocks) {
             if (validBlock.getClass().isInstance(world.getBlock(x, y, z))) {
                 return true;
             }
