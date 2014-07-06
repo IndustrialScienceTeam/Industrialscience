@@ -57,15 +57,32 @@ public class BlockChimney extends BlockContainer {
     @Override
     public void randomDisplayTick(World world, int x, int y, int z,
             Random random) {
-        //if(world.getBlockMetadata(x, y, z)==1){do particle krams}
-        for (int i = 0 ;  i < 10 ; i ++ ) {
-            System.err.println(random.nextFloat());
-            world.spawnParticle("smoke", x +  0.5+  (random.nextFloat()-0.5)/16*4, y+ (i/10), z +  0.5+  (random.nextFloat()-0.5)/16*4, 0, 0.1, 0);
-            
-        }
-        
+           if(world.getBlock(x, y-1, z) == this && world.getBlockMetadata(x, y-1, z)== 1){
+               System.err.println("Active chimney under me -");
+               if(world.getBlock(x, y+1, z)== this){
+                   System.err.println("-I am not the highest");
+               }
+               if(world.isAirBlock(x, y+1, z) ){
+                   System.err.println("-I am on top");
+               }         
+           }
+           else if (world.getBlockMetadata(x, y, z)==0) {
+               System.err.println("I am inactive+");
+               if(world.getBlock(x, y-1, z) == this && world.getBlockMetadata(x, y-1, z)== 1){
+                   System.err.println("+Active chimney under me");            
+               }
+           }
     }
+        
+    
+    @SideOnly(Side.CLIENT)
+    protected void spawnParticles(World world ,int x, int y, int z, Random random) {
+        System.err.println("I am doing shit");
+     // world.spawnParticle("smoke", x +  0.5+  (random.nextFloat()-0.5)/16*4, y+ (i/10), z +  0.5+  (random.nextFloat()-0.5)/16*4, 0, 1, 0);
 
+    }
+    
+    
     @Override
     public boolean renderAsNormalBlock() {
         return false;
