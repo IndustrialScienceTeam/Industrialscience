@@ -12,6 +12,7 @@ import de.zsgn.industrialscience.factory.block.BlockStoneFurnaceController;
 import de.zsgn.industrialscience.factory.block.BlockStoneHatch;
 import de.zsgn.industrialscience.factory.block.BlockStoneHull;
 import de.zsgn.industrialscience.factory.item.ItemThermometer;
+import de.zsgn.industrialscience.factory.item.ItemTong;
 import de.zsgn.industrialscience.factory.tileentity.ITileEntityMultiBlockController;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityChimney;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityHatch;
@@ -27,6 +28,7 @@ public class FactoryModule {
     private Block blockControllerIronfurnace;
     private Block blockironhatch;
     private Item itemThermometer;
+    private Item itemTong;
 
     public void init(FMLInitializationEvent event) {
         blockIronhull = new BlockIronHull();
@@ -37,6 +39,7 @@ public class FactoryModule {
         blockControllerIronfurnace = new BlockIronFurnaceController();
         blockironhatch = new BlockIronHatch();
         itemThermometer=new ItemThermometer();
+        itemTong=new ItemTong();
 
         GameRegistry.registerBlock(blockControllerStonefurnace,
                 blockControllerStonefurnace.getUnlocalizedName().substring(5));
@@ -54,6 +57,8 @@ public class FactoryModule {
                 .getUnlocalizedName().substring(5));
         
         GameRegistry.registerItem(itemThermometer, itemThermometer
+                .getUnlocalizedName().substring(5));
+        GameRegistry.registerItem(itemTong, itemTong
                 .getUnlocalizedName().substring(5));
 
         GameRegistry.registerTileEntity(TileEntityMultiBlockFurnace.class,
@@ -85,6 +90,22 @@ public class FactoryModule {
 
     public Block getBlockControllerStonefurnace() {
         return blockControllerStonefurnace;
+    }
+
+    public Block getBlockControllerIronfurnace() {
+        return blockControllerIronfurnace;
+    }
+
+    public Block getBlockironhatch() {
+        return blockironhatch;
+    }
+
+    public Item getItemThermometer() {
+        return itemThermometer;
+    }
+
+    public Item getItemTong() {
+        return itemTong;
     }
 
 }

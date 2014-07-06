@@ -174,17 +174,15 @@ public class TileEntityHatch extends TileEntityMultiBlock implements
                 && worldObj.getBlock(masterx, mastery, masterz) instanceof IBlockMultiBlockController) {
             IHatchSupport master = (IHatchSupport) worldObj.getTileEntity(
                     masterx, mastery, masterz);
-            ForgeDirection right = ForgeDirection.getOrientation(
-                    worldObj.getBlockMetadata(masterx, mastery, masterz))
+            ForgeDirection right = IBlockMultiBlockController.getFacingDir(worldObj, masterx, mastery, masterz)
                     .getRotation(ForgeDirection.DOWN);
-            ForgeDirection depth = ForgeDirection.getOrientation(
-                    worldObj.getBlockMetadata(masterx, mastery, masterz))
+            ForgeDirection depth = IBlockMultiBlockController.getFacingDir(worldObj, masterx, mastery, masterz)
                     .getOpposite();
+            AbsoluteCoordinate owncoords=new AbsoluteCoordinate(xCoord, yCoord, zCoord);
             for (RelativeCoordinate iteminterfacecoord : master
-                    .getRelativeInterfaceHatchCoords()) {
+                    .getRelativeItemHatchCoords()) {
                 if (iteminterfacecoord.convertToAbsolute(masterx, mastery,
-                        masterz, right, depth).equals(
-                        new AbsoluteCoordinate(xCoord, yCoord, zCoord))) {
+                        masterz, right, depth).equals(owncoords)) {
                     iteminterface = true;
                     blockinterface = true;
                     break;
@@ -240,6 +238,14 @@ public class TileEntityHatch extends TileEntityMultiBlock implements
         tagCompound.setBoolean("automated", automated);
         tagCompound.setBoolean("iteminterface", iteminterface);
         tagCompound.setBoolean("blockinterface", blockinterface);
+    }
+
+    @Override
+    public void markDirty() {
+        if (worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport) {
+            worldObj.getTileEntity(masterx, mastery, masterz).markDirty();;
+        }
+        super.markDirty();
     }
 
 }
