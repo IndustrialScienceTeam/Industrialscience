@@ -8,10 +8,12 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -46,14 +48,32 @@ public abstract class IBlockMultiBlockController extends BlockContainer {
     public boolean onBlockActivated(World world, int x, int y, int z,
             EntityPlayer player, int side, float xOffset, float yOffset,
             float zOffset) {
-        if (!world.isRemote
-                && world.getTileEntity(x, y, z) instanceof TileEntityMultiBlockFurnace) {
-            return this.testStructure(world, x, y, z, player);
+        if (!world.isRemote) {
+            if(world.getTileEntity(x, y, z)instanceof ITileEntityMultiBlockController){
+                if (!((ITileEntityMultiBlockController)world.getTileEntity(x, y, z)).isActivePart()) {
+            return this.testAndSetStructure(world, x, y, z);
+            }else if(world.getTileEntity(x, y, z) instanceof IInventory){
+                IInventory inventory=(IInventory)world.getTileEntity(x, y, z);
+                boolean notempty = false;
+                String[] items=new String[inventory.getSizeInventory()];
+                for (int i = 0; i < inventory.getSizeInventory(); i++) {
+                    if(inventory.getStackInSlot(i)!=null){
+                        items[i]=inventory.getStackInSlot(i).getDisplayName();
+                        notempty=true;
+                    }
+                }
+                player.addChatMessage(new ChatComponentText(notempty?StatCollector.translateToLocal("i_can_see"):StatCollector.translateToLocal("appears_empty")));
+                for (String item : items) {
+                    if(item!=null){
+                        player.addChatMessage(new ChatComponentText(item));
+                    }
+                }
+            }
+            }
         }
         return false;
     }
-    private boolean testStructure(World world, int x, int y, int z,
-            EntityPlayer player) {
+    private boolean testAndSetStructure(World world, int x, int y, int z) {
         if (world.getTileEntity(x, y, z) instanceof ITileEntityMultiBlockController) {
             ITileEntityMultiBlockController masterTileEntity = (ITileEntityMultiBlockController) world
                     .getTileEntity(x, y, z);
@@ -64,8 +84,6 @@ public abstract class IBlockMultiBlockController extends BlockContainer {
                     return false;
                 }
                 for (AbsoluteCoordinate blockcord : blocks) {
-                    Block block = world.getBlock(blockcord.xCoord,
-                            blockcord.yCoord, blockcord.zCoord);
                     if (world.getTileEntity(blockcord.xCoord, blockcord.yCoord,
                             blockcord.zCoord) instanceof TileEntityMultiBlock) {
                         TileEntityMultiBlock tileentity = (TileEntityMultiBlock) world
@@ -76,7 +94,6 @@ public abstract class IBlockMultiBlockController extends BlockContainer {
                     }
                 }
                 masterTileEntity.setStructure(blocks);
-                player.addChatMessage(new ChatComponentText("Active"));
                 return true;
             }
         }
