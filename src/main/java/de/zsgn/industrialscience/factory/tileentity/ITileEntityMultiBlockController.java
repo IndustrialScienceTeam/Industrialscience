@@ -1,5 +1,7 @@
 package de.zsgn.industrialscience.factory.tileentity;
 
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import de.zsgn.industrialscience.util.AbsoluteCoordinate;
@@ -7,6 +9,7 @@ import de.zsgn.industrialscience.util.AbsoluteCoordinate;
 public abstract class ITileEntityMultiBlockController extends
         TileEntityMultiBlock {
     protected AbsoluteCoordinate[] structure = {};
+    protected AbsoluteCoordinate itemhole=null;
 
     @Override
     public void updateEntity() {
@@ -29,6 +32,16 @@ public abstract class ITileEntityMultiBlockController extends
                 ((TileEntityMultiBlock) tileEntity).setActivepart(false);
             }
         }
+        if(this instanceof IInventory&&itemhole!=null){
+            IInventory inventory =(IInventory)this;
+            for (int i = 0; i < inventory.getSizeInventory(); i++) {
+                if(inventory.getStackInSlot(i)!=null){
+                    worldObj.spawnEntityInWorld(new EntityItem(worldObj, itemhole.xCoord+0.5, itemhole.yCoord+0.5, itemhole.zCoord+0.5, inventory.getStackInSlot(i)));
+                    inventory.setInventorySlotContents(i, null);
+                }
+            }
+            
+        }
         structure = null;
         }
     }
@@ -36,19 +49,37 @@ public abstract class ITileEntityMultiBlockController extends
     @Override
     public void readFromNBT(NBTTagCompound tagCompound) {
         super.readFromNBT(tagCompound);
+        if(!worldObj.isRemote){
         structure = AbsoluteCoordinate.getArrayFromNBTTagList(tagCompound
                 .getTagList("structure", new NBTTagCompound().getId()));
+        if(tagCompound.getCompoundTag("itemhole")!=null){
+        itemhole=new AbsoluteCoordinate(tagCompound.getCompoundTag("itemhole"));
+        } 
+        }
     }
 
     @Override
     public void writeToNBT(NBTTagCompound tagCompound) {
         super.writeToNBT(tagCompound);
+        if(!worldObj.isRemote){
         tagCompound.setTag("structure",
                 AbsoluteCoordinate.getArrayAsNBTTagList(structure));
+        if(itemhole!=null){
+        tagCompound.setTag("itemhole", itemhole.getasNBTTagCompound());
+        }
+        }
     }
 
     public void setStructure(AbsoluteCoordinate[] blocks) {
         structure = blocks;
+        if(this instanceof IInventory){
+            for (AbsoluteCoordinate coordinate : structure) {
+                if(worldObj.isAirBlock(coordinate.xCoord, coordinate.yCoord, coordinate.zCoord)){
+                    itemhole=coordinate;
+                    break;
+                }
+            }
+        }
     }
 
     @Override
