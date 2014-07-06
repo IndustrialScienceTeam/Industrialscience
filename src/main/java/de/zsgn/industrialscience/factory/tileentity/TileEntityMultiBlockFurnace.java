@@ -174,7 +174,7 @@ public class TileEntityMultiBlockFurnace extends
                 if (furnaceslots[var1].stackSize == 0) {
                     furnaceslots[var1] = null;
                 }
-                return null;
+                return result;
             }
         } else {
             return null;

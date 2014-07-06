@@ -30,7 +30,6 @@ public class BlockStoneHatch extends BlockStoneHull {
             if(!world.isRemote){
             TileEntityHatch hatch = (TileEntityHatch) world.getTileEntity(x, y,
                     z);
-            System.out.println(hatch.isItemInterface());
             if (hatch.isItemInterface()) {
                 if (player.inventory.getCurrentItem() != null&&player.inventory.getCurrentItem().getItem()==IndustrialScience.getInstance().getFactoryModule().getItemTong()) {
                    extractItem(world,hatch,player);
