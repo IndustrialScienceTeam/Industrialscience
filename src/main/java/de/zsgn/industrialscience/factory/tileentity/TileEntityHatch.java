@@ -26,7 +26,7 @@ public class TileEntityHatch extends TileEntityMultiBlock implements
 
     @Override
     public int getSizeInventory() {
-        if (worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport) {
+        if (worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport&&activepart) {
             return ((IHatchSupport) worldObj.getTileEntity(masterx, mastery,
                     masterz)).getSizeInventory();
         }
@@ -35,7 +35,7 @@ public class TileEntityHatch extends TileEntityMultiBlock implements
 
     @Override
     public ItemStack getStackInSlot(int var1) {
-        if (worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport) {
+        if (worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport&&activepart) {
             return ((IHatchSupport) worldObj.getTileEntity(masterx, mastery,
                     masterz)).getStackInSlot(var1);
         }
@@ -44,7 +44,7 @@ public class TileEntityHatch extends TileEntityMultiBlock implements
 
     @Override
     public ItemStack decrStackSize(int var1, int var2) {
-        if (worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport) {
+        if (worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport&&activepart) {
             return ((IHatchSupport) worldObj.getTileEntity(masterx, mastery,
                     masterz)).decrStackSize(var1, var2);
         }
@@ -53,7 +53,7 @@ public class TileEntityHatch extends TileEntityMultiBlock implements
 
     @Override
     public ItemStack getStackInSlotOnClosing(int var1) {
-        if (worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport) {
+        if (worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport&&activepart) {
             return ((IHatchSupport) worldObj.getTileEntity(masterx, mastery,
                     masterz)).getStackInSlotOnClosing(var1);
         }
@@ -62,7 +62,7 @@ public class TileEntityHatch extends TileEntityMultiBlock implements
 
     @Override
     public void setInventorySlotContents(int var1, ItemStack var2) {
-        if (worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport) {
+        if (worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport&&activepart) {
             ((IHatchSupport) worldObj.getTileEntity(masterx, mastery, masterz))
                     .setInventorySlotContents(var1, var2);
         }
@@ -70,7 +70,7 @@ public class TileEntityHatch extends TileEntityMultiBlock implements
 
     @Override
     public String getInventoryName() {
-        if (worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport) {
+        if (worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport&&activepart) {
             return ((IHatchSupport) worldObj.getTileEntity(masterx, mastery,
                     masterz)).getInventoryName();
         }
@@ -84,7 +84,7 @@ public class TileEntityHatch extends TileEntityMultiBlock implements
 
     @Override
     public int getInventoryStackLimit() {
-        if (worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport) {
+        if (worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport&&activepart) {
             return ((IHatchSupport) worldObj.getTileEntity(masterx, mastery,
                     masterz)).getInventoryStackLimit();
         }
@@ -110,7 +110,7 @@ public class TileEntityHatch extends TileEntityMultiBlock implements
 
     @Override
     public boolean isItemValidForSlot(int var1, ItemStack var2) {
-        if (worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport) {
+        if (worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport&&activepart) {
             return ((IHatchSupport) worldObj.getTileEntity(masterx, mastery,
                     masterz)).isItemValidForSlot(var1, var2);
         }
@@ -120,7 +120,7 @@ public class TileEntityHatch extends TileEntityMultiBlock implements
     @Override
     public int[] getAccessibleSlotsFromSide(int var1) {
         if (worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport
-                && automated) {
+                && automated&&activepart) {
             IHatchSupport master = (IHatchSupport) worldObj.getTileEntity(
                     masterx, mastery, masterz);
             return master.getSlots();
@@ -131,7 +131,7 @@ public class TileEntityHatch extends TileEntityMultiBlock implements
     @Override
     public boolean canInsertItem(int var1, ItemStack var2, int var3) {
         if (worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport
-                && automated) {
+                && automated&&activepart) {
             IHatchSupport master = (IHatchSupport) worldObj.getTileEntity(
                     masterx, mastery, masterz);
             return this.canManuallyInsertItem(var1, var2);
@@ -142,14 +142,14 @@ public class TileEntityHatch extends TileEntityMultiBlock implements
     @Override
     public boolean canExtractItem(int var1, ItemStack var2, int var3) {
         if (worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport
-                && automated) {
+                && automated&&activepart) {
             return this.canManuallyExtractItem(var1, var2);
         }
         return false;
     }
 
     public boolean canManuallyInsertItem(int slot, ItemStack itemStack) {
-        if (worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport) {
+        if (worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport&&activepart) {
             IHatchSupport master = (IHatchSupport) worldObj.getTileEntity(
                     masterx, mastery, masterz);
             return master.isItemValidForSlot(slot, itemStack);
@@ -159,7 +159,7 @@ public class TileEntityHatch extends TileEntityMultiBlock implements
 
     public boolean canManuallyExtractItem(int var1, ItemStack var2) {
         if (worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport
-                && automated) {
+                &&activepart) {
             IHatchSupport master = (IHatchSupport) worldObj.getTileEntity(
                     masterx, mastery, masterz);
             return master.canExtractItem(var1, var2);
@@ -204,7 +204,7 @@ public class TileEntityHatch extends TileEntityMultiBlock implements
 
     public int[] getAccessibleSlots() {
         if (worldObj.getTileEntity(masterx, mastery, masterz) instanceof IHatchSupport
-                && automated) {
+                &&activepart) {
             IHatchSupport master = (IHatchSupport) worldObj.getTileEntity(
                     masterx, mastery, masterz);
             return master.getSlots();

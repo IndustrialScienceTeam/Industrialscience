@@ -88,7 +88,7 @@ public class TileEntityMultiBlockFurnace extends
         } else if (temperature > deftemperature) {
             temperature = temperature - (activepart ? 0.05F : 0.1F);
         }
-        if (currenfuelburntime == 0 && furnaceslots[FUELSLOT] != null) {
+        if (currenfuelburntime == 0 && furnaceslots[FUELSLOT] != null&&activepart) {
             currenfuelburntime = this.getItemBurnTime(furnaceslots[FUELSLOT]);
             furnaceslots[FUELSLOT].stackSize--;
             if (furnaceslots[FUELSLOT].stackSize == 0) {
@@ -122,7 +122,7 @@ public class TileEntityMultiBlockFurnace extends
     }
 
     protected boolean canSmelt() {
-        if (furnaceslots[INPUTSLOT] == null) {
+        if (furnaceslots[INPUTSLOT] == null||!activepart) {
             return false;
         } else {
             ItemStack result = SmeltingRegristry
