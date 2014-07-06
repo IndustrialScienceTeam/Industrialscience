@@ -46,23 +46,19 @@ public class TileEntityMultiBlock extends TileEntity {
     @Override
     public void readFromNBT(NBTTagCompound tagCompound) {
         super.readFromNBT(tagCompound);
-        if(!worldObj.isRemote){
         masterx = tagCompound.getInteger("masterx");
         mastery = tagCompound.getInteger("mastery");
         masterz = tagCompound.getInteger("masterz");
         activepart = tagCompound.getBoolean("activepart");
-        }
     }
 
     @Override
     public void writeToNBT(NBTTagCompound tagCompound) {
         super.writeToNBT(tagCompound);
-        if(!worldObj.isRemote){
         tagCompound.setInteger("masterx", masterx);
         tagCompound.setInteger("mastery", mastery);
         tagCompound.setInteger("masterz", masterz);
         tagCompound.setBoolean("activepart", activepart);
-        }
     }
 
 }

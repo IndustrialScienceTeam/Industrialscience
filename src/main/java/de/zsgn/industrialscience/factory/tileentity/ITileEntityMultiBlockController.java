@@ -49,24 +49,20 @@ public abstract class ITileEntityMultiBlockController extends
     @Override
     public void readFromNBT(NBTTagCompound tagCompound) {
         super.readFromNBT(tagCompound);
-        if(!worldObj.isRemote){
         structure = AbsoluteCoordinate.getArrayFromNBTTagList(tagCompound
                 .getTagList("structure", new NBTTagCompound().getId()));
         if(tagCompound.getCompoundTag("itemhole")!=null){
         itemhole=new AbsoluteCoordinate(tagCompound.getCompoundTag("itemhole"));
-        } 
         }
     }
 
     @Override
     public void writeToNBT(NBTTagCompound tagCompound) {
         super.writeToNBT(tagCompound);
-        if(!worldObj.isRemote){
         tagCompound.setTag("structure",
                 AbsoluteCoordinate.getArrayAsNBTTagList(structure));
         if(itemhole!=null){
         tagCompound.setTag("itemhole", itemhole.getasNBTTagCompound());
-        }
         }
     }
 
