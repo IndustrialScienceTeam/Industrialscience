@@ -1,13 +1,14 @@
 package de.zsgn.industrialscience.factory.tileentity;
 
-import org.apache.commons.lang3.ArrayUtils;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityFurnace;
+
+import org.apache.commons.lang3.ArrayUtils;
+
 import de.zsgn.industrialscience.factory.SmeltingRegristry;
 import de.zsgn.industrialscience.util.AbsoluteCoordinate;
 import de.zsgn.industrialscience.util.RelativeCoordinate;

@@ -15,7 +15,6 @@ import de.zsgn.industrialscience.IndustrialScience;
 import de.zsgn.industrialscience.factory.tileentity.IChimneySupport;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityChimney;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityHatch;
-import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlock;
 import de.zsgn.industrialscience.util.AbsoluteCoordinate;
 
 public class BlockChimney extends BlockContainer {

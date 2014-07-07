@@ -1,6 +1,5 @@
 package de.zsgn.industrialscience.factory.block;
 
-import sun.java2d.xr.DirtyRegion;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

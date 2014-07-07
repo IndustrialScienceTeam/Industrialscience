@@ -1,7 +1,5 @@
 package de.zsgn.industrialscience.factory.block;
 
-import javax.swing.text.html.HTMLDocument.HTMLReader.BlockAction;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -22,7 +20,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import de.zsgn.industrialscience.IndustrialScience;
 import de.zsgn.industrialscience.factory.tileentity.ITileEntityMultiBlockController;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlock;
-import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlockFurnace;
 import de.zsgn.industrialscience.util.AbsoluteCoordinate;
 import de.zsgn.industrialscience.util.MultiBlockStructure;
 

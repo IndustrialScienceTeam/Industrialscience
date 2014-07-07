@@ -4,7 +4,6 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
 import cpw.mods.fml.client.registry.ClientRegistry;
-import de.zsgn.industrialscience.factory.FactoryModule;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityChimney;
 import de.zsgn.industrialscience.item.ModelClimbingBoots;
 import de.zsgn.industrialscience.renderer.ItemRendererChimney;
