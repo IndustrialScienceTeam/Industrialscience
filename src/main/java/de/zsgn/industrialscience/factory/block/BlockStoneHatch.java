@@ -1,5 +1,6 @@
 package de.zsgn.industrialscience.factory.block;
 
+import sun.java2d.xr.DirtyRegion;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -19,7 +20,7 @@ public class BlockStoneHatch extends BlockStoneHull {
 
     @Override
     public TileEntity createNewTileEntity(World world, int blockMetadata) {
-        return new TileEntityHatch(true);
+        return new TileEntityHatch(false);
     }
 
     @Override
@@ -31,8 +32,12 @@ public class BlockStoneHatch extends BlockStoneHull {
             TileEntityHatch hatch = (TileEntityHatch) world.getTileEntity(x, y,
                     z);
             if (hatch.isItemInterface()) {
-                if (player.inventory.getCurrentItem() != null&&player.inventory.getCurrentItem().getItem()==IndustrialScience.getInstance().getFactoryModule().getItemTong()) {
+                if (player.inventory.getCurrentItem() != null) {
+                    if(player.inventory.getCurrentItem().getItem()==IndustrialScience.getInstance().getFactoryModule().getItemTong()){
                    extractItem(world,hatch,player);
+                    }else {
+                        insertItem(world, hatch, player);
+                    }
                     return true;
                     }
                 }
@@ -43,7 +48,8 @@ public class BlockStoneHatch extends BlockStoneHull {
         return false;
     }
 
-    public static void extractItem(World world,TileEntityHatch hatch, EntityPlayer player) {
+    public static void extractItem(World world, TileEntityHatch hatch,
+            EntityPlayer player) {
         for (int slot : hatch.getAccessibleSlots()) {
             ItemStack stackinslot =hatch.getStackInSlot(slot);
             if(stackinslot!=null&&hatch.canManuallyExtractItem(slot, stackinslot)){
@@ -54,6 +60,38 @@ public class BlockStoneHatch extends BlockStoneHull {
                 }
             }
         } 
+        
+    }
+
+    public static void insertItem(World world,TileEntityHatch hatch, EntityPlayer player) {
+        for (int slot : hatch.getAccessibleSlots()) {
+            ItemStack originalSlot=hatch.getStackInSlot(slot);
+            if (hatch.canManuallyInsertItem(slot, player.getHeldItem())) {
+                boolean isdirty=false;
+                if (originalSlot == null)
+                {
+                   hatch.setInventorySlotContents(slot, player.inventory.mainInventory[player.inventory.currentItem].splitStack(1));
+                   isdirty=true;
+                    
+               } else if (areStacksCompatable(originalSlot,player.getHeldItem()))
+                {
+                    int max = Math.min(player.getHeldItem().getMaxStackSize(), hatch.getInventoryStackLimit());
+                    if (max > originalSlot.stackSize+1)
+                    {
+                        player.inventory.mainInventory[player.inventory.currentItem].stackSize--;
+                        originalSlot.stackSize++;
+                        isdirty=true;
+                    }
+                }
+            if (isdirty) {
+                hatch.markDirty();
+            }
+            }
+        } 
+    }
+    public static boolean areStacksCompatable(ItemStack stack1, ItemStack stack2)
+    {
+        return stack1.getItem() != stack2.getItem() ? false : (stack1.getItemDamage() != stack2.getItemDamage() ? false : (stack1.stackSize > stack1.getMaxStackSize() ? false : ItemStack.areItemStackTagsEqual(stack1, stack2)));
     }
 
 }
