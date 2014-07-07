@@ -6,7 +6,7 @@ import net.minecraft.world.World;
 import de.zsgn.industrialscience.IndustrialScience;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityHatch;
 
-public class BlockIronHatch extends BlockStoneHull {
+public class BlockIronHatch extends BlockIronHull {
 
     public BlockIronHatch() {
         super();
@@ -25,18 +25,10 @@ public class BlockIronHatch extends BlockStoneHull {
             EntityPlayer player, int side, float xOffset, float yOffset,
             float zOffset) {
         if (world.getTileEntity(x, y, z) instanceof TileEntityHatch) {
-            TileEntityHatch hatch = (TileEntityHatch) world.getTileEntity(x, y,
-                    z);
-            if (hatch.isItemInterface()) {
-                if (player.inventory.getCurrentItem() != null) {
-                    if (!world.isRemote) {
-
-                    }
-                    return true;
-                } else {
-                    return false;
-                }
+            if(!world.isRemote){
+                HatchStrategy.onHatchActivated(world, x, y, z, player, side);
             }
+            return true;
         }
         return false;
     }
