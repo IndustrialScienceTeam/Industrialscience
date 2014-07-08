@@ -28,7 +28,7 @@ public class BlockStoneHatch extends BlockStoneHull {
             float zOffset) {
         if (world.getTileEntity(x, y, z) instanceof TileEntityHatch) {
             if(!world.isRemote){
-                HatchStrategy.onHatchActivated(world, x, y, z, player, side);
+                HatchStrategy.onHatchActivated(world, x, y, z, player, side,xOffset, yOffset, zOffset);
             }
             return true;
         }
