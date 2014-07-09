@@ -20,6 +20,10 @@ apply plugin: 'forge'
 version = "0.1"
 group= "de.zsgn.industrialscience" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "industrialscience"
+dependencies {
+compile files (
+"lib/industrialcraft-2-2.2.498-experimental-api.jar"
+)
 
 minecraft {
     version = "1.7.10-10.13.0.1152"

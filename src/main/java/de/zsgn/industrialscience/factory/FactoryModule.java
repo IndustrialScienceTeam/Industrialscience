@@ -5,6 +5,7 @@ import net.minecraft.item.Item;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import de.zsgn.industrialscience.factory.block.BlockChimney;
+import de.zsgn.industrialscience.factory.block.BlockIronEnergyLink;
 import de.zsgn.industrialscience.factory.block.BlockIronFurnaceController;
 import de.zsgn.industrialscience.factory.block.BlockIronHatch;
 import de.zsgn.industrialscience.factory.block.BlockIronHull;
@@ -15,6 +16,7 @@ import de.zsgn.industrialscience.factory.item.ItemThermometer;
 import de.zsgn.industrialscience.factory.item.ItemTong;
 import de.zsgn.industrialscience.factory.tileentity.ITileEntityMultiBlockController;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityChimney;
+import de.zsgn.industrialscience.factory.tileentity.TileEntityEnergyLink;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityHatch;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlock;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlockFurnace;
@@ -27,6 +29,7 @@ public class FactoryModule {
     private Block blockControllerStonefurnace;
     private Block blockControllerIronfurnace;
     private Block blockironhatch;
+    private Block blockironEnergyLink;
     private Item itemThermometer;
     private Item itemTong;
 
@@ -38,6 +41,7 @@ public class FactoryModule {
         blockControllerStonefurnace = new BlockStoneFurnaceController();
         blockControllerIronfurnace = new BlockIronFurnaceController();
         blockironhatch = new BlockIronHatch();
+        blockironEnergyLink=new BlockIronEnergyLink();
         itemThermometer=new ItemThermometer();
         itemTong=new ItemTong();
 
@@ -55,6 +59,8 @@ public class FactoryModule {
                 blockControllerIronfurnace.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(blockironhatch, blockironhatch
                 .getUnlocalizedName().substring(5));
+        GameRegistry.registerBlock(blockironEnergyLink, blockironEnergyLink
+                .getUnlocalizedName().substring(5));
         
         GameRegistry.registerItem(itemThermometer, itemThermometer
                 .getUnlocalizedName().substring(5));
@@ -70,6 +76,7 @@ public class FactoryModule {
         GameRegistry.registerTileEntity(TileEntityHatch.class, "tile.hatch");
         GameRegistry
                 .registerTileEntity(TileEntityChimney.class, "tile.chimney");
+        GameRegistry.registerTileEntity(TileEntityEnergyLink.class, "tile.energylink");
     }
 
     public Block getBlockStonehull() {

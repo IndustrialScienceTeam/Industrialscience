@@ -8,6 +8,7 @@ tile.cobblestonehull.name=Cobblestone Hull
 tile.cobblestonehatch.name=Cobblestone Hatch
 tile.ironbricks.name=Iron Bricks
 tile.ironhull.name=Iron Hull
+tile.ironenergylink.name=Iron Energylink
 tile.chimney.name = Chimney
 item.thermometer.name=Thermometer
 item.tong.name=Tong
