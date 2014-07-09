@@ -24,6 +24,7 @@ dependencies {
 compile files (
 "lib/industrialcraft-2-2.2.498-experimental-api.jar"
 )
+}
 
 minecraft {
     version = "1.7.10-10.13.0.1152"
