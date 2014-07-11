@@ -3,7 +3,7 @@ package de.zsgn.industrialscience.factory.item;
 import java.text.DecimalFormat;
 
 import de.zsgn.industrialscience.IndustrialScience;
-import de.zsgn.industrialscience.factory.tileentity.IThermometerSupport;
+import de.zsgn.industrialscience.factory.tileentity.controllers.IThermometerSupport;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

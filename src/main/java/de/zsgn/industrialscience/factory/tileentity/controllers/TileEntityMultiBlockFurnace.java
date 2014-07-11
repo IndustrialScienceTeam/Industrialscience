@@ -1,4 +1,4 @@
-package de.zsgn.industrialscience.factory.tileentity;
+package de.zsgn.industrialscience.factory.tileentity.controllers;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;

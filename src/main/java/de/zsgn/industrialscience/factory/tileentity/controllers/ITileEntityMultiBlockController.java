@@ -1,9 +1,10 @@
-package de.zsgn.industrialscience.factory.tileentity;
+package de.zsgn.industrialscience.factory.tileentity.controllers;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlock;
 import de.zsgn.industrialscience.util.AbsoluteCoordinate;
 
 public abstract class ITileEntityMultiBlockController extends

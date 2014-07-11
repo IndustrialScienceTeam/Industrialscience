@@ -12,9 +12,9 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import de.zsgn.industrialscience.IndustrialScience;
-import de.zsgn.industrialscience.factory.tileentity.IChimneySupport;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityChimney;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityHatch;
+import de.zsgn.industrialscience.factory.tileentity.controllers.IChimneySupport;
 import de.zsgn.industrialscience.util.AbsoluteCoordinate;
 
 public class BlockChimney extends BlockContainer {

@@ -14,12 +14,12 @@ import de.zsgn.industrialscience.factory.block.BlockStoneHatch;
 import de.zsgn.industrialscience.factory.block.BlockStoneHull;
 import de.zsgn.industrialscience.factory.item.ItemThermometer;
 import de.zsgn.industrialscience.factory.item.ItemTong;
-import de.zsgn.industrialscience.factory.tileentity.ITileEntityMultiBlockController;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityChimney;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityEnergyLink;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityHatch;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlock;
-import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlockFurnace;
+import de.zsgn.industrialscience.factory.tileentity.controllers.ITileEntityMultiBlockController;
+import de.zsgn.industrialscience.factory.tileentity.controllers.TileEntityMultiBlockFurnace;
 
 public class FactoryModule {
     private Block blockStonehull;

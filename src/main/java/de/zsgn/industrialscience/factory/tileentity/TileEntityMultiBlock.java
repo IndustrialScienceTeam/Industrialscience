@@ -1,5 +1,6 @@
 package de.zsgn.industrialscience.factory.tileentity;
 
+import de.zsgn.industrialscience.factory.tileentity.controllers.ITileEntityMultiBlockController;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 

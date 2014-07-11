@@ -10,7 +10,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import de.zsgn.industrialscience.IndustrialScience;
-import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlockFurnace;
+import de.zsgn.industrialscience.factory.tileentity.controllers.TileEntityMultiBlockFurnace;
 import de.zsgn.industrialscience.util.MultiBlockStructure;
 import de.zsgn.industrialscience.util.RelativeCoordinate;
 

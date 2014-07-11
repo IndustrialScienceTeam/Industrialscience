@@ -1,4 +1,4 @@
-package de.zsgn.industrialscience.factory.tileentity;
+package de.zsgn.industrialscience.factory.tileentity.controllers;
 
 import de.zsgn.industrialscience.util.AbsoluteCoordinate;
 
