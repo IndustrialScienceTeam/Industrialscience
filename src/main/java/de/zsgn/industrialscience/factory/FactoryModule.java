@@ -19,6 +19,7 @@ import de.zsgn.industrialscience.factory.tileentity.TileEntityEnergyLink;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityHatch;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlock;
 import de.zsgn.industrialscience.factory.tileentity.controllers.ITileEntityMultiBlockController;
+import de.zsgn.industrialscience.factory.tileentity.controllers.ITileEntityMultiBlockMachine;
 import de.zsgn.industrialscience.factory.tileentity.controllers.TileEntityMultiBlockFurnace;
 
 public class FactoryModule {
@@ -73,6 +74,8 @@ public class FactoryModule {
                 "tile.multiblock");
         GameRegistry.registerTileEntity(ITileEntityMultiBlockController.class,
                 "tile.multiblockcontroller");
+        GameRegistry.registerTileEntity(ITileEntityMultiBlockMachine.class,
+                "tile.multiblockmachine");
         GameRegistry.registerTileEntity(TileEntityHatch.class, "tile.hatch");
         GameRegistry
                 .registerTileEntity(TileEntityChimney.class, "tile.chimney");
