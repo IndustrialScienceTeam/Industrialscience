@@ -11,16 +11,11 @@ import de.zsgn.industrialscience.util.RelativeCoordinate;
 
 public class BlockIronFurnaceController extends IBlockMultiBlockController {
     public BlockIronFurnaceController() {
-        super(Material.rock, MultiBlockStructure.FURNACE_TIER1,
-                IndustrialScience.MODID
+        super(Material.rock,IndustrialScience.MODID
                         + ":"
                         + IndustrialScience.getInstance().getFactoryModule()
                                 .getBlockIronhull().getUnlocalizedName()
                                 .substring(5));
-        validBlocks = new Block[] {
-                this,
-                IndustrialScience.getInstance().getFactoryModule()
-                        .getBlockIronhull() };
         this.setCreativeTab(IndustrialScience.getInstance().getCreativetab());
         this.setBlockName("tier1ironfurnace");
         this.setHardness(3.0F);
@@ -34,6 +29,16 @@ public class BlockIronFurnaceController extends IBlockMultiBlockController {
                 new RelativeCoordinate(0, 0, 2),
                 new RelativeCoordinate(0, 1, 1),
                 new RelativeCoordinate(0, -1, 1) }, new RelativeCoordinate[] {});
+    }
+
+    @Override
+    protected MultiBlockStructure getMultiBlockStructure() {
+        MultiBlockStructure structure=MultiBlockStructure.FURNACE_TIER1;
+        structure.setValidBlocks(new Block[] {
+                this,
+                IndustrialScience.getInstance().getFactoryModule()
+                        .getBlockIronhull() });
+        return structure;
     }
 
 }

@@ -16,16 +16,11 @@ import de.zsgn.industrialscience.util.RelativeCoordinate;
 
 public class BlockStoneFurnaceController extends IBlockMultiBlockController {
     public BlockStoneFurnaceController() {
-        super(Material.rock, MultiBlockStructure.FURNACE_TIER1,
-                IndustrialScience.MODID
+        super(Material.rock, IndustrialScience.MODID
                         + ":"
                         + IndustrialScience.getInstance().getFactoryModule()
                                 .getBlockStonehull().getUnlocalizedName()
                                 .substring(5));
-        validBlocks = new Block[] {
-                this,
-                IndustrialScience.getInstance().getFactoryModule()
-                        .getBlockStonehull() };
         this.setCreativeTab(IndustrialScience.getInstance().getCreativetab());
         this.setBlockName("tier1stonefurnace");
         this.setHardness(3.0F);
@@ -52,6 +47,16 @@ public class BlockStoneFurnaceController extends IBlockMultiBlockController {
         float sideOffset=0.125F+0.0625F*(random.nextInt(11)+1);
         world.spawnParticle("flame", x+(Math.abs(right.offsetX)*sideOffset)+(front.offsetX>0?1:0), y+yOffset, z+(Math.abs(right.offsetZ)*sideOffset)+(front.offsetZ>0?1:0), 0, 0, 0);
         }
+    }
+
+    @Override
+    protected MultiBlockStructure getMultiBlockStructure() {
+        MultiBlockStructure structure=MultiBlockStructure.FURNACE_TIER1;
+        structure.setValidBlocks(new Block[] {
+                this,
+                IndustrialScience.getInstance().getFactoryModule()
+                        .getBlockStonehull() });
+        return structure;
     }
 
 }

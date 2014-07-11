@@ -16,7 +16,8 @@ public enum MultiBlockStructure {
     protected final int sizeToFront;
     protected final int resultsize;
     protected final RelativeCoordinate[] holes;
-
+    protected Block[] validBlocks = {};
+    
     MultiBlockStructure(int sizeToRight, int sizeToLeft, int sizeToBottom,
             int sizeToTop, int sizeToBack, int sizeToFront,
             RelativeCoordinate[] holes) {
@@ -33,43 +34,50 @@ public enum MultiBlockStructure {
     }
 
     public AbsoluteCoordinate[] structureTest(World world, int x, int y, int z,
-            ForgeDirection dir, Block[] validBlocks) {
+            ForgeDirection dir) {
         ForgeDirection dirRIGHT = dir.getRotation(ForgeDirection.DOWN);
         ForgeDirection dirLEFT = dirRIGHT.getOpposite();
         ForgeDirection dirDEPTH = dir.getOpposite();
-        int startX = x + sizeToRight * dirRIGHT.offsetX + sizeToFront
+        int firstX = x + sizeToRight * dirRIGHT.offsetX + sizeToFront
                 * dir.offsetX;
-        int startY = y + sizeToTop;
-        int startZ = z + sizeToRight * dirRIGHT.offsetZ + sizeToFront
+        int firstY = y + sizeToTop;
+        int firstZ = z + sizeToRight * dirRIGHT.offsetZ + sizeToFront
                 * dir.offsetZ;
-        int endX = x + sizeToLeft * dirLEFT.offsetX + sizeToBack
+        int secondX = x + sizeToLeft * dirLEFT.offsetX + sizeToBack
                 * dirDEPTH.offsetX;
-        int endY = y - sizeToBottom;
-        int endZ = z + sizeToLeft * dirLEFT.offsetZ + sizeToBack
+        int secondY = y - sizeToBottom;
+        int secondZ = z + sizeToLeft * dirLEFT.offsetZ + sizeToBack
                 * dirDEPTH.offsetZ;
+        AbsoluteCoordinate start=new AbsoluteCoordinate(Math.min(firstX, secondX),Math.min(firstY, secondY),Math.min(firstZ, secondZ));
+        AbsoluteCoordinate end=new AbsoluteCoordinate(Math.max(firstX, secondX),Math.max(firstY, secondY),Math.max(firstZ, secondZ));
+        AbsoluteCoordinate[] absholes = getAbsHoles(x, y, z, dirRIGHT, dirDEPTH);
+        return getAllStructureCoords(world, absholes, start, end);
+
+    }
+    protected AbsoluteCoordinate[] getAbsHoles(int x, int y, int z, ForgeDirection dirRIGHT, ForgeDirection dirDEPTH){
         AbsoluteCoordinate[] absholes = new AbsoluteCoordinate[holes.length];
-        AbsoluteCoordinate[] result = new AbsoluteCoordinate[resultsize];
         for (int i = 0; i < holes.length; i++) {
             absholes[i] = holes[i].convertToAbsolute(x, y, z, dirRIGHT,
                     dirDEPTH);
         }
+        return absholes;
+    }
+    protected AbsoluteCoordinate[] getAllStructureCoords(World world, AbsoluteCoordinate[] absholes, AbsoluteCoordinate start, AbsoluteCoordinate end){
+        AbsoluteCoordinate[] result = new AbsoluteCoordinate[resultsize];
         int i = 0;
-        for (int movex = 0; movex + Math.min(startX, endX) <= Math.max(startX,
-                endX); movex++) {
-            for (int movey = 0; movey + Math.min(startY, endY) <= Math.max(
-                    startY, endY); movey++) {
-                for (int movez = 0; movez + Math.min(startZ, endZ) <= Math.max(
-                        startZ, endZ); movez++) {
-                    if (!this.isValidBlock(validBlocks, absholes, world, movex
-                            + Math.min(startX, endX),
-                            movey + Math.min(startY, endY),
-                            movez + Math.min(startZ, endZ))) {
+        for (int movex = 0; movex + start.xCoord <= end.xCoord; movex++) {
+            for (int movey = 0; movey + start.yCoord <= end.yCoord; movey++) {
+                for (int movez = 0; movez + start.zCoord  <= end.zCoord; movez++) {
+                    if (!this.isValidBlock(absholes, world, movex
+                            + start.xCoord,
+                            movey + start.yCoord,
+                            movez + start.zCoord)) {
                         return null;
                     }
                     result[i] = new AbsoluteCoordinate(movex
-                            + Math.min(startX, endX), movey
-                            + Math.min(startY, endY), movez
-                            + Math.min(startZ, endZ));
+                            + start.xCoord,
+                            movey + start.yCoord,
+                            movez + start.zCoord);
                     i++;
                 }
             }
@@ -77,11 +85,10 @@ public enum MultiBlockStructure {
         return result;
     }
 
-    protected boolean isValidBlock(Block[] validBlocks,
-            AbsoluteCoordinate[] absholes, World world, int x, int y, int z) {
+    protected boolean isValidBlock(AbsoluteCoordinate[] absholes, World world, int x, int y, int z) {
         if (world.getTileEntity(x, y, z) instanceof TileEntityMultiBlock
                 && ((TileEntityMultiBlock) world.getTileEntity(x, y, z))
-                        .isActivePart()) {
+                .isActivePart()) {
             return false;
         }
         for (AbsoluteCoordinate abshole : absholes) {
@@ -100,6 +107,10 @@ public enum MultiBlockStructure {
             }
         }
         return false;
+    }
+
+    public void setValidBlocks(Block[] validBlocks) {
+        this.validBlocks = validBlocks;
     }
 
 }

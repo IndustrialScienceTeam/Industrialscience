@@ -24,9 +24,7 @@ import de.zsgn.industrialscience.util.AbsoluteCoordinate;
 import de.zsgn.industrialscience.util.MultiBlockStructure;
 
 public abstract class IBlockMultiBlockController extends BlockContainer {
-    protected MultiBlockStructure structure;
     protected String sidetexturestring;
-    protected Block[] validBlocks = {};
     @SideOnly(Side.CLIENT)
     protected IIcon front;
     @SideOnly(Side.CLIENT)
@@ -34,10 +32,8 @@ public abstract class IBlockMultiBlockController extends BlockContainer {
     @SideOnly(Side.CLIENT)
     protected IIcon sides;
 
-    protected IBlockMultiBlockController(Material material,
-            MultiBlockStructure structure, String sidetexturestring) {
+    protected IBlockMultiBlockController(Material material,String sidetexturestring) {
         super(material);
-        this.structure = structure;
         this.sidetexturestring = sidetexturestring;
     }
 
@@ -75,8 +71,8 @@ public abstract class IBlockMultiBlockController extends BlockContainer {
             ITileEntityMultiBlockController masterTileEntity = (ITileEntityMultiBlockController) world
                     .getTileEntity(x, y, z);
             if (!masterTileEntity.isActivePart()) {
-                AbsoluteCoordinate[] blocks = structure.structureTest(world, x,
-                        y, z, getFacingDir(world, x, y, z), validBlocks);
+                AbsoluteCoordinate[] blocks = getMultiBlockStructure().structureTest(world, x,
+                        y, z, getFacingDir(world, x, y, z));
                 if (blocks == null) {
                     return false;
                 }
@@ -187,5 +183,6 @@ public abstract class IBlockMultiBlockController extends BlockContainer {
     public static ForgeDirection getFacingDir(World world, int x, int y, int z){
         return ForgeDirection.getOrientation(world.getBlockMetadata(x, y, z) >> 1);
     }
+    protected abstract MultiBlockStructure getMultiBlockStructure();
 
 }
