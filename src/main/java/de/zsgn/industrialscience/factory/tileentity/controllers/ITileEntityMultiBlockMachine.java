@@ -9,15 +9,16 @@ import de.zsgn.industrialscience.util.RelativeCoordinate;
 
 public abstract class ITileEntityMultiBlockMachine extends
         ITileEntityMultiBlockController implements IHatchSupport {
-    protected ItemStack[] inventory = new ItemStack[3];
+    protected ItemStack[] inventory = {};
     protected RelativeCoordinate[] itemhatchcoords;
     protected RelativeCoordinate[] interfacehatchcoords;
     private int operatedticks = 0;
     
     public ITileEntityMultiBlockMachine(RelativeCoordinate[] itemhatchcoords,
-            RelativeCoordinate[] interfacehatchcoords) {
+            RelativeCoordinate[] interfacehatchcoords, int slotamount) {
         this.itemhatchcoords=itemhatchcoords;
         this.interfacehatchcoords=interfacehatchcoords;
+        this.inventory=new ItemStack[slotamount];
     }
     
     public ITileEntityMultiBlockMachine() {

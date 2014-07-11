@@ -27,7 +27,7 @@ ITileEntityMultiBlockMachine implements IThermometerSupport,IChimneySupport {
     public TileEntityMultiBlockFurnace(int deftemperature,
             RelativeCoordinate[] itemhatchcoords,
             RelativeCoordinate[] interfacehatchcoords) {
-        super(itemhatchcoords, interfacehatchcoords);
+        super(itemhatchcoords, interfacehatchcoords, 3);
         this.deftemperature = deftemperature;
         temperature = deftemperature;
     }
