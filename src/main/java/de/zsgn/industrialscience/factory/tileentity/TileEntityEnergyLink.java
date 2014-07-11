@@ -18,25 +18,29 @@ public class TileEntityEnergyLink extends TileEntityMultiBlock implements
     @Override
     public boolean acceptsEnergyFrom(TileEntity emitter,
             ForgeDirection direction) {
-        return true;
+        return isActivePart();
     }
 
     @Override
     public double getDemandedEnergy() {
-        return 5;
+        if(isActivePart()){
+        return 1;
+        }
+        return 0;
     }
 
     @Override
     public int getSinkTier() {
-        System.err.println("Tier");
         return 2;
     }
 
     @Override
     public double injectEnergy(ForgeDirection directionFrom, double amount,
             double voltage) {
-        System.err.println("Dir: "+directionFrom.name()+"  Amount: "+amount+" Voltage: "+voltage);
-        return amount-5;
+        if(isActivePart()){
+        return amount-1;
+        }
+        return amount;
     }
 
     @Override
