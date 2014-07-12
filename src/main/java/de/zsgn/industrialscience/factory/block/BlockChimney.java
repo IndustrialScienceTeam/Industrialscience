@@ -21,6 +21,7 @@ public class BlockChimney extends BlockContainer {
 
     public BlockChimney() {
         super(Material.iron);
+        this.setBlockTextureName("brick");
         this.setCreativeTab(IndustrialScience.getInstance().getCreativetab());
         this.setBlockName("chimney");
         this.setHardness(2.0F);
