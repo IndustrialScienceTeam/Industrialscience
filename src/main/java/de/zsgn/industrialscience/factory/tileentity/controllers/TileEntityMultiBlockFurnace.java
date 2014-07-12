@@ -134,15 +134,6 @@ ITileEntityMultiBlockMachine implements IThermometerSupport,IChimneySupport {
             return 0;
         }
     }
-    @Override
-    public void setInventorySlotContents(int var1, ItemStack var2) {
-        inventory[var1] = var2;
-        if (var2 != null && var2.stackSize > this.getInventoryStackLimit()) {
-            var2.stackSize = this.getInventoryStackLimit();
-        }
-
-    }
-
 
     @Override
     public boolean isItemValidForSlot(int var1, ItemStack var2) {

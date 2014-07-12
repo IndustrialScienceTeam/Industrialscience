@@ -1,5 +1,6 @@
 package de.zsgn.industrialscience.factory.tileentity;
 
+import de.zsgn.industrialscience.factory.tileentity.controllers.IEnergyLinkSupport;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -18,13 +19,14 @@ public class TileEntityEnergyLink extends TileEntityMultiBlock implements
     @Override
     public boolean acceptsEnergyFrom(TileEntity emitter,
             ForgeDirection direction) {
-        return isActivePart();
+        return isActivePart()&&worldObj.getTileEntity(masterx, mastery, masterz)instanceof IEnergyLinkSupport;
     }
 
     @Override
     public double getDemandedEnergy() {
-        if(isActivePart()){
-        return 1;
+        if(isActivePart()&&worldObj.getTileEntity(masterx, mastery, masterz)instanceof IEnergyLinkSupport){
+        IEnergyLinkSupport master=(IEnergyLinkSupport)worldObj.getTileEntity(masterx, mastery, masterz);
+        return master.getRequestedEnergy();
         }
         return 0;
     }
@@ -37,8 +39,9 @@ public class TileEntityEnergyLink extends TileEntityMultiBlock implements
     @Override
     public double injectEnergy(ForgeDirection directionFrom, double amount,
             double voltage) {
-        if(isActivePart()){
-        return amount-1;
+        if(isActivePart()&&worldObj.getTileEntity(masterx, mastery, masterz)instanceof IEnergyLinkSupport){
+        IEnergyLinkSupport master=(IEnergyLinkSupport)worldObj.getTileEntity(masterx, mastery, masterz);
+        return master.injectEnergy(amount);
         }
         return amount;
     }

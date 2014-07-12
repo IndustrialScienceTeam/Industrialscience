@@ -20,6 +20,7 @@ import de.zsgn.industrialscience.factory.tileentity.TileEntityHatch;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlock;
 import de.zsgn.industrialscience.factory.tileentity.controllers.ITileEntityMultiBlockController;
 import de.zsgn.industrialscience.factory.tileentity.controllers.ITileEntityMultiBlockMachine;
+import de.zsgn.industrialscience.factory.tileentity.controllers.TileEntityMultiBlockElectricFurnace;
 import de.zsgn.industrialscience.factory.tileentity.controllers.TileEntityMultiBlockFurnace;
 
 public class FactoryModule {
@@ -80,6 +81,7 @@ public class FactoryModule {
         GameRegistry
                 .registerTileEntity(TileEntityChimney.class, "tile.chimney");
         GameRegistry.registerTileEntity(TileEntityEnergyLink.class, "tile.energylink");
+        GameRegistry.registerTileEntity(TileEntityMultiBlockElectricFurnace.class, "tile.electricmultiblockfurnace");
     }
 
     public Block getBlockStonehull() {

@@ -5,6 +5,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import de.zsgn.industrialscience.IndustrialScience;
+import de.zsgn.industrialscience.factory.tileentity.controllers.TileEntityMultiBlockElectricFurnace;
 import de.zsgn.industrialscience.factory.tileentity.controllers.TileEntityMultiBlockFurnace;
 import de.zsgn.industrialscience.util.MultiBlockStructure;
 import de.zsgn.industrialscience.util.RelativeCoordinate;
@@ -23,7 +24,7 @@ public class BlockIronFurnaceController extends IBlockMultiBlockController {
 
     @Override
     public TileEntity createNewTileEntity(World var1, int var2) {
-        return new TileEntityMultiBlockFurnace(20, new RelativeCoordinate[] {
+        return new TileEntityMultiBlockElectricFurnace(20, new RelativeCoordinate[] {
                 new RelativeCoordinate(1, 0, 1),
                 new RelativeCoordinate(-1, 0, 1),
                 new RelativeCoordinate(0, 0, 2),

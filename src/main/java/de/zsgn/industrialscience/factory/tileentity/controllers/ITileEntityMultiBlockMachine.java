@@ -12,13 +12,15 @@ public abstract class ITileEntityMultiBlockMachine extends
     protected ItemStack[] inventory = {};
     protected RelativeCoordinate[] itemhatchcoords;
     protected RelativeCoordinate[] interfacehatchcoords;
-    private int operatedticks = 0;
+    protected int operatedticks = 0;
+    protected int slotamount=0;
     
     public ITileEntityMultiBlockMachine(RelativeCoordinate[] itemhatchcoords,
             RelativeCoordinate[] interfacehatchcoords, int slotamount) {
         this.itemhatchcoords=itemhatchcoords;
         this.interfacehatchcoords=interfacehatchcoords;
         this.inventory=new ItemStack[slotamount];
+        this.slotamount=slotamount;
     }
     
     public ITileEntityMultiBlockMachine() {
@@ -67,7 +69,14 @@ public abstract class ITileEntityMultiBlockMachine extends
             return null;
         }
     }
+    @Override
+    public void setInventorySlotContents(int var1, ItemStack var2) {
+        inventory[var1] = var2;
+        if (var2 != null && var2.stackSize > this.getInventoryStackLimit()) {
+            var2.stackSize = this.getInventoryStackLimit();
+        }
 
+    }
     @Override
     public String getInventoryName() {
         return "";
@@ -90,7 +99,7 @@ public abstract class ITileEntityMultiBlockMachine extends
 
     @Override
     public int getSizeInventory() {
-        return inventory.length;
+        return slotamount;
     }
 
     @Override
@@ -127,6 +136,7 @@ public abstract class ITileEntityMultiBlockMachine extends
     @Override
     public void readFromNBT(NBTTagCompound tagCompound) {
         super.readFromNBT(tagCompound);
+        slotamount=tagCompound.getInteger("slotamount");
         NBTTagList nbttaglist = tagCompound.getTagList("Items", 10);
         inventory = new ItemStack[this.getSizeInventory()];
 
@@ -149,6 +159,7 @@ public abstract class ITileEntityMultiBlockMachine extends
     @Override
     public void writeToNBT(NBTTagCompound tagCompound) {
         super.writeToNBT(tagCompound);
+        tagCompound.setInteger("slotamount", slotamount);
         NBTTagList nbttaglist = new NBTTagList();
 
         for (int i = 0; i < inventory.length; ++i) {
