@@ -19,6 +19,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import de.zsgn.industrialscience.IndustrialScience;
 import de.zsgn.industrialscience.factory.tileentity.TileEntityMultiBlock;
+import de.zsgn.industrialscience.factory.tileentity.controllers.IEnergyLinkSupport;
 import de.zsgn.industrialscience.factory.tileentity.controllers.ITileEntityMultiBlockController;
 import de.zsgn.industrialscience.util.AbsoluteCoordinate;
 import de.zsgn.industrialscience.util.MultiBlockStructure;
@@ -44,28 +45,46 @@ public abstract class IBlockMultiBlockController extends BlockContainer {
         if (!world.isRemote) {
             if(world.getTileEntity(x, y, z)instanceof ITileEntityMultiBlockController){
                 if (!((ITileEntityMultiBlockController)world.getTileEntity(x, y, z)).isActivePart()) {
-            return this.testAndSetStructure(world, x, y, z);
-            }else if(world.getTileEntity(x, y, z) instanceof IInventory){
-                IInventory inventory=(IInventory)world.getTileEntity(x, y, z);
-                boolean notempty = false;
-                String[] items=new String[inventory.getSizeInventory()];
-                for (int i = 0; i < inventory.getSizeInventory(); i++) {
-                    if(inventory.getStackInSlot(i)!=null){
-                        items[i]=inventory.getStackInSlot(i).getDisplayName();
-                        notempty=true;
+                    return this.testAndSetStructure(world, x, y, z);
+                }else{ 
+                    if(world.getTileEntity(x, y, z) instanceof IInventory){
+                        IInventory inventory=(IInventory)world.getTileEntity(x, y, z);
+                        sendPlayerInventoryContents(inventory, player);
+                    }
+                    if(world.getTileEntity(x, y, z) instanceof IEnergyLinkSupport){
+                        IEnergyLinkSupport energyLinkSupport=(IEnergyLinkSupport)world.getTileEntity(x, y, z);
+                        sendPlayerEnergyContents(energyLinkSupport, player);
                     }
                 }
-                player.addChatMessage(new ChatComponentText(notempty?StatCollector.translateToLocal("i_can_see"):StatCollector.translateToLocal("appears_empty")));
-                for (String item : items) {
-                    if(item!=null){
-                        player.addChatMessage(new ChatComponentText(item));
-                    }
-                }
-            }
             }
         }
-        return false;
+        return true;
     }
+    public void sendPlayerEnergyContents(IEnergyLinkSupport energyLinkSupport,
+            EntityPlayer player) {
+        player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("accumulator_filled")+" "+energyLinkSupport.percentageFilled()+"%"));
+        
+    }
+
+    public void sendPlayerInventoryContents(IInventory inventory,
+            EntityPlayer player) {
+        boolean notempty = false;
+        String[] items=new String[inventory.getSizeInventory()];
+        for (int i = 0; i < inventory.getSizeInventory(); i++) {
+            if(inventory.getStackInSlot(i)!=null){
+                items[i]=inventory.getStackInSlot(i).getDisplayName();
+                notempty=true;
+            }
+        }
+        player.addChatMessage(new ChatComponentText(notempty?StatCollector.translateToLocal("i_can_see"):StatCollector.translateToLocal("appears_empty")));
+        for (String item : items) {
+            if(item!=null){
+                player.addChatMessage(new ChatComponentText(item));
+            }
+        }
+        
+    }
+
     private boolean testAndSetStructure(World world, int x, int y, int z) {
         if (world.getTileEntity(x, y, z) instanceof ITileEntityMultiBlockController) {
             ITileEntityMultiBlockController masterTileEntity = (ITileEntityMultiBlockController) world

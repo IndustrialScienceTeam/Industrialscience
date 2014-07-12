@@ -163,4 +163,10 @@ public class TileEntityMultiBlockElectricFurnace extends
         tagCompound.setInteger("maxstoredenergy", maxstoredenergy);
     }
 
+
+    @Override
+    public double percentageFilled() {
+        return (storedenergy*100)/maxstoredenergy;
+    }
+
 }
