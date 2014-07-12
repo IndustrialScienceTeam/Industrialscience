@@ -10,6 +10,7 @@ import net.minecraft.tileentity.TileEntityFurnace;
 import org.apache.commons.lang3.ArrayUtils;
 
 import de.zsgn.industrialscience.factory.SmeltingRegristry;
+import de.zsgn.industrialscience.factory.block.BlockChimney;
 import de.zsgn.industrialscience.util.AbsoluteCoordinate;
 import de.zsgn.industrialscience.util.RelativeCoordinate;
 
@@ -50,10 +51,10 @@ ITileEntityMultiBlockMachine implements IThermometerSupport,IChimneySupport {
         for (AbsoluteCoordinate coordinate : chimneys) {
             if ((worldObj.getBlockMetadata(coordinate.xCoord, coordinate.yCoord, coordinate.zCoord) & 1) != (this
                     .isProcessing() ? 1 : 0)) {
-                int newmeta = worldObj.getBlockMetadata(coordinate.xCoord, coordinate.yCoord, coordinate.zCoord) >> 1 << 1
-                        | (this.isProcessing() ? 1 : 0);
-                worldObj.setBlockMetadataWithNotify(coordinate.xCoord, coordinate.yCoord, coordinate.zCoord,
-                        newmeta, 2);
+                for (int i = 0; worldObj.getBlock(coordinate.xCoord, coordinate.yCoord+i, coordinate.zCoord)instanceof BlockChimney; i++) {                   
+                worldObj.setBlockMetadataWithNotify(coordinate.xCoord, coordinate.yCoord+i, coordinate.zCoord,
+                        this.isProcessing() ? 1 : 0, 2);
+                }
             }
         }
 
