@@ -84,6 +84,8 @@ public abstract class IBlockMultiBlockController extends BlockContainer {
                                         blockcord.yCoord, blockcord.zCoord);
                         tileentity.setController(x, y, z);
                         tileentity.setActivepart(true);
+                        world.markBlockForUpdate(blockcord.xCoord,
+                        blockcord.yCoord, blockcord.zCoord);
                     }
                 }
                 masterTileEntity.setStructure(blocks);
