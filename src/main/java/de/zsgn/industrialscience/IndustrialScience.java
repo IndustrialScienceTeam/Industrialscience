@@ -52,6 +52,8 @@ public class IndustrialScience {
     public static CommonProxy proxy;
 
     protected FactoryModule factoryModule = new FactoryModule();
+    
+    private boolean generatePortalDungeons=false;
 
     private Hashtable<String, DungeonRoom> dungeonroomlist = new Hashtable<String, DungeonRoom>();
 
@@ -76,6 +78,7 @@ public class IndustrialScience {
         Configuration config = new Configuration(event.getSuggestedConfigurationFile());
         config.load();
         applyPotionIDs(config.getString("BadEffectIDs", Configuration.CATEGORY_GENERAL, "2,4,15,18,19", "Bad Effect IDs see: http://minecraft.gamepedia.com/Status_effect"));
+        generatePortalDungeons=config.getBoolean("generatePortalDungeons", "WorldGen", true, "Should the mod generate portals to the dungeon dimenson?");
         config.save();
     }
     @EventHandler
@@ -104,8 +107,10 @@ public class IndustrialScience {
 
         GameRegistry.registerTileEntity(TileEntityMysteriousPortal.class,
                 blockmysteriousportal.getUnlocalizedName().substring(5));
-
+        if(generatePortalDungeons){
+        loadDungeonRooms();
         GameRegistry.registerWorldGenerator(worldgeneratorportalroom, 5);
+        }
 
         this.addRecipes();
 
