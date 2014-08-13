@@ -13,6 +13,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
+import net.minecraftforge.common.config.Configuration;
 
 import org.apache.logging.log4j.Level;
 
@@ -23,6 +24,7 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import de.zsgn.industrialscience.block.BlockIronBricks;
@@ -66,18 +68,21 @@ public class IndustrialScience {
 
     private IWorldGenerator worldgeneratorportalroom;
 
-    private Properties props = new Properties();
-
     private IndustrialScienceMainCommand industrialScienceMainCommand = new IndustrialScienceMainCommand();
     private CommandGenerateRoom industrialScienceGenerateRoom = new CommandGenerateRoom();
-
+    
+    @EventHandler
+    public void preinit(FMLPreInitializationEvent event) {
+        Configuration config = new Configuration(event.getSuggestedConfigurationFile());
+        config.load();
+        applyPotionIDs(config.getString("BadEffectIDs", Configuration.CATEGORY_GENERAL, "2,4,15,18,19", "Bad Effect IDs see: http://minecraft.gamepedia.com/Status_effect"));
+        config.save();
+    }
     @EventHandler
     public void init(FMLInitializationEvent event) {
         FMLLog.log(Level.INFO, "This is IndustrialScience version: "
                 + IndustrialScience.VERSION);
         instance = this;
-        this.loadProps();
-        this.applyProps();
         this.initFields();
         GameRegistry.registerBlock(blocksingularity, blocksingularity
                 .getUnlocalizedName().substring(5));
@@ -112,8 +117,8 @@ public class IndustrialScience {
         return factoryModule;
     }
 
-    private void applyProps() {
-        String[] ids = props.getProperty("BadEffectsIDs").split(",");
+    private void applyPotionIDs(String idString) {
+        String[] ids = idString.split(",");
         ArrayList<Integer> idList = new ArrayList<Integer>();
         for (String string : ids) {
             Integer id = 0;
@@ -130,11 +135,6 @@ public class IndustrialScience {
         TileEntityMysteriousPortal
                 .setEffectlist(idList.toArray(new Integer[1]));
 
-    }
-
-    private void loadProps() {
-        props.setProperty("BadEffectsIDs", "2,4,15,18,19");
-        this.loadDungeonRooms();
     }
 
     private void loadDungeonRooms() {
